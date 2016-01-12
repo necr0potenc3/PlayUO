@@ -20,9 +20,9 @@
         {
             this.m_Item = i;
             this.m_ID = i.ID;
-            this.m_ID = (short) (this.m_ID & 0x3fff);
-            this.m_ID = (short) (this.m_ID + 0x4000);
-            this.m_Z = (sbyte) i.Z;
+            this.m_ID = (short)(this.m_ID & 0x3fff);
+            this.m_ID = (short)(this.m_ID + 0x4000);
+            this.m_Z = (sbyte)i.Z;
             this.m_Hue = Hues.GetItemHue(this.m_ID, i.Hue);
             this.m_Height = Map.GetHeight(this.m_ID);
         }
@@ -42,12 +42,12 @@
         {
             if (m_InstancePool.Count > 0)
             {
-                DynamicItem item2 = (DynamicItem) m_InstancePool.Dequeue();
+                DynamicItem item2 = (DynamicItem)m_InstancePool.Dequeue();
                 item2.m_Item = item;
                 item2.m_ID = item.ID;
-                item2.m_ID = (short) (item2.m_ID & 0x3fff);
-                item2.m_ID = (short) (item2.m_ID + 0x4000);
-                item2.m_Z = (sbyte) item.Z;
+                item2.m_ID = (short)(item2.m_ID & 0x3fff);
+                item2.m_ID = (short)(item2.m_ID + 0x4000);
+                item2.m_Z = (sbyte)item.Z;
                 item2.m_Hue = Hues.GetItemHue(item2.m_ID, item.Hue);
                 item2.m_Height = Map.GetHeight(item2.m_ID);
                 item2.m_LastImage = null;
@@ -123,4 +123,3 @@
         }
     }
 }
-

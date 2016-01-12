@@ -19,7 +19,7 @@
             {
                 return -1;
             }
-            Appraisal appraisal = (Appraisal) obj;
+            Appraisal appraisal = (Appraisal)obj;
             int[] worth = this.m_Worth;
             int[] numArray2 = appraisal.m_Worth;
             int num = 0;
@@ -64,4 +64,3 @@
         }
     }
 }
-

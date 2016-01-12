@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class Worker
     {
         public TileMatrix Matrix;
@@ -16,4 +14,3 @@
         }
     }
 }
-

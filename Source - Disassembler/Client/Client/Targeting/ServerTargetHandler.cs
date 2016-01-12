@@ -32,7 +32,7 @@
             Packet packet;
             if (targeted is Mobile)
             {
-                Mobile m = (Mobile) targeted;
+                Mobile m = (Mobile)targeted;
                 if ((!m.Player && ((World.CharData.NotoQuery == NotoQueryType.On) || ((World.CharData.NotoQuery == NotoQueryType.Smart) && (m.CheckGuarded() || World.Player.CheckGuarded())))) && ((((this.m_Flags & ServerTargetFlags.Harmful) != ServerTargetFlags.None) && (m.Notoriety == Notoriety.Innocent)) || (((this.m_Flags & ServerTargetFlags.Beneficial) != ServerTargetFlags.None) && ((m.Notoriety == Notoriety.Criminal) || (m.Notoriety == Notoriety.Murderer)))))
                 {
                     Gumps.Desktop.Children.Add(new GCriminalTargetQuery(m, this));
@@ -198,7 +198,7 @@
                 int x;
                 int y;
                 int z;
-                Item item = (Item) targeted;
+                Item item = (Item)targeted;
                 if (item.InWorld)
                 {
                     x = item.X;
@@ -215,7 +215,7 @@
             }
             else if (targeted is StaticTarget)
             {
-                StaticTarget target = (StaticTarget) targeted;
+                StaticTarget target = (StaticTarget)targeted;
                 packet = new PTarget_Response(1, this, 0, target.X, target.Y, target.Z, target.ID & 0x3fff);
             }
             else if (targeted is LandTarget)
@@ -225,7 +225,7 @@
                     Engine.TargetHandler = this;
                     return;
                 }
-                LandTarget target2 = (LandTarget) targeted;
+                LandTarget target2 = (LandTarget)targeted;
                 packet = new PTarget_Response(1, this, 0, target2.X, target2.Y, target2.Z, 0);
             }
             else
@@ -273,4 +273,3 @@
         }
     }
 }
-

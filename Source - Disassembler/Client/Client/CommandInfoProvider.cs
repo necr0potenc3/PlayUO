@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class CommandInfoProvider : InfoProvider
     {
         public CommandInfoProvider() : base("Commands")
@@ -133,10 +131,9 @@
 
         public override void UpdateGump(Gump g)
         {
-            GHtmlLabel label = (GHtmlLabel) g;
+            GHtmlLabel label = (GHtmlLabel)g;
             label.Children.Clear();
             label.Update(this.GetText(), Engine.GetUniFont(1), GumpColors.WindowText);
         }
     }
 }
-

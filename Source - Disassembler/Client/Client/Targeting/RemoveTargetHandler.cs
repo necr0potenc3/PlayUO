@@ -1,7 +1,6 @@
 ﻿namespace Client.Targeting
 {
     using Client;
-    using System;
 
     public class RemoveTargetHandler : ITargetHandler
     {
@@ -14,12 +13,12 @@
         {
             if (o is Item)
             {
-                Item item = (Item) o;
+                Item item = (Item)o;
                 World.Remove(item);
             }
             else if (o is Mobile)
             {
-                Mobile m = (Mobile) o;
+                Mobile m = (Mobile)o;
                 if (!m.Player)
                 {
                     World.Remove(m);
@@ -32,4 +31,3 @@
         }
     }
 }
-

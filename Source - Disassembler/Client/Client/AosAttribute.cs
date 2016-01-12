@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public enum AosAttribute
     {
         ArtifactRarity = 0x1030d6,
@@ -41,4 +39,3 @@
         SwingSpeedIncrease = 0x102e86
     }
 }
-

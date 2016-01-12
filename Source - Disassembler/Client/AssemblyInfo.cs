@@ -11,5 +11,4 @@
 [assembly: System.Reflection.AssemblyKeyName("")]
 [assembly: System.Reflection.AssemblyKeyFile("")]
 [assembly: System.Reflection.AssemblyDelaySign(false)]
-[assembly: System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.RequestMinimum, SkipVerification=true)]
-
+[assembly: System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.RequestMinimum, SkipVerification = true)]

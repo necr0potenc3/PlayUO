@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class TimeDelay
     {
         private int m_Duration;
@@ -15,7 +13,7 @@
 
         public TimeDelay(float Duration)
         {
-            this.m_Duration = (int) (Duration * 1000f);
+            this.m_Duration = (int)(Duration * 1000f);
             this.m_End = Engine.Ticks + this.m_Duration;
         }
 
@@ -44,4 +42,3 @@
         }
     }
 }
-

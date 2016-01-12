@@ -1,7 +1,6 @@
 ﻿namespace Client.Targeting
 {
     using Client;
-    using System;
 
     public class StaticTarget : IPoint3D, IPoint2D
     {
@@ -71,4 +70,3 @@
         }
     }
 }
-

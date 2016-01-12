@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class StaticMessage : TextMessage
     {
         private int m_Serial;
@@ -44,4 +42,3 @@
         }
     }
 }
-

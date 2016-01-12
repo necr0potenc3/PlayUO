@@ -1,7 +1,6 @@
 ﻿namespace Client
 {
     using Microsoft.DirectX.Direct3D;
-    using System;
 
     public class Clipper
     {
@@ -27,53 +26,53 @@
                     return false;
 
                 case ClipType.Inside:
-                {
-                    float num = -0.5f + xStart;
-                    float num2 = -0.5f + yStart;
-                    float num3 = num + xWidth;
-                    float num4 = num2 + yHeight;
-                    Vertices[0].X = Vertices[1].X = num3;
-                    Vertices[0].Y = Vertices[2].Y = num4;
-                    Vertices[1].Y = Vertices[3].Y = num2;
-                    Vertices[2].X = Vertices[3].X = num;
-                    Vertices[0].Tu = Vertices[0].Tv = Vertices[1].Tu = Vertices[2].Tv = 1f;
-                    Vertices[1].Tv = Vertices[2].Tu = Vertices[3].Tu = Vertices[3].Tv = 0f;
-                    return true;
-                }
+                    {
+                        float num = -0.5f + xStart;
+                        float num2 = -0.5f + yStart;
+                        float num3 = num + xWidth;
+                        float num4 = num2 + yHeight;
+                        Vertices[0].X = Vertices[1].X = num3;
+                        Vertices[0].Y = Vertices[2].Y = num4;
+                        Vertices[1].Y = Vertices[3].Y = num2;
+                        Vertices[2].X = Vertices[3].X = num;
+                        Vertices[0].Tu = Vertices[0].Tv = Vertices[1].Tu = Vertices[2].Tv = 1f;
+                        Vertices[1].Tv = Vertices[2].Tu = Vertices[3].Tu = Vertices[3].Tv = 0f;
+                        return true;
+                    }
                 case ClipType.Partial:
-                {
-                    int num5 = xStart;
-                    int num6 = yStart;
-                    int xEnd = xStart + xWidth;
-                    int yEnd = yStart + yHeight;
-                    if (xStart < this.m_xStart)
                     {
-                        num5 = this.m_xStart;
+                        int num5 = xStart;
+                        int num6 = yStart;
+                        int xEnd = xStart + xWidth;
+                        int yEnd = yStart + yHeight;
+                        if (xStart < this.m_xStart)
+                        {
+                            num5 = this.m_xStart;
+                        }
+                        if (yStart < this.m_yStart)
+                        {
+                            num6 = this.m_yStart;
+                        }
+                        if (xEnd > this.m_xEnd)
+                        {
+                            xEnd = this.m_xEnd;
+                        }
+                        if (yEnd > this.m_yEnd)
+                        {
+                            yEnd = this.m_yEnd;
+                        }
+                        Vertices[0].X = Vertices[1].X = -0.5f + xEnd;
+                        Vertices[0].Y = Vertices[2].Y = -0.5f + yEnd;
+                        Vertices[1].Y = Vertices[3].Y = -0.5f + num6;
+                        Vertices[2].X = Vertices[3].X = -0.5f + num5;
+                        double num9 = 1.0 / ((double)xWidth);
+                        double num10 = 1.0 / ((double)yHeight);
+                        Vertices[0].Tu = Vertices[1].Tu = (float)(num9 * (xEnd - xStart));
+                        Vertices[0].Tv = Vertices[2].Tv = (float)(num10 * (yEnd - yStart));
+                        Vertices[1].Tv = Vertices[3].Tv = (float)(num10 * (num6 - yStart));
+                        Vertices[2].Tu = Vertices[3].Tu = (float)(num9 * (num5 - xStart));
+                        return true;
                     }
-                    if (yStart < this.m_yStart)
-                    {
-                        num6 = this.m_yStart;
-                    }
-                    if (xEnd > this.m_xEnd)
-                    {
-                        xEnd = this.m_xEnd;
-                    }
-                    if (yEnd > this.m_yEnd)
-                    {
-                        yEnd = this.m_yEnd;
-                    }
-                    Vertices[0].X = Vertices[1].X = -0.5f + xEnd;
-                    Vertices[0].Y = Vertices[2].Y = -0.5f + yEnd;
-                    Vertices[1].Y = Vertices[3].Y = -0.5f + num6;
-                    Vertices[2].X = Vertices[3].X = -0.5f + num5;
-                    double num9 = 1.0 / ((double) xWidth);
-                    double num10 = 1.0 / ((double) yHeight);
-                    Vertices[0].Tu = Vertices[1].Tu = (float) (num9 * (xEnd - xStart));
-                    Vertices[0].Tv = Vertices[2].Tv = (float) (num10 * (yEnd - yStart));
-                    Vertices[1].Tv = Vertices[3].Tv = (float) (num10 * (num6 - yStart));
-                    Vertices[2].Tu = Vertices[3].Tu = (float) (num9 * (num5 - xStart));
-                    return true;
-                }
             }
             return false;
         }
@@ -84,7 +83,7 @@
             {
                 return false;
             }
-            Clipper clipper = (Clipper) Target;
+            Clipper clipper = (Clipper)Target;
             return ((clipper == this) || ((((this.m_xStart == clipper.m_xStart) && (this.m_yStart == clipper.m_yStart)) && (this.m_xEnd == clipper.m_xEnd)) && (this.m_yEnd == clipper.m_yEnd)));
         }
 
@@ -160,4 +159,3 @@
         }
     }
 }
-

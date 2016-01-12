@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class SortLock : ILocked
     {
         private int m_X;
@@ -19,4 +17,3 @@
         }
     }
 }
-

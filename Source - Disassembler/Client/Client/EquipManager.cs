@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
 
     public class EquipManager
@@ -58,7 +57,7 @@
                     object obj2 = this.m_AutoEquip[index];
                     if (obj2 != null)
                     {
-                        Item check = World.FindItem((int) obj2);
+                        Item check = World.FindItem((int)obj2);
                         if (check == null)
                         {
                             Engine.AddTextMessage("Equipment not found.");
@@ -82,4 +81,3 @@
         }
     }
 }
-

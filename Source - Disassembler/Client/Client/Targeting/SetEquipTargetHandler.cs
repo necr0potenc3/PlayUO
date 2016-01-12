@@ -1,7 +1,6 @@
 ﻿namespace Client.Targeting
 {
     using Client;
-    using System;
 
     public class SetEquipTargetHandler : ITargetHandler
     {
@@ -21,7 +20,7 @@
         {
             if (o is Item)
             {
-                Item item = (Item) o;
+                Item item = (Item)o;
                 if (Map.m_ItemFlags[item.ID & 0x3fff][TileFlag.Wearable])
                 {
                     switch (Map.GetQuality(item.ID))
@@ -38,4 +37,3 @@
         }
     }
 }
-

@@ -27,8 +27,8 @@
             {
                 throw new ArgumentException();
             }
-            bool flag = (x is Mobile) && ((Mobile) x).Human;
-            bool flag2 = (y is Mobile) && ((Mobile) y).Human;
+            bool flag = (x is Mobile) && ((Mobile)x).Human;
+            bool flag2 = (y is Mobile) && ((Mobile)y).Human;
             if (flag && !flag2)
             {
                 return -1;
@@ -42,4 +42,3 @@
         }
     }
 }
-

@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class TableDescriptor2D
     {
         private string[] m_Columns;
@@ -44,4 +42,3 @@
         }
     }
 }
-

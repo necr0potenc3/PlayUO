@@ -1,7 +1,6 @@
 ﻿namespace Client.Prompts
 {
     using Client;
-    using System;
 
     public class ASCIIPrompt : IPrompt
     {
@@ -15,7 +14,7 @@
             this.m_Prompt = prompt;
             if (((this.m_Text = this.Text) != null) && ((this.m_Text = this.m_Text.Trim()).Length > 0))
             {
-                Engine.AddTextMessage(this.m_Text, (float) 12.5f);
+                Engine.AddTextMessage(this.m_Text, (float)12.5f);
             }
             else
             {
@@ -61,4 +60,3 @@
         }
     }
 }
-

@@ -41,7 +41,7 @@
             }
             if (a != this)
             {
-                TextMessage message = (TextMessage) a;
+                TextMessage message = (TextMessage)a;
                 if (this.m_Timestamp < message.m_Timestamp)
                 {
                     return -1;
@@ -83,7 +83,7 @@
                 {
                     return 1f;
                 }
-                return (float) (1.0 - this.m_Sync.Normalized);
+                return (float)(1.0 - this.m_Sync.Normalized);
             }
         }
 
@@ -144,4 +144,3 @@
         }
     }
 }
-

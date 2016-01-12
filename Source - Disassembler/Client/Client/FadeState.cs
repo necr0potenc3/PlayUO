@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public enum FadeState
     {
         Faded,
@@ -10,4 +8,3 @@
         O2F
     }
 }
-

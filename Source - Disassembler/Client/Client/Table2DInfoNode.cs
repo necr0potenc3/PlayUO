@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class Table2DInfoNode : InfoNode
     {
         private TableDescriptor2D[] m_Descriptors;
@@ -20,4 +18,3 @@
         }
     }
 }
-

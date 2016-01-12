@@ -1,7 +1,6 @@
 ﻿namespace Client.Targeting
 {
     using Client;
-    using System;
 
     public class AddAutoUseTargetHandler : ITargetHandler
     {
@@ -14,7 +13,7 @@
         {
             if (o is Item)
             {
-                Item item = (Item) o;
+                Item item = (Item)o;
                 if (World.CharData.AutoUse.Contains(item))
                 {
                     item.OverrideHue(-1);
@@ -37,7 +36,7 @@
                 }
                 else if (item.IsEquip && (item.EquipParent is Mobile))
                 {
-                    Mobile equipParent = (Mobile) item.EquipParent;
+                    Mobile equipParent = (Mobile)item.EquipParent;
                     if (equipParent.Paperdoll != null)
                     {
                         Gumps.OpenPaperdoll(equipParent, equipParent.PaperdollName, equipParent.PaperdollCanDrag);
@@ -51,4 +50,3 @@
         }
     }
 }
-

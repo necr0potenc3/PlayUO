@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class BBMessageHeader
     {
         private Item m_Board;
@@ -20,4 +18,3 @@
         }
     }
 }
-

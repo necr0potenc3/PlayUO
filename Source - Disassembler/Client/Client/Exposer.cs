@@ -40,15 +40,15 @@
 
         public void AddTextMessage(string msg, TimeSpan ts)
         {
-            Engine.AddTextMessage(msg, (float) ts.TotalSeconds);
+            Engine.AddTextMessage(msg, (float)ts.TotalSeconds);
         }
 
         public void AddTextMessage(string msg, TimeSpan ts, int font)
         {
-            Engine.AddTextMessage(msg, (float) ts.TotalSeconds, Engine.GetFont(font));
+            Engine.AddTextMessage(msg, (float)ts.TotalSeconds, Engine.GetFont(font));
         }
 
-        public void AddTimer(Timer t)
+        public void AddTimer(Client.Timer t)
         {
             Engine.AddTimer(t);
         }
@@ -90,7 +90,7 @@
                         {
                             Engine.m_AutoUseIndex++;
                             Engine.m_AutoUseIndex = Engine.m_AutoUseIndex % autoUse.Count;
-                            Item check = (Item) autoUse[Engine.m_AutoUseIndex];
+                            Item check = (Item)autoUse[Engine.m_AutoUseIndex];
                             if (backpack.ContainsItem(check) || (check.IsEquip && (check.EquipParent == player)))
                             {
                                 check.Use();
@@ -210,12 +210,12 @@
 
         public Bitmap GetItem(int ItemID, int HueID)
         {
-            Texture item = Hues.Load(HueID).GetItem(ItemID);
-            if ((item == null) || item.IsEmpty())
+            Texture texture = Hues.Load(HueID).GetItem(ItemID);
+            if ((texture == null) || texture.IsEmpty())
             {
                 return null;
             }
-            return item.ToBitmap();
+            return texture.ToBitmap();
         }
 
         public Bitmap GetLand(int LandID, int HueID)
@@ -319,12 +319,12 @@
                 IDataObject dataObject = Clipboard.GetDataObject();
                 if (dataObject.GetDataPresent(DataFormats.UnicodeText))
                 {
-                    string data = (string) dataObject.GetData(DataFormats.UnicodeText);
+                    string data = (string)dataObject.GetData(DataFormats.UnicodeText);
                     this.Paste(data);
                 }
                 else if (dataObject.GetDataPresent(DataFormats.Text))
                 {
-                    string toPaste = (string) dataObject.GetData(DataFormats.Text);
+                    string toPaste = (string)dataObject.GetData(DataFormats.Text);
                     this.Paste(toPaste);
                 }
             }
@@ -360,7 +360,7 @@
 
         public void RegisterAsMacro(string action)
         {
-            this.RegisterAsMacro(action, (ParamNode[]) null);
+            this.RegisterAsMacro(action, (ParamNode[])null);
         }
 
         public void RegisterAsMacro(string action, params ParamNode[] options)
@@ -412,7 +412,7 @@
             }
         }
 
-        public void RemoveTimer(Timer t)
+        public void RemoveTimer(Client.Timer t)
         {
             Engine.RemoveTimer(t);
         }
@@ -667,7 +667,7 @@
         {
             get
             {
-                return ((Engine.m_LastTarget is Mobile) && ((Mobile) Engine.m_LastTarget).Player);
+                return ((Engine.m_LastTarget is Mobile) && ((Mobile)Engine.m_LastTarget).Player);
             }
         }
 
@@ -800,4 +800,3 @@
         }
     }
 }
-

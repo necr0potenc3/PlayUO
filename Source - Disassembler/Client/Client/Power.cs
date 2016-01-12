@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Sequential)]
@@ -8,6 +7,7 @@
     {
         private string m_Name;
         private char m_Symbol;
+
         public Power(string Name)
         {
             this.m_Name = Name;
@@ -28,6 +28,7 @@
                 return this.m_Name;
             }
         }
+
         public char Symbol
         {
             get
@@ -35,6 +36,7 @@
                 return this.m_Symbol;
             }
         }
+
         public static Power[] Parse(string Words)
         {
             string[] strArray = Words.Split(new char[] { ' ' });
@@ -48,4 +50,3 @@
         }
     }
 }
-

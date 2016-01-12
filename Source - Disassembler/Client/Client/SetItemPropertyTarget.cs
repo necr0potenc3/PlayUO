@@ -1,7 +1,6 @@
 ﻿namespace Client
 {
     using Client.Targeting;
-    using System;
 
     public class SetItemPropertyTarget : ITargetHandler
     {
@@ -29,4 +28,3 @@
         }
     }
 }
-

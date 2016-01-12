@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public enum Layer : byte
     {
         Arms = 0x13,
@@ -36,4 +34,3 @@
         Waist = 12
     }
 }
-

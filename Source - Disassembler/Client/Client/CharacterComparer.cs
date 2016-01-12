@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
 
     public class CharacterComparer : IComparer
@@ -11,7 +10,7 @@
             CharacterProfile profile2 = null;
             if (x is GPlayCharacterMenu)
             {
-                character = ((GPlayCharacterMenu) x).Character;
+                character = ((GPlayCharacterMenu)x).Character;
             }
             else
             {
@@ -19,7 +18,7 @@
             }
             if (y is GPlayCharacterMenu)
             {
-                profile2 = ((GPlayCharacterMenu) y).Character;
+                profile2 = ((GPlayCharacterMenu)y).Character;
             }
             else
             {
@@ -37,4 +36,3 @@
         }
     }
 }
-

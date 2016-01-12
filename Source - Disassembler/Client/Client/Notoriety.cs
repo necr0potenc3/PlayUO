@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public enum Notoriety : byte
     {
         Ally = 2,
@@ -14,4 +12,3 @@
         Vendor = 7
     }
 }
-

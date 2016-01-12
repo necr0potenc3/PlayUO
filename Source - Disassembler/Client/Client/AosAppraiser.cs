@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public abstract class AosAppraiser
     {
         private int[] m_Appraisal;
@@ -41,4 +39,3 @@
         protected abstract void DoAppraise(Item item, AosAttributes attrs);
     }
 }
-

@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class UnpackLeaf
     {
         public int[] m_Cache;
@@ -12,8 +10,7 @@
 
         public UnpackLeaf(int index)
         {
-            this.m_Index = (short) index;
+            this.m_Index = (short)index;
         }
     }
 }
-

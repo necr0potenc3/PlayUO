@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Sequential)]
@@ -8,6 +7,7 @@
     {
         private string m_Name;
         private int m_ItemID;
+
         public Reagent(string Name)
         {
             this.m_Name = Name;
@@ -27,6 +27,7 @@
                 return this.m_Name;
             }
         }
+
         public int ItemID
         {
             get
@@ -36,4 +37,3 @@
         }
     }
 }
-

@@ -1,7 +1,6 @@
 ﻿namespace Client.Targeting
 {
     using Client;
-    using System;
     using System.Windows.Forms;
 
     public class TraceTargetHandler : ITargetHandler
@@ -15,18 +14,18 @@
         {
             if (o is StaticTarget)
             {
-                Engine.AddTextMessage(((StaticTarget) o).Hue.ToString());
+                Engine.AddTextMessage(((StaticTarget)o).Hue.ToString());
             }
             else if (o is Item)
             {
-                Item item = (Item) o;
+                Item item = (Item)o;
                 Engine.AddTextMessage(string.Format("Hue: {0}", item.Hue));
                 Clipboard.SetDataObject(string.Format("new Point3D( {0}, {1}, {2} ),", item.X, item.Y, item.Z));
                 Debug.Trace(string.Format("new Point3D( {0}, {1}, {2} ),", item.X, item.Y, item.Z));
             }
             else if (o is Mobile)
             {
-                ((Mobile) o).Trace();
+                ((Mobile)o).Trace();
             }
             else
             {
@@ -35,4 +34,3 @@
         }
     }
 }
-

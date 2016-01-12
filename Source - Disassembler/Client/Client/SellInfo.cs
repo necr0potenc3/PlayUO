@@ -146,7 +146,7 @@
         {
             get
             {
-                return (int) (this.m_ToSell + 0.5);
+                return (int)(this.m_ToSell + 0.5);
             }
             set
             {
@@ -155,4 +155,3 @@
         }
     }
 }
-

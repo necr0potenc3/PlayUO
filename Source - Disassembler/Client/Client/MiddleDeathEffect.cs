@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class MiddleDeathEffect : Fade
     {
         private GLabel m_Label;
@@ -20,4 +18,3 @@
         }
     }
 }
-

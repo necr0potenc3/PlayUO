@@ -1,7 +1,6 @@
 ﻿namespace Client.Targeting
 {
     using Client;
-    using System;
 
     public class SetRegStockTargetHandler : ITargetHandler
     {
@@ -13,7 +12,7 @@
         {
             if (o is Item)
             {
-                Item item = (Item) o;
+                Item item = (Item)o;
                 if (!Map.m_ItemFlags[item.ID & 0x3fff][TileFlag.Container])
                 {
                     Engine.AddTextMessage("That is not a container.");
@@ -32,4 +31,3 @@
         }
     }
 }
-

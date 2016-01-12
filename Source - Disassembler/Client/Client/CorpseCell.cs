@@ -18,7 +18,7 @@
         public CorpseCell(Item src)
         {
             this.m_Serial = src.Serial;
-            this.m_Z = (sbyte) src.Z;
+            this.m_Z = (sbyte)src.Z;
             this.m_Body = src.Amount;
             this.m_Action = Engine.m_Animations.ConvertAction(this.m_Body, src.CorpseSerial, this.m_X, this.m_Y, src.Direction, GenericAction.Die, null);
             this.m_Direction = Engine.GetAnimDirection(src.Direction);
@@ -90,4 +90,3 @@
         }
     }
 }
-

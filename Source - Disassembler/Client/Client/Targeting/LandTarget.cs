@@ -1,7 +1,6 @@
 ﻿namespace Client.Targeting
 {
     using Client;
-    using System;
 
     public class LandTarget : IPoint3D, IPoint2D
     {
@@ -41,4 +40,3 @@
         }
     }
 }
-

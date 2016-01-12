@@ -1,7 +1,6 @@
 ﻿namespace Client.Targeting
 {
     using Client;
-    using System;
 
     public class HuePickerTargetHandler : ITargetHandler
     {
@@ -26,11 +25,11 @@
                 int num = 0;
                 if (o is Item)
                 {
-                    num = ((Item) o).Hue & 0x3fff;
+                    num = ((Item)o).Hue & 0x3fff;
                 }
                 else
                 {
-                    num = ((StaticTarget) o).Hue.HueID() & 0x3fff;
+                    num = ((StaticTarget)o).Hue.HueID() & 0x3fff;
                 }
                 if ((num >= 2) && (num < 0x3ea))
                 {
@@ -61,4 +60,3 @@
         }
     }
 }
-

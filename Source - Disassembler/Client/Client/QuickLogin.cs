@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
     using System.IO;
     using System.Text;
@@ -14,7 +13,7 @@
             Load();
             for (int i = 0; i < m_Entries.Count; i++)
             {
-                Entry entry = (Entry) m_Entries[i];
+                Entry entry = (Entry)m_Entries[i];
                 if (((entry.AccountName == e.AccountName) && (entry.Password == e.Password)) && ((entry.ServerID == e.ServerID) && (entry.CharID == e.CharID)))
                 {
                     m_Entries.RemoveAt(i);
@@ -37,14 +36,13 @@
                 int num = bin.ReadInt32();
                 for (int i = 0; i < num; i++)
                 {
-                    Entry entry = new Entry {
-                        AccountName = ReadString(bin),
-                        Password = ReadString(bin),
-                        ServerID = bin.ReadInt32(),
-                        ServerName = ReadString(bin),
-                        CharID = bin.ReadInt32(),
-                        CharName = ReadString(bin)
-                    };
+                    Entry entry = new Entry();
+                    entry.AccountName = ReadString(bin);
+                    entry.Password = ReadString(bin);
+                    entry.ServerID = bin.ReadInt32();
+                    entry.ServerName = ReadString(bin);
+                    entry.CharID = bin.ReadInt32();
+                    entry.CharName = ReadString(bin);
                     m_Entries.Add(entry);
                 }
                 bin.Close();
@@ -71,7 +69,7 @@
             bin.Write(m_Entries.Count);
             for (int i = 0; i < m_Entries.Count; i++)
             {
-                Entry entry = (Entry) m_Entries[i];
+                Entry entry = (Entry)m_Entries[i];
                 WriteString(entry.AccountName, bin);
                 WriteString(entry.Password, bin);
                 bin.Write(entry.ServerID);
@@ -86,7 +84,7 @@
         {
             for (int i = 0; i < m_Entries.Count; i++)
             {
-                Validate((Entry) m_Entries[i], i);
+                Validate((Entry)m_Entries[i], i);
             }
         }
 
@@ -96,7 +94,7 @@
             int num2 = index + 1;
             while (num2 < count)
             {
-                Entry entry = (Entry) m_Entries[num2];
+                Entry entry = (Entry)m_Entries[num2];
                 if (((entry.AccountName == e.AccountName) && (entry.Password == e.Password)) && ((entry.ServerID == e.ServerID) && (entry.CharID == e.CharID)))
                 {
                     m_Entries.RemoveAt(num2);
@@ -126,4 +124,3 @@
         }
     }
 }
-
