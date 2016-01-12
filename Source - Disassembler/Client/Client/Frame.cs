@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class Frame
     {
         public int CenterX;
@@ -23,4 +21,3 @@
         }
     }
 }
-

@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GFader : GDragable
     {
         protected static bool m_Fade;
@@ -50,7 +48,7 @@
             if (this.m_Sync != null)
             {
                 double normalized = this.m_Sync.Normalized;
-                base.Alpha = this.m_FadeFrom + ((float) ((this.m_FadeTo - this.m_FadeFrom) * normalized));
+                base.Alpha = this.m_FadeFrom + ((float)((this.m_FadeTo - this.m_FadeFrom) * normalized));
                 if (normalized >= 1.0)
                 {
                     this.m_Sync = null;
@@ -93,7 +91,7 @@
                         Gump gump = gumpArray[i];
                         if (gump.m_ITranslucent)
                         {
-                            ITranslucent translucent = (ITranslucent) gump;
+                            ITranslucent translucent = (ITranslucent)gump;
                             alpha = translucent.Alpha;
                             translucent.Alpha *= base.m_fAlpha;
                             gump.Render(x, y);
@@ -160,7 +158,7 @@
                                 this.m_Timer.Delete();
                             }
                             this.m_Timer = new Timer(new OnTick(this.Fade_OnTick), 0);
-                            this.m_Sync = new TimeSync((double) this.m_fFadeInDuration);
+                            this.m_Sync = new TimeSync((double)this.m_fFadeInDuration);
                             this.m_Timer.Start(true);
                             break;
 
@@ -172,7 +170,7 @@
                                 this.m_Timer.Delete();
                             }
                             this.m_Timer = new Timer(new OnTick(this.Fade_OnTick), 0);
-                            this.m_Sync = new TimeSync((double) this.m_fDuration);
+                            this.m_Sync = new TimeSync((double)this.m_fDuration);
                             this.m_Timer.Start(true);
                             break;
                     }
@@ -182,4 +180,3 @@
         }
     }
 }
-

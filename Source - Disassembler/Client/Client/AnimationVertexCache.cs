@@ -1,13 +1,12 @@
 ﻿namespace Client
 {
     using Microsoft.DirectX.Direct3D;
-    using System;
 
     public class AnimationVertexCache
     {
         private bool m_bPool;
         private bool m_fPool;
-        private Texture m_tPool;
+        private Client.Texture m_tPool;
         private CustomVertex.TransformedColoredTextured[] m_vPool;
         private int m_xPool;
         private int m_yPool;
@@ -22,7 +21,7 @@
             this.m_xPool = this.m_yPool = -2147483648;
         }
 
-        public unsafe void Draw(Texture t, int x, int y)
+        public unsafe void Draw(Client.Texture t, int x, int y)
         {
             if (((this.m_xPool != x) || (this.m_yPool != y)) || ((this.m_tPool != t) || (this.m_fPool != t.Flip)))
             {
@@ -58,7 +57,7 @@
             }
         }
 
-        public unsafe void DrawGame(Texture t, int x, int y)
+        public unsafe void DrawGame(Client.Texture t, int x, int y)
         {
             if (((this.m_xPool != x) || (this.m_yPool != y)) || ((this.m_tPool != t) || (this.m_fPool != t.Flip)))
             {
@@ -109,4 +108,3 @@
         }
     }
 }
-

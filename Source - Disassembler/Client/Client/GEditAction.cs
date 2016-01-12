@@ -1,17 +1,16 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
     using System.Drawing;
     using System.Windows.Forms;
 
     public class GEditAction : GWindowsForm
     {
-        private Action m_Action;
+        private Client.Action m_Action;
         private Macro m_Macro;
         private GMacroEditorPanel m_Panel;
 
-        public GEditAction(GMacroEditorPanel p, Macro macro, Action action) : base(0, 0, 0x67, 0x56)
+        public GEditAction(GMacroEditorPanel p, Macro macro, Client.Action action) : base(0, 0, 0x67, 0x56)
         {
             this.m_Panel = p;
             this.m_Macro = macro;
@@ -28,28 +27,24 @@
 
         private GSystemButton AddButton(string name, int x, int y, int w, int h, OnClick onClick)
         {
-            GSystemButton toAdd = new GSystemButton(x, y, w, h, SystemColors.Control, SystemColors.ControlText, name, Engine.GetUniFont(2)) {
-                OnClick = onClick
-            };
+            GSystemButton toAdd = new GSystemButton(x, y, w, h, SystemColors.Control, SystemColors.ControlText, name, Engine.GetUniFont(2));
+            toAdd.OnClick = onClick;
             base.Client.Children.Add(toAdd);
             return toAdd;
         }
 
         private GTextBox AddTextBox(string name, int index, string initialText, char pc)
         {
-            GLabel label;
             int y = 30 + (index * 0x19);
-            label = new GLabel(name, Engine.GetUniFont(2), GumpHues.ControlText, 0, 0) {
-                X = 10 - label.Image.xMin,
-                Y = (y + ((0x16 - ((label.Image.yMax - label.Image.yMin) + 1)) / 2)) - label.Image.yMin
-            };
-            base.m_Children.Add(label);
-            GAlphaBackground toAdd = new GAlphaBackground(60, y, 200, 0x16) {
-                ShouldHitTest = false,
-                FillColor = GumpColors.Window,
-                FillAlpha = 1f
-            };
+            GLabel toAdd = new GLabel(name, Engine.GetUniFont(2), GumpHues.ControlText, 0, 0);
+            toAdd.X = 10 - toAdd.Image.xMin;
+            toAdd.Y = (y + ((0x16 - ((toAdd.Image.yMax - toAdd.Image.yMin) + 1)) / 2)) - toAdd.Image.yMin;
             base.m_Children.Add(toAdd);
+            GAlphaBackground background = new GAlphaBackground(60, y, 200, 0x16);
+            background.ShouldHitTest = false;
+            background.FillColor = GumpColors.Window;
+            background.FillAlpha = 1f;
+            base.m_Children.Add(background);
             IHue windowText = GumpHues.WindowText;
             GTextBox box = new GTextBox(0, false, 60, y, 200, 0x16, initialText, Engine.GetUniFont(2), windowText, windowText, windowText, pc);
             base.Client.Children.Add(box);
@@ -60,7 +55,7 @@
         {
             ArrayList list = new ArrayList(this.m_Macro.Actions);
             list.Remove(this.m_Action);
-            this.m_Macro.Actions = (Action[]) list.ToArray(typeof(Action));
+            this.m_Macro.Actions = (Client.Action[])list.ToArray(typeof(Client.Action));
             GMacroEditorForm parent = this.m_Panel.Parent.Parent as GMacroEditorForm;
             if (parent != null)
             {
@@ -79,7 +74,7 @@
                 list.RemoveAt(index);
                 list.Insert(index + 1, this.m_Action);
             }
-            this.m_Macro.Actions = (Action[]) list.ToArray(typeof(Action));
+            this.m_Macro.Actions = (Client.Action[])list.ToArray(typeof(Client.Action));
             GMacroEditorForm parent = this.m_Panel.Parent.Parent as GMacroEditorForm;
             if (parent != null)
             {
@@ -104,7 +99,7 @@
                 list.RemoveAt(index);
                 list.Insert(index - 1, this.m_Action);
             }
-            this.m_Macro.Actions = (Action[]) list.ToArray(typeof(Action));
+            this.m_Macro.Actions = (Client.Action[])list.ToArray(typeof(Client.Action));
             GMacroEditorForm parent = this.m_Panel.Parent.Parent as GMacroEditorForm;
             if (parent != null)
             {
@@ -113,4 +108,3 @@
         }
     }
 }
-

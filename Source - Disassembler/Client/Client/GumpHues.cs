@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GumpHues
     {
         private static IHue[] m_Hues = new IHue[0x1b];
@@ -240,4 +238,3 @@
         }
     }
 }
-

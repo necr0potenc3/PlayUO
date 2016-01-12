@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GCombatGump : GDragable
     {
         private static IHue m_AbleHue = new Hues.HFill(0x15155a);
@@ -28,7 +26,7 @@
                 AbilityInfo a = abilities[i];
                 IHue hueFor = GetHueFor(a);
                 toAdd = new GTextButton(Localization.GetString(a.Name), uniFont, hueFor, hueFor, 0x38 + ((i / 9) * 0xa2), 0x26 + ((i % 9) * 15), onClick);
-                a.NameLabel = (GTextButton) toAdd;
+                a.NameLabel = (GTextButton)toAdd;
                 toAdd.SetTag("Ability", a);
                 toAdd.Tooltip = new Tooltip(Localization.GetString(a.Tooltip), true, 240);
                 toAdd.Tooltip.Delay = 0.25f;
@@ -75,7 +73,7 @@
                 GTextButton button = gumpArray[i] as GTextButton;
                 if (button != null)
                 {
-                    AbilityInfo tag = (AbilityInfo) button.GetTag("Ability");
+                    AbilityInfo tag = (AbilityInfo)button.GetTag("Ability");
                     if (tag != null)
                     {
                         tag.NameLabel.FocusHue = tag.NameLabel.DefaultHue = GetHueFor(tag);
@@ -86,7 +84,7 @@
 
         private void Name_OnClick(Gump sender)
         {
-            AbilityInfo tag = (AbilityInfo) sender.GetTag("Ability");
+            AbilityInfo tag = (AbilityInfo)sender.GetTag("Ability");
             if (AbilityInfo.Active == tag)
             {
                 AbilityInfo.Active = null;
@@ -122,4 +120,3 @@
         }
     }
 }
-

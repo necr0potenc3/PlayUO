@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GBrightnessBar : Gump
@@ -99,12 +98,12 @@
             {
                 this.m_Target.Brightness++;
             }
-            this.m_Position = (int) ((((double) this.m_Target.Brightness) / 4.0) * (this.m_Height - 1));
+            this.m_Position = (int)((((double)this.m_Target.Brightness) / 4.0) * (this.m_Height - 1));
         }
 
         public void Refresh()
         {
-            this.m_Position = (int) ((((double) this.m_Target.Brightness) / 4.0) * (this.m_Height - 1));
+            this.m_Position = (int)((((double)this.m_Target.Brightness) / 4.0) * (this.m_Height - 1));
         }
 
         public void Slide(int Y)
@@ -119,7 +118,7 @@
             {
                 this.m_Position = this.m_Height - 1;
             }
-            int num = (int) (((((double) this.m_Position) / ((double) (this.m_Height - 1))) - 1E-13) * 5.0);
+            int num = (int)(((((double)this.m_Position) / ((double)(this.m_Height - 1))) - 1E-13) * 5.0);
             if (this.m_Target.Brightness != num)
             {
                 this.m_Target.Brightness = num;
@@ -152,4 +151,3 @@
         }
     }
 }
-

@@ -1,8 +1,6 @@
 ﻿namespace Client
 {
-    using System;
     using System.IO;
-    using System.Runtime.InteropServices;
 
     public class LandArt
     {
@@ -16,11 +14,11 @@
         {
             Stream stream = Engine.FileManager.OpenMUL(Files.ArtIdx);
             byte[] buffer = new byte[0x30000];
-            Engine.NativeRead((FileStream) stream, buffer, 0, buffer.Length);
+            Engine.NativeRead((FileStream)stream, buffer, 0, buffer.Length);
             stream.Close();
             fixed (byte* numRef = buffer)
             {
-                int* numPtr = (int*) numRef;
+                int* numPtr = (int*)numRef;
                 int num = 0;
                 while (num < 0x4000)
                 {
@@ -28,16 +26,16 @@
                     numPtr += 3;
                 }
             }
-            this.m_Length = new int[] { 
-                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0x10, 
-                0x11, 0x12, 0x13, 20, 0x15, 0x16, 0x16, 0x15, 20, 0x13, 0x12, 0x11, 0x10, 15, 14, 13, 
+            this.m_Length = new int[] {
+                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0x10,
+                0x11, 0x12, 0x13, 20, 0x15, 0x16, 0x16, 0x15, 20, 0x13, 0x12, 0x11, 0x10, 15, 14, 13,
                 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
-             };
-            this.m_Offset = new int[] { 
-                0x15, 20, 0x13, 0x12, 0x11, 0x10, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 
-                5, 4, 3, 2, 1, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+            };
+            this.m_Offset = new int[] {
+                0x15, 20, 0x13, 0x12, 0x11, 0x10, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6,
+                5, 4, 3, 2, 1, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
                 10, 11, 12, 13, 14, 15, 0x10, 0x11, 0x12, 0x13, 20, 0x15
-             };
+            };
             this.m_Stream = Engine.FileManager.OpenMUL(Files.ArtMul);
             ArtTableEntry[] entries = ArtTable.m_Entries;
             int length = entries.Length;
@@ -81,16 +79,16 @@
             public LandFactory(LandArt land)
             {
                 this.m_Land = land;
-                this.m_Length = new int[] { 
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0x10, 
-                    0x11, 0x12, 0x13, 20, 0x15, 0x16, 0x16, 0x15, 20, 0x13, 0x12, 0x11, 0x10, 15, 14, 13, 
+                this.m_Length = new int[] {
+                    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0x10,
+                    0x11, 0x12, 0x13, 20, 0x15, 0x16, 0x16, 0x15, 20, 0x13, 0x12, 0x11, 0x10, 15, 14, 13,
                     12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
-                 };
-                this.m_Offset = new int[] { 
-                    0x15, 20, 0x13, 0x12, 0x11, 0x10, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 
-                    5, 4, 3, 2, 1, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+                };
+                this.m_Offset = new int[] {
+                    0x15, 20, 0x13, 0x12, 0x11, 0x10, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6,
+                    5, 4, 3, 2, 1, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
                     10, 11, 12, 13, 14, 15, 0x10, 0x11, 0x12, 0x13, 20, 0x15
-                 };
+                };
             }
 
             protected override void CoreAssignArgs(Texture tex)
@@ -115,12 +113,12 @@
                 int num = this.m_Land.m_Lookup[this.m_LandID];
                 if (num != -1)
                 {
-                    this.m_Land.m_Stream.Seek((long) num, SeekOrigin.Begin);
+                    this.m_Land.m_Stream.Seek((long)num, SeekOrigin.Begin);
                     fixed (byte* numRef = this.m_Buffer)
                     {
-                        Engine.NativeRead((FileStream) this.m_Land.m_Stream, (void*) numRef, 0x800);
-                        int* numPtr = (int*) numRef;
-                        short* numPtr2 = (short*) pLine;
+                        Engine.NativeRead((FileStream)this.m_Land.m_Stream, (void*)numRef, 0x800);
+                        int* numPtr = (int*)numRef;
+                        short* numPtr2 = (short*)pLine;
                         int num2 = 11;
                         fixed (int* numRef2 = this.m_Offset)
                         {
@@ -129,24 +127,24 @@
                                 int* numPtr3 = numRef2;
                                 for (int* numPtr4 = numRef3; --num2 >= 0; numPtr4 += 4)
                                 {
-                                    int* numPtr5 = (int*) (pLine + numPtr3[0]);
+                                    int* numPtr5 = (int*)(pLine + numPtr3[0]);
                                     int num3 = numPtr4[0];
-                                    this.m_Hue.CopyPixels((void*) numPtr, (void*) numPtr5, num3 << 1);
+                                    this.m_Hue.CopyPixels((void*)numPtr, (void*)numPtr5, num3 << 1);
                                     numPtr += num3;
                                     pLine += lineEndDelta;
-                                    numPtr5 = (int*) (pLine + numPtr3[1]);
+                                    numPtr5 = (int*)(pLine + numPtr3[1]);
                                     num3 = numPtr4[1];
-                                    this.m_Hue.CopyPixels((void*) numPtr, (void*) numPtr5, num3 << 1);
+                                    this.m_Hue.CopyPixels((void*)numPtr, (void*)numPtr5, num3 << 1);
                                     numPtr += num3;
                                     pLine += lineEndDelta;
-                                    numPtr5 = (int*) (pLine + numPtr3[2]);
+                                    numPtr5 = (int*)(pLine + numPtr3[2]);
                                     num3 = numPtr4[2];
-                                    this.m_Hue.CopyPixels((void*) numPtr, (void*) numPtr5, num3 << 1);
+                                    this.m_Hue.CopyPixels((void*)numPtr, (void*)numPtr5, num3 << 1);
                                     numPtr += num3;
                                     pLine += lineEndDelta;
-                                    numPtr5 = (int*) (pLine + numPtr3[3]);
+                                    numPtr5 = (int*)(pLine + numPtr3[3]);
                                     num3 = numPtr4[3];
-                                    this.m_Hue.CopyPixels((void*) numPtr, (void*) numPtr5, num3 << 1);
+                                    this.m_Hue.CopyPixels((void*)numPtr, (void*)numPtr5, num3 << 1);
                                     numPtr += num3;
                                     pLine += lineEndDelta;
                                     numPtr3 += 4;
@@ -166,11 +164,10 @@
 
             public override Texture Reconstruct(object[] args)
             {
-                this.m_LandID = (int) args[0];
-                this.m_Hue = (IHue) args[1];
+                this.m_LandID = (int)args[0];
+                this.m_Hue = (IHue)args[1];
                 return base.Construct(true);
             }
         }
     }
 }
-

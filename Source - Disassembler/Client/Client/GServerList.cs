@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GServerList : GBackground
     {
         private GServerEntry[] m_Entries;
@@ -19,7 +17,7 @@
             this.m_Entries = new GServerEntry[servers.Length];
             for (int i = 0; i < servers.Length; i++)
             {
-                this.m_Entries[i] = new GServerEntry(servers[i], font, hue, offsetX, offsetY, useWidth, selectionBorderColor, selectionFillColor, ((float) selectionFillAlpha) / 255f);
+                this.m_Entries[i] = new GServerEntry(servers[i], font, hue, offsetX, offsetY, useWidth, selectionBorderColor, selectionFillColor, ((float)selectionFillAlpha) / 255f);
                 offsetY += this.m_Entries[i].Height - 1;
                 base.m_Children.Add(this.m_Entries[i]);
             }
@@ -34,7 +32,7 @@
                     base.m_Children.Add(new GImage(0x100, this.Width - 6, j));
                 }
                 base.m_NonRestrictivePicking = true;
-                this.m_Slider = new GVSlider(0xfe, this.Width - 5, 0x11, 13, 0xec, 0.0, 0.0, (double) (offsetY - (base.UseHeight - 2)), 1.0);
+                this.m_Slider = new GVSlider(0xfe, this.Width - 5, 0x11, 13, 0xec, 0.0, 0.0, (double)(offsetY - (base.UseHeight - 2)), 1.0);
                 this.m_Slider.OnValueChange = new OnValueChange(this.OnScroll);
                 this.m_Slider.ScrollOffset = 20.0;
                 base.m_Children.Add(this.m_Slider);
@@ -70,7 +68,7 @@
 
         private void OnScroll(double vNew, double vOld, Gump sender)
         {
-            int num = (int) vNew;
+            int num = (int)vNew;
             Gump[] gumpArray = base.m_Children.ToArray();
             for (int i = 0; i < gumpArray.Length; i++)
             {
@@ -83,4 +81,3 @@
         }
     }
 }
-

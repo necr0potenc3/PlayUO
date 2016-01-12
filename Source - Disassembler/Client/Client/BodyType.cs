@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public enum BodyType : byte
     {
         Animal = 3,
@@ -12,4 +10,3 @@
         Sea = 2
     }
 }
-

@@ -6,10 +6,11 @@
 
     public class Config
     {
-        private static string[] m_FileNames = new string[] { 
-            "Skills.idx", "Skills.mul", "SoundIdx.mul", "Sound.mul", "LightIdx.mul", "Light.mul", "Fonts.mul", "TileData.mul", "Anim.idx", "Anim.mul", "ArtIdx.mul", "Art.mul", "TexIdx.mul", "TexMaps.mul", "Hues.mul", "Multi.idx", 
+        private static string[] m_FileNames = new string[] {
+            "Skills.idx", "Skills.mul", "SoundIdx.mul", "Sound.mul", "LightIdx.mul", "Light.mul", "Fonts.mul", "TileData.mul", "Anim.idx", "Anim.mul", "ArtIdx.mul", "Art.mul", "TexIdx.mul", "TexMaps.mul", "Hues.mul", "Multi.idx",
             "Multi.mul", "Map0.mul", "Map2.mul", "Statics0.mul", "Statics2.mul", "StaIdx0.mul", "StaIdx2.mul", "AnimData.mul", "VerData.mul", "GumpIdx.mul", "GumpArt.mul"
-         };
+        };
+
         private static ArrayList m_PaperdollCFG;
 
         static Config()
@@ -83,7 +84,7 @@
             int count = m_PaperdollCFG.Count;
             for (int i = 0; i < count; i++)
             {
-                PaperdollEntry entry = (PaperdollEntry) m_PaperdollCFG[i];
+                PaperdollEntry entry = (PaperdollEntry)m_PaperdollCFG[i];
                 if (entry.BodyID == BodyID)
                 {
                     return entry.GumpID;
@@ -93,4 +94,3 @@
         }
     }
 }
-

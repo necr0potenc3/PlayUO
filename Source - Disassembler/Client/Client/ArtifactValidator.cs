@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class ArtifactValidator : IItemValidator
     {
         private IItemValidator m_Parent;
@@ -36,4 +34,3 @@
         }
     }
 }
-

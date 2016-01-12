@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public sealed class Entity : IEntity
     {
         private int m_Serial;
@@ -25,4 +23,3 @@
         }
     }
 }
-

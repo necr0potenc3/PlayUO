@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GItemCounters : GEmpty
     {
         private static bool m_Active;
@@ -77,4 +75,3 @@
         }
     }
 }
-

@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GTransparencyGump : GLabel
     {
         public GTransparencyGump() : base("Transparency On", Engine.DefaultFont, Engine.DefaultHue, 4, 4)
@@ -29,4 +27,3 @@
         }
     }
 }
-

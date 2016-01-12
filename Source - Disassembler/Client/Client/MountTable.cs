@@ -26,10 +26,10 @@
 
         private void Default()
         {
-            int[,] numArray = new int[,] { 
-                { 0x3ea0, 0xe2 }, { 0x3ea1, 0xe4 }, { 0x3ea2, 0xcc }, { 0x3ea3, 210 }, { 0x3ea4, 0xda }, { 0x3ea5, 0xdb }, { 0x3ea6, 220 }, { 0x3ea7, 0x74 }, { 0x3ea8, 0x75 }, { 0x3ea9, 0x72 }, { 0x3eaa, 0x73 }, { 0x3eab, 170 }, { 0x3eac, 0xab }, { 0x3ead, 0x84 }, { 0x3eaf, 120 }, { 0x3eb0, 0x79 }, 
+            int[,] numArray = new int[,] {
+                { 0x3ea0, 0xe2 }, { 0x3ea1, 0xe4 }, { 0x3ea2, 0xcc }, { 0x3ea3, 210 }, { 0x3ea4, 0xda }, { 0x3ea5, 0xdb }, { 0x3ea6, 220 }, { 0x3ea7, 0x74 }, { 0x3ea8, 0x75 }, { 0x3ea9, 0x72 }, { 0x3eaa, 0x73 }, { 0x3eab, 170 }, { 0x3eac, 0xab }, { 0x3ead, 0x84 }, { 0x3eaf, 120 }, { 0x3eb0, 0x79 },
                 { 0x3eb1, 0x77 }, { 0x3eb2, 0x76 }, { 0x3eb3, 0x90 }, { 0x3eb4, 0x7a }, { 0x3eb5, 0xb1 }, { 0x3eb6, 0xb2 }, { 0x3eb7, 0xb3 }, { 0x3eb8, 0xbc }, { 0x3eba, 0xbb }, { 0x3ebb, 0x319 }, { 0x3ebc, 0x317 }, { 0x3ebd, 0x31a }, { 0x3ebe, 0x31f }
-             };
+            };
             int length = numArray.GetLength(0);
             this.m_Entries = new Hashtable(length);
             for (int i = 0; i < length; i++)
@@ -139,10 +139,10 @@
                     foreach (DictionaryEntry entry in this.m_Entries)
                     {
                         writer.Write("0x");
-                        int key = (int) entry.Key;
+                        int key = (int)entry.Key;
                         writer.Write(key.ToString("X"));
                         writer.Write("\t0x");
-                        writer.WriteLine(((int) entry.Value).ToString("X"));
+                        writer.WriteLine(((int)entry.Value).ToString("X"));
                     }
                     writer.WriteLine("default\t0x{0:X}", this.m_Default);
                 }
@@ -160,10 +160,9 @@
             object obj2 = this.m_Entries[itemID];
             if (obj2 != null)
             {
-                return (int) obj2;
+                return (int)obj2;
             }
             return this.m_Default;
         }
     }
 }
-

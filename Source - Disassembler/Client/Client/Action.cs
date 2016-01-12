@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class Action
     {
         private ActionHandler m_Action;
@@ -61,4 +59,3 @@
         }
     }
 }
-

@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public enum Files
     {
         SkillIdx,
@@ -33,4 +31,3 @@
         GumpMul
     }
 }
-

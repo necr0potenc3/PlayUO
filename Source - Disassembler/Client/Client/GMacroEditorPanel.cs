@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Drawing;
     using System.Windows.Forms;
 
@@ -20,9 +19,9 @@
             base.m_CanDrag = false;
             base.m_NonRestrictivePicking = true;
             base.ShouldHitTest = false;
-            this.m_Ctrl = new GSystemButton(10, 10, 40, 20, GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float) 0.5f), SystemColors.ControlText, "Ctrl", Engine.GetUniFont(2));
-            this.m_Alt = new GSystemButton(0x31, 10, 40, 20, GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float) 0.5f), SystemColors.ControlText, "Alt", Engine.GetUniFont(2));
-            this.m_Shift = new GSystemButton(0x58, 10, 0x2a, 20, GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float) 0.5f), SystemColors.ControlText, "Shift", Engine.GetUniFont(2));
+            this.m_Ctrl = new GSystemButton(10, 10, 40, 20, GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float)0.5f), SystemColors.ControlText, "Ctrl", Engine.GetUniFont(2));
+            this.m_Alt = new GSystemButton(0x31, 10, 40, 20, GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float)0.5f), SystemColors.ControlText, "Alt", Engine.GetUniFont(2));
+            this.m_Shift = new GSystemButton(0x58, 10, 0x2a, 20, GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float)0.5f), SystemColors.ControlText, "Shift", Engine.GetUniFont(2));
             this.m_Ctrl.OnClick = new OnClick(this.Ctrl_OnClick);
             this.m_Alt.OnClick = new OnClick(this.Alt_OnClick);
             this.m_Shift.OnClick = new OnClick(this.Shift_OnClick);
@@ -33,18 +32,16 @@
             base.m_Children.Add(this.m_Alt);
             base.m_Children.Add(this.m_Shift);
             this.UpdateModifiers();
-            GAlphaBackground toAdd = new GAlphaBackground(0x81, 10, 0x4a, 20) {
-                FillAlpha = 1f,
-                FillColor = GumpColors.Window
-            };
+            GAlphaBackground toAdd = new GAlphaBackground(0x81, 10, 0x4a, 20);
+            toAdd.FillAlpha = 1f;
+            toAdd.FillColor = GumpColors.Window;
             base.m_Children.Add(toAdd);
-            GMacroKeyEntry entry = new GMacroKeyEntry(GetKeyName(m.Key), 0x81, 10, 0x4a, 20) {
-                Tooltip = new Tooltip("Press any key here to change the macro", true)
-            };
+            GMacroKeyEntry entry = new GMacroKeyEntry(GetKeyName(m.Key), 0x81, 10, 0x4a, 20);
+            entry.Tooltip = new Tooltip("Press any key here to change the macro", true);
             base.m_Children.Add(entry);
-            GSystemButton button = new GSystemButton(10, 10, 40, 20, GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float) 0.5f), SystemColors.ControlText, "Delete", Engine.GetUniFont(2));
-            button.SetBackColor(GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float) 0.25f));
-            button.InactiveColor = GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float) 0.5f);
+            GSystemButton button = new GSystemButton(10, 10, 40, 20, GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float)0.5f), SystemColors.ControlText, "Delete", Engine.GetUniFont(2));
+            button.SetBackColor(GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float)0.25f));
+            button.InactiveColor = GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float)0.5f);
             button.Tooltip = new Tooltip("Deletes the entire macro", true);
             button.OnClick = new OnClick(this.Delete_OnClick);
             button.X = (this.Width - 10) - button.Width;
@@ -54,7 +51,7 @@
             {
                 try
                 {
-                    Action action = m.Actions[i];
+                    Client.Action action = m.Actions[i];
                     if (action.Handler != null)
                     {
                         ActionHandler ah = action.Handler;
@@ -63,15 +60,13 @@
                         menu.Add(this.FormatMenu(menuFrom));
                         if (ah.Params == null)
                         {
-                            GAlphaBackground background2 = new GAlphaBackground(0x81, 0x23 + (i * 0x17), 120, 0x18) {
-                                FillAlpha = 1f,
-                                FillColor = GumpColors.Window
-                            };
+                            GAlphaBackground background2 = new GAlphaBackground(0x81, 0x23 + (i * 0x17), 120, 0x18);
+                            background2.FillAlpha = 1f;
+                            background2.FillColor = GumpColors.Window;
                             base.m_Children.Add(background2);
                             IHue windowText = GumpHues.WindowText;
-                            GTextBox box = new GMacroParamEntry(action, action.Param, background2.X, background2.Y, background2.Width, background2.Height) {
-                                MaxChars = 0xef
-                            };
+                            GTextBox box = new GMacroParamEntry(action, action.Param, background2.X, background2.Y, background2.Width, background2.Height);
+                            box.MaxChars = 0xef;
                             base.m_Children.Add(box);
                         }
                         else if (ah.Params.Length != 0)
@@ -157,24 +152,24 @@
         private GMenuItem FormatMenu(GMenuItem mi)
         {
             mi.FillAlpha = 1f;
-            mi.DefaultColor = GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float) 0.5f);
-            mi.OverColor = GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float) 0.5f);
-            mi.ExpandedColor = GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float) 0.5f);
+            mi.DefaultColor = GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float)0.5f);
+            mi.OverColor = GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float)0.5f);
+            mi.ExpandedColor = GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float)0.5f);
             mi.SetHue(Hues.Load(1));
             return mi;
         }
 
         public static string GetKeyName(Keys key)
         {
-            if (key == 0x11000)
+            if (key == (Keys)0x11000)
             {
                 return "Wheel Up";
             }
-            if (key == 0x11001)
+            if (key == (Keys)0x11001)
             {
                 return "Wheel Down";
             }
-            if (key == 0x11002)
+            if (key == (Keys)0x11002)
             {
                 return "Wheel Press";
             }
@@ -182,7 +177,7 @@
             {
                 LoadAliases();
             }
-            int index = (int) key;
+            int index = (int)key;
             if (((index >= 0) && (index < m_Aliases.Length)) && (m_Aliases[index] != null))
             {
                 return m_Aliases[index];
@@ -195,11 +190,11 @@
             GMenuItem mi = new GMenuItem(n.Name);
             for (int i = 0; i < n.Nodes.Count; i++)
             {
-                mi.Add(this.GetMenuFrom((ActionNode) n.Nodes[i]));
+                mi.Add(this.GetMenuFrom((ActionNode)n.Nodes[i]));
             }
             for (int j = 0; j < n.Handlers.Count; j++)
             {
-                ActionHandler action = (ActionHandler) n.Handlers[j];
+                ActionHandler action = (ActionHandler)n.Handlers[j];
                 GMenuItem item2 = new GNewActionMenu(this, this.m_Macro, action);
                 for (int k = 0; (action.Params != null) && (k < action.Params.Length); k++)
                 {
@@ -210,7 +205,7 @@
             return this.FormatMenu(mi);
         }
 
-        private GMenuItem GetMenuFrom(ParamNode n, Action a, ActionHandler ah)
+        private GMenuItem GetMenuFrom(ParamNode n, Client.Action a, ActionHandler ah)
         {
             GMenuItem item;
             if (n.Param != null)
@@ -297,7 +292,7 @@
 
         private static void SetAlias(Keys key, string alias)
         {
-            m_Aliases[(int) key] = alias;
+            m_Aliases[(int)key] = alias;
         }
 
         private void Shift_OnClick(Gump g)
@@ -311,12 +306,12 @@
         {
             if (opt)
             {
-                btn.SetBackColor(GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float) 0.5f));
+                btn.SetBackColor(GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float)0.5f));
             }
             else
             {
-                btn.SetBackColor(GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float) 0.25f));
-                btn.InactiveColor = GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float) 0.5f);
+                btn.SetBackColor(GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float)0.25f));
+                btn.InactiveColor = GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float)0.5f);
             }
         }
 
@@ -336,4 +331,3 @@
         }
     }
 }
-

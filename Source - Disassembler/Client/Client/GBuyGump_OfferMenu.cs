@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GBuyGump_OfferMenu : GImage
@@ -57,7 +56,7 @@
                 {
                     if (gump is GBuyGump_OfferedItem)
                     {
-                        ((GBuyGump_OfferedItem) gump).Clipper = clipper;
+                        ((GBuyGump_OfferedItem)gump).Clipper = clipper;
                     }
                 }
             }
@@ -71,13 +70,13 @@
                 }
                 else
                 {
-                    this.m_Signature.Scissor(0, 0, (int) (normalized * this.m_Signature.Width), this.m_Signature.Height);
+                    this.m_Signature.Scissor(0, 0, (int)(normalized * this.m_Signature.Width), this.m_Signature.Height);
                 }
                 Engine.Redraw();
             }
             if (this.m_LastHeight >= 0)
             {
-                this.m_yOffset = 0x43 - ((int) ((this.m_Slider.GetValue() / 50.0) * this.m_LastHeight));
+                this.m_yOffset = 0x43 - ((int)((this.m_Slider.GetValue() / 50.0) * this.m_LastHeight));
             }
             else
             {
@@ -165,4 +164,3 @@
         }
     }
 }
-

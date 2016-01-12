@@ -44,9 +44,8 @@
                         }
                     }
                 }
-                m_Entries = (GumpTableEntry[]) list.ToArray(typeof(GumpTableEntry));
+                m_Entries = (GumpTableEntry[])list.ToArray(typeof(GumpTableEntry));
             }
         }
     }
 }
-

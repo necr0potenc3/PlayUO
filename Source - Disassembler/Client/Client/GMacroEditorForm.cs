@@ -1,7 +1,6 @@
 ﻿namespace Client
 {
     using Microsoft.Win32;
-    using System;
     using System.Drawing;
 
     public class GMacroEditorForm : GWindowsForm
@@ -29,21 +28,19 @@
             this.m_KeyboardFlipper = new GSystemButton(0x47, 0xec, 120, 20, SystemColors.Control, SystemColors.ControlText, "Show Keyboard", Engine.GetUniFont(2));
             this.m_KeyboardFlipper.OnClick = new OnClick(this.KeyboardFlipper_OnClick);
             base.Client.Children.Add(this.m_KeyboardFlipper);
-            GSystemButton button = new GSystemButton(240, 0xec, 20, 20, SystemColors.Control, SystemColors.ControlText, "→", Engine.GetUniFont(2)) {
-                Tooltip = new Tooltip("Advance to the next macro", true),
-                OnClick = new OnClick(this.Next_OnClick)
-            };
+            GSystemButton button = new GSystemButton(240, 0xec, 20, 20, SystemColors.Control, SystemColors.ControlText, "→", Engine.GetUniFont(2));
+            button.Tooltip = new Tooltip("Advance to the next macro", true);
+            button.OnClick = new OnClick(this.Next_OnClick);
             base.Client.Children.Add(button);
-            GSystemButton button2 = new GSystemButton(1, 0xec, 20, 20, SystemColors.Control, SystemColors.ControlText, "←", Engine.GetUniFont(2)) {
-                Tooltip = new Tooltip("Go back to the previous macro", true),
-                OnClick = new OnClick(this.Prev_OnClick)
-            };
+            GSystemButton button2 = new GSystemButton(1, 0xec, 20, 20, SystemColors.Control, SystemColors.ControlText, "←", Engine.GetUniFont(2));
+            button2.Tooltip = new Tooltip("Go back to the previous macro", true);
+            button2.OnClick = new OnClick(this.Prev_OnClick);
             base.Client.Children.Add(button2);
             this.Center();
             this.Y -= 0x5c;
             if (Macros.List.Count > 0)
             {
-                this.Current = (Macro) Macros.List[0];
+                this.Current = (Macro)Macros.List[0];
             }
         }
 
@@ -66,7 +63,7 @@
                 int num = (Macros.List.IndexOf(this.m_Current) + 1) % Macros.List.Count;
                 if ((num >= 0) && (num < Macros.List.Count))
                 {
-                    this.Current = (Macro) Macros.List[num];
+                    this.Current = (Macro)Macros.List[num];
                 }
             }
         }
@@ -99,25 +96,25 @@
                 }
                 if ((num >= 0) && (num < Macros.List.Count))
                 {
-                    this.Current = (Macro) Macros.List[num];
+                    this.Current = (Macro)Macros.List[num];
                 }
             }
         }
 
-        private static Color ReadRegistryColor(string name)
+        private static System.Drawing.Color ReadRegistryColor(string name)
         {
             try
             {
                 using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Colors", false))
                 {
                     string[] strArray = (key.GetValue(name) as string).Split(new char[] { ' ' });
-                    return Color.FromArgb(int.Parse(strArray[0]), int.Parse(strArray[1]), int.Parse(strArray[2]));
+                    return System.Drawing.Color.FromArgb(int.Parse(strArray[0]), int.Parse(strArray[1]), int.Parse(strArray[2]));
                 }
             }
             catch
             {
             }
-            return Color.White;
+            return System.Drawing.Color.White;
         }
 
         public void UpdateKeyboard()
@@ -216,4 +213,3 @@
         }
     }
 }
-

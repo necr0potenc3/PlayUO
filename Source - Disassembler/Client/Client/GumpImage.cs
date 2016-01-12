@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GumpImage
     {
         private bool m_Draw;
@@ -166,4 +164,3 @@
         }
     }
 }
-

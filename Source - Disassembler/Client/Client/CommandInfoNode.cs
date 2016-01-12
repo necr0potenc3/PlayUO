@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Text;
 
     public class CommandInfoNode : InfoNode
@@ -47,4 +46,3 @@
         }
     }
 }
-

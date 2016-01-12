@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class AosAttributes
     {
         private ObjectPropertyList m_Props;
@@ -15,7 +13,7 @@
         {
             foreach (ObjectProperty property in this.m_Props.Properties)
             {
-                if (property.Number == attr)
+                if (property.Number == (int)attr)
                 {
                     string arguments = property.Arguments;
                     switch (arguments)
@@ -378,4 +376,3 @@
         }
     }
 }
-

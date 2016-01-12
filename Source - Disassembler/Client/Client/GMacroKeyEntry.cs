@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GMacroKeyEntry : GTextBox
@@ -39,7 +38,7 @@
             if (mb == MouseButtons.Middle)
             {
                 this.Start();
-                this.Finish(0x11002, Control.ModifierKeys);
+                this.Finish((Keys)0x11002, Control.ModifierKeys);
             }
         }
 
@@ -49,12 +48,12 @@
             if (Delta > 0)
             {
                 this.Start();
-                this.Finish(0x11000, Control.ModifierKeys);
+                this.Finish((Keys)0x11000, Control.ModifierKeys);
             }
             else if (Delta < 0)
             {
                 this.Start();
-                this.Finish(0x11001, Control.ModifierKeys);
+                this.Finish((Keys)0x11001, Control.ModifierKeys);
             }
         }
 
@@ -75,4 +74,3 @@
         }
     }
 }
-

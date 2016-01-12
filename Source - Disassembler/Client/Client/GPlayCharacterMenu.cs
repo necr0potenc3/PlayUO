@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GPlayCharacterMenu : GMenuItem
     {
         private CharacterProfile m_Character;
@@ -13,15 +11,14 @@
 
         public override void OnClick()
         {
-            Entry entry = new Entry {
-                AccountName = this.m_Character.Shard.Account.Username,
-                Password = this.m_Character.Shard.Account.Password,
-                CharID = this.m_Character.Index,
-                CharName = this.m_Character.Name,
-                ServerID = this.m_Character.Shard.Index,
-                ServerName = this.m_Character.Shard.Name,
-                CharProfile = this.m_Character
-            };
+            Entry entry = new Entry();
+            entry.AccountName = this.m_Character.Shard.Account.Username;
+            entry.Password = this.m_Character.Shard.Account.Password;
+            entry.CharID = this.m_Character.Index;
+            entry.CharName = this.m_Character.Name;
+            entry.ServerID = this.m_Character.Shard.Index;
+            entry.ServerName = this.m_Character.Shard.Name;
+            entry.CharProfile = this.m_Character;
             Engine.m_QuickLogin = true;
             Engine.m_QuickEntry = entry;
             Cursor.Hourglass = true;
@@ -63,4 +60,3 @@
         }
     }
 }
-

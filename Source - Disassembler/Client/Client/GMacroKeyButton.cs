@@ -10,7 +10,7 @@
         private Keys m_Key;
         private object m_Macro;
 
-        public GMacroKeyButton(Keys key, string name, bool bold, int x, int y, int w, int h) : base(x, y, w, h, GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float) 0.5f), SystemColors.ControlText, name, bold ? Engine.GetUniFont(1) : Engine.GetUniFont(2))
+        public GMacroKeyButton(Keys key, string name, bool bold, int x, int y, int w, int h) : base(x, y, w, h, GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float)0.5f), SystemColors.ControlText, name, bold ? Engine.GetUniFont(1) : Engine.GetUniFont(2))
         {
             this.m_Key = key;
             base.Tooltip = new Tooltip(string.Format("{0}\nClick to create", GMacroEditorPanel.GetKeyName(this.m_Key)), true);
@@ -52,18 +52,18 @@
                             none |= Keys.Control;
                         }
                     }
-                    Client.Macro macro = new Client.Macro(this.m_Key, none, new Action[0]);
+                    Client.Macro macro = new Client.Macro(this.m_Key, none, new Client.Action[0]);
                     Macros.List.Add(macro);
                     parent.Current = macro;
                     parent.UpdateKeyboard();
                 }
                 else if (this.m_Macro is Client.Macro)
                 {
-                    parent.Current = (Client.Macro) this.m_Macro;
+                    parent.Current = (Client.Macro)this.m_Macro;
                 }
                 else if (this.m_Macro is Client.Macro[])
                 {
-                    Client.Macro[] array = (Client.Macro[]) this.m_Macro;
+                    Client.Macro[] array = (Client.Macro[])this.m_Macro;
                     int index = Array.IndexOf(array, parent.Current);
                     parent.Current = array[(index + 1) % array.Length];
                 }
@@ -76,7 +76,7 @@
             {
                 base.m_IsDragging = false;
                 Gumps.Drag = null;
-                Point point = base.PointToScreen(new Point(0, 0)) - base.m_Parent.Parent.PointToScreen(new Point(0, 0));
+                Client.Point point = base.PointToScreen(new Client.Point(0, 0)) - base.m_Parent.Parent.PointToScreen(new Client.Point(0, 0));
                 base.m_Parent.Parent.m_OffsetX = point.X + base.m_OffsetX;
                 base.m_Parent.Parent.m_OffsetY = point.Y + base.m_OffsetY;
                 base.m_Parent.Parent.m_IsDragging = true;
@@ -113,7 +113,7 @@
                     this.m_Macro = value;
                     if (this.m_Macro == null)
                     {
-                        base.SetBackColor(GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float) 0.5f));
+                        base.SetBackColor(GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float)0.5f));
                         if (this.m_Dots != null)
                         {
                             Gumps.Destroy(this.m_Dots);
@@ -123,7 +123,7 @@
                     }
                     else
                     {
-                        base.SetBackColor(GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float) 0.5f));
+                        base.SetBackColor(GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float)0.5f));
                         int count = 1;
                         if (this.m_Macro is Client.Macro)
                         {
@@ -132,7 +132,7 @@
                         else
                         {
                             base.Tooltip = new Tooltip("Jump to the macros", true);
-                            count = ((Client.Macro[]) this.m_Macro).Length;
+                            count = ((Client.Macro[])this.m_Macro).Length;
                         }
                         if (this.m_Dots == null)
                         {
@@ -151,4 +151,3 @@
         }
     }
 }
-

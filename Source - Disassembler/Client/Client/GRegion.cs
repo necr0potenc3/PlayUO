@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GRegion : Gump, IClipable
     {
         protected Client.Clipper m_Clipper;
@@ -56,4 +54,3 @@
         }
     }
 }
-

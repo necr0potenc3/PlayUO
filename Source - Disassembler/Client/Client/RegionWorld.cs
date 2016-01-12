@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public enum RegionWorld
     {
         Britannia,
@@ -12,4 +10,3 @@
         Tokuno
     }
 }
-

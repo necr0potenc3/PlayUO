@@ -1,8 +1,6 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
-    using System.Runtime.InteropServices;
 
     public class Multi
     {
@@ -27,7 +25,7 @@
             this.m_yMax = -1000;
             while (num2 < count)
             {
-                MultiItem item = (MultiItem) list[num2];
+                MultiItem item = (MultiItem)list[num2];
                 if (item.X < this.m_xMin)
                 {
                     this.m_xMin = item.X;
@@ -62,7 +60,7 @@
             this.m_yMax = -1000;
             while (num2 < count)
             {
-                MultiItem item = (MultiItem) list[num2];
+                MultiItem item = (MultiItem)list[num2];
                 if (item.X < this.m_xMin)
                 {
                     this.m_xMin = item.X;
@@ -93,19 +91,18 @@
                 itemID |= 0x4000;
                 for (int i = 0; i < this.m_List.Count; i++)
                 {
-                    MultiItem item = (MultiItem) this.m_List[i];
+                    MultiItem item = (MultiItem)this.m_List[i];
                     if (((item.X == x) && (item.Y == y)) && ((item.Z == z) && ((Map.GetHeight(item.ItemID) > 0) == (Map.GetHeight(itemID) > 0))))
                     {
                         this.m_List.RemoveAt(i--);
                     }
                 }
-                MultiItem item2 = new MultiItem {
-                    Flags = 1,
-                    ItemID = (short) itemID,
-                    X = (short) x,
-                    Y = (short) y,
-                    Z = (short) z
-                };
+                MultiItem item2 = new MultiItem();
+                item2.Flags = 1;
+                item2.ItemID = (short)itemID;
+                item2.X = (short)x;
+                item2.Y = (short)y;
+                item2.Z = (short)z;
                 this.m_List.Add(item2);
             }
         }
@@ -129,7 +126,7 @@
             bool flag = false;
             for (int i = 0; i < this.m_List.Count; i++)
             {
-                MultiItem item = (MultiItem) this.m_List[i];
+                MultiItem item = (MultiItem)this.m_List[i];
                 if (((item.X == x) && (item.Y == y)) && ((item.Z == z) && (item.ItemID == itemID)))
                 {
                     this.m_List.RemoveAt(i--);
@@ -176,7 +173,7 @@
                 }
                 for (int j = 0; j < this.m_List.Count; j++)
                 {
-                    MultiItem item = (MultiItem) this.m_List[j];
+                    MultiItem item = (MultiItem)this.m_List[j];
                     int index = item.X - this.m_xMin;
                     int num10 = item.Y - this.m_yMin;
                     if (((index >= 0) && (index < num)) && ((num10 >= 0) && (num10 < num2)))
@@ -185,8 +182,8 @@
                         int num12 = z + Map.GetHeight(item.ItemID);
                         int num13 = numArray2[num10][index];
                         int num14 = numArray[num10][index];
-                        int itemID = item.ItemID;
-                        if (((num12 > num14) || ((num12 == num14) && (z > num13))) && ((((itemID != 0x4001) && (itemID != 0x5796)) && ((itemID != 0x61a4) && (itemID != 0x6198))) && ((itemID != 0x61bc) && (itemID != 0x6199))))
+                        int num15 = item.ItemID;
+                        if (((num12 > num14) || ((num12 == num14) && (z > num13))) && ((((num15 != 0x4001) && (num15 != 0x5796)) && ((num15 != 0x61a4) && (num15 != 0x6198))) && ((num15 != 0x61bc) && (num15 != 0x6199))))
                         {
                             this.m_Radar[num10][index] = item.ItemID;
                             numArray2[num10][index] = z;
@@ -194,13 +191,13 @@
                         }
                         if (!Map.GetTileFlags(item.ItemID)[TileFlag.Roof])
                         {
-                            itemID = item.ItemID & 0x3fff;
-                            sbyte num16 = (sbyte) item.Z;
+                            num15 = item.ItemID & 0x3fff;
+                            sbyte num16 = (sbyte)item.Z;
                             if (num16 < this.m_Inside[num10][index])
                             {
                                 this.m_Inside[num10][index] = num16;
                             }
-                            if ((((itemID < 0xb95) || (itemID > 0xc0e)) && ((itemID < 0xc43) || (itemID > 0xc44))) && (num16 < this.m_RunUO_Inside[num10][index]))
+                            if ((((num15 < 0xb95) || (num15 > 0xc0e)) && ((num15 < 0xc43) || (num15 > 0xc44))) && (num16 < this.m_RunUO_Inside[num10][index]))
                             {
                                 this.m_RunUO_Inside[num10][index] = num16;
                             }
@@ -251,4 +248,3 @@
         }
     }
 }
-

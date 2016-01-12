@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.IO;
     using System.Net;
     using System.Text;
@@ -12,7 +11,7 @@
 
         public void Align(int to)
         {
-            int num = (int) (this.m_Stream.Position % ((long) to));
+            int num = (int)(this.m_Stream.Position % ((long)to));
             if (num != 0)
             {
                 this.Write(new byte[to - num]);
@@ -22,7 +21,7 @@
         public byte[] Compile()
         {
             this.m_Stream.Seek(8L, SeekOrigin.Begin);
-            this.Write((int) this.m_Stream.Length);
+            this.Write((int)this.m_Stream.Length);
             return this.m_Stream.ToArray();
         }
 
@@ -43,43 +42,43 @@
 
         public void Write(short value)
         {
-            m_Buffer[0] = (byte) value;
-            m_Buffer[1] = (byte) (value >> 8);
+            m_Buffer[0] = (byte)value;
+            m_Buffer[1] = (byte)(value >> 8);
             this.m_Stream.Write(m_Buffer, 0, 2);
         }
 
         public void Write(int value)
         {
-            m_Buffer[0] = (byte) value;
-            m_Buffer[1] = (byte) (value >> 8);
-            m_Buffer[2] = (byte) (value >> 0x10);
-            m_Buffer[3] = (byte) (value >> 0x18);
+            m_Buffer[0] = (byte)value;
+            m_Buffer[1] = (byte)(value >> 8);
+            m_Buffer[2] = (byte)(value >> 0x10);
+            m_Buffer[3] = (byte)(value >> 0x18);
             this.m_Stream.Write(m_Buffer, 0, 4);
         }
 
         public void Write(IPAddress ipaddr)
         {
-            this.Write((uint) ipaddr.Address);
+            this.Write((uint)ipaddr.Address);
         }
 
         public void Write(sbyte value)
         {
-            this.m_Stream.WriteByte((byte) value);
+            this.m_Stream.WriteByte((byte)value);
         }
 
         public void Write(ushort value)
         {
-            m_Buffer[0] = (byte) value;
-            m_Buffer[1] = (byte) (value >> 8);
+            m_Buffer[0] = (byte)value;
+            m_Buffer[1] = (byte)(value >> 8);
             this.m_Stream.Write(m_Buffer, 0, 2);
         }
 
         public void Write(uint value)
         {
-            m_Buffer[0] = (byte) value;
-            m_Buffer[1] = (byte) (value >> 8);
-            m_Buffer[2] = (byte) (value >> 0x10);
-            m_Buffer[3] = (byte) (value >> 0x18);
+            m_Buffer[0] = (byte)value;
+            m_Buffer[1] = (byte)(value >> 8);
+            m_Buffer[2] = (byte)(value >> 0x10);
+            m_Buffer[3] = (byte)(value >> 0x18);
             this.m_Stream.Write(m_Buffer, 0, 4);
         }
 
@@ -107,4 +106,3 @@
         }
     }
 }
-

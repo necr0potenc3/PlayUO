@@ -1,14 +1,12 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GActionMenu : GMenuItem
     {
-        private Action m_Action;
+        private Client.Action m_Action;
         private Macro m_Macro;
         private GMacroEditorPanel m_Panel;
 
-        public GActionMenu(GMacroEditorPanel panel, Macro macro, Action action) : base(action.Handler.Name)
+        public GActionMenu(GMacroEditorPanel panel, Macro macro, Client.Action action) : base(action.Handler.Name)
         {
             this.m_Panel = panel;
             this.m_Macro = macro;
@@ -22,4 +20,3 @@
         }
     }
 }
-

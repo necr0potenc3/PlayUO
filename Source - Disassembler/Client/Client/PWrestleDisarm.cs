@@ -1,13 +1,10 @@
 ﻿namespace Client
 {
-    using System;
-
     public class PWrestleDisarm : Packet
     {
         public PWrestleDisarm() : base(0xbf, "Wrestle Disarm")
         {
-            base.m_Stream.Write((short) 9);
+            base.m_Stream.Write((short)9);
         }
     }
 }
-

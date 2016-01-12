@@ -57,7 +57,7 @@
         {
             if (this.m_Particles.Count > 0)
             {
-                ((IParticle) this.m_Particles[0]).Invalidate();
+                ((IParticle)this.m_Particles[0]).Invalidate();
             }
         }
 
@@ -66,7 +66,7 @@
             int count = this.m_Particles.Count;
             for (int i = 0; i < count; i++)
             {
-                ((IParticle) this.m_Particles[i]).Invalidate();
+                ((IParticle)this.m_Particles[i]).Invalidate();
             }
         }
 
@@ -80,7 +80,7 @@
                 Renderer.SetFilterEnable(true);
                 while (index < count)
                 {
-                    Effect effect = (Effect) this.m_List[index];
+                    Effect effect = (Effect)this.m_List[index];
                     if (!effect.Slice())
                     {
                         effect.OnStop();
@@ -114,7 +114,7 @@
                 Random random = new Random();
                 while (index < count)
                 {
-                    IParticle particle = (IParticle) this.m_Particles[index];
+                    IParticle particle = (IParticle)this.m_Particles[index];
                     if (!particle.Slice())
                     {
                         this.m_Particles.RemoveAt(index);
@@ -155,7 +155,7 @@
                     Renderer.SetTexture(null);
                     Renderer.SetAlphaEnable(true);
                     Renderer.AlphaTestEnable = false;
-                    Renderer.SetAlpha(((float) Math.Abs((int) (this.m_Temperature - 10))) / 118f);
+                    Renderer.SetAlpha(((float)Math.Abs((int)(this.m_Temperature - 10))) / 118f);
                     this.m_Screen[0].Color = this.m_Screen[1].Color = this.m_Screen[2].Color = this.m_Screen[3].Color = Renderer.GetQuadColor(0x40c0ff);
                     Renderer.DrawQuadPrecalc(this.m_Screen);
                     Renderer.SetAlphaEnable(false);
@@ -181,7 +181,7 @@
                 Renderer.SetTexture(null);
                 Renderer.SetAlphaEnable(true);
                 Renderer.AlphaTestEnable = false;
-                Renderer.SetAlpha((float) (((double) globalLight) / 31.0));
+                Renderer.SetAlpha((float)(((double)globalLight) / 31.0));
                 this.m_Screen[0].Color = this.m_Screen[1].Color = this.m_Screen[2].Color = this.m_Screen[3].Color = Renderer.GetQuadColor(0);
                 Renderer.DrawQuadPrecalc(this.m_Screen);
             }
@@ -195,10 +195,10 @@
                 double alpha = 0.0;
                 while (index < count)
                 {
-                    Fade fade = (Fade) this.m_Fades[index];
+                    Fade fade = (Fade)this.m_Fades[index];
                     if (fade.Evaluate(ref alpha))
                     {
-                        Renderer.SetAlpha((float) alpha);
+                        Renderer.SetAlpha((float)alpha);
                         this.m_Screen[0].Color = this.m_Screen[1].Color = this.m_Screen[2].Color = this.m_Screen[3].Color = Renderer.GetQuadColor(fade.Color);
                         Renderer.DrawQuadPrecalc(this.m_Screen);
                     }
@@ -227,7 +227,7 @@
             int index = 0;
             while (index < count)
             {
-                IParticle particle = (IParticle) this.m_Particles[index];
+                IParticle particle = (IParticle)this.m_Particles[index];
                 if (!particle.Offset(xDelta, yDelta))
                 {
                     this.m_Particles.RemoveAt(index);
@@ -245,14 +245,14 @@
         {
             double num = rnd.NextDouble();
             double num2 = 1.5707963267948966 + (((3.1415926535897931 * num) * 0.5) - 0.78539816339744828);
-            return (float) num2;
+            return (float)num2;
         }
 
         public static float RandomSnowAngle(Random rnd)
         {
             double num = rnd.NextDouble();
             double num2 = 3.1415926535897931 * num;
-            return (float) num2;
+            return (float)num2;
         }
 
         public void Unlock()
@@ -318,4 +318,3 @@
         }
     }
 }
-

@@ -38,7 +38,7 @@
                 num2++;
                 index++;
                 num4++;
-                num = (short) (num - 0x421);
+                num = (short)(num - 0x421);
             }
         }
 
@@ -50,7 +50,7 @@
             this.m_Lookup = new int[0x10000];
             fixed (int* numRef = this.m_Lookup)
             {
-                Engine.NativeRead((FileStream) this.m_Stream, (void*) numRef, 0x40000);
+                Engine.NativeRead((FileStream)this.m_Stream, (void*)numRef, 0x40000);
             }
             this.m_4Bytes = new byte[4];
             this.m_Cache = new FontCache[8];
@@ -135,6 +135,7 @@
 
         [DllImport("Kernel32")]
         private static extern unsafe void RtlZeroMemory(void* pvTarget, int byteCount);
+
         public override string ToString()
         {
             return string.Format("<Unicode Font #{0}>", this.m_FontID);
@@ -246,37 +247,37 @@
                     switch (c)
                     {
                         case '\t':
-                        {
-                            flag = false;
-                            num += 0x18;
-                            if (num > num3)
                             {
-                                num3 = num;
+                                flag = false;
+                                num += 0x18;
+                                if (num > num3)
+                                {
+                                    num3 = num;
+                                }
+                                continue;
                             }
-                            continue;
-                        }
                         case '\n':
                         case '\r':
-                        {
-                            if (!flag)
                             {
-                                num = 0;
-                                num2 += 0x12;
-                                num4 += 0x12;
-                                flag = true;
+                                if (!flag)
+                                {
+                                    num = 0;
+                                    num2 += 0x12;
+                                    num4 += 0x12;
+                                    flag = true;
+                                }
+                                continue;
                             }
-                            continue;
-                        }
                         case ' ':
-                        {
-                            flag = false;
-                            num += spaceWidth;
-                            if (num > num3)
                             {
-                                num3 = num;
+                                flag = false;
+                                num += spaceWidth;
+                                if (num > num3)
+                                {
+                                    num3 = num;
+                                }
+                                continue;
                             }
-                            continue;
-                        }
                     }
                     flag = false;
                     CharacterBits character = this.GetCharacter(c, false);
@@ -315,35 +316,35 @@
                 bool flag2 = ((this.m_Hue.HueID() & 0x3fff) != 1) && !(this.m_Hue is Hues.HFill);
                 fixed (byte* numRef = buffer)
                 {
-                    UnicodeFont.RtlZeroMemory((void*) numRef, byteCount);
+                    UnicodeFont.RtlZeroMemory((void*)numRef, byteCount);
                     for (int i = 0; i < str.Length; i++)
                     {
                         char c = str[i];
                         switch (c)
                         {
                             case '\t':
-                            {
-                                flag = false;
-                                num += 0x18;
-                                continue;
-                            }
+                                {
+                                    flag = false;
+                                    num += 0x18;
+                                    continue;
+                                }
                             case '\n':
                             case '\r':
-                            {
-                                if (!flag)
                                 {
-                                    num = 0;
-                                    num2 += 0x12;
-                                    flag = true;
+                                    if (!flag)
+                                    {
+                                        num = 0;
+                                        num2 += 0x12;
+                                        flag = true;
+                                    }
+                                    continue;
                                 }
-                                continue;
-                            }
                             case ' ':
-                            {
-                                flag = false;
-                                num += spaceWidth;
-                                continue;
-                            }
+                                {
+                                    flag = false;
+                                    num += spaceWidth;
+                                    continue;
+                                }
                         }
                         flag = false;
                         CharacterBits character = this.GetCharacter(c, true);
@@ -357,8 +358,8 @@
                             int num10 = 0;
                             while (num10 < character.m_yHeight)
                             {
-                                uint num11 = *((uint*) numPtr);
-                                num11 = ((uint) ((((num11 & 0xff) << 0x18) | ((num11 & 0xff00) << 8)) | ((num11 & 0xff0000) >> 8))) | ((num11 >> 0x18) & 0xff);
+                                uint num11 = *((uint*)numPtr);
+                                num11 = ((uint)((((num11 & 0xff) << 0x18) | ((num11 & 0xff00) << 8)) | ((num11 & 0xff0000) >> 8))) | ((num11 >> 0x18) & 0xff);
                                 num11 = num11 >> num6;
                                 byte* numPtr3 = numPtr2;
                                 if (flag2)
@@ -378,18 +379,18 @@
                                                 if (!flag5)
                                                 {
                                                     byte* numPtr1 = numPtr3 - 1;
-                                                    numPtr1[0] = (byte) (numPtr1[0] | 0x80);
+                                                    numPtr1[0] = (byte)(numPtr1[0] | 0x80);
                                                 }
                                                 if (!flag6)
                                                 {
                                                     byte* numPtr6 = numPtr3 + 1;
-                                                    numPtr6[0] = (byte) (numPtr6[0] | 0x80);
+                                                    numPtr6[0] = (byte)(numPtr6[0] | 0x80);
                                                 }
                                                 byte* numPtr7 = numPtr3 - width;
-                                                numPtr7[0] = (byte) (numPtr7[0] | 0x80);
-                                                numPtr3[0] = (byte) (numPtr3[0] | 2);
+                                                numPtr7[0] = (byte)(numPtr7[0] | 0x80);
+                                                numPtr3[0] = (byte)(numPtr3[0] | 2);
                                                 byte* numPtr8 = numPtr3 + width;
-                                                numPtr8[0] = (byte) (numPtr8[0] | 0x80);
+                                                numPtr8[0] = (byte)(numPtr8[0] | 0x80);
                                             }
                                             numPtr3--;
                                             num8--;
@@ -407,16 +408,16 @@
                                                 if (!flag7)
                                                 {
                                                     byte* numPtr9 = numPtr3 - 1;
-                                                    numPtr9[0] = (byte) (numPtr9[0] | 0x80);
+                                                    numPtr9[0] = (byte)(numPtr9[0] | 0x80);
                                                 }
                                                 if (!flag8)
                                                 {
                                                     byte* numPtr10 = numPtr3 + 1;
-                                                    numPtr10[0] = (byte) (numPtr10[0] | 0x80);
+                                                    numPtr10[0] = (byte)(numPtr10[0] | 0x80);
                                                 }
-                                                numPtr3[0] = (byte) (numPtr3[0] | 2);
+                                                numPtr3[0] = (byte)(numPtr3[0] | 2);
                                                 byte* numPtr11 = numPtr3 + width;
-                                                numPtr11[0] = (byte) (numPtr11[0] | 0x80);
+                                                numPtr11[0] = (byte)(numPtr11[0] | 0x80);
                                             }
                                             numPtr3--;
                                             num8--;
@@ -434,16 +435,16 @@
                                                 if (!flag9)
                                                 {
                                                     byte* numPtr12 = numPtr3 - 1;
-                                                    numPtr12[0] = (byte) (numPtr12[0] | 0x80);
+                                                    numPtr12[0] = (byte)(numPtr12[0] | 0x80);
                                                 }
                                                 if (!flag10)
                                                 {
                                                     byte* numPtr13 = numPtr3 + 1;
-                                                    numPtr13[0] = (byte) (numPtr13[0] | 0x80);
+                                                    numPtr13[0] = (byte)(numPtr13[0] | 0x80);
                                                 }
                                                 byte* numPtr14 = numPtr3 - width;
-                                                numPtr14[0] = (byte) (numPtr14[0] | 0x80);
-                                                numPtr3[0] = (byte) (numPtr3[0] | 2);
+                                                numPtr14[0] = (byte)(numPtr14[0] | 0x80);
+                                                numPtr3[0] = (byte)(numPtr3[0] | 2);
                                             }
                                             numPtr3--;
                                             num8--;
@@ -461,14 +462,14 @@
                                                 if (!flag11)
                                                 {
                                                     byte* numPtr15 = numPtr3 - 1;
-                                                    numPtr15[0] = (byte) (numPtr15[0] | 0x80);
+                                                    numPtr15[0] = (byte)(numPtr15[0] | 0x80);
                                                 }
                                                 if (!flag12)
                                                 {
                                                     byte* numPtr16 = numPtr3 + 1;
-                                                    numPtr16[0] = (byte) (numPtr16[0] | 0x80);
+                                                    numPtr16[0] = (byte)(numPtr16[0] | 0x80);
                                                 }
-                                                numPtr3[0] = (byte) (numPtr3[0] | 2);
+                                                numPtr3[0] = (byte)(numPtr3[0] | 2);
                                             }
                                             numPtr3--;
                                             num8--;
@@ -482,7 +483,7 @@
                                     {
                                         if ((num11 & 1) != 0)
                                         {
-                                            numPtr3[0] = (byte) (numPtr3[0] | 2);
+                                            numPtr3[0] = (byte)(numPtr3[0] | 2);
                                         }
                                         numPtr3--;
                                         num11 = num11 >> 1;
@@ -505,9 +506,9 @@
                     {
                         fixed (short* numRef4 = UnicodeFont.m_HuedColors)
                         {
-                            ushort* numPtr5 = (ushort*) numRef4;
-                            this.m_Hue.CopyPixels((void*) (numRef3 + 1), (void*) (numPtr5 + 1), 0x20);
-                            this.m_Hue.CopyPixels((void*) (numRef3 + 0x81), (void*) (numPtr5 + 0x81), 0x20);
+                            ushort* numPtr5 = (ushort*)numRef4;
+                            this.m_Hue.CopyPixels((void*)(numRef3 + 1), (void*)(numPtr5 + 1), 0x20);
+                            this.m_Hue.CopyPixels((void*)(numRef3 + 0x81), (void*)(numPtr5 + 0x81), 0x20);
                             for (int j = 0; j < height; j++)
                             {
                                 for (int k = 0; k < width; k++)
@@ -577,8 +578,8 @@
 
             private CharacterBits LoadCharacter(int index, bool needBits)
             {
-                this.m_Font.m_Stream.Seek((long) this.m_Font.m_Lookup[index], SeekOrigin.Begin);
-                return new CharacterBits((FileStream) this.m_Font.m_Stream, needBits);
+                this.m_Font.m_Stream.Seek((long)this.m_Font.m_Lookup[index], SeekOrigin.Begin);
+                return new CharacterBits((FileStream)this.m_Font.m_Stream, needBits);
             }
 
             public int MeasureWidth(string text)
@@ -596,8 +597,8 @@
 
             public override Texture Reconstruct(object[] args)
             {
-                this.m_String = (string) args[0];
-                this.m_Hue = (IHue) args[1];
+                this.m_String = (string)args[0];
+                this.m_Hue = (IHue)args[1];
                 return base.Construct(true);
             }
 
@@ -614,10 +615,10 @@
                 {
                     if (stream.Read(m_Header, 0, 4) == 4)
                     {
-                        this.m_xOffset = (sbyte) m_Header[0];
-                        this.m_yOffset = (sbyte) m_Header[1];
-                        this.m_xWidth = (sbyte) m_Header[2];
-                        this.m_yHeight = (sbyte) m_Header[3];
+                        this.m_xOffset = (sbyte)m_Header[0];
+                        this.m_yOffset = (sbyte)m_Header[1];
+                        this.m_xWidth = (sbyte)m_Header[2];
+                        this.m_yHeight = (sbyte)m_Header[3];
                         int count = ((this.m_xWidth + 7) >> 3) * this.m_yHeight;
                         if (count > 0)
                         {
@@ -642,4 +643,3 @@
         }
     }
 }
-

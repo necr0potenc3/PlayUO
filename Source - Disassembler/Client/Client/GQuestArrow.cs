@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GQuestArrow : GTracker
     {
         private static bool m_Active;
@@ -39,4 +37,3 @@
         }
     }
 }
-

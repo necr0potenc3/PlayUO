@@ -1,8 +1,6 @@
 ﻿namespace Client
 {
-    using System;
     using System.IO;
-    using System.Runtime.InteropServices;
 
     public class TextureArt
     {
@@ -14,11 +12,11 @@
         {
             Stream stream = Engine.FileManager.OpenMUL(Files.TexIdx);
             byte[] buffer = new byte[0xc000];
-            Engine.NativeRead((FileStream) stream, buffer, 0, buffer.Length);
+            Engine.NativeRead((FileStream)stream, buffer, 0, buffer.Length);
             stream.Close();
             fixed (byte* numRef = buffer)
             {
-                int* numPtr = (int*) numRef;
+                int* numPtr = (int*)numRef;
                 int index = 0;
                 do
                 {
@@ -89,11 +87,11 @@
                 if (num != -1)
                 {
                     int length = (width * height) * 2;
-                    this.m_Textures.m_Stream.Seek((long) (num & 0x7fffffff), SeekOrigin.Begin);
-                    Engine.NativeRead((FileStream) this.m_Textures.m_Stream, this.m_Buffer, 0, length);
+                    this.m_Textures.m_Stream.Seek((long)(num & 0x7fffffff), SeekOrigin.Begin);
+                    Engine.NativeRead((FileStream)this.m_Textures.m_Stream, this.m_Buffer, 0, length);
                     fixed (byte* numRef = this.m_Buffer)
                     {
-                        this.m_Hue.CopyPixels((void*) numRef, (void*) pLine, width * height);
+                        this.m_Hue.CopyPixels((void*)numRef, (void*)pLine, width * height);
                     }
                 }
             }
@@ -107,11 +105,10 @@
 
             public override Texture Reconstruct(object[] args)
             {
-                this.m_TextureID = (int) args[0];
-                this.m_Hue = (IHue) args[1];
+                this.m_TextureID = (int)args[0];
+                this.m_Hue = (IHue)args[1];
                 return base.Construct(true);
             }
         }
     }
 }
-

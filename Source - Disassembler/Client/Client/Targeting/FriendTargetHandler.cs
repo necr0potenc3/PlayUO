@@ -1,7 +1,6 @@
 ﻿namespace Client.Targeting
 {
     using Client;
-    using System;
 
     public class FriendTargetHandler : ITargetHandler
     {
@@ -17,7 +16,7 @@
                 CharData charData = World.CharData;
                 if (charData != null)
                 {
-                    Mobile item = (Mobile) o;
+                    Mobile item = (Mobile)o;
                     if (charData.Friends.Contains(item))
                     {
                         charData.Friends.Remove(item);
@@ -40,4 +39,3 @@
         }
     }
 }
-

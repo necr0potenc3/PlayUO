@@ -16,4 +16,3 @@
         YellowHits = 8
     }
 }
-

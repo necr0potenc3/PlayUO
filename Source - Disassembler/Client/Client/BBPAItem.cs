@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Sequential)]
@@ -8,6 +7,7 @@
     {
         private int m_ItemID;
         private int m_Hue;
+
         public int ItemID
         {
             get
@@ -19,6 +19,7 @@
                 this.m_ItemID = value;
             }
         }
+
         public int Hue
         {
             get
@@ -30,6 +31,7 @@
                 this.m_Hue = value;
             }
         }
+
         public BBPAItem(int itemID, int hue)
         {
             this.m_ItemID = itemID;
@@ -37,4 +39,3 @@
         }
     }
 }
-

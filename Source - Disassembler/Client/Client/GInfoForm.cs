@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Drawing;
 
     public class GInfoForm : GWindowsForm
@@ -18,9 +17,8 @@
             base.Text = "Information Browser";
             InfoProvider[] providerArray = new InfoProvider[] { new CommandInfoProvider(), new CastingInfoProvider(), new SwingInfoProvider() };
             GMainMenu toAdd = new GMainMenu((this.Width - 130) - 4, 8);
-            GMenuItem child = new GMenuItem("Change Provider") {
-                DropDown = true
-            };
+            GMenuItem child = new GMenuItem("Change Provider");
+            child.DropDown = true;
             for (int i = 0; i < providerArray.Length; i++)
             {
                 child.Add(new ChangeProviderMenu(this, providerArray[i]));
@@ -37,9 +35,9 @@
         private GMenuItem FormatMenu(GMenuItem mi)
         {
             mi.FillAlpha = 1f;
-            mi.DefaultColor = GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float) 0.5f);
-            mi.OverColor = GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float) 0.5f);
-            mi.ExpandedColor = GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float) 0.5f);
+            mi.DefaultColor = GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float)0.5f);
+            mi.OverColor = GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float)0.5f);
+            mi.ExpandedColor = GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float)0.5f);
             mi.SetHue(Hues.Load(1));
             return mi;
         }
@@ -59,7 +57,7 @@
             {
                 if (mi.Children[i] is GMenuItem)
                 {
-                    this.RecurseFormatMenu((GMenuItem) mi.Children[i]);
+                    this.RecurseFormatMenu((GMenuItem)mi.Children[i]);
                 }
             }
         }
@@ -117,4 +115,3 @@
         }
     }
 }
-

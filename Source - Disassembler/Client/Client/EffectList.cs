@@ -1,8 +1,6 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
-    using System.Reflection;
 
     public class EffectList : IEnumerable
     {
@@ -62,9 +60,8 @@
         {
             get
             {
-                return (Effect) this.m_List[Index];
+                return (Effect)this.m_List[Index];
             }
         }
     }
 }
-

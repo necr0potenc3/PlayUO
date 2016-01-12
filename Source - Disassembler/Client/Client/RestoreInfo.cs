@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
 
     public class RestoreInfo
@@ -30,17 +29,17 @@
             ArrayList equip = null;
             if (this.m_EquipParent is Mobile)
             {
-                equip = ((Mobile) this.m_EquipParent).Equip;
+                equip = ((Mobile)this.m_EquipParent).Equip;
             }
             else if (this.m_EquipParent is Item)
             {
-                equip = ((Item) this.m_EquipParent).Equip;
+                equip = ((Item)this.m_EquipParent).Equip;
             }
             if (equip != null)
             {
                 for (int i = 0; i < equip.Count; i++)
                 {
-                    EquipEntry entry = (EquipEntry) equip[i];
+                    EquipEntry entry = (EquipEntry)equip[i];
                     if (entry.m_Item == item)
                     {
                         this.m_EquipEntry = entry;
@@ -51,4 +50,3 @@
         }
     }
 }
-

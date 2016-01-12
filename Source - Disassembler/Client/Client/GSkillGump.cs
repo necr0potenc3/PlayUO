@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GSkillGump : Gump
@@ -39,7 +38,7 @@
                 this.m_Height = this.m_Value.Image.yMax - this.m_Value.Image.yMin;
             }
             base.m_Children.Add(this.m_Value);
-            this.m_Lock = new GThreeToggle(Engine.m_SkillUp, Engine.m_SkillDown, Engine.m_SkillLocked, (int) this.m_Skill.Lock, this.m_Width - 4, 0);
+            this.m_Lock = new GThreeToggle(Engine.m_SkillUp, Engine.m_SkillDown, Engine.m_SkillLocked, (int)this.m_Skill.Lock, this.m_Width - 4, 0);
             this.m_Lock.OnStateChange = new OnStateChange(this.Lock_OnStateChange);
             this.UpdateLock();
             base.m_Children.Add(this.m_Lock);
@@ -47,7 +46,7 @@
 
         private void Lock_OnStateChange(int state, Gump g)
         {
-            SkillLock @lock = (SkillLock) state;
+            SkillLock @lock = (SkillLock)state;
             if (this.m_Skill.Lock != @lock)
             {
                 this.m_Skill.Lock = @lock;
@@ -60,7 +59,7 @@
             this.m_Value.Text = newValue.ToString("F1");
             this.m_Value.X = (this.m_Width - 0x18) - this.m_Value.Image.xMax;
             this.m_Value.Y = -this.m_Value.Image.yMin;
-            this.m_Lock.State = (int) newLock;
+            this.m_Lock.State = (int)newLock;
             this.UpdateLock();
         }
 
@@ -124,18 +123,16 @@
 
             protected internal override void OnDragStart()
             {
-                GSkillIcon icon;
                 base.m_IsDragging = false;
                 Gumps.Drag = null;
-                icon = new GSkillIcon(this.m_Skill) {
-                    m_IsDragging = true,
-                    m_OffsetX = icon.Width / 2,
-                    m_OffsetY = icon.Height / 2,
-                    X = Engine.m_xMouse - icon.m_OffsetX,
-                    Y = Engine.m_yMouse - icon.m_OffsetY
-                };
-                Gumps.Desktop.Children.Add(icon);
-                Gumps.Drag = icon;
+                GSkillIcon toAdd = new GSkillIcon(this.m_Skill);
+                toAdd.m_IsDragging = true;
+                toAdd.m_OffsetX = toAdd.Width / 2;
+                toAdd.m_OffsetY = toAdd.Height / 2;
+                toAdd.X = Engine.m_xMouse - toAdd.m_OffsetX;
+                toAdd.Y = Engine.m_yMouse - toAdd.m_OffsetY;
+                Gumps.Desktop.Children.Add(toAdd);
+                Gumps.Drag = toAdd;
             }
 
             protected internal override void OnMouseDown(int x, int y, MouseButtons mb)
@@ -154,4 +151,3 @@
         }
     }
 }
-

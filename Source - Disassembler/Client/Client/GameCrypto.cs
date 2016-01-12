@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.IO;
 
     public sealed class GameCrypto : BaseCrypto
@@ -45,7 +44,7 @@
                         }
                     }
                 }
-                return (int) ((long) (((numPtr - outputStart) - numRef) / 1));
+                return (int)((long)(((numPtr - outputStart) - numRef) / 1));
             }
         }
 
@@ -59,4 +58,3 @@
         }
     }
 }
-

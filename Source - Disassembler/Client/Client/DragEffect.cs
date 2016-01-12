@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class DragEffect : MovingEffect
     {
         protected bool m_Double;
@@ -55,10 +53,10 @@
             num12 -= Renderer.m_yScroll;
             if ((base.m_Source != null) && (base.m_Source.GetType() == typeof(Mobile)))
             {
-                Mobile source = (Mobile) base.m_Source;
+                Mobile source = (Mobile)base.m_Source;
                 if (source.Walking.Count > 0)
                 {
-                    WalkAnimation animation = (WalkAnimation) source.Walking.Peek();
+                    WalkAnimation animation = (WalkAnimation)source.Walking.Peek();
                     if (animation.Snapshot(ref xOffset, ref yOffset, ref fOffset))
                     {
                         num11 += xOffset;
@@ -79,10 +77,10 @@
             num14 -= Renderer.m_yScroll;
             if ((base.m_Target != null) && (base.m_Target.GetType() == typeof(Mobile)))
             {
-                Mobile target = (Mobile) base.m_Target;
+                Mobile target = (Mobile)base.m_Target;
                 if (target.Walking.Count > 0)
                 {
-                    WalkAnimation animation2 = (WalkAnimation) target.Walking.Peek();
+                    WalkAnimation animation2 = (WalkAnimation)target.Walking.Peek();
                     if (animation2.Snapshot(ref xOffset, ref yOffset, ref fOffset))
                     {
                         num13 += xOffset;
@@ -131,8 +129,8 @@
                 num13 -= t.xMin + ((t.xMax - t.xMin) / 2);
                 num14 -= t.yMin + ((t.yMax - t.yMin) / 2);
             }
-            int num15 = num11 + ((int) ((num13 - num11) * normalized));
-            int num16 = num12 + ((int) ((num14 - num12) * normalized));
+            int num15 = num11 + ((int)((num13 - num11) * normalized));
+            int num16 = num12 + ((int)((num14 - num12) * normalized));
             if (this.m_vCache == null)
             {
                 this.m_vCache = base.VCPool.GetInstance();
@@ -150,4 +148,3 @@
         }
     }
 }
-

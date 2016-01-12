@@ -30,7 +30,7 @@
 
         public static int CF28(float f)
         {
-            int num = (int) (255f * f);
+            int num = (int)(255f * f);
             if (num > 0xff)
             {
                 return 0xff;
@@ -105,8 +105,8 @@
                         CalcVert(i, k + 1);
                         calcPool[i, k + 1] = true;
                     }
-                    SurfaceNormal(normalPool, i, k, 0, *(vertsPool[i, k]), *(vertsPool[i + 1, k]), *(vertsPool[i, k + 1]));
-                    SurfaceNormal(normalPool, i, k, 1, *(vertsPool[i, k + 1]), *(vertsPool[i + 1, k]), *(vertsPool[i + 1, k + 1]));
+                    SurfaceNormal(normalPool, i, k, 0, (vertsPool[i, k]), (vertsPool[i + 1, k]), (vertsPool[i, k + 1]));
+                    SurfaceNormal(normalPool, i, k, 1, (vertsPool[i, k + 1]), (vertsPool[i + 1, k]), (vertsPool[i + 1, k + 1]));
                 }
             }
             int[,] colorMap = m_ColorMap;
@@ -127,26 +127,26 @@
                 int[,] numArray3;
                 for (int m = 1; m < (cellHeight - 1); m++)
                 {
-                    Vector vector = *(normalPool[j, m, 0]);
-                    Vector vector2 = *(normalPool[j - 1, m - 1, 1]);
-                    Vector vector3 = *(normalPool[j - 1, m, 0]);
-                    Vector vector4 = *(normalPool[j - 1, m, 1]);
-                    Vector vector5 = *(normalPool[j, m - 1, 0]);
-                    Vector vector6 = *(normalPool[j, m - 1, 1]);
+                    Vector vector = (normalPool[j, m, 0]);
+                    Vector vector2 = (normalPool[j - 1, m - 1, 1]);
+                    Vector vector3 = (normalPool[j - 1, m, 0]);
+                    Vector vector4 = (normalPool[j - 1, m, 1]);
+                    Vector vector5 = (normalPool[j, m - 1, 0]);
+                    Vector vector6 = (normalPool[j, m - 1, 1]);
                     float num8 = ((((vector.m_X + vector2.m_X) + vector3.m_X) + vector4.m_X) + vector5.m_X) + vector6.m_X;
                     float num9 = ((((vector.m_Y + vector2.m_Y) + vector3.m_Y) + vector4.m_Y) + vector5.m_Y) + vector6.m_Y;
                     float num10 = ((((vector.m_Z + vector2.m_Z) + vector3.m_Z) + vector4.m_Z) + vector5.m_Z) + vector6.m_Z;
                     num8 *= 0.1666667f;
                     num9 *= 0.1666667f;
                     num10 *= 0.1666667f;
-                    float num11 = (float) (1.0 / Math.Sqrt((double) (((num8 * num8) + (num9 * num9)) + (num10 * num10))));
+                    float num11 = (float)(1.0 / Math.Sqrt((double)(((num8 * num8) + (num9 * num9)) + (num10 * num10))));
                     num8 *= num11;
                     num9 *= num11;
                     num10 *= num11;
                     float num12 = ((num8 * vLight.m_X) + (num9 * vLight.m_Y)) + (num10 * vLight.m_Z);
                     num12 += 0.2151413f;
                     num12 += 0.8235294f;
-                    int num13 = (int) ((255f * num12) + 0.5f);
+                    int num13 = (int)((255f * num12) + 0.5f);
                     if (num13 < 0x80)
                     {
                         num13 = 0x80;
@@ -164,25 +164,25 @@
                         int num17 = m_CalcVert_Tiles[j - 1, m].m_Z;
                         if (((z == num15) && (z == num16)) && (z == num17))
                         {
-                            (buffer2 = flags)[(int) (ptr = (IntPtr) (j - 1)), (int) (ptr2 = (IntPtr) (m - 1))] = (byte) (buffer2[(int) ptr, (int) ptr2] & ~num3);
+                            (buffer2 = flags)[(int)(ptr = (IntPtr)(j - 1)), (int)(ptr2 = (IntPtr)(m - 1))] = (byte)(buffer2[(int)ptr, (int)ptr2] & ~num3);
                         }
                         else
                         {
-                            (buffer2 = flags)[(int) (ptr = (IntPtr) (j - 1)), (int) (ptr2 = (IntPtr) (m - 1))] = (byte) (buffer2[(int) ptr, (int) ptr2] | num3);
+                            (buffer2 = flags)[(int)(ptr = (IntPtr)(j - 1)), (int)(ptr2 = (IntPtr)(m - 1))] = (byte)(buffer2[(int)ptr, (int)ptr2] | num3);
                         }
                     }
                     else
                     {
-                        (buffer2 = flags)[(int) (ptr = (IntPtr) (j - 1)), (int) (ptr2 = (IntPtr) (m - 1))] = (byte) (buffer2[(int) ptr, (int) ptr2] | num3);
+                        (buffer2 = flags)[(int)(ptr = (IntPtr)(j - 1)), (int)(ptr2 = (IntPtr)(m - 1))] = (byte)(buffer2[(int)ptr, (int)ptr2] | num3);
                     }
                 }
-                (buffer2 = flags)[(int) (ptr = (IntPtr) j), 0] = (byte) (buffer2[(int) ptr, 0] | num3);
-                (buffer2 = flags)[(int) (ptr = (IntPtr) j), (int) (ptr2 = (IntPtr) (cellHeight - 2))] = (byte) (buffer2[(int) ptr, (int) ptr2] | num3);
-                (buffer2 = flags)[0, (int) (ptr = (IntPtr) j)] = (byte) (buffer2[0, (int) ptr] | num3);
-                (buffer2 = flags)[(int) (ptr = (IntPtr) (cellWidth - 2)), (int) (ptr2 = (IntPtr) j)] = (byte) (buffer2[(int) ptr, (int) ptr2] | num3);
+                (buffer2 = flags)[(int)(ptr = (IntPtr)j), 0] = (byte)(buffer2[(int)ptr, 0] | num3);
+                (buffer2 = flags)[(int)(ptr = (IntPtr)j), (int)(ptr2 = (IntPtr)(cellHeight - 2))] = (byte)(buffer2[(int)ptr, (int)ptr2] | num3);
+                (buffer2 = flags)[0, (int)(ptr = (IntPtr)j)] = (byte)(buffer2[0, (int)ptr] | num3);
+                (buffer2 = flags)[(int)(ptr = (IntPtr)(cellWidth - 2)), (int)(ptr2 = (IntPtr)j)] = (byte)(buffer2[(int)ptr, (int)ptr2] | num3);
                 numArray2[j, 0] = colorMap[j, 0] = 0;
                 numArray2[j, cellHeight - 1] = colorMap[j, cellHeight - 1] = 0;
-                numArray2[0, j] = (numArray3 = colorMap)[0, (int) (ptr = (IntPtr) j)] = numArray3[0, (int) ptr] | num3;
+                numArray2[0, j] = (numArray3 = colorMap)[0, (int)(ptr = (IntPtr)j)] = numArray3[0, (int)ptr] | num3;
                 numArray2[cellWidth - 1, j] = colorMap[cellWidth - 1, j] = 0;
             }
             map.colorMap = colorMap;
@@ -213,11 +213,10 @@
             float num7 = (num2 * num6) - (num3 * num5);
             float num8 = (num3 * num4) - (num * num6);
             float num9 = (num * num5) - (num2 * num4);
-            float num10 = (float) (1.0 / Math.Sqrt((double) (((num7 * num7) + (num8 * num8)) + (num9 * num9))));
+            float num10 = (float)(1.0 / Math.Sqrt((double)(((num7 * num7) + (num8 * num8)) + (num9 * num9))));
             vNormal[x, y, z].m_X = num7 * num10;
             vNormal[x, y, z].m_Y = num8 * num10;
             vNormal[x, y, z].m_Z = num9 * num10;
         }
     }
 }
-

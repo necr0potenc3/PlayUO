@@ -1,7 +1,6 @@
 ﻿namespace Client.Targeting
 {
     using Client;
-    using System;
 
     public class DragToBagTargetHandler : ITargetHandler
     {
@@ -21,7 +20,7 @@
         {
             if (o is Item)
             {
-                Item e = (Item) o;
+                Item e = (Item)o;
                 Mobile player = World.Player;
                 if ((player != null) && ((Map.GetWeight(e.ID) != 0xff) || e.Flags[ItemFlag.CanMove]))
                 {
@@ -54,4 +53,3 @@
         }
     }
 }
-

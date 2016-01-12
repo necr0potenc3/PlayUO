@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
     using System.Drawing;
     using System.Windows.Forms;
@@ -28,10 +27,10 @@
             base.FillAlpha = 1f;
             base.m_NonRestrictivePicking = true;
             int x = this.Width - 0x62;
-            this.m_All = new GSystemButton(x - 0x13, 10, 20, 20, GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float) 0.5f), Color.Black, "", Engine.GetUniFont(2));
-            this.m_Ctrl = new GSystemButton(x, 10, 0x20, 20, GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float) 0.5f), Color.Black, "Ctrl", Engine.GetUniFont(2));
-            this.m_Alt = new GSystemButton(x + 0x1f, 10, 0x20, 20, GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float) 0.5f), Color.Black, "Alt", Engine.GetUniFont(2));
-            this.m_Shift = new GSystemButton(x + 0x3e, 10, 0x20, 20, GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float) 0.5f), Color.Black, "Shift", Engine.GetUniFont(2));
+            this.m_All = new GSystemButton(x - 0x13, 10, 20, 20, GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float)0.5f), Color.Black, "", Engine.GetUniFont(2));
+            this.m_Ctrl = new GSystemButton(x, 10, 0x20, 20, GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float)0.5f), Color.Black, "Ctrl", Engine.GetUniFont(2));
+            this.m_Alt = new GSystemButton(x + 0x1f, 10, 0x20, 20, GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float)0.5f), Color.Black, "Alt", Engine.GetUniFont(2));
+            this.m_Shift = new GSystemButton(x + 0x3e, 10, 0x20, 20, GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float)0.5f), Color.Black, "Shift", Engine.GetUniFont(2));
             this.m_All.OnClick = new OnClick(this.All_OnClick);
             this.m_Ctrl.OnClick = new OnClick(this.Ctrl_OnClick);
             this.m_Alt.OnClick = new OnClick(this.Alt_OnClick);
@@ -93,7 +92,7 @@
             this.PlaceKey(Keys.Subtract, "-");
             this.m_fX = 0f;
             this.m_fY++;
-            this.PlaceKey(Keys.Tab, (float) 1.5f);
+            this.PlaceKey(Keys.Tab, (float)1.5f);
             this.PlaceKey(Keys.Q);
             this.PlaceKey(Keys.W);
             this.PlaceKey(Keys.E);
@@ -132,7 +131,7 @@
             this.PlaceKey(Keys.L);
             this.PlaceKey(Keys.Oem1, ";");
             this.PlaceKey(Keys.Oem7, "'");
-            this.PlaceKey(Keys.Enter, (float) 2.25f);
+            this.PlaceKey(Keys.Enter, (float)2.25f);
             this.Skip(3.5f);
             this.PlaceKey(Keys.NumPad4, "4");
             this.PlaceKey(Keys.NumPad5, "5");
@@ -165,10 +164,10 @@
             this.PlaceKey(Keys.ControlKey, "Ctrl", 1.5f);
             this.PlaceKey(Keys.LWin, "Win", 1.25f);
             this.PlaceKey(Keys.Menu, "Alt", 1.25f);
-            this.PlaceKey(Keys.Space, (float) 5.75f);
+            this.PlaceKey(Keys.Space, (float)5.75f);
             this.PlaceKey(Keys.Menu, "Alt", 1.25f);
             this.PlaceKey(Keys.RWin, "Win", 1.25f);
-            this.PlaceKey(Keys.Apps, (float) 1.25f);
+            this.PlaceKey(Keys.Apps, (float)1.25f);
             this.PlaceKey(Keys.ControlKey, "Ctrl", 1.5f);
             this.Skip(0.25f);
             this.PlaceKey(Keys.Left, "←");
@@ -218,7 +217,7 @@
             }
             else
             {
-                num = (int) key;
+                num = (int)key;
             }
             if ((num >= 0) && (num < this.m_Buttons.Length))
             {
@@ -238,7 +237,7 @@
             {
                 base.m_IsDragging = false;
                 Gumps.Drag = null;
-                Point point = base.PointToScreen(new Point(0, 0)) - base.m_Parent.PointToScreen(new Point(0, 0));
+                Client.Point point = base.PointToScreen(new Client.Point(0, 0)) - base.m_Parent.PointToScreen(new Client.Point(0, 0));
                 base.m_Parent.m_OffsetX = point.X + base.m_OffsetX;
                 base.m_Parent.m_OffsetY = point.Y + base.m_OffsetY;
                 base.m_Parent.m_IsDragging = true;
@@ -268,7 +267,7 @@
 
         public void PlaceKey(Keys key, string name, float w, float h)
         {
-            GMacroKeyButton btn = new GMacroKeyButton(key, name, this.m_Bold, 4 + ((int) (this.m_fX * 28f)), 4 + ((int) (this.m_fY * 28f)), 1 + ((int) (w * 28f)), 1 + ((int) (h * 28f)));
+            GMacroKeyButton btn = new GMacroKeyButton(key, name, this.m_Bold, 4 + ((int)(this.m_fX * 28f)), 4 + ((int)(this.m_fY * 28f)), 1 + ((int)(w * 28f)), 1 + ((int)(h * 28f)));
             this.SetButton(key, btn);
             base.m_Children.Add(btn);
             this.m_fX += w;
@@ -306,7 +305,7 @@
             }
             else
             {
-                num = (int) key;
+                num = (int)key;
             }
             if ((num >= 0) && (num < this.m_Buttons.Length))
             {
@@ -329,7 +328,7 @@
             {
                 if (obj2 is GMacroKeyButton)
                 {
-                    objs[index] = new GMacroKeyButton[] { (GMacroKeyButton) obj2, btn };
+                    objs[index] = new GMacroKeyButton[] { (GMacroKeyButton)obj2, btn };
                 }
                 else
                 {
@@ -347,11 +346,11 @@
             }
             else if (btn.Macro is Macro)
             {
-                btn.Macro = new Macro[] { (Macro) btn.Macro, mc };
+                btn.Macro = new Macro[] { (Macro)btn.Macro, mc };
             }
             else if (btn.Macro is Macro[])
             {
-                Macro[] macro = (Macro[]) btn.Macro;
+                Macro[] macro = (Macro[])btn.Macro;
                 Macro[] macroArray2 = new Macro[macro.Length + 1];
                 for (int i = 0; i < macro.Length; i++)
                 {
@@ -399,13 +398,13 @@
             ArrayList list = Macros.List;
             for (int j = 0; j < list.Count; j++)
             {
-                Macro mc = (Macro) list[j];
+                Macro mc = (Macro)list[j];
                 if (flag || (((mc.Control == flag2) && (mc.Alt == flag3)) && (mc.Shift == flag4)))
                 {
                     object obj2 = this.GetButton(mc.Key);
                     if (obj2 is GMacroKeyButton[])
                     {
-                        GMacroKeyButton[] buttonArray = (GMacroKeyButton[]) obj2;
+                        GMacroKeyButton[] buttonArray = (GMacroKeyButton[])obj2;
                         for (int m = 0; m < buttonArray.Length; m++)
                         {
                             this.SetMacro(dataStore, buttonArray[m], mc);
@@ -413,13 +412,13 @@
                     }
                     else if (obj2 is GMacroKeyButton)
                     {
-                        this.SetMacro(dataStore, (GMacroKeyButton) obj2, mc);
+                        this.SetMacro(dataStore, (GMacroKeyButton)obj2, mc);
                     }
                 }
             }
             for (int k = 0; k < dataStore.Count; k++)
             {
-                ((GMacroKeyButton) dataStore[k]).Macro = null;
+                ((GMacroKeyButton)dataStore[k]).Macro = null;
             }
             Engine.ReleaseDataStore(dataStore);
         }
@@ -432,12 +431,12 @@
             }
             else if (opt)
             {
-                btn.SetBackColor(GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float) 0.5f));
+                btn.SetBackColor(GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float)0.5f));
             }
             else
             {
-                btn.SetBackColor(GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float) 0.25f));
-                btn.InactiveColor = GumpPaint.Blend(Color.White, SystemColors.Control, (float) 0.5f);
+                btn.SetBackColor(GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float)0.25f));
+                btn.InactiveColor = GumpPaint.Blend(Color.White, SystemColors.Control, (float)0.5f);
             }
         }
 
@@ -465,4 +464,3 @@
         }
     }
 }
-

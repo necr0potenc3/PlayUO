@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GBuyGump_OfferedItem : GRegion
     {
         private GLabel m_Amount;
@@ -109,4 +107,3 @@
         }
     }
 }
-

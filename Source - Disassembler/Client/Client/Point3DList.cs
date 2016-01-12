@@ -1,8 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-    using System.Reflection;
-
     public class Point3DList
     {
         private int m_Count = 0;
@@ -88,4 +85,3 @@
         }
     }
 }
-

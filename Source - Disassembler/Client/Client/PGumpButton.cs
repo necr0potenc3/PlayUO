@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
 
     public class PGumpButton : Packet
@@ -17,7 +16,7 @@
             {
                 if (gumpArray[i] is IRelayedSwitch)
                 {
-                    IRelayedSwitch switch2 = (IRelayedSwitch) gumpArray[i];
+                    IRelayedSwitch switch2 = (IRelayedSwitch)gumpArray[i];
                     if (switch2.Active)
                     {
                         dataStore.Add(switch2.RelayID);
@@ -31,14 +30,14 @@
             base.m_Stream.Write(dataStore.Count);
             for (int j = 0; j < dataStore.Count; j++)
             {
-                base.m_Stream.Write((int) dataStore[j]);
+                base.m_Stream.Write((int)dataStore[j]);
             }
             base.m_Stream.Write(list.Count);
             for (int k = 0; k < list.Count; k++)
             {
-                GServerTextBox box = (GServerTextBox) list[k];
-                base.m_Stream.Write((short) box.RelayID);
-                base.m_Stream.Write((short) box.String.Length);
+                GServerTextBox box = (GServerTextBox)list[k];
+                base.m_Stream.Write((short)box.RelayID);
+                base.m_Stream.Write((short)box.String.Length);
                 base.m_Stream.WriteUnicode(box.String);
             }
             Engine.ReleaseDataStore(list);
@@ -55,4 +54,3 @@
         }
     }
 }
-

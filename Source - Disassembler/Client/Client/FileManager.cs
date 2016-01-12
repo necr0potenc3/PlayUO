@@ -23,14 +23,13 @@
                     this.m_FilePath = this.GetExePath("Ultima Online Third Dawn");
                     if (this.m_FilePath == null)
                     {
-                        OpenFileDialog dialog = new OpenFileDialog {
-                            CheckPathExists = true,
-                            CheckFileExists = false,
-                            FileName = "Client.exe",
-                            Filter = "Client.exe|Client.exe",
-                            Title = "Find your UO directory",
-                            InitialDirectory = Path.GetPathRoot(this.m_BasePath)
-                        };
+                        OpenFileDialog dialog = new OpenFileDialog();
+                        dialog.CheckPathExists = true;
+                        dialog.CheckFileExists = false;
+                        dialog.FileName = "Client.exe";
+                        dialog.Filter = "Client.exe|Client.exe";
+                        dialog.Title = "Find your UO directory";
+                        dialog.InitialDirectory = Path.GetPathRoot(this.m_BasePath);
                         if (dialog.ShowDialog() == DialogResult.OK)
                         {
                             this.m_FilePath = Path.GetDirectoryName(dialog.FileName);
@@ -46,14 +45,14 @@
             }
         }
 
-        public string BasePath(string Path)
+        public string BasePath(string Path1)
         {
-            return Path.Combine(this.m_BasePath, Path);
+            return Path.Combine(this.m_BasePath, Path1);
         }
 
-        public Stream CreateBaseMUL(string Path)
+        public Stream CreateBaseMUL(string Path1)
         {
-            string path = Path.Combine(this.m_BasePath, Path);
+            string path = Path.Combine(this.m_BasePath, Path1);
             if (File.Exists(path))
             {
                 File.Delete(path);
@@ -102,19 +101,19 @@
             return directoryName;
         }
 
-        public Stream OpenBaseMUL(string Path)
+        public Stream OpenBaseMUL(string Path1)
         {
-            return this.OpenRead(Path.Combine(this.m_BasePath, Path));
+            return this.OpenRead(Path.Combine(this.m_BasePath, Path1));
         }
 
         public Stream OpenMUL(Files File)
         {
-            return this.OpenRead(Path.Combine(this.m_FilePath, Config.GetFile((int) File)));
+            return this.OpenRead(Path.Combine(this.m_FilePath, Config.GetFile((int)File)));
         }
 
-        public Stream OpenMUL(string Path)
+        public Stream OpenMUL(string Path1)
         {
-            return this.OpenRead(Path.Combine(this.m_FilePath, Path));
+            return this.OpenRead(Path.Combine(this.m_FilePath, Path1));
         }
 
         protected Stream OpenRead(string Path)
@@ -124,12 +123,12 @@
 
         public string ResolveMUL(Files File)
         {
-            return Path.Combine(this.m_FilePath, Config.GetFile((int) File));
+            return Path.Combine(this.m_FilePath, Config.GetFile((int)File));
         }
 
-        public string ResolveMUL(string Path)
+        public string ResolveMUL(string Path1)
         {
-            return Path.Combine(this.m_FilePath, Path);
+            return Path.Combine(this.m_FilePath, Path1);
         }
 
         public bool Error
@@ -149,4 +148,3 @@
         }
     }
 }
-

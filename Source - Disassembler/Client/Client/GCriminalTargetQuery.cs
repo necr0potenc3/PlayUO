@@ -1,7 +1,6 @@
 ﻿namespace Client
 {
     using Client.Targeting;
-    using System;
 
     public class GCriminalTargetQuery : GMessageBoxYesNo
     {
@@ -27,4 +26,3 @@
         }
     }
 }
-

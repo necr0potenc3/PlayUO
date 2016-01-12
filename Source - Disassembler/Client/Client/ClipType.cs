@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public enum ClipType
     {
         Outside,
@@ -9,4 +7,3 @@
         Partial
     }
 }
-

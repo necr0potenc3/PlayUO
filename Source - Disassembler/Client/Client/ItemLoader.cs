@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class ItemLoader : ILoader
     {
         private bool m_Grayscale;
@@ -15,16 +13,15 @@
 
         public void Load()
         {
-            Texture item;
+            Texture texture;
             if (!this.m_Grayscale)
             {
-                item = Hues.Default.GetItem(this.m_ItemID);
+                texture = Hues.Default.GetItem(this.m_ItemID);
             }
             else
             {
-                item = Hues.Grayscale.GetItem(this.m_ItemID);
+                texture = Hues.Grayscale.GetItem(this.m_ItemID);
             }
         }
     }
 }
-

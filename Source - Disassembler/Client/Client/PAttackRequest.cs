@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class PAttackRequest : Packet
     {
         public PAttackRequest(Mobile Target) : this(Target.Serial)
@@ -18,4 +16,3 @@
         }
     }
 }
-

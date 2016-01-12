@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GNewAccountMenu : GMenuItem
     {
         private ServerProfile m_Server;
@@ -17,4 +15,3 @@
         }
     }
 }
-

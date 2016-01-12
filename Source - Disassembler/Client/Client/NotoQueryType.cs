@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public enum NotoQueryType
     {
         Off,
@@ -9,4 +7,3 @@
         Smart
     }
 }
-

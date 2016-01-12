@@ -1,7 +1,6 @@
 ﻿namespace Client
 {
     using Microsoft.Win32;
-    using System;
     using System.Drawing;
 
     public class GumpColors
@@ -17,20 +16,20 @@
             m_InactiveCaptionGradient = -1;
         }
 
-        private static Color ReadRegistryColor(string name)
+        private static System.Drawing.Color ReadRegistryColor(string name)
         {
             try
             {
                 using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Colors", false))
                 {
                     string[] strArray = (key.GetValue(name) as string).Split(new char[] { ' ' });
-                    return Color.FromArgb(int.Parse(strArray[0]), int.Parse(strArray[1]), int.Parse(strArray[2]));
+                    return System.Drawing.Color.FromArgb(int.Parse(strArray[0]), int.Parse(strArray[1]), int.Parse(strArray[2]));
                 }
             }
             catch
             {
             }
-            return Color.White;
+            return System.Drawing.Color.White;
         }
 
         public static int ActiveBorder
@@ -278,4 +277,3 @@
         }
     }
 }
-

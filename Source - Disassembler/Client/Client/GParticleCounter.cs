@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GParticleCounter : GLabel
     {
         public GParticleCounter() : base("", Engine.DefaultFont, Engine.DefaultHue, 4, 4)
@@ -30,4 +28,3 @@
         }
     }
 }
-

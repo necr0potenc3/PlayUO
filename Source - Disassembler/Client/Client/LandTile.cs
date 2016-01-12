@@ -12,7 +12,7 @@
         public bool m_Guarded;
         public byte m_Height;
         public short m_ID;
-        public Texture m_sDraw;
+        public Client.Texture m_sDraw;
         private sbyte m_SortZ;
         public CustomVertex.TransformedColoredTextured[] m_vDraw;
         public sbyte m_Z;
@@ -20,10 +20,10 @@
 
         public static unsafe void Initialize(LandTile t, byte* pSrc)
         {
-            t.m_ID = *((short*) pSrc);
-            t.m_ID = (short) (t.m_ID & 0x3fff);
-            t.m_ID = (short) TextureTable.m_Table[t.m_ID];
-            t.m_SortZ = t.m_Z = *((sbyte*) (pSrc + 2));
+            t.m_ID = *((short*)pSrc);
+            t.m_ID = (short)(t.m_ID & 0x3fff);
+            t.m_ID = (short)TextureTable.m_Table[t.m_ID];
+            t.m_SortZ = t.m_Z = *((sbyte*)(pSrc + 2));
             t.m_bDraw = false;
             t.m_bInit = false;
             t.m_bFilter = false;
@@ -36,8 +36,8 @@
         public static void Initialize(LandTile t, short id, sbyte z)
         {
             t.m_ID = id;
-            t.m_ID = (short) (t.m_ID & 0x3fff);
-            t.m_ID = (short) TextureTable.m_Table[t.m_ID];
+            t.m_ID = (short)(t.m_ID & 0x3fff);
+            t.m_ID = (short)TextureTable.m_Table[t.m_ID];
             t.m_SortZ = t.m_Z = z;
             t.m_bDraw = false;
             t.m_bInit = false;
@@ -109,4 +109,3 @@
         }
     }
 }
-

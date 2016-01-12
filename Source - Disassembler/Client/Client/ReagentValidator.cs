@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class ReagentValidator : ItemIDValidator
     {
         public static readonly ReagentValidator Validator = new ReagentValidator();
@@ -15,4 +13,3 @@
         }
     }
 }
-

@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class TimeSync
     {
         private double m_Duration;
@@ -22,7 +20,7 @@
                 Engine.QueryPerformanceCounter(ref Engine.m_QPC);
                 this.m_Start = Engine.m_QPC;
                 this.m_Start /= Engine.m_QPF;
-                Engine.m_Ticks = (int) (this.m_Start + 0.5);
+                Engine.m_Ticks = (int)(this.m_Start + 0.5);
                 Engine.m_dTicks = this.m_Start;
                 Engine.m_SetTicks = true;
             }
@@ -54,7 +52,7 @@
                     Engine.QueryPerformanceCounter(ref Engine.m_QPC);
                     dTicks = Engine.m_QPC;
                     dTicks /= Engine.m_QPF;
-                    Engine.m_Ticks = (int) (dTicks + 0.5);
+                    Engine.m_Ticks = (int)(dTicks + 0.5);
                     Engine.m_dTicks = dTicks;
                     Engine.m_SetTicks = true;
                 }
@@ -73,4 +71,3 @@
         }
     }
 }
-

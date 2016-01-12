@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class TileGroup
     {
         private int m_Count;
@@ -16,7 +14,7 @@
         public static unsafe int GetBrightness(Texture tex, int xStart, int yStart, int xStep, int yStep, int count)
         {
             LockData data = tex.Lock(LockFlags.ReadOnly);
-            short* pvSrc = (short*) data.pvSrc;
+            short* pvSrc = (short*)data.pvSrc;
             int num = data.Pitch >> 1;
             pvSrc += yStart * num;
             pvSrc += xStart;
@@ -38,4 +36,3 @@
         }
     }
 }
-

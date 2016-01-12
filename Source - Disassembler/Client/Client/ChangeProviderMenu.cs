@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class ChangeProviderMenu : GMenuItem
     {
         private GInfoForm m_Form;
@@ -19,4 +17,3 @@
         }
     }
 }
-

@@ -29,11 +29,11 @@
             base.m_CanDrop = true;
             this.GetBounds(gumpID);
             base.m_NonRestrictivePicking = true;
-            ArrayList items = container.Items;
-            int count = items.Count;
+            ArrayList list = container.Items;
+            int count = list.Count;
             for (int i = 0; i < count; i++)
             {
-                Client.Item item = (Client.Item) items[i];
+                Client.Item item = (Client.Item)list[i];
                 if (((base.m_GumpID != 9) || ((item.ID & 0x3fff) < 0x2006)) || ((item.ID & 0x3fff) > 0x2050))
                 {
                     Client.Gump toAdd = new GContainerItem(item, this.m_Item);
@@ -44,7 +44,7 @@
             }
         }
 
-        public Point Clip(Texture img, bool xDouble, Point p, int xOffset, int yOffset)
+        public Client.Point Clip(Texture img, bool xDouble, Client.Point p, int xOffset, int yOffset)
         {
             if ((base.m_GumpID == 0x91a) || (base.m_GumpID == 0x92e))
             {
@@ -52,9 +52,8 @@
             }
             if (Engine.m_ContainerGrid)
             {
-                Point point2;
                 Rectangle grid = this.GetGrid();
-                Point point = new Point(p, xOffset, yOffset) - new Point(grid.Left, grid.Top);
+                Client.Point point = new Client.Point(p, xOffset, yOffset) - new Client.Point(grid.Left, grid.Top);
                 point /= 0x15;
                 if (point.X < 0)
                 {
@@ -72,9 +71,12 @@
                 {
                     point.Y = grid.Height - 1;
                 }
-                return new Point((grid.X + (point.X * 0x15)) + ((20 - ((xDouble ? 6 : 1) + (img.xMax - img.xMin))) / 2), (grid.Y + (point.Y * 0x15)) + ((20 - ((xDouble ? 6 : 1) + (img.yMax - img.yMin))) / 2)) { X = point2.X - img.xMin, Y = point2.Y - img.yMin };
+                Client.Point point2 = new Client.Point((grid.X + (point.X * 0x15)) + ((20 - ((xDouble ? 6 : 1) + (img.xMax - img.xMin))) / 2), (grid.Y + (point.Y * 0x15)) + ((20 - ((xDouble ? 6 : 1) + (img.yMax - img.yMin))) / 2));
+                point2.X -= img.xMin;
+                point2.Y -= img.yMin;
+                return point2;
             }
-            Point point3 = new Point(p.X, p.Y);
+            Client.Point point3 = new Client.Point(p.X, p.Y);
             int num = p.X + img.xMin;
             int num2 = p.Y + img.yMin;
             int num3 = p.X + img.xMax;
@@ -129,10 +131,10 @@
                 Rectangle grid = this.GetGrid();
                 Renderer.SetTexture(null);
                 Renderer.AlphaTestEnable = false;
-                float num = (float) (base.m_fAlpha * Math.Sqrt((double) base.m_fAlpha));
+                float num = (float)(base.m_fAlpha * Math.Sqrt((double)base.m_fAlpha));
                 if (num != 1f)
                 {
-                    Renderer.SetAlpha((float) (base.m_fAlpha * Math.Sqrt((double) base.m_fAlpha)));
+                    Renderer.SetAlpha((float)(base.m_fAlpha * Math.Sqrt((double)base.m_fAlpha)));
                     Renderer.SetAlphaEnable(true);
                 }
                 int num2 = 0;
@@ -200,8 +202,8 @@
             }
             else if ((g != null) && (g.GetType() == typeof(GDraggedItem)))
             {
-                GDraggedItem item = (GDraggedItem) g;
-                Point point = this.Clip(item.Image, item.Double, base.PointToClient(new Point(Engine.m_xMouse - g.m_OffsetX, Engine.m_yMouse - g.m_OffsetY)), g.m_OffsetX, g.m_OffsetY);
+                GDraggedItem item = (GDraggedItem)g;
+                Client.Point point = this.Clip(item.Image, item.Double, base.PointToClient(new Client.Point(Engine.m_xMouse - g.m_OffsetX, Engine.m_yMouse - g.m_OffsetY)), g.m_OffsetX, g.m_OffsetY);
                 int num = item.Item.ID & 0x3fff;
                 if ((num >= 0x3585) && (num <= 0x358a))
                 {
@@ -212,7 +214,7 @@
                     point.Y += 20;
                 }
                 Gumps.Destroy(item);
-                Network.Send(new PDropItem(item.Item.Serial, (short) point.X, (short) point.Y, 0, this.m_Item.Serial));
+                Network.Send(new PDropItem(item.Item.Serial, (short)point.X, (short)point.Y, 0, this.m_Item.Serial));
             }
         }
 
@@ -222,7 +224,7 @@
             {
                 base.m_IsDragging = false;
                 Gumps.Drag = null;
-                Point point = base.m_Parent.PointToClient(new Point(Engine.m_xMouse, Engine.m_yMouse));
+                Client.Point point = base.m_Parent.PointToClient(new Client.Point(Engine.m_xMouse, Engine.m_yMouse));
                 base.m_Parent.m_OffsetX = point.X;
                 base.m_Parent.m_OffsetY = point.Y;
                 base.m_Parent.m_IsDragging = true;
@@ -234,7 +236,7 @@
         {
             if (((base.m_GumpID != 9) || ((item.ID & 0x3fff) < 0x2006)) || ((item.ID & 0x3fff) > 0x2050))
             {
-                GContainerItem g = (GContainerItem) this.m_Hash[item];
+                GContainerItem g = (GContainerItem)this.m_Hash[item];
                 if (g != null)
                 {
                     Gumps.Destroy(g);
@@ -253,7 +255,7 @@
             }
             else
             {
-                GContainerItem toAdd = (GContainerItem) this.m_Hash[item];
+                GContainerItem toAdd = (GContainerItem)this.m_Hash[item];
                 if (toAdd == null)
                 {
                     toAdd = new GContainerItem(item, this.m_Item);
@@ -270,7 +272,7 @@
 
         public void OnItemRemove(Client.Item item)
         {
-            GContainerItem g = (GContainerItem) this.m_Hash[item];
+            GContainerItem g = (GContainerItem)this.m_Hash[item];
             if (g != null)
             {
                 Gumps.Destroy(g);
@@ -289,7 +291,7 @@
             {
                 if (this.m_TradeContainer)
                 {
-                    ((GSecureTrade) base.m_Parent).Close();
+                    ((GSecureTrade)base.m_Parent).Close();
                 }
                 else
                 {
@@ -315,4 +317,3 @@
         }
     }
 }
-

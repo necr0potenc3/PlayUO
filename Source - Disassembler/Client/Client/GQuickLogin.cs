@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GQuickLogin : GAlphaBackground
     {
         protected bool m_Compacted;
@@ -49,7 +47,7 @@
                 Clipper clipper = new Clipper(base.m_X + 1, base.m_Y + 1, base.m_Width - 2, base.m_Height - 2);
                 for (int i = 0; i < count; i++)
                 {
-                    Entry entry = (Entry) QuickLogin.Entries[i];
+                    Entry entry = (Entry)QuickLogin.Entries[i];
                     GTextButton button = new GTextButton(entry.CharName, Engine.GetUniFont(0), Hues.Load(0x58), Hues.Load(0x35), 2, 2, onClick);
                     base.m_Children.Add(button);
                     button.Center();
@@ -61,7 +59,7 @@
                     bool flag = false;
                     for (int j = 0; j < count; j++)
                     {
-                        Entry entry2 = (Entry) QuickLogin.Entries[j];
+                        Entry entry2 = (Entry)QuickLogin.Entries[j];
                         if (entry2.CharName == entry.CharName)
                         {
                             if (j <= i)
@@ -104,7 +102,7 @@
                 Clipper clipper = new Clipper(this.m_LastX + 1, this.m_LastY + 1, base.m_Width - 2, base.m_Height - 2);
                 for (int i = 1; i < base.m_Children.Count; i++)
                 {
-                    ((GTextButton) base.m_Children[i]).Scissor(clipper);
+                    ((GTextButton)base.m_Children[i]).Scissor(clipper);
                 }
             }
             if ((Gumps.LastOver != null) && Gumps.LastOver.IsChildOf(this))
@@ -145,7 +143,7 @@
         protected void Roll_OnTick(Timer t)
         {
             double normalized = this.m_Sync.Normalized;
-            this.Height = this.m_From + ((int) ((this.m_To - this.m_From) * normalized));
+            this.Height = this.m_From + ((int)((this.m_To - this.m_From) * normalized));
             Engine.Redraw();
             if (normalized >= 1.0)
             {
@@ -187,10 +185,9 @@
                 Gump[] gumpArray = base.m_Children.ToArray();
                 for (int i = 1; i < gumpArray.Length; i++)
                 {
-                    ((GTextButton) gumpArray[i]).Scissor(clipper);
+                    ((GTextButton)gumpArray[i]).Scissor(clipper);
                 }
             }
         }
     }
 }
-

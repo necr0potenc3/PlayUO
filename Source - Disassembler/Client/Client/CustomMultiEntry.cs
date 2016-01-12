@@ -131,17 +131,17 @@
                                 goto Label_0284;
 
                             default:
-                            {
-                                continue;
-                            }
+                                {
+                                    continue;
+                                }
                         }
                     Label_00CA:
                         item = new MultiItem();
                         item.Flags = 1;
-                        item.ItemID = (short) (0x4000 | (((dest[0] << 8) | dest[1]) & 0x3fff));
-                        item.X = (sbyte) dest[2];
-                        item.Y = (sbyte) dest[3];
-                        item.Z = (sbyte) dest[4];
+                        item.ItemID = (short)(0x4000 | (((dest[0] << 8) | dest[1]) & 0x3fff));
+                        item.X = (sbyte)dest[2];
+                        item.Y = (sbyte)dest[3];
+                        item.Z = (sbyte)dest[4];
                         dest += 5;
                         if (item.ItemID != 0x4000)
                         {
@@ -170,13 +170,12 @@
                     Label_0226:
                         while (dest < numPtr3)
                         {
-                            MultiItem item2 = new MultiItem {
-                                Flags = 1,
-                                ItemID = (short) (0x4000 | (((dest[0] << 8) | dest[1]) & 0x3fff)),
-                                X = (sbyte) dest[2],
-                                Y = (sbyte) dest[3],
-                                Z = (sbyte) num8
-                            };
+                            MultiItem item2 = new MultiItem();
+                            item2.Flags = 1;
+                            item2.ItemID = (short)(0x4000 | (((dest[0] << 8) | dest[1]) & 0x3fff));
+                            item2.X = (sbyte)dest[2];
+                            item2.Y = (sbyte)dest[3];
+                            item2.Z = (sbyte)num8;
                             dest += 4;
                             if (item2.ItemID != 0x4000)
                             {
@@ -220,18 +219,17 @@
                         int num13 = 0;
                         while (dest < numPtr3)
                         {
-                            short num14 = (short) (0x4000 | (((dest[0] << 8) | dest[1]) & 0x3fff));
+                            short num14 = (short)(0x4000 | (((dest[0] << 8) | dest[1]) & 0x3fff));
                             num13++;
                             dest += 2;
                             if (num14 != 0x4000)
                             {
-                                MultiItem item3 = new MultiItem {
-                                    Flags = 1,
-                                    ItemID = num14,
-                                    X = (short) (num10 + ((num13 - 1) / num12)),
-                                    Y = (sbyte) (num11 + ((num13 - 1) % num12)),
-                                    Z = (sbyte) num9
-                                };
+                                MultiItem item3 = new MultiItem();
+                                item3.Flags = 1;
+                                item3.ItemID = num14;
+                                item3.X = (short)(num10 + ((num13 - 1) / num12));
+                                item3.Y = (sbyte)(num11 + ((num13 - 1) % num12));
+                                item3.Z = (sbyte)num9;
                                 list.Add(item3);
                             }
                         }
@@ -247,16 +245,15 @@
             for (int i = 0; i < num; i++)
             {
                 int num4 = (buffer[num2++] << 8) | buffer[num2++];
-                int num5 = (sbyte) buffer[num2++];
-                int num6 = (sbyte) buffer[num2++];
-                int num7 = (sbyte) buffer[num2++];
-                MultiItem item = new MultiItem {
-                    Flags = 1,
-                    ItemID = (short) num4,
-                    X = (short) num5,
-                    Y = (short) num6,
-                    Z = (short) num7
-                };
+                int num5 = (sbyte)buffer[num2++];
+                int num6 = (sbyte)buffer[num2++];
+                int num7 = (sbyte)buffer[num2++];
+                MultiItem item = new MultiItem();
+                item.Flags = 1;
+                item.ItemID = (short)num4;
+                item.X = (short)num5;
+                item.Y = (short)num6;
+                item.Z = (short)num7;
                 list.Add(item);
             }
         }
@@ -289,4 +286,3 @@
         }
     }
 }
-

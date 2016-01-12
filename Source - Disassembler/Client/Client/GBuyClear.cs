@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GBuyClear : GRegion
     {
         private GBuyGump m_Owner;
@@ -17,4 +15,3 @@
         }
     }
 }
-

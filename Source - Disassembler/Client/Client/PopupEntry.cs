@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class PopupEntry
     {
         private int m_EntryID;
@@ -44,4 +42,3 @@
         }
     }
 }
-

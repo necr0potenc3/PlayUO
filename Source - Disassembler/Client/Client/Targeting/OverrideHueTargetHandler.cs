@@ -1,7 +1,6 @@
 ﻿namespace Client.Targeting
 {
     using Client;
-    using System;
 
     public class OverrideHueTargetHandler : ITargetHandler
     {
@@ -23,7 +22,7 @@
         {
             if (o is Item)
             {
-                Item removed = (Item) o;
+                Item removed = (Item)o;
                 removed.OverrideHue(this.m_Hue);
                 if ((removed.Parent != null) && (removed.Parent.Container != null))
                 {
@@ -36,7 +35,7 @@
                 }
                 else if (removed.IsEquip && (removed.EquipParent is Mobile))
                 {
-                    Mobile equipParent = (Mobile) removed.EquipParent;
+                    Mobile equipParent = (Mobile)removed.EquipParent;
                     if (equipParent.Paperdoll != null)
                     {
                         Gumps.OpenPaperdoll(equipParent, equipParent.PaperdollName, equipParent.PaperdollCanDrag);
@@ -50,4 +49,3 @@
         }
     }
 }
-

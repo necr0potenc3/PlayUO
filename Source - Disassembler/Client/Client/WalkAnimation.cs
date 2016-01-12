@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
 
     public class WalkAnimation
@@ -73,7 +72,7 @@
                 WalkAnimation current = null;
                 while (enumerator.MoveNext())
                 {
-                    current = (WalkAnimation) enumerator.Current;
+                    current = (WalkAnimation)enumerator.Current;
                 }
                 if (current != null)
                 {
@@ -85,7 +84,7 @@
             if (!m.Player)
             {
                 Engine.EquipSort(m, NewDir & 0x87);
-                m.Direction = (byte) NewDir;
+                m.Direction = (byte)NewDir;
             }
             this.m_Advance = false;
             this.m_Sync = null;
@@ -100,7 +99,7 @@
                 this.m_Y = num8;
                 int idx = (NewDir >> 7) & 1;
                 ArrayList equip = m.Equip;
-                bool mounted = (equip.Count > 0) && (((EquipEntry) equip[0]).m_Layer == Layer.Mount);
+                bool mounted = (equip.Count > 0) && (((EquipEntry)equip[0]).m_Layer == Layer.Mount);
                 if ((m.Player && Engine.GMPrivs) && ((Engine.m_WalkSpeed != 0.4f) || (Engine.m_RunSpeed != 0.2f)))
                 {
                     this.m_Duration = (idx == 0) ? Engine.m_WalkSpeed : Engine.m_RunSpeed;
@@ -132,7 +131,7 @@
             }
             if (m_Pool.Count > 0)
             {
-                WalkAnimation animation = (WalkAnimation) m_Pool.Dequeue();
+                WalkAnimation animation = (WalkAnimation)m_Pool.Dequeue();
                 animation.Initialize(m, x, y, z, dir);
                 return animation;
             }
@@ -148,7 +147,7 @@
             double normalized = this.m_Sync.Normalized;
             if (!NewConfig.SmoothWalk && (normalized != 1.0))
             {
-                switch (((int) this.m_Frames))
+                switch (((int)this.m_Frames))
                 {
                     case 1:
                         normalized = 0.0;
@@ -181,15 +180,15 @@
             }
             if (!this.m_Advance)
             {
-                xOffset = (int) (this.m_X * normalized);
-                yOffset = (int) (this.m_Y * normalized);
+                xOffset = (int)(this.m_X * normalized);
+                yOffset = (int)(this.m_Y * normalized);
             }
             else
             {
-                xOffset = -this.m_X + ((int) (this.m_X * normalized));
-                yOffset = -this.m_Y + ((int) (this.m_Y * normalized));
+                xOffset = -this.m_X + ((int)(this.m_X * normalized));
+                yOffset = -this.m_Y + ((int)(this.m_Y * normalized));
             }
-            fOffset = (int) (this.m_Frames * normalized);
+            fOffset = (int)(this.m_Frames * normalized);
             return (normalized < 1.0);
         }
 
@@ -204,17 +203,17 @@
             {
                 if (m_SyncPool.Count > 0)
                 {
-                    this.m_Sync = (TimeSync) m_SyncPool.Dequeue();
-                    this.m_Sync.Initialize((double) this.m_Duration);
+                    this.m_Sync = (TimeSync)m_SyncPool.Dequeue();
+                    this.m_Sync.Initialize((double)this.m_Duration);
                 }
                 else
                 {
-                    this.m_Sync = new TimeSync((double) this.m_Duration);
+                    this.m_Sync = new TimeSync((double)this.m_Duration);
                 }
                 this.m_Advance = ((this.m_NewDir & 7) >= 1) && ((this.m_NewDir & 7) <= 4);
                 if (this.m_Advance)
                 {
-                    this.m_Mobile.SetLocation((short) this.m_NewX, (short) this.m_NewY, (short) this.m_NewZ);
+                    this.m_Mobile.SetLocation((short)this.m_NewX, (short)this.m_NewY, (short)this.m_NewZ);
                     if (update)
                     {
                         this.m_Mobile.Update();
@@ -240,7 +239,7 @@
         {
             get
             {
-                return (int) this.m_Frames;
+                return (int)this.m_Frames;
             }
         }
 
@@ -293,4 +292,3 @@
         }
     }
 }
-

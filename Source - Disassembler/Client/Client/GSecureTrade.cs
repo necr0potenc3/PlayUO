@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GSecureTrade : GAlphaBackground
@@ -16,71 +15,61 @@
             base.m_CanDrop = true;
             base.FillAlpha = 0.5f;
             base.FillColor = 0x6080ff;
-            GBorder3D toAdd = new GBorder3D(false, 0, 0, this.Width, this.Height) {
-                FillAlpha = 0f,
-                ShouldHitTest = false
-            };
+            GBorder3D toAdd = new GBorder3D(false, 0, 0, this.Width, this.Height);
+            toAdd.FillAlpha = 0f;
+            toAdd.ShouldHitTest = false;
             base.m_Children.Add(toAdd);
-            GBorder3D borderd2 = new GBorder3D(true, 6, 6, 0x84, 0x68) {
-                FillAlpha = 0f,
-                ShouldHitTest = false
-            };
+            GBorder3D borderd2 = new GBorder3D(true, 6, 6, 0x84, 0x68);
+            borderd2.FillAlpha = 0f;
+            borderd2.ShouldHitTest = false;
             base.m_Children.Add(borderd2);
-            GBorder3D borderd3 = new GBorder3D(false, 7, 7, 130, 20) {
-                ShouldHitTest = false
-            };
+            GBorder3D borderd3 = new GBorder3D(false, 7, 7, 130, 20);
+            borderd3.ShouldHitTest = false;
             GLabel label = new GLabel(this.Truncate(myName, Engine.GetUniFont(1), borderd3.Width - 0x1c), Engine.GetUniFont(1), Hues.Load(1), 0, 0);
             borderd3.Children.Add(label);
             label.Center();
             label.X = 0x1c - label.Image.xMin;
             base.m_Children.Add(borderd3);
-            GBorder3D borderd4 = new GBorder3D(true, 0x8f, 6, 0x84, 0x68) {
-                FillAlpha = 0f,
-                ShouldHitTest = false
-            };
+            GBorder3D borderd4 = new GBorder3D(true, 0x8f, 6, 0x84, 0x68);
+            borderd4.FillAlpha = 0f;
+            borderd4.ShouldHitTest = false;
             base.m_Children.Add(borderd4);
-            GBorder3D borderd5 = new GBorder3D(false, 0x90, 7, 130, 20) {
-                ShouldHitTest = false
-            };
+            GBorder3D borderd5 = new GBorder3D(false, 0x90, 7, 130, 20);
+            borderd5.ShouldHitTest = false;
             GLabel label2 = new GLabel(this.Truncate(theirName, Engine.GetUniFont(1), borderd5.Width - 0x1c), Engine.GetUniFont(1), Hues.Load(1), 0, 0);
             borderd5.Children.Add(label2);
             label2.Center();
             label2.X = (borderd5.Width - 0x1c) - label2.Image.xMax;
             base.m_Children.Add(borderd5);
-            GAlphaBackground background = new GAlphaBackground(1, 1, 5, 0x72) {
-                ShouldHitTest = false,
-                BorderColor = 0xc0c0c0,
-                FillColor = 0xc0c0c0,
-                FillAlpha = 1f
-            };
+            GAlphaBackground background = new GAlphaBackground(1, 1, 5, 0x72);
+            background.ShouldHitTest = false;
+            background.BorderColor = 0xc0c0c0;
+            background.FillColor = 0xc0c0c0;
+            background.FillAlpha = 1f;
             base.m_Children.Add(background);
-            background = new GAlphaBackground(0x113, 1, 5, 0x72) {
-                ShouldHitTest = false,
-                BorderColor = 0xc0c0c0,
-                FillColor = 0xc0c0c0,
-                FillAlpha = 1f
-            };
+            background = new GAlphaBackground(0x113, 1, 5, 0x72);
+            background.ShouldHitTest = false;
+            background.BorderColor = 0xc0c0c0;
+            background.FillColor = 0xc0c0c0;
+            background.FillAlpha = 1f;
             base.m_Children.Add(background);
-            background = new GAlphaBackground(6, 1, 0x10d, 5) {
-                ShouldHitTest = false,
-                BorderColor = 0xc0c0c0,
-                FillColor = 0xc0c0c0,
-                FillAlpha = 1f
-            };
+            background = new GAlphaBackground(6, 1, 0x10d, 5);
+            background.ShouldHitTest = false;
+            background.BorderColor = 0xc0c0c0;
+            background.FillColor = 0xc0c0c0;
+            background.FillAlpha = 1f;
             base.m_Children.Add(background);
-            background = new GAlphaBackground(6, 110, 0x10d, 5) {
-                ShouldHitTest = false,
-                BorderColor = 0xc0c0c0,
-                FillColor = 0xc0c0c0,
-                FillAlpha = 1f
-            };
+            background = new GAlphaBackground(6, 110, 0x10d, 5);
+            background.ShouldHitTest = false;
+            background.BorderColor = 0xc0c0c0;
+            background.FillColor = 0xc0c0c0;
+            background.FillAlpha = 1f;
             base.m_Children.Add(background);
-            background = new GAlphaBackground(0x8a, 6, 5, 0x68) {
-                ShouldHitTest = false,
-                BorderColor = 0xc0c0c0,
-                FillColor = 0xc0c0c0,
-                FillAlpha = 1f
-            };
+            background = new GAlphaBackground(0x8a, 6, 5, 0x68);
+            background.ShouldHitTest = false;
+            background.BorderColor = 0xc0c0c0;
+            background.FillColor = 0xc0c0c0;
+            background.FillAlpha = 1f;
             base.m_Children.Add(background);
         }
 
@@ -123,7 +112,7 @@
             this.m_ShouldClose = false;
         }
 
-        public string Truncate(string text, IFont font, int width)
+        public string Truncate(string text, Client.IFont font, int width)
         {
             if (font.GetStringWidth(text) > width)
             {
@@ -137,4 +126,3 @@
         }
     }
 }
-

@@ -5,10 +5,11 @@
 
     public class GHtmlLabel : Gump
     {
-        private static object[,] m_ColorTable = new object[,] { 
-            { "black", 0 }, { "red", 0xff0000 }, { "lime", 0xff00 }, { "blue", 0xff }, { "yellow", 0xffff00 }, { "magenta", 0xff00ff }, { "fuchsia", 0xff00ff }, { "cyan", 0xffff }, { "aqua", 0xffff }, { "white", 0xffffff }, { "darkred", 0x7f0000 }, { "maroon", 0x7f0000 }, { "green", 0x7f00 }, { "darkgreen", 0x5a00 }, { "darkblue", 0x7f00 }, { "navy", 0x7f00 }, 
+        private static object[,] m_ColorTable = new object[,] {
+            { "black", 0 }, { "red", 0xff0000 }, { "lime", 0xff00 }, { "blue", 0xff }, { "yellow", 0xffff00 }, { "magenta", 0xff00ff }, { "fuchsia", 0xff00ff }, { "cyan", 0xffff }, { "aqua", 0xffff }, { "white", 0xffffff }, { "darkred", 0x7f0000 }, { "maroon", 0x7f0000 }, { "green", 0x7f00 }, { "darkgreen", 0x5a00 }, { "darkblue", 0x7f00 }, { "navy", 0x7f00 },
             { "darkyellow", 0x7f7f00 }, { "olive", 0x7f7f00 }, { "darkmagenta", 0x7f007f }, { "purple", 0x7f007f }, { "darkcyan", 0x7f7f }, { "teal", 0x7f7f }, { "gray", 0x7f7f7f }, { "grey", 0x7f7f7f }
-         };
+        };
+
         private int m_Height;
         private int m_Width;
 
@@ -50,9 +51,9 @@
                 string attribute;
                 string str10;
                 HtmlElement element = elements[i];
-                FontInfo info2 = (stack.Count > 0) ? ((FontInfo) stack.Peek()) : info;
-                HtmlAlignment alignment = (stack2.Count > 0) ? ((HtmlAlignment) stack2.Peek()) : HtmlAlignment.Normal;
-                string url = (stack3.Count > 0) ? ((string) stack3.Peek()) : null;
+                FontInfo info2 = (stack.Count > 0) ? ((FontInfo)stack.Peek()) : info;
+                HtmlAlignment alignment = (stack2.Count > 0) ? ((HtmlAlignment)stack2.Peek()) : HtmlAlignment.Normal;
+                string url = (stack3.Count > 0) ? ((string)stack3.Peek()) : null;
                 switch (element.Type)
                 {
                     case ElementType.Text:
@@ -61,90 +62,90 @@
                         goto Label_02F6;
 
                     case ElementType.Start:
-                    {
-                        str10 = element.Name.ToLower();
-                        if (str10 != null)
                         {
-                            str10 = string.IsInterned(str10);
-                            if (str10 == "br")
+                            str10 = element.Name.ToLower();
+                            if (str10 != null)
                             {
-                                num4 = 0;
-                                y += 0x12;
+                                str10 = string.IsInterned(str10);
+                                if (str10 == "br")
+                                {
+                                    num4 = 0;
+                                    y += 0x12;
+                                }
+                                else
+                                {
+                                    if (str10 == "u")
+                                    {
+                                        goto Label_03A3;
+                                    }
+                                    if (str10 == "i")
+                                    {
+                                        goto Label_03AC;
+                                    }
+                                    if (str10 == "a")
+                                    {
+                                        goto Label_03B7;
+                                    }
+                                    if (str10 == "basefont")
+                                    {
+                                        goto Label_03E5;
+                                    }
+                                    if (str10 == "center")
+                                    {
+                                        goto Label_048A;
+                                    }
+                                    if (str10 == "div")
+                                    {
+                                        goto Label_049C;
+                                    }
+                                }
                             }
-                            else
+                            continue;
+                        }
+                    case ElementType.End:
+                        {
+                            str10 = element.Name.ToLower();
+                            if (str10 != null)
                             {
+                                str10 = string.IsInterned(str10);
                                 if (str10 == "u")
                                 {
-                                    goto Label_03A3;
+                                    num2--;
+                                    if (num2 < 0)
+                                    {
+                                        num2 = 0;
+                                    }
                                 }
-                                if (str10 == "i")
+                                else
                                 {
-                                    goto Label_03AC;
-                                }
-                                if (str10 == "a")
-                                {
-                                    goto Label_03B7;
-                                }
-                                if (str10 == "basefont")
-                                {
-                                    goto Label_03E5;
-                                }
-                                if (str10 == "center")
-                                {
-                                    goto Label_048A;
-                                }
-                                if (str10 == "div")
-                                {
-                                    goto Label_049C;
+                                    if (str10 == "i")
+                                    {
+                                        goto Label_0610;
+                                    }
+                                    if (str10 == "a")
+                                    {
+                                        goto Label_0620;
+                                    }
+                                    if (str10 == "basefont")
+                                    {
+                                        goto Label_0634;
+                                    }
+                                    if ((str10 == "div") || (str10 == "center"))
+                                    {
+                                        goto Label_0646;
+                                    }
                                 }
                             }
+                            continue;
                         }
-                        continue;
-                    }
-                    case ElementType.End:
-                    {
-                        str10 = element.Name.ToLower();
-                        if (str10 != null)
-                        {
-                            str10 = string.IsInterned(str10);
-                            if (str10 == "u")
-                            {
-                                num2--;
-                                if (num2 < 0)
-                                {
-                                    num2 = 0;
-                                }
-                            }
-                            else
-                            {
-                                if (str10 == "i")
-                                {
-                                    goto Label_0610;
-                                }
-                                if (str10 == "a")
-                                {
-                                    goto Label_0620;
-                                }
-                                if (str10 == "basefont")
-                                {
-                                    goto Label_0634;
-                                }
-                                if ((str10 == "div") || (str10 == "center"))
-                                {
-                                    goto Label_0646;
-                                }
-                            }
-                        }
-                        continue;
-                    }
                     default:
-                    {
-                        continue;
-                    }
+                        {
+                            continue;
+                        }
                 }
             Label_00EB:
                 stringWidth = num4;
-                switch ((alignment & ((HtmlAlignment) 0xff)))
+                switch ((alignment & ((HtmlAlignment)0xff)))
                 {
                     case HtmlAlignment.Center:
                         stringWidth = info2.Font.GetStringWidth(name);
@@ -157,7 +158,7 @@
                         break;
 
                     case HtmlAlignment.Left:
-                        stringWidth = ((int) alignment) >> 8;
+                        stringWidth = ((int)alignment) >> 8;
                         break;
 
                     case HtmlAlignment.Right:
@@ -167,7 +168,7 @@
                             string[] strArray2 = Engine.WrapText(name, width, info2.Font).Split(new char[] { '\n' });
                             stringWidth = info2.Font.GetStringWidth(strArray2[0]);
                         }
-                        stringWidth = (((int) alignment) >> 8) - stringWidth;
+                        stringWidth = (((int)alignment) >> 8) - stringWidth;
                         break;
                 }
                 string[] strArray3 = name.Split(new char[] { ' ' });
@@ -239,9 +240,9 @@
                 {
                     for (int j = 0; j < m_ColorTable.GetLength(0); j++)
                     {
-                        if (str8.ToLower() == ((string) m_ColorTable[j, 0]))
+                        if (str8.ToLower() == ((string)m_ColorTable[j, 0]))
                         {
-                            color = (int) m_ColorTable[j, 1];
+                            color = (int)m_ColorTable[j, 1];
                             break;
                         }
                     }
@@ -261,7 +262,7 @@
                         try
                         {
                             int num11 = int.Parse(attribute);
-                            stack2.Push(HtmlAlignment.Left | ((HtmlAlignment) (num11 << 8)));
+                            stack2.Push(HtmlAlignment.Left | ((HtmlAlignment)(num11 << 8)));
                         }
                         catch
                         {
@@ -273,7 +274,7 @@
                         try
                         {
                             int num12 = int.Parse(attribute);
-                            stack2.Push(HtmlAlignment.Right | ((HtmlAlignment) (num12 << 8)));
+                            stack2.Push(HtmlAlignment.Right | ((HtmlAlignment)(num12 << 8)));
                         }
                         catch
                         {
@@ -289,7 +290,7 @@
                             break;
 
                         case "right":
-                            stack2.Push(HtmlAlignment.Right | ((HtmlAlignment) (width << 8)));
+                            stack2.Push(HtmlAlignment.Right | ((HtmlAlignment)(width << 8)));
                             break;
 
                         case "left":
@@ -351,4 +352,3 @@
         }
     }
 }
-

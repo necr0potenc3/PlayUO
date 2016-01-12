@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GItemList : GDragable
@@ -56,7 +55,7 @@
                 {
                     if (base.m_Children[i] is GItemListEntry)
                     {
-                        ((GItemListEntry) base.m_Children[i]).Clipper = clipper;
+                        ((GItemListEntry)base.m_Children[i]).Clipper = clipper;
                     }
                 }
                 this.m_EntryLabel.Scissor(new Clipper(x + 0x27, y + 0x6a, 0xda, 11));
@@ -118,16 +117,15 @@
                     value = this.m_xOffsetCap;
                 }
                 this.m_xOffset = value;
-                int num = (int) value;
+                int num = (int)value;
                 for (int i = 0; i < base.m_Children.Count; i++)
                 {
                     if (base.m_Children[i] is GItemListEntry)
                     {
-                        ((GItemListEntry) base.m_Children[i]).xOffset = num;
+                        ((GItemListEntry)base.m_Children[i]).xOffset = num;
                     }
                 }
             }
         }
     }
 }
-

@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class SwingSpeedInfoNode : Table2DInfoNode
     {
         private int[] m_Speeds;
@@ -28,7 +26,7 @@
             }
             int num2 = this.m_Speeds[row] * (100 + num);
             num2 /= 100;
-            int num3 = 1 + ((int) (((20000.0 / ((2 + col) * 0.5)) - (100 * num2)) / ((double) num2)));
+            int num3 = 1 + ((int)(((20000.0 / ((2 + col) * 0.5)) - (100 * num2)) / ((double)num2)));
             if (num3 < 0)
             {
                 num3 = 0;
@@ -37,4 +35,3 @@
         }
     }
 }
-

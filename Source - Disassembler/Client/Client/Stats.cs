@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class Stats
     {
         private static int m_yOffset;
@@ -25,4 +23,3 @@
         }
     }
 }
-

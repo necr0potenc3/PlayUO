@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public enum SkillName
     {
         Alchemy,
@@ -56,4 +54,3 @@
         Necromancy
     }
 }
-

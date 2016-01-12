@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class ExposerInterop : IInterop
     {
         public void AddTimer(Timer t)
@@ -147,139 +145,138 @@
                 switch (Name)
                 {
                     case "OpenedStatus":
-                        mobile.OpenedStatus = (bool) Value;
+                        mobile.OpenedStatus = (bool)Value;
                         break;
 
                     case "BigStatus":
-                        mobile.BigStatus = (bool) Value;
+                        mobile.BigStatus = (bool)Value;
                         break;
 
                     case "Weight":
-                        mobile.Weight = (int) Value;
+                        mobile.Weight = (int)Value;
                         break;
 
                     case "Gold":
-                        mobile.Gold = (int) Value;
+                        mobile.Gold = (int)Value;
                         break;
 
                     case "Gender":
-                        mobile.Gender = (byte) ((int) Value);
+                        mobile.Gender = (byte)((int)Value);
                         break;
 
                     case "CorpseSerial":
-                        mobile.CorpseSerial = (int) Value;
+                        mobile.CorpseSerial = (int)Value;
                         break;
 
                     case "Notoriety":
-                        mobile.Notoriety = (Notoriety) ((byte) ((int) Value));
+                        mobile.Notoriety = (Notoriety)((byte)((int)Value));
                         break;
 
                     case "Visible":
-                        mobile.Visible = (bool) Value;
+                        mobile.Visible = (bool)Value;
                         break;
 
                     case "OldMapX":
-                        mobile.OldMapX = (int) Value;
+                        mobile.OldMapX = (int)Value;
                         break;
 
                     case "OldMapY":
-                        mobile.OldMapY = (int) Value;
+                        mobile.OldMapY = (int)Value;
                         break;
 
                     case "Armor":
-                        mobile.Armor = (int) Value;
+                        mobile.Armor = (int)Value;
                         break;
 
                     case "Str":
-                        mobile.Str = (int) Value;
+                        mobile.Str = (int)Value;
                         break;
 
                     case "HPCur":
-                        mobile.HPCur = (int) Value;
+                        mobile.HPCur = (int)Value;
                         break;
 
                     case "HPMax":
-                        mobile.HPMax = (int) Value;
+                        mobile.HPMax = (int)Value;
                         break;
 
                     case "Dex":
-                        mobile.Dex = (int) Value;
+                        mobile.Dex = (int)Value;
                         break;
 
                     case "StamCur":
-                        mobile.StamCur = (int) Value;
+                        mobile.StamCur = (int)Value;
                         break;
 
                     case "StamMax":
-                        mobile.StamMax = (int) Value;
+                        mobile.StamMax = (int)Value;
                         break;
 
                     case "Int":
-                        mobile.Int = (int) Value;
+                        mobile.Int = (int)Value;
                         break;
 
                     case "ManaCur":
-                        mobile.ManaCur = (int) Value;
+                        mobile.ManaCur = (int)Value;
                         break;
 
                     case "ManaMax":
-                        mobile.ManaMax = (int) Value;
+                        mobile.ManaMax = (int)Value;
                         break;
 
                     case "PaperdollName":
-                        mobile.PaperdollName = (string) Value;
+                        mobile.PaperdollName = (string)Value;
                         break;
 
                     case "Flags":
-                        mobile.Flags.Value = (int) Value;
+                        mobile.Flags.Value = (int)Value;
                         break;
 
                     case "IsMoving":
-                        mobile.IsMoving = (bool) Value;
+                        mobile.IsMoving = (bool)Value;
                         break;
 
                     case "MovedTiles":
-                        mobile.MovedTiles = (int) Value;
+                        mobile.MovedTiles = (int)Value;
                         break;
 
                     case "LastWalk":
-                        mobile.LastWalk = (int) Value;
+                        mobile.LastWalk = (int)Value;
                         break;
 
                     case "Direction":
-                        mobile.Direction = (byte) ((int) Value);
+                        mobile.Direction = (byte)((int)Value);
                         break;
 
                     case "Body":
-                        mobile.Body = (short) ((int) Value);
+                        mobile.Body = (short)((int)Value);
                         break;
 
                     case "Hue":
-                        mobile.Hue = (short) ((int) Value);
+                        mobile.Hue = (short)((int)Value);
                         break;
 
                     case "X":
-                        mobile.X = (short) ((int) Value);
+                        mobile.X = (short)((int)Value);
                         break;
 
                     case "Y":
-                        mobile.Y = (short) ((int) Value);
+                        mobile.Y = (short)((int)Value);
                         break;
 
                     case "Z":
-                        mobile.Z = (short) ((int) Value);
+                        mobile.Z = (short)((int)Value);
                         break;
 
                     case "Name":
-                        mobile.Name = (string) Value;
+                        mobile.Name = (string)Value;
                         break;
 
                     case "Refresh":
-                        mobile.Refresh = (bool) Value;
+                        mobile.Refresh = (bool)Value;
                         break;
                 }
             }
         }
     }
 }
-

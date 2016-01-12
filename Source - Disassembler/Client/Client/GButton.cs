@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GButton : Gump, ITranslucent, IClickable
@@ -273,4 +272,3 @@
         }
     }
 }
-

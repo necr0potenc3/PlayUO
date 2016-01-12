@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
     using System.Text.RegularExpressions;
 
@@ -24,7 +23,7 @@
             {
                 return null;
             }
-            return (string) this.m_Attributes[name];
+            return (string)this.m_Attributes[name];
         }
 
         public static HtmlElement[] GetElements(string text)
@@ -55,7 +54,7 @@
                 index++;
                 list.Add(Parse(text.Substring(startIndex, index - startIndex)));
             }
-            return (HtmlElement[]) list.ToArray(typeof(HtmlElement));
+            return (HtmlElement[])list.ToArray(typeof(HtmlElement));
         }
 
         public static HtmlElement Parse(string ele)
@@ -115,4 +114,3 @@
         }
     }
 }
-

@@ -85,7 +85,7 @@
 
         public short ReadInt16()
         {
-            return (short) ((this.m_Data[this.m_Index++] << 8) | this.m_Data[this.m_Index++]);
+            return (short)((this.m_Data[this.m_Index++] << 8) | this.m_Data[this.m_Index++]);
         }
 
         public int ReadInt32()
@@ -95,7 +95,7 @@
 
         public sbyte ReadSByte()
         {
-            return (sbyte) this.m_Data[this.m_Index++];
+            return (sbyte)this.m_Data[this.m_Index++];
         }
 
         public unsafe string ReadString()
@@ -109,8 +109,8 @@
                 while (((numPtr4 = numPtr3) < numPtr2) && (*(numPtr3++) != 0))
                 {
                 }
-                this.m_Index = (int) (((long) ((numPtr4 - numRef) / 1)) + 1L);
-                return new string((sbyte*) numPtr, 0, (int) ((long) ((numPtr4 - numPtr) / 1)));
+                this.m_Index = (int)(((long)((numPtr4 - numRef) / 1)) + 1L);
+                return new string((sbyte*)numPtr, 0, (int)((long)((numPtr4 - numPtr) / 1)));
             }
         }
 
@@ -130,18 +130,18 @@
                 {
                 }
                 this.m_Index += fixedLength;
-                return new string((sbyte*) numPtr, 0, (int) ((long) ((numPtr4 - numPtr) / 1)));
+                return new string((sbyte*)numPtr, 0, (int)((long)((numPtr4 - numPtr) / 1)));
             }
         }
 
         public ushort ReadUInt16()
         {
-            return (ushort) ((this.m_Data[this.m_Index++] << 8) | this.m_Data[this.m_Index++]);
+            return (ushort)((this.m_Data[this.m_Index++] << 8) | this.m_Data[this.m_Index++]);
         }
 
         public uint ReadUInt32()
         {
-            return (uint) ((((this.m_Data[this.m_Index++] << 0x18) | (this.m_Data[this.m_Index++] << 0x10)) | (this.m_Data[this.m_Index++] << 8)) | this.m_Data[this.m_Index++]);
+            return (uint)((((this.m_Data[this.m_Index++] << 0x18) | (this.m_Data[this.m_Index++] << 0x10)) | (this.m_Data[this.m_Index++] << 8)) | this.m_Data[this.m_Index++]);
         }
 
         public unsafe string ReadUnicodeLEString()
@@ -155,8 +155,8 @@
                 while (((numPtr4 = numPtr3) < numPtr2) && ((*(numPtr3++) | *(numPtr3++)) != 0))
                 {
                 }
-                this.m_Index = (int) (((long) ((numPtr4 - numRef) / 1)) + 2L);
-                return new string((sbyte*) numPtr, 0, (int) ((long) ((numPtr4 - numPtr) / 1)), Encoding.Unicode);
+                this.m_Index = (int)(((long)((numPtr4 - numRef) / 1)) + 2L);
+                return new string((sbyte*)numPtr, 0, (int)((long)((numPtr4 - numPtr) / 1)), Encoding.Unicode);
             }
         }
 
@@ -171,8 +171,8 @@
                 while (((numPtr4 = numPtr3) < numPtr2) && ((*(numPtr3++) | *(numPtr3++)) != 0))
                 {
                 }
-                this.m_Index = (int) (((long) ((numPtr4 - numRef) / 1)) + 2L);
-                return new string((sbyte*) numPtr, 0, (int) ((long) ((numPtr4 - numPtr) / 1)), Encoding.BigEndianUnicode);
+                this.m_Index = (int)(((long)((numPtr4 - numRef) / 1)) + 2L);
+                return new string((sbyte*)numPtr, 0, (int)((long)((numPtr4 - numPtr) / 1)), Encoding.BigEndianUnicode);
             }
         }
 
@@ -192,7 +192,7 @@
                 {
                 }
                 this.m_Index += fixedLength << 1;
-                return new string((sbyte*) numPtr, 0, (int) ((long) ((numPtr4 - numPtr) / 1)), Encoding.BigEndianUnicode);
+                return new string((sbyte*)numPtr, 0, (int)((long)((numPtr4 - numPtr) / 1)), Encoding.BigEndianUnicode);
             }
         }
 
@@ -208,8 +208,8 @@
                 {
                 }
                 int index = this.m_Index;
-                this.m_Index = (int) (((long) ((numPtr4 - numRef) / 1)) + 1L);
-                return Encoding.UTF8.GetString(this.m_Data, index, (int) ((long) ((numPtr4 - numPtr) / 1)));
+                this.m_Index = (int)(((long)((numPtr4 - numRef) / 1)) + 1L);
+                return Encoding.UTF8.GetString(this.m_Data, index, (int)((long)((numPtr4 - numPtr) / 1)));
             }
         }
 
@@ -323,4 +323,3 @@
         }
     }
 }
-

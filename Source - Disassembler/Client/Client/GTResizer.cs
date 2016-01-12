@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GTResizer : Gump
@@ -28,13 +27,13 @@
         {
             if (Gumps.Capture == this)
             {
-                Point point = ((Gump) this.m_Target).PointToScreen(new Point(0, this.m_Target.Height));
+                Point point = ((Gump)this.m_Target).PointToScreen(new Point(0, this.m_Target.Height));
                 Point point2 = base.PointToScreen(new Point(X, Y));
                 int num = point.Y - (point2.Y - this.m_yOffset);
                 if ((num >= this.m_Target.MinHeight) && (num <= this.m_Target.MaxHeight))
                 {
                     this.m_Target.Height = num;
-                    ((Gump) this.m_Target).Y = point2.Y - this.m_yOffset;
+                    ((Gump)this.m_Target).Y = point2.Y - this.m_yOffset;
                     Engine.Redraw();
                 }
             }
@@ -62,4 +61,3 @@
         }
     }
 }
-

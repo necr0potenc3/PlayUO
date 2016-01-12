@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GCharacterProfile : GBackground
     {
         public GCharacterProfile(Mobile owner, string header, string body, string footer) : base(0x13c2, 100, 100, 0x19, 0x19, true)
@@ -71,4 +69,3 @@
         }
     }
 }
-

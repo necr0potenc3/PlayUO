@@ -1,8 +1,6 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
-    using System.Reflection;
 
     public sealed class GumpList
     {
@@ -44,7 +42,7 @@
         {
             while (this.m_List.Count > 0)
             {
-                Gump g = (Gump) this.m_List[0];
+                Gump g = (Gump)this.m_List[0];
                 Gumps.Destroy(g);
                 this.m_List.Remove(g);
             }
@@ -122,7 +120,7 @@
                 }
                 else
                 {
-                    this.m_Array = (Gump[]) this.m_List.ToArray(typeof(Gump));
+                    this.m_Array = (Gump[])this.m_List.ToArray(typeof(Gump));
                 }
             }
             return this.m_Array;
@@ -140,9 +138,8 @@
         {
             get
             {
-                return (Gump) this.m_List[index];
+                return (Gump)this.m_List[index];
             }
         }
     }
 }
-

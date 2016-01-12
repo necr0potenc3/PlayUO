@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
 
     public class MiniHealthEntry
@@ -30,7 +29,7 @@
             }
             if (m_Pool.Count > 0)
             {
-                MiniHealthEntry entry = (MiniHealthEntry) m_Pool.Dequeue();
+                MiniHealthEntry entry = (MiniHealthEntry)m_Pool.Dequeue();
                 entry.m_X = x;
                 entry.m_Y = y;
                 entry.m_Mobile = m;
@@ -40,4 +39,3 @@
         }
     }
 }
-

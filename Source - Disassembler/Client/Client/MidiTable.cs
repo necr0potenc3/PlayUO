@@ -26,12 +26,12 @@
 
         private void Default()
         {
-            object[,] objArray = new object[,] { 
-                { 0, "oldult01.mid" }, { 1, "create1.mid" }, { 2, "draglift.mid" }, { 3, "oldult02.mid" }, { 4, "oldult03.mid" }, { 5, "oldult04.mid" }, { 6, "oldult05.mid" }, { 7, "oldult06.mid" }, { 8, "stones2.mid" }, { 9, "britain1.mid" }, { 10, "britain2.mid" }, { 11, "bucsden.mid" }, { 12, "jhelom.mid" }, { 13, "lbcastle.mid" }, { 14, "linelle.mid" }, { 15, "magincia.mid" }, 
-                { 0x10, "minoc.mid" }, { 0x11, "ocllo.mid" }, { 0x12, "samlethe.mid" }, { 0x13, "serpents.mid" }, { 20, "skarabra.mid" }, { 0x15, "trinsic.mid" }, { 0x16, "vesper.mid" }, { 0x17, "wind.mid" }, { 0x18, "yew.mid" }, { 0x19, "cave01.mid" }, { 0x1a, "dungeon9.mid" }, { 0x1b, "forest_a.mid" }, { 0x1c, "intown01.mid" }, { 0x1d, "jungle_a.mid" }, { 30, "mountn_a.mid" }, { 0x1f, "plains_a.mid" }, 
-                { 0x20, "sailing.mid" }, { 0x21, "swamp_a.mid" }, { 0x22, "tavern01.mid" }, { 0x23, "tavern02.mid" }, { 0x24, "tavern03.mid" }, { 0x25, "tavern04.mid" }, { 0x26, "combat1.mid" }, { 0x27, "combat2.mid" }, { 40, "combat3.mid" }, { 0x29, "approach.mid" }, { 0x2a, "death.mid" }, { 0x2b, "victory.mid" }, { 0x2c, "btcastle.mid" }, { 0x2d, "nujelm.mid" }, { 0x2e, "dungeon2.mid" }, { 0x2f, "cove.mid" }, 
+            object[,] objArray = new object[,] {
+                { 0, "oldult01.mid" }, { 1, "create1.mid" }, { 2, "draglift.mid" }, { 3, "oldult02.mid" }, { 4, "oldult03.mid" }, { 5, "oldult04.mid" }, { 6, "oldult05.mid" }, { 7, "oldult06.mid" }, { 8, "stones2.mid" }, { 9, "britain1.mid" }, { 10, "britain2.mid" }, { 11, "bucsden.mid" }, { 12, "jhelom.mid" }, { 13, "lbcastle.mid" }, { 14, "linelle.mid" }, { 15, "magincia.mid" },
+                { 0x10, "minoc.mid" }, { 0x11, "ocllo.mid" }, { 0x12, "samlethe.mid" }, { 0x13, "serpents.mid" }, { 20, "skarabra.mid" }, { 0x15, "trinsic.mid" }, { 0x16, "vesper.mid" }, { 0x17, "wind.mid" }, { 0x18, "yew.mid" }, { 0x19, "cave01.mid" }, { 0x1a, "dungeon9.mid" }, { 0x1b, "forest_a.mid" }, { 0x1c, "intown01.mid" }, { 0x1d, "jungle_a.mid" }, { 30, "mountn_a.mid" }, { 0x1f, "plains_a.mid" },
+                { 0x20, "sailing.mid" }, { 0x21, "swamp_a.mid" }, { 0x22, "tavern01.mid" }, { 0x23, "tavern02.mid" }, { 0x24, "tavern03.mid" }, { 0x25, "tavern04.mid" }, { 0x26, "combat1.mid" }, { 0x27, "combat2.mid" }, { 40, "combat3.mid" }, { 0x29, "approach.mid" }, { 0x2a, "death.mid" }, { 0x2b, "victory.mid" }, { 0x2c, "btcastle.mid" }, { 0x2d, "nujelm.mid" }, { 0x2e, "dungeon2.mid" }, { 0x2f, "cove.mid" },
                 { 0x30, "moonglow.mid" }
-             };
+            };
             int length = objArray.GetLength(0);
             this.m_Entries = new Hashtable(length);
             for (int i = 0; i < length; i++)
@@ -172,13 +172,12 @@
             {
                 this.LoadMP3Table();
             }
-            string str = (string) this.m_Overwrite[midiID];
+            string str = (string)this.m_Overwrite[midiID];
             if (str == null)
             {
-                str = (string) this.m_Entries[midiID];
+                str = (string)this.m_Entries[midiID];
             }
             return str;
         }
     }
 }
-

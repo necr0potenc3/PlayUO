@@ -23,11 +23,11 @@
         private static void ChangeCircle_OnClick(Gump sender)
         {
             Gump parent = sender.Parent;
-            Item tag = (Item) parent.GetTag("Container");
+            Item tag = (Item)parent.GetTag("Container");
             object obj2 = sender.GetTag("Circle");
             if (tag != null)
             {
-                int circle = (obj2 == null) ? 0 : ((int) obj2);
+                int circle = (obj2 == null) ? 0 : ((int)obj2);
                 int x = parent.X;
                 int y = parent.Y;
                 Gumps.Destroy(parent);
@@ -327,7 +327,7 @@
                     {
                         IntPtr ptr;
                         GSpellName name = new GSpellName(container.SpellbookOffset + i, spellByID.Name, Engine.GetFont(9), Hues.Load(0x288), Hues.Load(0x28b), 0x3e + ((num9 & 1) * 0xa3), numArray2[num9 & 1]);
-                        numArray2[(int) (ptr = (IntPtr) (num9 & 1))] = numArray2[(int) ptr] + 15;
+                        numArray2[(int)(ptr = (IntPtr)(num9 & 1))] = numArray2[(int)ptr] + 15;
                         string str2 = string.Format("{0}\n", spellByID.Name);
                         StringBuilder builder = new StringBuilder();
                         builder.Append(spellByID.Name);
@@ -340,7 +340,7 @@
                         for (int n = 0; n < spellByID.Reagents.Count; n++)
                         {
                             builder.Append('\n');
-                            Reagent reagent = (Reagent) spellByID.Reagents[n];
+                            Reagent reagent = (Reagent)spellByID.Reagents[n];
                             builder.Append(reagent.Name);
                         }
                         if (spellByID.Tithing > 0)
@@ -423,10 +423,9 @@
                 if ((mb & MouseButtons.Left) != MouseButtons.None)
                 {
                     base.m_Parent.Visible = false;
-                    Gumps.Desktop.Children.Add(new GSpellbookIcon(base.m_Parent, (Item) base.m_Parent.GetTag("Container")));
+                    Gumps.Desktop.Children.Add(new GSpellbookIcon(base.m_Parent, (Item)base.m_Parent.GetTag("Container")));
                 }
             }
         }
     }
 }
-

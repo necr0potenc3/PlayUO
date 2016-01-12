@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GTextButton : GLabel
@@ -11,7 +10,7 @@
         private Client.OnHighlight m_OnHighlight;
         private int m_State;
 
-        public GTextButton(string text, IFont font, IHue defaultHue, IHue focusHue, int x, int y, Client.OnClick onClick) : base(x, y)
+        public GTextButton(string text, Client.IFont font, IHue defaultHue, IHue focusHue, int x, int y, Client.OnClick onClick) : base(x, y)
         {
             this.m_CanHitTest = true;
             this.m_Hues = new IHue[] { defaultHue, focusHue };
@@ -157,4 +156,3 @@
         }
     }
 }
-

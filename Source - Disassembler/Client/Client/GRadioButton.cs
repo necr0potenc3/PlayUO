@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
     using System.Windows.Forms;
 
@@ -60,20 +59,20 @@
                         stack.Push((this.m_ParentOverride != null) ? this.m_ParentOverride : base.m_Parent);
                         while (stack.Count > 0)
                         {
-                            gump = (Gump) stack.Pop();
-                            foreach (Gump gump in gump.Children.ToArray())
+                            Gump gump = (Gump)stack.Pop();
+                            foreach (Gump gump1 in gump.Children.ToArray())
                             {
-                                if ((gump is GRadioButton) && (gump != this))
+                                if ((gump1 is GRadioButton) && (gump1 != this))
                                 {
-                                    GRadioButton button = (GRadioButton) gump;
+                                    GRadioButton button = (GRadioButton)gump1;
                                     if (button.State)
                                     {
                                         button.State = false;
                                     }
                                 }
-                                if (gump.Children.Count > 0)
+                                if (gump1.Children.Count > 0)
                                 {
-                                    stack.Push(gump);
+                                    stack.Push(gump1);
                                 }
                             }
                         }
@@ -83,4 +82,3 @@
         }
     }
 }
-

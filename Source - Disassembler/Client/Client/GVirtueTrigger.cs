@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GVirtueTrigger : GClickable
     {
         private Mobile m_Mobile;
@@ -18,4 +16,3 @@
         }
     }
 }
-

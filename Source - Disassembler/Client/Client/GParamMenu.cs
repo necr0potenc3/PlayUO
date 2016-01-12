@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GParamMenu : GMenuItem
     {
         private Client.Action m_Action;
@@ -39,9 +37,9 @@
                     }
                     if (parent is GMacroEditorPanel)
                     {
-                        Macro macro = ((GMacroEditorPanel) parent).Macro;
+                        Macro macro = ((GMacroEditorPanel)parent).Macro;
                         macro.AddAction(new Client.Action(string.Format("{0} {1}", this.m_Handler.Action, param)));
-                        ((GMacroEditorForm) parent.Parent.Parent).Current = macro;
+                        ((GMacroEditorForm)parent.Parent.Parent).Current = macro;
                     }
                 }
                 else
@@ -50,7 +48,7 @@
                     GMenuItem item = this;
                     while (item.Parent is GMenuItem)
                     {
-                        item = (GMenuItem) item.Parent;
+                        item = (GMenuItem)item.Parent;
                     }
                     item.Text = this.m_Param.Name;
                 }
@@ -82,4 +80,3 @@
         }
     }
 }
-

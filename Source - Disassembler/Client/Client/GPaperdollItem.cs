@@ -91,7 +91,7 @@
                         int num3 = -3;
                         while (num3 <= 3)
                         {
-                            if ((((((int) (Math.Sqrt((double) ((num * num) + (num3 * num3))) + 0.5)) <= 3) && ((X + num) >= 0)) && (((X + num) < this.m_Width) && ((Y + num3) >= 0))) && (((Y + num3) < this.m_Height) && this.m_Image.HitTest(X + num, Y + num3)))
+                            if ((((((int)(Math.Sqrt((double)((num * num) + (num3 * num3))) + 0.5)) <= 3) && ((X + num) >= 0)) && (((X + num) < this.m_Width) && ((Y + num3) >= 0))) && (((Y + num3) < this.m_Height) && this.m_Image.HitTest(X + num, Y + num3)))
                             {
                                 return true;
                             }
@@ -129,7 +129,7 @@
                 Gump gump = this.m_Item.OnBeginDrag();
                 if (gump.GetType() == typeof(GDragAmount))
                 {
-                    ((GDragAmount) gump).ToDestroy = this;
+                    ((GDragAmount)gump).ToDestroy = this;
                 }
                 else
                 {
@@ -163,7 +163,7 @@
         {
             if (base.Tooltip != null)
             {
-                ((ItemTooltip) base.Tooltip).Gump = null;
+                ((ItemTooltip)base.Tooltip).Gump = null;
             }
         }
 
@@ -281,4 +281,3 @@
         }
     }
 }
-

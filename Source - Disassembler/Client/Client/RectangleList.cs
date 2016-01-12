@@ -2,7 +2,6 @@
 {
     using System;
     using System.Drawing;
-    using System.Reflection;
 
     public class RectangleList
     {
@@ -157,4 +156,3 @@
         }
     }
 }
-

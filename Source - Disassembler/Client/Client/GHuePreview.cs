@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GHuePreview : Gump
     {
         private int[] m_Colors;
@@ -19,7 +17,7 @@
             this.m_Solid = Solid;
             if (!Solid)
             {
-                this.m_xRun = 31f / ((float) Width);
+                this.m_xRun = 31f / ((float)Width);
                 this.m_Colors = new int[0x20];
                 for (int i = 0; i < 0x20; i++)
                 {
@@ -27,9 +25,9 @@
                     int num3 = (num2 >> 10) & 0x1f;
                     int num4 = (num2 >> 5) & 0x1f;
                     int num5 = num2 & 0x1f;
-                    num3 = (int) (num3 * 8.225806f);
-                    num4 = (int) (num4 * 8.225806f);
-                    num5 = (int) (num5 * 8.225806f);
+                    num3 = (int)(num3 * 8.225806f);
+                    num4 = (int)(num4 * 8.225806f);
+                    num5 = (int)(num5 * 8.225806f);
                     this.m_Colors[i] = ((num3 << 0x10) | (num4 << 8)) | num5;
                 }
             }
@@ -39,9 +37,9 @@
                 int num8 = (num7 >> 10) & 0x1f;
                 int num9 = (num7 >> 5) & 0x1f;
                 int num10 = num7 & 0x1f;
-                num8 = (int) (num8 * 8.225806f);
-                num9 = (int) (num9 * 8.225806f);
-                num10 = (int) (num10 * 8.225806f);
+                num8 = (int)(num8 * 8.225806f);
+                num9 = (int)(num9 * 8.225806f);
+                num10 = (int)(num10 * 8.225806f);
                 int num11 = ((num8 << 0x10) | (num9 << 8)) | num10;
                 this.m_Colors = new int[] { num11 };
             }
@@ -83,7 +81,7 @@
                     this.m_Hue = value;
                     if (!this.m_Solid)
                     {
-                        this.m_xRun = 31f / ((float) this.Width);
+                        this.m_xRun = 31f / ((float)this.Width);
                         this.m_Colors = new int[0x20];
                         for (int i = 0; i < 0x20; i++)
                         {
@@ -91,9 +89,9 @@
                             int num3 = (num2 >> 10) & 0x1f;
                             int num4 = (num2 >> 5) & 0x1f;
                             int num5 = num2 & 0x1f;
-                            num3 = (int) (num3 * 8.225806f);
-                            num4 = (int) (num4 * 8.225806f);
-                            num5 = (int) (num5 * 8.225806f);
+                            num3 = (int)(num3 * 8.225806f);
+                            num4 = (int)(num4 * 8.225806f);
+                            num5 = (int)(num5 * 8.225806f);
                             this.m_Colors[i] = ((num3 << 0x10) | (num4 << 8)) | num5;
                         }
                     }
@@ -103,9 +101,9 @@
                         int num8 = (num7 >> 10) & 0x1f;
                         int num9 = (num7 >> 5) & 0x1f;
                         int num10 = num7 & 0x1f;
-                        num8 = (int) (num8 * 8.225806f);
-                        num9 = (int) (num9 * 8.225806f);
-                        num10 = (int) (num10 * 8.225806f);
+                        num8 = (int)(num8 * 8.225806f);
+                        num9 = (int)(num9 * 8.225806f);
+                        num10 = (int)(num10 * 8.225806f);
                         int num11 = ((num8 << 0x10) | (num9 << 8)) | num10;
                         this.m_Colors = new int[] { num11 };
                     }
@@ -122,4 +120,3 @@
         }
     }
 }
-

@@ -1,7 +1,6 @@
 ﻿namespace Client.Targeting
 {
     using Client;
-    using System;
 
     public class StackTargetHandler : ITargetHandler
     {
@@ -14,7 +13,7 @@
         {
             if (o is Item)
             {
-                Item item = (Item) o;
+                Item item = (Item)o;
                 Mobile player = World.Player;
                 if (player != null)
                 {
@@ -48,4 +47,3 @@
         }
     }
 }
-

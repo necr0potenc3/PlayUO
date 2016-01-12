@@ -4,7 +4,6 @@
     using System.Collections;
     using System.Drawing;
     using System.IO;
-    using System.Runtime.InteropServices;
     using System.Windows.Forms;
 
     public sealed class Gumps
@@ -22,7 +21,7 @@
         private static Gump m_Modal;
         private Hashtable m_Objects;
         private static Gump m_StartDrag;
-        private static Point m_StartDragPoint;
+        private static Client.Point m_StartDragPoint;
         private Stream m_Stream;
         private static GTextBox m_TextFocus;
         private static TimeDelay m_TipDelay;
@@ -53,7 +52,7 @@
                     this.m_Index = new Entry3D[num];
                     fixed (Entry3D* entrydRef = this.m_Index)
                     {
-                        Engine.NativeRead((FileStream) reader.BaseStream, (void*) entrydRef, num * 12);
+                        Engine.NativeRead((FileStream)reader.BaseStream, (void*)entrydRef, num * 12);
                     }
                     reader.Close();
                     return;
@@ -61,12 +60,12 @@
                 reader.Close();
             }
             FileStream fs = new FileStream(Engine.FileManager.ResolveMUL(Files.GumpIdx), FileMode.Open, FileAccess.Read, FileShare.Read);
-            int num2 = (int) (fs.Length / 12L);
+            int num2 = (int)(fs.Length / 12L);
             int num3 = num2;
             this.m_Index = new Entry3D[num2];
             fixed (Entry3D* entrydRef2 = this.m_Index)
             {
-                Engine.NativeRead(fs, (void*) entrydRef2, num2 * 12);
+                Engine.NativeRead(fs, (void*)entrydRef2, num2 * 12);
             }
             fs.Close();
             BinaryReader reader2 = new BinaryReader(Engine.FileManager.OpenMUL(Files.Verdata));
@@ -93,7 +92,7 @@
             writer.Write(num3);
             fixed (Entry3D* entrydRef3 = this.m_Index)
             {
-                Engine.NativeWrite((FileStream) writer.BaseStream, (void*) entrydRef3, num3 * 12);
+                Engine.NativeWrite((FileStream)writer.BaseStream, (void*)entrydRef3, num3 * 12);
             }
             writer.Flush();
             writer.Close();
@@ -161,21 +160,21 @@
                 }
                 if ((g.m_Restore && (g.GUID != null)) && (g.GUID.Length > 0))
                 {
-                    m_ToRestore[g.GUID] = new Point(g.X, g.Y);
+                    m_ToRestore[g.GUID] = new Client.Point(g.X, g.Y);
                 }
                 if (g.HasTag("Dispose"))
                 {
-                    switch (((string) g.GetTag("Dispose")))
+                    switch (((string)g.GetTag("Dispose")))
                     {
                         case "Spellbook":
-                        {
-                            Item tag = (Item) g.GetTag("Container");
-                            if (tag != null)
                             {
-                                tag.OpenSB = false;
+                                Item tag = (Item)g.GetTag("Container");
+                                if (tag != null)
+                                {
+                                    tag.OpenSB = false;
+                                }
+                                break;
                             }
-                            break;
-                        }
                         case "Modal":
                             m_Modal = null;
                             break;
@@ -192,7 +191,7 @@
 
         public void DisplayObject(string Name)
         {
-            m_Desktop.Children.Add((Gump) this.m_Objects[Name]);
+            m_Desktop.Children.Add((Gump)this.m_Objects[Name]);
         }
 
         public void Dispose()
@@ -201,7 +200,7 @@
             stack.Push(m_Desktop);
             while (stack.Count > 0)
             {
-                Gump gump = (Gump) stack.Pop();
+                Gump gump = (Gump)stack.Pop();
                 if (gump != null)
                 {
                     GumpList children = gump.Children;
@@ -258,7 +257,7 @@
         {
             if (m_Capture != null)
             {
-                Point point = m_Capture.PointToClient(new Point(X, Y));
+                Client.Point point = m_Capture.PointToClient(new Client.Point(X, Y));
                 m_Capture.OnDoubleClick(point.X, point.Y);
                 return true;
             }
@@ -274,7 +273,7 @@
             if (m_Desktop != null)
             {
                 m_Desktop.Render(0, 0);
-                if ((((m_LastOver != null) && (m_LastOver.Tooltip != null)) && ((m_TipDelay != null) && m_TipDelay.Elapsed)) && Cursor.Visible)
+                if ((((m_LastOver != null) && (m_LastOver.Tooltip != null)) && ((m_TipDelay != null) && m_TipDelay.Elapsed)) && Client.Cursor.Visible)
                 {
                     Gump gump = m_LastOver.Tooltip.GetGump();
                     if (gump != null)
@@ -287,7 +286,7 @@
                         {
                             if (flag2)
                             {
-                                x = (Engine.m_xMouse + Cursor.Width) + 2;
+                                x = (Engine.m_xMouse + Client.Cursor.Width) + 2;
                             }
                             else
                             {
@@ -298,7 +297,7 @@
                         {
                             if (flag)
                             {
-                                y = (Engine.m_yMouse + Cursor.Height) + 2;
+                                y = (Engine.m_yMouse + Client.Cursor.Height) + 2;
                             }
                             else
                             {
@@ -333,7 +332,7 @@
             stack.Push(m_Desktop);
             while (stack.Count > 0)
             {
-                Gump gump = (Gump) stack.Pop();
+                Gump gump = (Gump)stack.Pop();
                 if (gump.GUID == GUID)
                 {
                     return gump;
@@ -351,7 +350,7 @@
         {
             if (m_Capture != null)
             {
-                Point point = m_Capture.PointToClient(new Point(x, y));
+                Client.Point point = m_Capture.PointToClient(new Client.Point(x, y));
                 return new object[] { m_Capture, point };
             }
             if ((m_Desktop == null) || (m_Desktop.Children.Count == 0))
@@ -486,23 +485,23 @@
                     int count = dockers.Count;
                     for (int i = 0; i < count; i++)
                     {
-                        Point point = new Point((Point) dockers[i], g.X, g.Y);
+                        Client.Point point = new Client.Point((Client.Point)dockers[i], g.X, g.Y);
                         int num3 = m_Desktop.Children.Count;
                         for (int j = 0; j < num3; j++)
                         {
                             if (((m_Desktop.Children[j] != null) && (m_Desktop.Children[j] != g)) && (m_Desktop.Children[j].GetType() == typeof(GDragable)))
                             {
-                                ArrayList list2 = ((GDragable) m_Desktop.Children[j]).Dockers;
-                                Point[] pointArray = (Point[]) list2.ToArray(typeof(Point));
+                                ArrayList list2 = ((GDragable)m_Desktop.Children[j]).Dockers;
+                                Client.Point[] pointArray = (Client.Point[])list2.ToArray(typeof(Client.Point));
                                 int num5 = list2.Count;
                                 for (int k = 0; k < num5; k++)
                                 {
-                                    pointArray[k] = new Point(pointArray[k], m_Desktop.Children[j].X, m_Desktop.Children[j].Y);
+                                    pointArray[k] = new Client.Point(pointArray[k], m_Desktop.Children[j].X, m_Desktop.Children[j].Y);
                                     if (point == pointArray[k])
                                     {
-                                        if (((GDragable) m_Desktop.Children[j]).Link(g, k, i))
+                                        if (((GDragable)m_Desktop.Children[j]).Link(g, k, i))
                                         {
-                                            LinkDocked((GDragable) m_Desktop.Children[j]);
+                                            LinkDocked((GDragable)m_Desktop.Children[j]);
                                         }
                                         break;
                                     }
@@ -557,8 +556,8 @@
 
         public static void MessageBoxOk_OnClick(Gump Sender)
         {
-            Gump tag = (Gump) Sender.GetTag("Dialog");
-            OnClick click = (OnClick) Sender.GetTag("ClickHandler");
+            Gump tag = (Gump)Sender.GetTag("Dialog");
+            OnClick click = (OnClick)Sender.GetTag("ClickHandler");
             if (click != null)
             {
                 click(Sender);
@@ -573,7 +572,7 @@
         {
             if (m_Capture != null)
             {
-                Point point = m_Capture.PointToClient(new Point(X, Y));
+                Client.Point point = m_Capture.PointToClient(new Client.Point(X, Y));
                 m_Capture.OnMouseDown(point.X, point.Y, mb);
                 Focus = m_Capture;
                 return true;
@@ -603,7 +602,7 @@
         {
             if (m_Capture != null)
             {
-                Point point = m_Capture.PointToClient(new Point(X, Y));
+                Client.Point point = m_Capture.PointToClient(new Client.Point(X, Y));
                 if (m_LastOver != m_Capture)
                 {
                     if (m_LastOver != null)
@@ -640,7 +639,7 @@
                 {
                     y = Engine.ScreenHeight - m_Drag.m_DragClipY;
                 }
-                Point point2 = m_Drag.Parent.PointToClient(new Point(x, y));
+                Client.Point point2 = m_Drag.Parent.PointToClient(new Client.Point(x, y));
                 m_Drag.X = point2.X;
                 m_Drag.Y = point2.Y;
                 m_Drag.OnDragMove();
@@ -671,7 +670,7 @@
                     m_LastOver = m_Drag;
                     if (m_LastOver != null)
                     {
-                        point2 = m_LastOver.PointToClient(new Point(X, Y));
+                        point2 = m_LastOver.PointToClient(new Client.Point(X, Y));
                         m_LastOver.OnMouseEnter(point2.X, point2.Y, mb);
                     }
                 }
@@ -705,7 +704,7 @@
                     m_LastOver = m_Drag;
                     if (m_LastOver != null)
                     {
-                        Point p = new Point(X, Y);
+                        Client.Point p = new Client.Point(X, Y);
                         p = m_LastOver.PointToClient(p);
                         m_LastOver.OnMouseEnter(p.X, p.Y, mb);
                     }
@@ -725,13 +724,13 @@
                     m_LastOver = m_Drag;
                     if (m_LastOver != null)
                     {
-                        Point point4 = new Point(X, Y);
+                        Client.Point point4 = new Client.Point(X, Y);
                         point4 = m_LastOver.PointToClient(point4);
                         m_LastOver.OnMouseEnter(point4.X, point4.Y, mb);
                     }
                 }
             }
-            else if ((((startDrag == m_LastOver) && (startDrag != null)) && (startDrag.m_CanDrag && !startDrag.m_IsDragging)) && ((!startDrag.m_QuickDrag && (mb == MouseButtons.Left)) && ((m_StartDragPoint ^ new Point(X, Y)) >= 2)))
+            else if ((((startDrag == m_LastOver) && (startDrag != null)) && (startDrag.m_CanDrag && !startDrag.m_IsDragging)) && ((!startDrag.m_QuickDrag && (mb == MouseButtons.Left)) && ((m_StartDragPoint ^ new Client.Point(X, Y)) >= 2)))
             {
                 m_Drag = startDrag;
                 if (m_LastOver != m_Drag)
@@ -743,7 +742,7 @@
                     m_LastOver = m_Drag;
                     if (m_LastOver != null)
                     {
-                        Point point5 = new Point(X, Y);
+                        Client.Point point5 = new Client.Point(X, Y);
                         point5 = m_LastOver.PointToClient(point5);
                         m_LastOver.OnMouseEnter(point5.X, point5.Y, mb);
                     }
@@ -763,7 +762,7 @@
                     m_LastOver = m_Drag;
                     if (m_LastOver != null)
                     {
-                        Point point6 = new Point(X, Y);
+                        Client.Point point6 = new Client.Point(X, Y);
                         point6 = m_LastOver.PointToClient(point6);
                         m_LastOver.OnMouseEnter(point6.X, point6.Y, mb);
                     }
@@ -777,7 +776,7 @@
             m_StartDrag = null;
             if (m_Capture != null)
             {
-                Point point = m_Capture.PointToClient(new Point(X, Y));
+                Client.Point point = m_Capture.PointToClient(new Client.Point(X, Y));
                 m_Capture.OnMouseUp(point.X, point.Y, mb);
                 return true;
             }
@@ -830,7 +829,7 @@
                 bool flag3 = flag && (m_Drag == m.Paperdoll);
                 int num = flag3 ? m_Drag.m_OffsetX : 0;
                 int num2 = flag3 ? m_Drag.m_OffsetY : 0;
-                int index = flag ? m.Paperdoll.Parent.Children.IndexOf(m.Paperdoll) : -1;
+                int num3 = flag ? m.Paperdoll.Parent.Children.IndexOf(m.Paperdoll) : -1;
                 int x = 0x7fffffff;
                 int y = 5;
                 if (flag)
@@ -887,7 +886,7 @@
                 GButton toAdd = new GButton(numArray2[7], numArray2[7] + 2, numArray2[7] + 1, 0xb9, numArray[7], clickArray[7]);
                 toAdd.SetTag("Serial", m.Serial);
                 paperdoll.Children.Add(toAdd);
-                int hueID = (ushort) m.Hue;
+                int hueID = (ushort)m.Hue;
                 bool flag4 = false;
                 int gender = 0;
                 int body = m.Body;
@@ -908,14 +907,13 @@
 
                     case 0x192:
                     case 0x193:
-                    {
-                        GImage image = new GImage((m.Gender == 0) ? 12 : 13, 8, 0x13) {
-                            Alpha = 0.25f
-                        };
-                        paperdoll.Children.Add(image);
-                        flag4 = true;
-                        break;
-                    }
+                        {
+                            GImage image = new GImage((m.Gender == 0) ? 12 : 13, 8, 0x13);
+                            image.Alpha = 0.25f;
+                            paperdoll.Children.Add(image);
+                            flag4 = true;
+                            break;
+                        }
                     case 0x3db:
                         gender = m.Gender;
                         paperdoll.Children.Add(new GImage((m.Gender == 0) ? 12 : 13, Hues.Load(0x3ea), 8, 0x13));
@@ -923,29 +921,28 @@
                         break;
 
                     default:
-                    {
-                        int paperdollGump = Config.GetPaperdollGump(body);
-                        if (paperdollGump != 0)
                         {
-                            paperdoll.Children.Add(new GImage(paperdollGump, h, 8, 0x13));
+                            int paperdollGump = Config.GetPaperdollGump(body);
+                            if (paperdollGump != 0)
+                            {
+                                paperdoll.Children.Add(new GImage(paperdollGump, h, 8, 0x13));
+                            }
+                            break;
                         }
-                        break;
-                    }
                 }
                 paperdoll.Gender = gender;
                 if (flag4)
                 {
                     for (int j = 0; j < m.Equip.Count; j++)
                     {
-                        EquipEntry entry = (EquipEntry) m.Equip[j];
+                        EquipEntry entry = (EquipEntry)m.Equip[j];
                         if (entry.m_Layer == Layer.OuterTorso)
                         {
-                            int iD = entry.m_Item.ID;
+                            int itemID = entry.m_Item.ID;
                             int hue = entry.m_Item.Hue;
-                            int gumpID = GetEquipGumpID(iD, gender, ref hue);
-                            GPaperdollItem item = new GPaperdollItem(8, 0x13, gumpID, entry.m_Item.Serial, Hues.GetItemHue(iD, hue), (int) entry.m_Layer, m, canDrag) {
-                                Alpha = 0.5f
-                            };
+                            int gumpID = GetEquipGumpID(itemID, gender, ref hue);
+                            GPaperdollItem item = new GPaperdollItem(8, 0x13, gumpID, entry.m_Item.Serial, Hues.GetItemHue(itemID, hue), (int)entry.m_Layer, m, canDrag);
+                            item.Alpha = 0.5f;
                             paperdoll.Children.Add(item);
                         }
                     }
@@ -956,13 +953,13 @@
                     m.Equip.Sort(comparer);
                     for (int k = 0; k < m.Equip.Count; k++)
                     {
-                        EquipEntry entry2 = (EquipEntry) m.Equip[k];
+                        EquipEntry entry2 = (EquipEntry)m.Equip[k];
                         if (comparer.IsValid(entry2.m_Layer))
                         {
-                            int itemID = entry2.m_Item.ID;
+                            int num16 = entry2.m_Item.ID;
                             int num17 = entry2.m_Item.Hue;
-                            int num18 = GetEquipGumpID(itemID, gender, ref num17);
-                            paperdoll.Children.Add(new GPaperdollItem(8, 0x13, num18, entry2.m_Item.Serial, Hues.GetItemHue(itemID, num17), (int) entry2.m_Layer, m, canDrag));
+                            int num18 = GetEquipGumpID(num16, gender, ref num17);
+                            paperdoll.Children.Add(new GPaperdollItem(8, 0x13, num18, entry2.m_Item.Serial, Hues.GetItemHue(num16, num17), (int)entry2.m_Layer, m, canDrag));
                         }
                     }
                     m.Equip.Sort(LayerComparer.FromDirection(m.Direction));
@@ -998,9 +995,9 @@
                 {
                     paperdoll.Y = Engine.ScreenHeight - paperdoll.m_DragClipY;
                 }
-                if (index != -1)
+                if (num3 != -1)
                 {
-                    Desktop.Children.Insert(index, paperdoll);
+                    Desktop.Children.Insert(num3, paperdoll);
                 }
                 else
                 {
@@ -1114,11 +1111,11 @@
                 {
                     if ((m_Modal == null) && g.HitTest(mx - x, my - y))
                     {
-                        return new object[] { g, new Point(mx - x, my - y) };
+                        return new object[] { g, new Client.Point(mx - x, my - y) };
                     }
                     if (((m_Modal != null) && g.IsChildOf(m_Modal)) && g.HitTest(mx - x, my - y))
                     {
-                        return new object[] { g, new Point(mx - x, my - y) };
+                        return new object[] { g, new Client.Point(mx - x, my - y) };
                     }
                 }
             }
@@ -1205,7 +1202,7 @@
                         if (((m_Drag == null) && g.m_CanDrag) && (mb == MouseButtons.Left))
                         {
                             m_StartDrag = g;
-                            m_StartDragPoint = new Point(mX, mY);
+                            m_StartDragPoint = new Client.Point(mX, mY);
                             g.m_OffsetX = mX - X;
                             g.m_OffsetY = mY - Y;
                             if (g.m_QuickDrag)
@@ -1233,7 +1230,7 @@
                         if (((m_Drag == null) && g.m_CanDrag) && (mb == MouseButtons.Left))
                         {
                             m_StartDrag = g;
-                            m_StartDragPoint = new Point(mX, mY);
+                            m_StartDragPoint = new Client.Point(mX, mY);
                             g.m_OffsetX = mX - X;
                             g.m_OffsetY = mY - Y;
                             if (g.m_QuickDrag)
@@ -1390,7 +1387,7 @@
         {
             if (((m_ToRestore != null) && (ToRestore.GUID != null)) && ((ToRestore.GUID.Length > 0) && m_ToRestore.Contains(ToRestore.GUID)))
             {
-                Point point = (Point) m_ToRestore[ToRestore.GUID];
+                Client.Point point = (Client.Point)m_ToRestore[ToRestore.GUID];
                 ToRestore.X = point.X;
                 ToRestore.Y = point.Y;
             }
@@ -1421,7 +1418,7 @@
                     Gump gump = gumpArray[(i + index) % length];
                     if (gump is GWindowsTextBox)
                     {
-                        textBox = ((GWindowsTextBox) gump).TextBox;
+                        textBox = ((GWindowsTextBox)gump).TextBox;
                     }
                     else
                     {
@@ -1446,7 +1443,7 @@
                     Gump gump2 = gumpArray[((length + index) - j) % length];
                     if (gump2 is GWindowsTextBox)
                     {
-                        textBox = ((GWindowsTextBox) gump2).TextBox;
+                        textBox = ((GWindowsTextBox)gump2).TextBox;
                     }
                     else
                     {
@@ -1495,7 +1492,7 @@
             {
                 if (((value == null) && (m_Drag != null)) && (m_Drag.GetType() == typeof(GDragable)))
                 {
-                    LinkDocked((GDragable) m_Drag);
+                    LinkDocked((GDragable)m_Drag);
                 }
                 if ((value == null) && (m_Drag != null))
                 {
@@ -1674,8 +1671,8 @@
                             {
                                 this.m_Gumps.m_Buffer = new byte[length];
                             }
-                            this.m_Gumps.m_Verdata.Seek((long) lookup, SeekOrigin.Begin);
-                            verdata = (FileStream) this.m_Gumps.m_Verdata;
+                            this.m_Gumps.m_Verdata.Seek((long)lookup, SeekOrigin.Begin);
+                            verdata = (FileStream)this.m_Gumps.m_Verdata;
                         }
                         else
                         {
@@ -1683,16 +1680,16 @@
                             {
                                 this.m_Gumps.m_Buffer = new byte[length];
                             }
-                            this.m_Gumps.m_Stream.Seek((long) lookup, SeekOrigin.Begin);
-                            verdata = (FileStream) this.m_Gumps.m_Stream;
+                            this.m_Gumps.m_Stream.Seek((long)lookup, SeekOrigin.Begin);
+                            verdata = (FileStream)this.m_Gumps.m_Stream;
                         }
                         fixed (byte* numRef = this.m_Gumps.m_Buffer)
                         {
-                            Engine.NativeRead(verdata, (void*) numRef, length);
-                            int* numPtr = (int*) numRef;
+                            Engine.NativeRead(verdata, (void*)numRef, length);
+                            int* numPtr = (int*)numRef;
                             for (int* numPtr2 = numPtr; pLine < pImageEnd; numPtr2++)
                             {
-                                this.m_Hue.FillLine((ushort*) (numPtr + numPtr2[0]), pLine, pLineEnd);
+                                this.m_Hue.FillLine((ushort*)(numPtr + numPtr2[0]), pLine, pLineEnd);
                                 pLine += lineEndDelta;
                                 pLineEnd += lineEndDelta;
                             }
@@ -1714,11 +1711,10 @@
 
             public override Texture Reconstruct(object[] args)
             {
-                this.m_GumpID = (int) args[0];
-                this.m_Hue = (IHue) args[1];
+                this.m_GumpID = (int)args[0];
+                this.m_Hue = (IHue)args[1];
                 return base.Construct(true);
             }
         }
     }
 }
-

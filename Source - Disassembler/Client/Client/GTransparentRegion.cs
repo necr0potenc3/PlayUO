@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GTransparentRegion : GEmpty
     {
         private GServerGump m_Owner;
@@ -17,4 +15,3 @@
         }
     }
 }
-

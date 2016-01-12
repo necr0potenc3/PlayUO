@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections;
-    using System.Runtime.InteropServices;
 
     public class TileSorter : IComparer
     {
@@ -66,7 +65,7 @@
         {
             if (obj is MobileCell)
             {
-                MobileCell cell = (MobileCell) obj;
+                MobileCell cell = (MobileCell)obj;
                 z = cell.Z;
                 treshold = 2;
                 type = 3;
@@ -81,7 +80,7 @@
             }
             else if (obj is LandTile)
             {
-                LandTile tile = (LandTile) obj;
+                LandTile tile = (LandTile)obj;
                 z = tile.SortZ;
                 treshold = 0;
                 type = 0;
@@ -90,7 +89,7 @@
             else if (obj is DynamicItem)
             {
                 int num;
-                DynamicItem item = (DynamicItem) obj;
+                DynamicItem item = (DynamicItem)obj;
                 z = item.Z;
                 if (Map.m_ItemFlags[item.ID & 0x3fff][TileFlag.Background])
                 {
@@ -107,7 +106,7 @@
             else if (obj is StaticItem)
             {
                 int num2;
-                StaticItem item2 = (StaticItem) obj;
+                StaticItem item2 = (StaticItem)obj;
                 z = item2.Z;
                 if (Map.m_ItemFlags[item2.ID & 0x3fff][TileFlag.Background])
                 {
@@ -134,8 +133,8 @@
         {
             bool flag5;
             bool flag6;
-            ICell cell = (ICell) x;
-            ICell cell2 = (ICell) y;
+            ICell cell = (ICell)x;
+            ICell cell2 = (ICell)y;
             Type cellType = cell.CellType;
             Type type2 = cell2.CellType;
             bool flag = cellType == tLandTile;
@@ -144,10 +143,10 @@
             bool flag4 = !flag2 && ((type2 == tDynamicItem) || (type2 == tStaticItem));
             if (flag3)
             {
-                this.item1 = (IItem) cell;
+                this.item1 = (IItem)cell;
                 if (cellType == tStaticItem)
                 {
-                    StaticItem item = (StaticItem) cell;
+                    StaticItem item = (StaticItem)cell;
                     this.c1ItemID = item.m_ID;
                     this.c1SortZ = item.m_Z;
                     this.c1Height = item.m_Height;
@@ -155,7 +154,7 @@
                 }
                 else
                 {
-                    DynamicItem item2 = (DynamicItem) cell;
+                    DynamicItem item2 = (DynamicItem)cell;
                     this.c1ItemID = item2.m_ID;
                     this.c1SortZ = item2.m_Z;
                     this.c1Height = item2.m_Height;
@@ -175,10 +174,10 @@
             }
             if (flag4)
             {
-                this.item2 = (IItem) cell2;
+                this.item2 = (IItem)cell2;
                 if (type2 == tStaticItem)
                 {
-                    StaticItem item3 = (StaticItem) cell2;
+                    StaticItem item3 = (StaticItem)cell2;
                     this.c2ItemID = item3.m_ID;
                     this.c2SortZ = item3.m_Z;
                     this.c2Height = item3.m_Height;
@@ -186,7 +185,7 @@
                 }
                 else
                 {
-                    DynamicItem item4 = (DynamicItem) cell2;
+                    DynamicItem item4 = (DynamicItem)cell2;
                     this.c2ItemID = item4.m_ID;
                     this.c2SortZ = item4.m_Z;
                     this.c2Height = item4.m_Height;
@@ -279,8 +278,8 @@
                 }
                 if (flag9 && flag10)
                 {
-                    Mobile mobile = ((MobileCell) cell).m_Mobile;
-                    Mobile mobile2 = ((MobileCell) cell2).m_Mobile;
+                    Mobile mobile = ((MobileCell)cell).m_Mobile;
+                    Mobile mobile2 = ((MobileCell)cell2).m_Mobile;
                     if ((mobile != null) && (mobile2 != null))
                     {
                         bool player = mobile.Player;
@@ -318,8 +317,8 @@
                 }
                 if ((cellType == tDynamicItem) && (type2 == tDynamicItem))
                 {
-                    Item item5 = ((DynamicItem) cell).m_Item;
-                    Item item6 = ((DynamicItem) cell2).m_Item;
+                    Item item5 = ((DynamicItem)cell).m_Item;
+                    Item item6 = ((DynamicItem)cell2).m_Item;
                     if (item5.Serial < item6.Serial)
                     {
                         return -1;
@@ -335,4 +334,3 @@
         }
     }
 }
-

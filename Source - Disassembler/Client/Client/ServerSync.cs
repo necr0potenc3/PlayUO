@@ -20,7 +20,7 @@
             this.m_Account = account;
             this.m_Shard = shard;
             this.m_Buffer = new byte[0x800];
-            this.m_CryptoProvider = new LoginCrypto((uint) Network.ClientIP);
+            this.m_CryptoProvider = new LoginCrypto((uint)Network.ClientIP);
             Dns.BeginResolve(server.Address, new AsyncCallback(this.OnResolve), null);
         }
 
@@ -143,7 +143,7 @@
                     string name = pvSrc.ReadString(0x20);
                     int percentFull = pvSrc.ReadByte();
                     int timeZone = pvSrc.ReadSByte();
-                    IPAddress address = new IPAddress((long) pvSrc.ReadUInt32());
+                    IPAddress address = new IPAddress((long)pvSrc.ReadUInt32());
                     if (this.m_Shard == null)
                     {
                         ShardProfile profile = null;
@@ -168,7 +168,7 @@
                         }
                         if (i == 0)
                         {
-                            new Timer(new OnTick(this.Update_OnTick), 0, 1).Start(false);
+                            new Client.Timer(new OnTick(this.Update_OnTick), 0, 1).Start(false);
                         }
                     }
                 }
@@ -193,13 +193,13 @@
             if (this.m_Shard != null)
             {
                 this.m_Shard.Auth = num3;
-                this.m_Shard.Address = new IPAddress((long) ((ulong) num));
+                this.m_Shard.Address = new IPAddress((long)((ulong)num));
                 this.m_Shard.Port = num2;
                 new ShardSync(this.m_Server, this.m_Account, this.m_Shard);
             }
         }
 
-        public void Update_OnTick(Timer t)
+        public void Update_OnTick(Client.Timer t)
         {
             Profiles.Save();
             GMenuItem item = this.m_Account.Menu;
@@ -234,4 +234,3 @@
         }
     }
 }
-

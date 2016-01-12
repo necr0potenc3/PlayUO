@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
 
     public class GNewActionMenu : GMenuItem
@@ -47,8 +46,8 @@
         public override void OnClick()
         {
             ArrayList list = new ArrayList(this.m_Macro.Actions);
-            list.Add(new Action(string.Format("{0} {1}", this.m_Action.Action, this.FindFirst(this.m_Action.Params))));
-            this.m_Macro.Actions = (Action[]) list.ToArray(typeof(Action));
+            list.Add(new Client.Action(string.Format("{0} {1}", this.m_Action.Action, this.FindFirst(this.m_Action.Params))));
+            this.m_Macro.Actions = (Client.Action[])list.ToArray(typeof(Client.Action));
             GMacroEditorForm parent = this.m_Panel.Parent.Parent as GMacroEditorForm;
             if (parent != null)
             {
@@ -57,4 +56,3 @@
         }
     }
 }
-

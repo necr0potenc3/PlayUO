@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GBackground : Gump
@@ -291,4 +290,3 @@
         }
     }
 }
-

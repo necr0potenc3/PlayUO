@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
 
     public class ObjectPropertyList
@@ -20,12 +19,12 @@
 
         public static ObjectPropertyList Find(int serial, int number)
         {
-            return (ObjectPropertyList) m_Table[GetKey(serial, number)];
+            return (ObjectPropertyList)m_Table[GetKey(serial, number)];
         }
 
         public static long GetKey(int serial, int number)
         {
-            return ((serial << 0x20) | ((long) ((ulong) number)));
+            return ((serial << 0x20) | ((long)((ulong)number)));
         }
 
         public int Number
@@ -53,4 +52,3 @@
         }
     }
 }
-

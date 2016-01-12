@@ -1,8 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-    using System.Drawing;
-
     public interface IMessage
     {
         System.Drawing.Rectangle OnBeginRender();
@@ -16,4 +13,3 @@
         bool Visible { get; }
     }
 }
-

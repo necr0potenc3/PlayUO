@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class SkillTooltip : Tooltip
     {
         private float m_LastReal;
@@ -26,4 +24,3 @@
         }
     }
 }
-

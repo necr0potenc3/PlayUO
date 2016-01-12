@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Drawing;
 
     public class GumpPaint
@@ -14,7 +13,7 @@
 
         public static Color Blend(Color c1, Color c2, float f)
         {
-            return Blend(c1, c2, (int) (f * 255f));
+            return Blend(c1, c2, (int)(f * 255f));
         }
 
         public static int Blend(int c1, int c2, int p)
@@ -116,4 +115,3 @@
         }
     }
 }
-

@@ -1,8 +1,6 @@
 ﻿namespace Client
 {
-    using System;
     using System.IO;
-    using System.Runtime.InteropServices;
 
     public class ItemArt
     {
@@ -18,19 +16,19 @@
             fs.Seek(0x30000L, SeekOrigin.Begin);
             fixed (Entry3D* entrydRef = this.m_Index)
             {
-                Engine.NativeRead(fs, (void*) entrydRef, 0x30000);
+                Engine.NativeRead(fs, (void*)entrydRef, 0x30000);
             }
             fs.Close();
             this.m_Stream = new FileStream(Engine.FileManager.ResolveMUL(Files.ArtMul), FileMode.Open, FileAccess.Read, FileShare.Read);
             this.m_Verdata = new FileStream(Engine.FileManager.ResolveMUL(Files.Verdata), FileMode.Open, FileAccess.Read, FileShare.Read);
             int num = 0;
-            Engine.NativeRead(this.m_Verdata, (void*) &num, 4);
+            Engine.NativeRead(this.m_Verdata, (void*)&num, 4);
             if (num > 0)
             {
                 Entry5D[] entrydArray = new Entry5D[num];
                 fixed (Entry5D* entrydRef2 = entrydArray)
                 {
-                    Engine.NativeRead(this.m_Verdata, (void*) entrydRef2, num * 20);
+                    Engine.NativeRead(this.m_Verdata, (void*)entrydRef2, num * 20);
                     for (int k = 0; k < num; k++)
                     {
                         Entry5D entryd = entrydRef2[k];
@@ -172,12 +170,12 @@
                 if (flag)
                 {
                     length &= 0x7fffffff;
-                    this.m_Items.m_Verdata.Seek((long) lookup, SeekOrigin.Begin);
+                    this.m_Items.m_Verdata.Seek((long)lookup, SeekOrigin.Begin);
                     verdata = this.m_Items.m_Verdata;
                 }
                 else
                 {
-                    this.m_Items.m_Stream.Seek((long) lookup, SeekOrigin.Begin);
+                    this.m_Items.m_Stream.Seek((long)lookup, SeekOrigin.Begin);
                     verdata = this.m_Items.m_Stream;
                 }
                 if ((this.m_Buffer == null) || (length > this.m_Buffer.Length))
@@ -197,8 +195,8 @@
             {
                 fixed (byte* numRef = this.m_Buffer)
                 {
-                    short* numPtr3 = (short*) ((numRef + 8) + (((IntPtr) height) * 2));
-                    short* numPtr4 = (short*) (numRef + 6);
+                    short* numPtr3 = (short*)((numRef + 8) + (height * 2));
+                    short* numPtr4 = (short*)(numRef + 6);
                     int num = width;
                     int num2 = height;
                     int num3 = 0;
@@ -219,7 +217,7 @@
                         goto Label_008D;
                     Label_0066:
                         numPtr2 += num7;
-                        this.m_Hue.CopyPixels((void*) numPtr, (void*) numPtr2, pixels);
+                        this.m_Hue.CopyPixels((void*)numPtr, (void*)numPtr2, pixels);
                         numPtr2 += pixels;
                         numPtr += pixels;
                     Label_008D:
@@ -229,7 +227,7 @@
                         {
                             goto Label_0066;
                         }
-                        num5 = (int) ((long) ((numPtr2 - pLine) / 2));
+                        num5 = (int)((long)((numPtr2 - pLine) / 2));
                         if (num5 > 0)
                         {
                             if (num2 == height)
@@ -262,11 +260,10 @@
 
             public override Texture Reconstruct(object[] args)
             {
-                this.m_ItemID = (int) args[0];
-                this.m_Hue = (IHue) args[1];
+                this.m_ItemID = (int)args[0];
+                this.m_Hue = (IHue)args[1];
                 return base.Construct(true);
             }
         }
     }
 }
-

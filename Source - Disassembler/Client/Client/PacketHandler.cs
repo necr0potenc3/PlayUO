@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     internal class PacketHandler
     {
         private PacketCallback m_Callback;
@@ -69,4 +67,3 @@
         }
     }
 }
-

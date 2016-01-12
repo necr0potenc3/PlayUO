@@ -70,10 +70,10 @@
             }
             double num = (this.m_End - this.m_Start) + 1.0;
             num -= 1E-13;
-            double num2 = ((double) Position) / ((double) (this.m_Height - 1));
+            double num2 = ((double)Position) / ((double)(this.m_Height - 1));
             double num3 = num2 * num;
             num3 += this.m_Start;
-            return (double) ((int) num3);
+            return (double)((int)num3);
         }
 
         protected internal override bool HitTest(int X, int Y)
@@ -140,7 +140,7 @@
             {
                 num2 = 1.0;
             }
-            this.m_Position = (int) (num2 * (this.m_Height - 1));
+            this.m_Position = (int)(num2 * (this.m_Height - 1));
             if (CallOnChange && (this.m_OnValueChange != null))
             {
                 this.m_OnValueChange(Value, old, this);
@@ -163,10 +163,10 @@
             }
             double num3 = (this.m_End - this.m_Start) + 1.0;
             num3 -= 1E-13;
-            double num4 = ((double) this.m_Position) / ((double) (this.m_Height - 1));
+            double num4 = ((double)this.m_Position) / ((double)(this.m_Height - 1));
             double num5 = num4 * num3;
             num5 += this.m_Start;
-            num5 = (int) num5;
+            num5 = (int)num5;
             if (position != this.m_Position)
             {
                 if (this.m_OnValueChange != null)
@@ -283,4 +283,3 @@
         }
     }
 }
-

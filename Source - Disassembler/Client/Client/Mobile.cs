@@ -35,7 +35,6 @@
         private short m_Hue;
         private bool m_Human;
         private bool m_HumanOrGhost;
-        private int m_iAnimationPool;
         private bool m_Ignored;
         private int m_Int;
         public bool m_IsFactionGuard;
@@ -43,6 +42,7 @@
         private bool m_IsKUOC;
         private bool m_IsMoving;
         private bool m_IsPet;
+        private int m_iAnimationPool;
         public int m_KUOC_F;
         public int m_KUOC_X;
         public int m_KUOC_Y;
@@ -111,7 +111,7 @@
                 int index = 0;
                 while (index < count)
                 {
-                    EquipEntry entry = (EquipEntry) this.m_Equip[index];
+                    EquipEntry entry = (EquipEntry)this.m_Equip[index];
                     if (entry.m_Layer == e.m_Layer)
                     {
                         this.m_Equip.RemoveAt(index);
@@ -192,14 +192,14 @@
         {
             int num = this.m_X - p.X;
             int num2 = this.m_Y - p.Y;
-            return Math.Sqrt((double) ((num * num) + (num2 * num2)));
+            return Math.Sqrt((double)((num * num) + (num2 * num2)));
         }
 
         public int DistanceTo(int xTile, int yTile)
         {
             int num = this.m_X - xTile;
             int num2 = this.m_Y - yTile;
-            return (int) Math.Sqrt((double) ((num * num) + (num2 * num2)));
+            return (int)Math.Sqrt((double)((num * num) + (num2 * num2)));
         }
 
         public void Draw(Texture t, int x, int y)
@@ -245,7 +245,7 @@
             int count = equip.Count;
             for (int i = 0; i < count; i++)
             {
-                EquipEntry entry = (EquipEntry) equip[i];
+                EquipEntry entry = (EquipEntry)equip[i];
                 if (check.IsValid(entry.m_Item))
                 {
                     return entry.m_Item;
@@ -260,7 +260,7 @@
             int count = equip.Count;
             for (int i = 0; i < count; i++)
             {
-                EquipEntry entry = (EquipEntry) equip[i];
+                EquipEntry entry = (EquipEntry)equip[i];
                 if (entry.m_Layer == layer)
                 {
                     return entry.m_Item;
@@ -275,7 +275,7 @@
             int count = equip.Count;
             for (int i = 0; i < count; i++)
             {
-                if (((EquipEntry) equip[i]).m_Item == check)
+                if (((EquipEntry)equip[i]).m_Item == check)
                 {
                     return true;
                 }
@@ -289,7 +289,7 @@
             int count = equip.Count;
             for (int i = 0; i < count; i++)
             {
-                if (((EquipEntry) equip[i]).m_Layer == check)
+                if (((EquipEntry)equip[i]).m_Layer == check)
                 {
                     return true;
                 }
@@ -460,7 +460,7 @@
                 indent = indent + "   ";
                 for (int i = 0; i < item.Items.Count; i++)
                 {
-                    this.RecurseTrace(sw, indent, (Item) item.Items[i]);
+                    this.RecurseTrace(sw, indent, (Item)item.Items[i]);
                 }
                 indent = indent.Substring(0, indent.Length - 3);
                 sw.WriteLine("{0}}}", indent);
@@ -499,9 +499,9 @@
 
         public void SetReal(int x, int y, int z)
         {
-            this.m_XReal = (short) x;
-            this.m_YReal = (short) y;
-            this.m_ZReal = (short) z;
+            this.m_XReal = (short)x;
+            this.m_YReal = (short)y;
+            this.m_ZReal = (short)z;
         }
 
         private void StatChange(string name, int oldValue, int newValue)
@@ -530,7 +530,7 @@
             Debug.Trace("Weight: {0}", this.m_Weight);
             Debug.Trace("IsMoving: {0}", this.m_IsMoving);
             Debug.Trace("WalkCount: {0}", this.m_Walking.Count);
-            Debug.Trace("Animated: {0}", (this.m_Animation == null) ? ((object) 0) : ((object) this.m_Animation.Running));
+            Debug.Trace("Animated: {0}", (this.m_Animation == null) ? ((object)0) : ((object)this.m_Animation.Running));
             foreach (EquipEntry entry in this.m_Equip)
             {
                 Debug.Trace("\tAnim: {0}", entry.m_Animation);
@@ -561,7 +561,7 @@
             int count = equip.Count;
             for (int i = 0; i < count; i++)
             {
-                EquipEntry entry = (EquipEntry) equip[i];
+                EquipEntry entry = (EquipEntry)equip[i];
                 if ((entry.m_Layer == Layer.TwoHanded) && Map.m_ItemFlags[entry.m_Item.ID & 0x3fff][TileFlag.Unknown3])
                 {
                     int num3 = entry.m_Item.ID & 0x3fff;
@@ -594,11 +594,11 @@
             }
             set
             {
-                if ((!this.m_Refresh && (this.m_StatusBar != null)) && (this.m_Armor != ((short) value)))
+                if ((!this.m_Refresh && (this.m_StatusBar != null)) && (this.m_Armor != ((short)value)))
                 {
-                    this.m_StatusBar.OnArmorChange((short) value);
+                    this.m_StatusBar.OnArmorChange((short)value);
                 }
-                this.m_Armor = (short) value;
+                this.m_Armor = (short)value;
             }
         }
 
@@ -1245,7 +1245,7 @@
                     }
                     if ((this.m_Player && Engine.m_Ingame) && ((this.m_Notoriety >= Client.Notoriety.Innocent) && (this.m_Notoriety <= Client.Notoriety.Vendor)))
                     {
-                        Engine.AddTextMessage(m_NotorietyStrings[((int) this.m_Notoriety) - 1], Engine.DefaultFont, Hues.GetNotoriety(this.m_Notoriety));
+                        Engine.AddTextMessage(m_NotorietyStrings[((int)this.m_Notoriety) - 1], Engine.DefaultFont, Hues.GetNotoriety(this.m_Notoriety));
                     }
                 }
             }
@@ -1731,4 +1731,3 @@
         }
     }
 }
-

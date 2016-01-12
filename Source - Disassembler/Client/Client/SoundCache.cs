@@ -38,13 +38,13 @@
             SecondaryBuffer buffer = null;
             for (int i = 0; i < this.m_Count; i++)
             {
-                SecondaryBuffer buffer2 = (SecondaryBuffer) this.m_Buffers[i];
-                BufferStatus status = buffer2.get_Status();
-                if (!status.get_Playing() && !status.get_BufferLost())
+                SecondaryBuffer buffer2 = (SecondaryBuffer)this.m_Buffers[i];
+                BufferStatus status = buffer2.Status;
+                if (!status.Playing && !status.BufferLost)
                 {
                     return buffer2;
                 }
-                if (status.get_BufferLost())
+                if (status.BufferLost)
                 {
                     this.m_Buffers.RemoveAt(i);
                     i--;
@@ -86,4 +86,3 @@
         }
     }
 }
-

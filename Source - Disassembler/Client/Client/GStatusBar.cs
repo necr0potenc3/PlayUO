@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GStatusBar : GFader, IMobileStatus
@@ -47,7 +46,7 @@
             this.m_Mobile = m;
             base.m_CanDrop = true;
             base.m_QuickDrag = true;
-            IFont font = Engine.GetFont(9);
+            Client.IFont font = Engine.GetFont(9);
             IHue hue = Hues.Load(0x455);
             this.m_Name = new GLabel("", font, hue, 0x26, 50);
             this.m_Str = new GLabel("0", font, hue, 0x58, 0x4d);
@@ -114,11 +113,10 @@
 
         private void AddTooltip(int x, int y, int w, int h, int num)
         {
-            GHotspot toAdd = new GHotspot(x, y, w, h, this) {
-                m_CanDrag = true,
-                m_QuickDrag = false,
-                Tooltip = new Tooltip(Localization.GetString(num))
-            };
+            GHotspot toAdd = new GHotspot(x, y, w, h, this);
+            toAdd.m_CanDrag = true;
+            toAdd.m_QuickDrag = false;
+            toAdd.Tooltip = new Tooltip(Localization.GetString(num));
             base.m_Children.Add(toAdd);
         }
 
@@ -138,7 +136,7 @@
 
         private int GetMaxWeight(int str)
         {
-            return (40 + ((int) (3.5 * str)));
+            return (40 + ((int)(3.5 * str)));
         }
 
         protected internal override bool HitTest(int X, int Y)
@@ -205,7 +203,7 @@
         {
             if (g is GDraggedItem)
             {
-                Item item = ((GDraggedItem) g).Item;
+                Item item = ((GDraggedItem)g).Item;
                 if ((item != null) && (this.m_Mobile != null))
                 {
                     Network.Send(new PDropItem(item.Serial, -1, -1, 0, this.m_Mobile.Serial));
@@ -468,4 +466,3 @@
         }
     }
 }
-

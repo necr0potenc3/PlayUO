@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public abstract class InfoInput
     {
         private object m_Active;
@@ -15,6 +13,7 @@
         }
 
         public abstract Client.Gump CreateGump();
+
         public abstract void UpdateGump(Client.Gump g);
 
         public object Active
@@ -74,4 +73,3 @@
         }
     }
 }
-

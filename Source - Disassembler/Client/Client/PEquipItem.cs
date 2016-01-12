@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class PEquipItem : Packet
     {
         public PEquipItem(Item toEquip, Mobile target) : base(0x13, "Equip Item", 10)
@@ -12,4 +10,3 @@
         }
     }
 }
-

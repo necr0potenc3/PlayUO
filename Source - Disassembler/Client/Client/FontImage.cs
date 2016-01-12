@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class FontImage
     {
         public int xDelta;
@@ -18,4 +16,3 @@
         }
     }
 }
-

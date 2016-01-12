@@ -1,8 +1,6 @@
 ﻿namespace Client
 {
-    using System;
     using System.Drawing;
-    using System.Runtime.InteropServices;
 
     public class TableGump : GAlphaBackground
     {
@@ -37,7 +35,7 @@
                             object obj2 = desc.Function(i - 1, j - 1);
                             if (obj2 is double)
                             {
-                                str = ((double) obj2).ToString("F2");
+                                str = ((double)obj2).ToString("F2");
                             }
                             else if (obj2 != null)
                             {
@@ -168,4 +166,3 @@
         }
     }
 }
-

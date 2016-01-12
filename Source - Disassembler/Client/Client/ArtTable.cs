@@ -44,9 +44,8 @@
                         }
                     }
                 }
-                m_Entries = (ArtTableEntry[]) list.ToArray(typeof(ArtTableEntry));
+                m_Entries = (ArtTableEntry[])list.ToArray(typeof(ArtTableEntry));
             }
         }
     }
 }
-

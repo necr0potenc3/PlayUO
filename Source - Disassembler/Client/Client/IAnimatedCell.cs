@@ -7,4 +7,3 @@
         void GetPackage(ref int Body, ref int Action, ref int Direction, ref int Frame, ref int Hue);
     }
 }
-

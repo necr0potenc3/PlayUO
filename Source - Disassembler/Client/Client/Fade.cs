@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class Fade
     {
         protected int m_Color;
@@ -14,7 +12,7 @@
             this.m_Color = Color;
             this.m_From = From;
             this.m_Delta = To - From;
-            this.m_Sync = new TimeSync((double) Duration);
+            this.m_Sync = new TimeSync((double)Duration);
         }
 
         public bool Evaluate(ref double Alpha)
@@ -37,4 +35,3 @@
         }
     }
 }
-

@@ -72,8 +72,8 @@
                         else
                         {
                             int num;
-                            string input = Engine.m_Text + e.KeyChar;
-                            string text = Engine.Encode(input) + "_";
+                            string str = Engine.m_Text + e.KeyChar;
+                            string text = Engine.Encode(str) + "_";
                             Mobile player = World.Player;
                             if (((player != null) && player.OpenedStatus) && (player.StatusBar == null))
                             {
@@ -85,8 +85,8 @@
                             }
                             if (Engine.GetUniFont(3).GetStringWidth(text) < num)
                             {
-                                Engine.m_Text = input;
-                                Renderer.SetText(input);
+                                Engine.m_Text = str;
+                                Renderer.SetText(str);
                             }
                         }
                     }
@@ -210,4 +210,3 @@
         }
     }
 }
-

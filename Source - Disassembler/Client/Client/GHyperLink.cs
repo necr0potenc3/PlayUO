@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
 
     public class GHyperLink : GTextButton
@@ -25,4 +24,3 @@
         }
     }
 }
-

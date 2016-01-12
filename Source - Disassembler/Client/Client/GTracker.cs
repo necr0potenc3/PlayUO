@@ -15,7 +15,9 @@
         }
 
         protected abstract string GetPluralString(string direction, int distance);
+
         protected abstract string GetSingularString(string direction);
+
         protected void Render(int X, int Y, int xTarget, int yTarget)
         {
             Mobile player = World.Player;
@@ -25,9 +27,9 @@
                 {
                     int num3;
                     Direction direction = Engine.GetDirection(player.X, player.Y, xTarget, yTarget);
-                    string str = m_DirectionStrings[(int) (Direction.West & direction)];
-                    int num = Math.Abs((int) (xTarget - player.X));
-                    int num2 = Math.Abs((int) (yTarget - player.Y));
+                    string str = m_DirectionStrings[(int)(Direction.West & direction)];
+                    int num = Math.Abs((int)(xTarget - player.X));
+                    int num2 = Math.Abs((int)(yTarget - player.Y));
                     if (num > num2)
                     {
                         num3 = num2 + (num - num2);
@@ -63,4 +65,3 @@
         }
     }
 }
-

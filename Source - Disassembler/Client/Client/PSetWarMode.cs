@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class PSetWarMode : Packet
     {
         public PSetWarMode(bool warMode, short unk1, byte unk2) : base(0x72, "Set War Mode", 5)
@@ -12,4 +10,3 @@
         }
     }
 }
-

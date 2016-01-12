@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GEmpty : Gump
     {
         private int m_Height;
@@ -46,4 +44,3 @@
         }
     }
 }
-

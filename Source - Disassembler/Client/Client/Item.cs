@@ -3,7 +3,6 @@
     using System;
     using System.Collections;
     using System.IO;
-    using System.Runtime.InteropServices;
 
     public class Item : IComparable, IPoint3D, IEntity, IMessageOwner, IPoint2D, IAnimationOwner
     {
@@ -28,12 +27,12 @@
         private ItemFlags m_Flags = new ItemFlags();
         private IHue m_hAnimationPool;
         private ushort m_Hue;
-        private int m_iAnimationPool;
         private short m_ID;
         private bool m_InWorld;
         private bool m_IsEquip;
         private bool m_IsMulti;
         private ArrayList m_Items = new ArrayList(0);
+        private int m_iAnimationPool;
         private Mobile m_LastLooked;
         private int m_LastSpell = -1;
         public string m_LastText;
@@ -85,8 +84,8 @@
                     {
                         break;
                     }
-                    Item item = (Item) parent;
-                    if (((item.Container != null) && (item.Container.Gump is GContainer)) && ((GContainer) item.Container.Gump).m_TradeContainer)
+                    Item item = (Item)parent;
+                    if (((item.Container != null) && (item.Container.Gump is GContainer)) && ((GContainer)item.Container.Gump).m_TradeContainer)
                     {
                         flag = true;
                     }
@@ -185,7 +184,7 @@
             {
                 throw new ArgumentException();
             }
-            Item item = (Item) x;
+            Item item = (Item)x;
             if ((this.m_ContainerY < item.m_ContainerY) || ((this.m_ContainerY == item.m_ContainerY) && (this.m_ContainerX < item.m_ContainerX)))
             {
                 return -1;
@@ -261,12 +260,12 @@
                 queue.Enqueue(this);
                 while (queue.Count > 0)
                 {
-                    Item item = (Item) queue.Dequeue();
-                    ArrayList items = item.m_Items;
-                    int count = items.Count;
+                    Item item = (Item)queue.Dequeue();
+                    ArrayList list = item.m_Items;
+                    int count = list.Count;
                     for (int i = 0; i < count; i++)
                     {
-                        Item item2 = (Item) items[i];
+                        Item item2 = (Item)list[i];
                         if (check.IsValid(item2))
                         {
                             return item2;
@@ -306,12 +305,12 @@
                 queue.Enqueue(this);
                 while (queue.Count > 0)
                 {
-                    Item item = (Item) queue.Dequeue();
-                    ArrayList items = item.m_Items;
-                    int count = items.Count;
+                    Item item = (Item)queue.Dequeue();
+                    ArrayList list2 = item.m_Items;
+                    int count = list2.Count;
                     for (int i = 0; i < count; i++)
                     {
-                        Item item2 = (Item) items[i];
+                        Item item2 = (Item)list2[i];
                         if (check.IsValid(item2))
                         {
                             dataStore.Add(item2);
@@ -323,7 +322,7 @@
                     }
                 }
             }
-            Item[] itemArray = (Item[]) dataStore.ToArray(typeof(Item));
+            Item[] itemArray = (Item[])dataStore.ToArray(typeof(Item));
             Engine.ReleaseDataStore(dataStore);
             return itemArray;
         }
@@ -336,13 +335,13 @@
                 object equipParent;
                 if (obj2 is Item)
                 {
-                    if (((Item) obj2).EquipParent is Mobile)
+                    if (((Item)obj2).EquipParent is Mobile)
                     {
-                        equipParent = ((Item) obj2).EquipParent;
+                        equipParent = ((Item)obj2).EquipParent;
                     }
                     else
                     {
-                        equipParent = ((Item) obj2).Parent;
+                        equipParent = ((Item)obj2).Parent;
                     }
                 }
                 else
@@ -357,15 +356,15 @@
             }
             if (obj2 is Item)
             {
-                x = ((Item) obj2).X;
-                y = ((Item) obj2).Y;
-                z = ((Item) obj2).Z;
+                x = ((Item)obj2).X;
+                y = ((Item)obj2).Y;
+                z = ((Item)obj2).Z;
             }
             else if (obj2 is Mobile)
             {
-                x = ((Mobile) obj2).X;
-                y = ((Mobile) obj2).Y;
-                z = ((Mobile) obj2).Z;
+                x = ((Mobile)obj2).X;
+                y = ((Mobile)obj2).Y;
+                z = ((Mobile)obj2).Z;
             }
             else
             {
@@ -377,7 +376,7 @@
 
         public bool GetSpellContained(int index)
         {
-            long num = ((long) 1L) << index;
+            long num = ((long)1L) << index;
             return ((this.m_SpellContained & num) != 0L);
         }
 
@@ -445,7 +444,7 @@
         public Gump OnBeginDrag()
         {
             int num = this.m_ID & 0x3fff;
-            int num2 = (ushort) this.m_Amount;
+            int num2 = (ushort)this.m_Amount;
             if (Map.m_ItemFlags[num & 0x3fff][TileFlag.Generic] && (num2 > 1))
             {
                 GDragAmount amount = new GDragAmount(this);
@@ -483,12 +482,12 @@
                 if (!shouldOverrideHue)
                 {
                     this.m_RealHue = this.m_Hue;
-                    this.m_Hue = (ushort) hue;
+                    this.m_Hue = (ushort)hue;
                 }
             }
             else if (shouldOverrideHue)
             {
-                this.m_Hue = (ushort) this.m_RealHue;
+                this.m_Hue = (ushort)this.m_RealHue;
             }
         }
 
@@ -513,7 +512,7 @@
                 ArrayList equip;
                 if (this.m_EquipParent is Mobile)
                 {
-                    equip = ((Mobile) this.m_EquipParent).Equip;
+                    equip = ((Mobile)this.m_EquipParent).Equip;
                 }
                 else
                 {
@@ -521,14 +520,14 @@
                     {
                         return;
                     }
-                    equip = ((Item) this.m_EquipParent).Equip;
+                    equip = ((Item)this.m_EquipParent).Equip;
                 }
                 int index = 0;
                 int count = equip.Count;
                 bool flag = false;
                 while (index < count)
                 {
-                    EquipEntry entry = (EquipEntry) equip[index];
+                    EquipEntry entry = (EquipEntry)equip[index];
                     if (entry.m_Item == this)
                     {
                         equip.RemoveAt(index);
@@ -542,7 +541,7 @@
                 }
                 if (flag && (this.m_EquipParent is Mobile))
                 {
-                    ((Mobile) this.m_EquipParent).EquipRemoved();
+                    ((Mobile)this.m_EquipParent).EquipRemoved();
                 }
                 this.m_EquipParent = null;
             }
@@ -589,7 +588,7 @@
 
         public void SetSpellContained(int index, bool value)
         {
-            long num = ((long) 1L) << index;
+            long num = ((long)1L) << index;
             if (value)
             {
                 this.m_SpellContained |= num;
@@ -1331,4 +1330,3 @@
         }
     }
 }
-

@@ -1,7 +1,6 @@
 ﻿namespace Client
 {
     using System;
-    using System.Drawing;
     using System.Windows.Forms;
 
     public class GSystemMessage : GLabel, IMessage
@@ -14,20 +13,17 @@
         private float m_SolidDuration;
         private DateTime m_UpdateTime;
 
-        public GSystemMessage(string text, IFont font, IHue hue, float duration) : base(text, font, hue, 0, 0)
+        public GSystemMessage(string text, Client.IFont font, IHue hue, float duration) : base(text, font, hue, 0, 0)
         {
             base.m_OverridesCursor = false;
             this.m_SolidDuration = duration;
-            this.m_Dispose = new TimeSync((double) (this.m_SolidDuration + 1f));
+            this.m_Dispose = new TimeSync((double)(this.m_SolidDuration + 1f));
             this.m_UpdateTime = DateTime.Now;
             this.m_DupeCount = 1;
             this.m_OrigText = text;
         }
 
-        bool IMessage.get_Visible()
-        {
-            return base.Visible;
-        }
+        public bool Visible { get { return base.Visible; } }
 
         protected internal override void Draw(int x, int y)
         {
@@ -38,7 +34,7 @@
                 Gump gump = array[i];
                 if (gump is IMessage)
                 {
-                    IMessage message = (IMessage) gump;
+                    IMessage message = (IMessage)gump;
                     if (message.Visible && message.ImageRect.IntersectsWith(this.m_ImageRect))
                     {
                         num += message.Alpha;
@@ -46,7 +42,7 @@
                 }
             }
             float alpha = this.Alpha;
-            this.Alpha = (float) ((1.0 / ((double) num)) * alpha);
+            this.Alpha = (float)((1.0 / ((double)num)) * alpha);
             base.Draw(x, y);
             this.Alpha = alpha;
         }
@@ -71,7 +67,7 @@
             }
             if (elapsed >= this.m_SolidDuration)
             {
-                this.Alpha = (float) (1.0 - (elapsed - this.m_SolidDuration));
+                this.Alpha = (float)(1.0 - (elapsed - this.m_SolidDuration));
             }
             base.Visible = true;
             this.X = Engine.GameX + 2;
@@ -93,7 +89,7 @@
         {
             if ((mb & MouseButtons.Right) != MouseButtons.None)
             {
-                Point point = base.PointToScreen(new Point(x, y));
+                Client.Point point = base.PointToScreen(new Client.Point(x, y));
                 int distance = 0;
                 Engine.movingDir = Engine.GetDirection(point.X, point.Y, ref distance);
                 Engine.amMoving = true;
@@ -109,7 +105,7 @@
         {
             if (((mb & MouseButtons.Right) != MouseButtons.None) && Engine.amMoving)
             {
-                Point point = base.PointToScreen(new Point(X, Y));
+                Client.Point point = base.PointToScreen(new Client.Point(X, Y));
                 int distance = 0;
                 Engine.movingDir = Engine.GetDirection(point.X, point.Y, ref distance);
             }
@@ -176,4 +172,3 @@
         }
     }
 }
-

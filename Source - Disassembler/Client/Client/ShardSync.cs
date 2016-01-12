@@ -22,7 +22,7 @@
             this.m_Shard = shard;
             this.m_Compressed = new byte[0x800];
             this.m_Buffer = new byte[0x800];
-            this.m_CryptoProvider = new GameCrypto((uint) shard.Auth);
+            this.m_CryptoProvider = new GameCrypto((uint)shard.Auth);
             this.Connect(new IPEndPoint(shard.Address, shard.Port));
         }
 
@@ -68,7 +68,7 @@
                 }
             }
             Array.Sort(this.m_Shard.Characters, new CharacterComparer());
-            new Timer(new OnTick(this.Update_OnTick), 0, 1).Start(false);
+            new Client.Timer(new OnTick(this.Update_OnTick), 0, 1).Start(false);
         }
 
         public void Connect(IPEndPoint ipep)
@@ -154,7 +154,7 @@
             this.m_Socket.Send(buffer, 0, buffer.Length, SocketFlags.None);
         }
 
-        public void Update_OnTick(Timer t)
+        public void Update_OnTick(Client.Timer t)
         {
             Profiles.Save();
             GMenuItem item = this.m_Shard.Menu;
@@ -189,4 +189,3 @@
         }
     }
 }
-

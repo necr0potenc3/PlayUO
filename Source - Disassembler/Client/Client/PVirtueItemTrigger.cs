@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class PVirtueItemTrigger : Packet
     {
         public PVirtueItemTrigger(GServerGump owner, int gumpID) : base(0xb1, "Virtue Item Trigger")
@@ -12,4 +10,3 @@
         }
     }
 }
-

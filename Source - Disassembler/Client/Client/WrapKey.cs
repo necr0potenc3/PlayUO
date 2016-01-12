@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class WrapKey
     {
         public int m_HashCode;
@@ -17,7 +15,7 @@
 
         public override bool Equals(object x)
         {
-            WrapKey key = (WrapKey) x;
+            WrapKey key = (WrapKey)x;
             return ((this == key) || (((this.m_HashCode == key.m_HashCode) && (this.m_MaxWidth == key.m_MaxWidth)) && (this.m_ToWrap == key.m_ToWrap)));
         }
 
@@ -27,4 +25,3 @@
         }
     }
 }
-

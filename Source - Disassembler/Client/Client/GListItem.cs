@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GListItem : GTextButton
@@ -35,4 +34,3 @@
         }
     }
 }
-

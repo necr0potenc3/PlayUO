@@ -70,9 +70,9 @@
             this.m_OnScreen = this.CheckOnScreen();
             this.m_Random = rnd;
             this.m_Image = Engine.m_Rain;
-            float num2 = 0.5f + ((float) (rnd.NextDouble() * 0.5));
-            this.m_Sync = new TimeSync((double) num2);
-            this.m_SliceCheck = (int) (20f * num2);
+            float num2 = 0.5f + ((float)(rnd.NextDouble() * 0.5));
+            this.m_Sync = new TimeSync((double)num2);
+            this.m_SliceCheck = (int)(20f * num2);
         }
 
         private bool CheckOnScreen()
@@ -100,8 +100,8 @@
             {
                 return false;
             }
-            int num2 = (int) (this.m_xStart + ((this.m_xEnd - this.m_xStart) * normalized));
-            int num3 = (int) (this.m_yStart + ((this.m_yEnd - this.m_yStart) * normalized));
+            int num2 = (int)(this.m_xStart + ((this.m_xEnd - this.m_xStart) * normalized));
+            int num3 = (int)(this.m_yStart + ((this.m_yEnd - this.m_yStart) * normalized));
             this.m_xStart -= xDelta;
             this.m_yStart -= yDelta;
             this.m_xEnd -= xDelta;
@@ -109,8 +109,8 @@
             this.m_OnScreen = this.CheckOnScreen();
             if (((num2 >= 0) && (num3 >= 0)) && ((num2 < Engine.ScreenWidth) && (num3 < Engine.ScreenHeight)))
             {
-                num2 = (int) (this.m_xStart + ((this.m_xEnd - this.m_xStart) * normalized));
-                num3 = (int) (this.m_yStart + ((this.m_yEnd - this.m_yStart) * normalized));
+                num2 = (int)(this.m_xStart + ((this.m_xEnd - this.m_xStart) * normalized));
+                num3 = (int)(this.m_yStart + ((this.m_yEnd - this.m_yStart) * normalized));
                 if (((num2 < 0) || (num3 < 0)) || ((num2 >= Engine.ScreenWidth) || (num3 >= Engine.ScreenHeight)))
                 {
                     if ((xDelta == 0x2c) && (yDelta == 0))
@@ -160,8 +160,8 @@
                 {
                     return false;
                 }
-                int x = (int) (this.m_xStart + ((this.m_xEnd - this.m_xStart) * normalized));
-                int y = (int) (this.m_yStart + ((this.m_yEnd - this.m_yStart) * normalized));
+                int x = (int)(this.m_xStart + ((this.m_xEnd - this.m_xStart) * normalized));
+                int y = (int)(this.m_yStart + ((this.m_yEnd - this.m_yStart) * normalized));
                 x -= Renderer.m_xScroll;
                 y -= Renderer.m_yScroll;
                 if (((x >= 0) && (y >= 0)) && ((x < Engine.ScreenWidth) && (y < Engine.ScreenHeight)))
@@ -173,4 +173,3 @@
         }
     }
 }
-

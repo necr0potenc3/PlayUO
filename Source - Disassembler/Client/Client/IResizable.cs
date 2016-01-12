@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public interface IResizable
     {
         int Height { get; set; }
@@ -17,4 +15,3 @@
         int Width { get; set; }
     }
 }
-

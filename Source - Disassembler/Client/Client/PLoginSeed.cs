@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.IO;
 
     public class PLoginSeed : Packet
@@ -15,8 +14,7 @@
             }
             base.m_Stream.Seek(0L, SeekOrigin.Begin);
             base.m_Stream.Write(clientIP);
-            Network.SetupCrypto((uint) clientIP);
+            Network.SetupCrypto((uint)clientIP);
         }
     }
 }
-

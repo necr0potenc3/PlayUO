@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class UpdateMobileLock : ILocked
     {
         private Mobile m_Mobile;
@@ -17,4 +15,3 @@
         }
     }
 }
-

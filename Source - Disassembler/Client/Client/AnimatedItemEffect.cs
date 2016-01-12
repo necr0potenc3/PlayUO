@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class AnimatedItemEffect : Effect
     {
         protected bool m_Animated;
@@ -69,7 +67,7 @@
                 base.SetSource(source);
                 if ((!source.Player && !source.IsMoving) && (((xSource != 0) || (ySource != 0)) || (zSource != 0)))
                 {
-                    source.SetLocation((short) xSource, (short) ySource, (short) zSource);
+                    source.SetLocation((short)xSource, (short)ySource, (short)zSource);
                     source.Update();
                     source.UpdateReal();
                 }
@@ -82,7 +80,7 @@
                     base.SetSource(item);
                     if (((xSource != 0) || (ySource != 0)) || (zSource != 0))
                     {
-                        item.SetLocation((short) xSource, (short) ySource, (short) zSource);
+                        item.SetLocation((short)xSource, (short)ySource, (short)zSource);
                         item.Update();
                     }
                 }
@@ -125,10 +123,10 @@
             num11 += Engine.GameY;
             if ((base.m_Source != null) && (base.m_Source.GetType() == typeof(Mobile)))
             {
-                Mobile source = (Mobile) base.m_Source;
+                Mobile source = (Mobile)base.m_Source;
                 if (source.Walking.Count > 0)
                 {
-                    WalkAnimation animation = (WalkAnimation) source.Walking.Peek();
+                    WalkAnimation animation = (WalkAnimation)source.Walking.Peek();
                     if (animation.Snapshot(ref xOffset, ref yOffset, ref fOffset))
                     {
                         num10 += xOffset;
@@ -206,4 +204,3 @@
         }
     }
 }
-

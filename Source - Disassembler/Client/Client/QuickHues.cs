@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
     using System.IO;
     using System.Text;
@@ -14,7 +13,7 @@
             Load();
             for (int i = 0; i < m_Entries.Count; i++)
             {
-                QuickHueEntry entry = (QuickHueEntry) m_Entries[i];
+                QuickHueEntry entry = (QuickHueEntry)m_Entries[i];
                 if ((entry.Name == e.Name) || (entry.Hue == e.Hue))
                 {
                     m_Entries.RemoveAt(i);
@@ -37,10 +36,9 @@
                 int num = bin.ReadInt32();
                 for (int i = 0; i < num; i++)
                 {
-                    QuickHueEntry entry = new QuickHueEntry {
-                        Name = ReadString(bin),
-                        Hue = bin.ReadInt32()
-                    };
+                    QuickHueEntry entry = new QuickHueEntry();
+                    entry.Name = ReadString(bin);
+                    entry.Hue = bin.ReadInt32();
                     m_Entries.Add(entry);
                 }
                 bin.Close();
@@ -74,7 +72,7 @@
             bin.Write(m_Entries.Count);
             for (int i = 0; i < m_Entries.Count; i++)
             {
-                QuickHueEntry entry = (QuickHueEntry) m_Entries[i];
+                QuickHueEntry entry = (QuickHueEntry)m_Entries[i];
                 WriteString(entry.Name, bin);
                 bin.Write(entry.Hue);
             }
@@ -85,7 +83,7 @@
         {
             for (int i = 0; i < m_Entries.Count; i++)
             {
-                Validate((QuickHueEntry) m_Entries[i], i);
+                Validate((QuickHueEntry)m_Entries[i], i);
             }
         }
 
@@ -95,7 +93,7 @@
             int num2 = index + 1;
             while (num2 < count)
             {
-                QuickHueEntry entry = (QuickHueEntry) m_Entries[num2];
+                QuickHueEntry entry = (QuickHueEntry)m_Entries[num2];
                 if ((entry.Name == e.Name) || (entry.Hue == e.Hue))
                 {
                     m_Entries.RemoveAt(num2);
@@ -125,4 +123,3 @@
         }
     }
 }
-

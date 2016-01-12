@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GMapTracker : GTracker
     {
         private static int m_MapX;
@@ -50,4 +48,3 @@
         }
     }
 }
-

@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GWindowsTextBox : Gump
@@ -10,7 +9,7 @@
         protected GTextBox m_TextBox;
         protected int m_Width;
 
-        public GWindowsTextBox(int x, int y, int width, int height, string initialText, IFont font, IHue normalHue, IHue overHue, IHue focusHue, char passChar) : base(x, y)
+        public GWindowsTextBox(int x, int y, int width, int height, string initialText, Client.IFont font, IHue normalHue, IHue overHue, IHue focusHue, char passChar) : base(x, y)
         {
             this.m_Width = width;
             this.m_Height = height;
@@ -150,4 +149,3 @@
         }
     }
 }
-

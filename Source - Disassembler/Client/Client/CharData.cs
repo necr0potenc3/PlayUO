@@ -92,7 +92,7 @@
                                 this.LoadEntry(reader);
                                 break;
                             }
-                            reader.BaseStream.Seek((long) num4, SeekOrigin.Current);
+                            reader.BaseStream.Seek((long)num4, SeekOrigin.Current);
                         }
                         reader.Close();
                     }
@@ -128,7 +128,7 @@
         {
             int count = Entries.Count;
             BinaryWriter bin = new BinaryWriter(File.Open(FilePath, FileMode.Create, FileAccess.Write));
-            bin.Write((int) (count + 1));
+            bin.Write((int)(count + 1));
             ArrayList list = new ArrayList();
             if (this.m_TextHue != 0x60)
             {
@@ -148,7 +148,7 @@
             }
             if (this.m_NotoQuery != NotoQueryType.On)
             {
-                list.Add(new Property(7, (byte) this.m_NotoQuery));
+                list.Add(new Property(7, (byte)this.m_NotoQuery));
             }
             if (this.m_QueueTargets)
             {
@@ -220,12 +220,12 @@
             list.Add(new Property(0x1c, this.m_RestrictHeals));
             for (int i = 0; i < this.m_AutoUse.Count; i++)
             {
-                Item item = (Item) this.m_AutoUse[i];
+                Item item = (Item)this.m_AutoUse[i];
                 list.Add(new Property(10, item.Serial));
             }
             for (int j = 0; j < this.m_Friends.Count; j++)
             {
-                Mobile mobile = (Mobile) this.m_Friends[j];
+                Mobile mobile = (Mobile)this.m_Friends[j];
                 list.Add(new Property(6, mobile.Serial));
             }
             if (this.m_Equip != null)
@@ -233,8 +233,8 @@
                 IEnumerator enumerator = this.m_Equip.AutoEquip.GetEnumerator();
                 while (enumerator.MoveNext())
                 {
-                    DictionaryEntry current = (DictionaryEntry) enumerator.Current;
-                    list.Add(new Property(5, (int) current.Key, (int) current.Value));
+                    DictionaryEntry current = (DictionaryEntry)enumerator.Current;
+                    list.Add(new Property(5, (int)current.Key, (int)current.Value));
                 }
             }
             Gump desktop = Gumps.Desktop;
@@ -243,16 +243,16 @@
                 for (int m = 0; m < desktop.Children.Count; m++)
                 {
                     IRestorableGump gump2 = desktop.Children[m] as IRestorableGump;
-                    if ((gump2 != null) && ((Gump) gump2).Visible)
+                    if ((gump2 != null) && ((Gump)gump2).Visible)
                     {
                         list.Add(new Property(4, new GumpLayout(gump2.Type, gump2.Extra, gump2.X, gump2.Y, gump2.Width, gump2.Height)));
                     }
                 }
             }
-            this.SaveEntry(this.m_Serial, (Property[]) list.ToArray(typeof(Property)), bin);
+            this.SaveEntry(this.m_Serial, (Property[])list.ToArray(typeof(Property)), bin);
             for (int k = 0; k < count; k++)
             {
-                bin.Write((byte[]) Entries[k]);
+                bin.Write((byte[])Entries[k]);
             }
             bin.Flush();
             bin.Close();
@@ -292,14 +292,14 @@
                         break;
 
                     case 6:
-                    {
-                        Mobile mobile = World.WantMobile(bin.ReadInt32());
-                        mobile.m_IsFriend = true;
-                        this.m_Friends.Add(mobile);
-                        break;
-                    }
+                        {
+                            Mobile mobile = World.WantMobile(bin.ReadInt32());
+                            mobile.m_IsFriend = true;
+                            this.m_Friends.Add(mobile);
+                            break;
+                        }
                     case 7:
-                        this.m_NotoQuery = (NotoQueryType) bin.ReadByte();
+                        this.m_NotoQuery = (NotoQueryType)bin.ReadByte();
                         break;
 
                     case 8:
@@ -311,12 +311,12 @@
                         break;
 
                     case 10:
-                    {
-                        Item item = World.WantItem(bin.ReadInt32());
-                        item.OverrideHue(0x22);
-                        this.m_AutoUse.Add(item);
-                        break;
-                    }
+                        {
+                            Item item = World.WantItem(bin.ReadInt32());
+                            item.OverrideHue(0x22);
+                            this.m_AutoUse.Add(item);
+                            break;
+                        }
                     case 11:
                         this.m_AutoPickup = bin.ReadBoolean();
                         break;
@@ -390,7 +390,7 @@
                         break;
 
                     default:
-                        bin.BaseStream.Seek((long) count, SeekOrigin.Current);
+                        bin.BaseStream.Seek((long)count, SeekOrigin.Current);
                         break;
                 }
             }
@@ -410,7 +410,7 @@
                     int num4 = reader.ReadInt32();
                     if (num3 == this.m_Serial)
                     {
-                        reader.BaseStream.Seek((long) num4, SeekOrigin.Current);
+                        reader.BaseStream.Seek((long)num4, SeekOrigin.Current);
                     }
                     else
                     {
@@ -440,7 +440,7 @@
             }
         }
 
-        [OptionHue, Optionable("Ally", "Notoriety Hues", Default=0x3f)]
+        [OptionHue, Optionable("Ally", "Notoriety Hues", Default = 0x3f)]
         public int AllyHue
         {
             get
@@ -454,7 +454,7 @@
             }
         }
 
-        [Optionable("Always Run", "Options", Default=false)]
+        [Optionable("Always Run", "Options", Default = false)]
         public bool AlwaysRun
         {
             get
@@ -467,7 +467,7 @@
             }
         }
 
-        [Optionable("Pickup Arrows", "Options", Default=false)]
+        [Optionable("Pickup Arrows", "Options", Default = false)]
         public bool Archery
         {
             get
@@ -481,7 +481,7 @@
             }
         }
 
-        [Optionable("Attackable", "Notoriety Hues", Default=0x517), OptionHue]
+        [Optionable("Attackable", "Notoriety Hues", Default = 0x517), OptionHue]
         public int AttackableHue
         {
             get
@@ -495,7 +495,7 @@
             }
         }
 
-        [Optionable("Pickup Regs & Bolas", "Options", Default=true)]
+        [Optionable("Pickup Regs & Bolas", "Options", Default = true)]
         public bool AutoPickup
         {
             get
@@ -517,7 +517,7 @@
             }
         }
 
-        [OptionHue, Optionable("Criminal", "Notoriety Hues", Default=0x3b2)]
+        [OptionHue, Optionable("Criminal", "Notoriety Hues", Default = 0x3b2)]
         public int CriminalHue
         {
             get
@@ -544,7 +544,7 @@
             }
         }
 
-        [OptionHue, Optionable("Emote", "Text Hues", Default=0x60)]
+        [OptionHue, Optionable("Emote", "Text Hues", Default = 0x60)]
         public int EmoteHue
         {
             get
@@ -558,7 +558,7 @@
             }
         }
 
-        [Optionable("Enemy", "Notoriety Hues", Default=0x90), OptionHue]
+        [Optionable("Enemy", "Notoriety Hues", Default = 0x90), OptionHue]
         public int EnemyHue
         {
             get
@@ -588,7 +588,7 @@
             }
         }
 
-        [Optionable("Notoriety Halos", "Options", Default=false)]
+        [Optionable("Notoriety Halos", "Options", Default = false)]
         public bool Halos
         {
             get
@@ -602,7 +602,7 @@
             }
         }
 
-        [Optionable("Incoming Names", "Options", Default=true)]
+        [Optionable("Incoming Names", "Options", Default = true)]
         public bool IncomingNames
         {
             get
@@ -615,7 +615,7 @@
             }
         }
 
-        [OptionHue, Optionable("Innocent", "Notoriety Hues", Default=0x59)]
+        [OptionHue, Optionable("Innocent", "Notoriety Hues", Default = 0x59)]
         public int InnocentHue
         {
             get
@@ -637,7 +637,7 @@
             }
         }
 
-        [Optionable("Loot Gold", "Options", Default=false)]
+        [Optionable("Loot Gold", "Options", Default = false)]
         public bool LootGold
         {
             get
@@ -663,7 +663,7 @@
             }
         }
 
-        [OptionHue, Optionable("Murderer", "Notoriety Hues", Default=0x22)]
+        [OptionHue, Optionable("Murderer", "Notoriety Hues", Default = 0x22)]
         public int MurdererHue
         {
             get
@@ -689,7 +689,7 @@
             }
         }
 
-        [Optionable("Notoriety Query", "Options", Default=true)]
+        [Optionable("Notoriety Query", "Options", Default = true)]
         public NotoQueryType NotoQuery
         {
             get
@@ -715,7 +715,7 @@
             }
         }
 
-        [Optionable("Queue Targets", "Options", Default=false)]
+        [Optionable("Queue Targets", "Options", Default = false)]
         public bool QueueTargets
         {
             get
@@ -750,7 +750,7 @@
             }
         }
 
-        [Optionable("Only Cure When Poisoned", "Options", Default=true)]
+        [Optionable("Only Cure When Poisoned", "Options", Default = true)]
         public bool RestrictCures
         {
             get
@@ -763,7 +763,7 @@
             }
         }
 
-        [Optionable("No Heal When Poisoned", "Options", Default=true)]
+        [Optionable("No Heal When Poisoned", "Options", Default = true)]
         public bool RestrictHeals
         {
             get
@@ -809,7 +809,7 @@
             }
         }
 
-        [Optionable("Speech", "Text Hues", Default=0x60), OptionHue]
+        [Optionable("Speech", "Text Hues", Default = 0x60), OptionHue]
         public int TextHue
         {
             get
@@ -823,7 +823,7 @@
             }
         }
 
-        [Optionable("Vendor", "Notoriety Hues", Default=0x35), OptionHue]
+        [Optionable("Vendor", "Notoriety Hues", Default = 0x35), OptionHue]
         public int VendorHue
         {
             get
@@ -837,7 +837,7 @@
             }
         }
 
-        [Optionable("Whisper", "Text Hues", Default=0x60), OptionHue]
+        [Optionable("Whisper", "Text Hues", Default = 0x60), OptionHue]
         public int WhisperHue
         {
             get
@@ -851,7 +851,7 @@
             }
         }
 
-        [OptionHue, Optionable("Yell", "Text Hues", Default=0x60)]
+        [OptionHue, Optionable("Yell", "Text Hues", Default = 0x60)]
         public int YellHue
         {
             get
@@ -908,7 +908,7 @@
             {
                 this.m_ID = ID;
                 this.m_Data = Encoding.ASCII.GetBytes(Data);
-                this.m_Length = ((byte[]) this.m_Data).Length;
+                this.m_Length = ((byte[])this.m_Data).Length;
                 this.m_Type = PropertyType.String;
             }
 
@@ -927,35 +927,35 @@
                 switch (this.m_Type)
                 {
                     case PropertyType.Numeric:
-                        Output.Write((int) this.m_Data);
+                        Output.Write((int)this.m_Data);
                         break;
 
                     case PropertyType.Numeric2:
-                        Output.Write(((int[]) this.m_Data)[0]);
-                        Output.Write(((int[]) this.m_Data)[1]);
+                        Output.Write(((int[])this.m_Data)[0]);
+                        Output.Write(((int[])this.m_Data)[1]);
                         break;
 
                     case PropertyType.Byte:
-                        Output.Write((byte) this.m_Data);
+                        Output.Write((byte)this.m_Data);
                         break;
 
                     case PropertyType.String:
-                        Output.Write((byte[]) this.m_Data);
+                        Output.Write((byte[])this.m_Data);
                         break;
 
                     case PropertyType.GumpLayout:
-                    {
-                        GumpLayout data = (GumpLayout) this.m_Data;
-                        Output.Write(data.Type);
-                        Output.Write(data.Extra);
-                        Output.Write(data.X);
-                        Output.Write(data.Y);
-                        Output.Write(data.Width);
-                        Output.Write(data.Height);
-                        break;
-                    }
+                        {
+                            GumpLayout data = (GumpLayout)this.m_Data;
+                            Output.Write(data.Type);
+                            Output.Write(data.Extra);
+                            Output.Write(data.X);
+                            Output.Write(data.Y);
+                            Output.Write(data.Width);
+                            Output.Write(data.Height);
+                            break;
+                        }
                     case PropertyType.Boolean:
-                        Output.Write((bool) this.m_Data);
+                        Output.Write((bool)this.m_Data);
                         break;
                 }
             }
@@ -980,4 +980,3 @@
         }
     }
 }
-

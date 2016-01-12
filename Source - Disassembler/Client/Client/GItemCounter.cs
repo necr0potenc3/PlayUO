@@ -43,7 +43,7 @@
             int num = 0;
             for (int i = 0; i < itemArray.Length; i++)
             {
-                num += Math.Max((ushort) itemArray[i].Amount, 1);
+                num += Math.Max((ushort)itemArray[i].Amount, (ushort)1);
             }
             if (this.m_LastAmount != num)
             {
@@ -55,4 +55,3 @@
         }
     }
 }
-

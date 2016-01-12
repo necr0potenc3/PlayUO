@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GAccountMenu : GMenuItem
     {
         private AccountProfile m_Account;
@@ -17,4 +15,3 @@
         }
     }
 }
-

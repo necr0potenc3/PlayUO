@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class MapBlock
     {
         public Tile[] m_LandTiles;
@@ -14,4 +12,3 @@
         }
     }
 }
-

@@ -1,8 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-    using System.Runtime.InteropServices;
-
     public class Effect
     {
         protected EffectList m_Children;
@@ -26,14 +23,14 @@
             }
             else if (this.m_Source.GetType() == typeof(Mobile))
             {
-                Mobile source = (Mobile) this.m_Source;
+                Mobile source = (Mobile)this.m_Source;
                 X = source.X;
                 Y = source.Y;
                 Z = source.Z;
             }
             else if (this.m_Source.GetType() == typeof(Item))
             {
-                Item item = (Item) this.m_Source;
+                Item item = (Item)this.m_Source;
                 X = item.X;
                 Y = item.Y;
                 Z = item.Z;
@@ -56,14 +53,14 @@
             }
             else if (this.m_Target.GetType() == typeof(Mobile))
             {
-                Mobile target = (Mobile) this.m_Target;
+                Mobile target = (Mobile)this.m_Target;
                 X = target.X;
                 Y = target.Y;
                 Z = target.Z;
             }
             else if (this.m_Target.GetType() == typeof(Item))
             {
-                Item item = (Item) this.m_Target;
+                Item item = (Item)this.m_Target;
                 X = item.X;
                 Y = item.Y;
                 Z = item.Z;
@@ -142,4 +139,3 @@
         }
     }
 }
-

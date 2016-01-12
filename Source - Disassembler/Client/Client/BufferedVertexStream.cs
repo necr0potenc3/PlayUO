@@ -1,7 +1,7 @@
 ﻿namespace Client
 {
+    using Microsoft.DirectX;
     using Microsoft.DirectX.Direct3D;
-    using System;
 
     public class BufferedVertexStream
     {
@@ -27,11 +27,11 @@
                 {
                     if (unlock)
                     {
-                        this.m_Stream = this.m_Buffer.Lock(this.m_VertexBufferOffset * this.m_SizePerVertex, vertexCount * this.m_SizePerVertex, 0x1000);
+                        this.m_Stream = this.m_Buffer.Lock(this.m_VertexBufferOffset * this.m_SizePerVertex, vertexCount * this.m_SizePerVertex, Microsoft.DirectX.Direct3D.LockFlags.NoOverwrite);
                     }
                     else
                     {
-                        this.m_Stream = this.m_Buffer.Lock(this.m_VertexBufferOffset * this.m_SizePerVertex, (this.m_VertexBufferLength - this.m_VertexBufferOffset) * this.m_SizePerVertex, 0x1000);
+                        this.m_Stream = this.m_Buffer.Lock(this.m_VertexBufferOffset * this.m_SizePerVertex, (this.m_VertexBufferLength - this.m_VertexBufferOffset) * this.m_SizePerVertex, Microsoft.DirectX.Direct3D.LockFlags.NoOverwrite);
                     }
                 }
                 this.m_Stream.Write(buffer, 0, vertexCount * this.m_SizePerVertex);
@@ -50,11 +50,11 @@
                 {
                     if (unlock)
                     {
-                        this.m_Stream = this.m_Buffer.Lock(0, vertexCount * this.m_SizePerVertex, 0x2000);
+                        this.m_Stream = this.m_Buffer.Lock(0, vertexCount * this.m_SizePerVertex, Microsoft.DirectX.Direct3D.LockFlags.Discard);
                     }
                     else
                     {
-                        this.m_Stream = this.m_Buffer.Lock(0, this.m_VertexBufferLength * this.m_SizePerVertex, 0x2000);
+                        this.m_Stream = this.m_Buffer.Lock(0, this.m_VertexBufferLength * this.m_SizePerVertex, Microsoft.DirectX.Direct3D.LockFlags.Discard);
                     }
                 }
                 this.m_Stream.Write(buffer, 0, vertexCount * this.m_SizePerVertex);
@@ -86,4 +86,3 @@
         }
     }
 }
-

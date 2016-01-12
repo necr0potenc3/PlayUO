@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public enum HtmlAlignment
     {
         Normal,
@@ -10,4 +8,3 @@
         Right
     }
 }
-

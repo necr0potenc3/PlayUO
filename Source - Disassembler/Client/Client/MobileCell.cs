@@ -13,7 +13,7 @@
         private MobileCell(Mobile m)
         {
             this.m_Mobile = m;
-            this.m_Z = (sbyte) m.Z;
+            this.m_Z = (sbyte)m.Z;
         }
 
         public void GetPackage(ref int Body, ref int Action, ref int Direction, ref int Frame, ref int Hue)
@@ -30,9 +30,9 @@
             if (m.Walking.Count > 0)
             {
                 GenericAction action;
-                Direction = Engine.GetAnimDirection((byte) ((WalkAnimation) m.Walking.Peek()).NewDir);
+                Direction = Engine.GetAnimDirection((byte)((WalkAnimation)m.Walking.Peek()).NewDir);
                 int num = 0;
-                if ((equip.Count > 0) && (((EquipEntry) equip[0]).m_Layer == Layer.Mount))
+                if ((equip.Count > 0) && (((EquipEntry)equip[0]).m_Layer == Layer.Mount))
                 {
                     action = ((Direction & 0x80) == 0) ? GenericAction.MountedWalk : GenericAction.MountedRun;
                     num = ((Direction & 0x80) == 0) ? 2 : 1;
@@ -59,7 +59,7 @@
                 if ((m.Animation == null) || !m.Animation.Running)
                 {
                     GenericAction mountedStand;
-                    if ((equip.Count > 0) && (((EquipEntry) equip[0]).m_Layer == Layer.Mount))
+                    if ((equip.Count > 0) && (((EquipEntry)equip[0]).m_Layer == Layer.Mount))
                     {
                         mountedStand = GenericAction.MountedStand;
                     }
@@ -74,7 +74,7 @@
                 {
                     int frames = Renderer.m_Frames;
                     Action = m.Animation.Action;
-                    Direction = Engine.GetAnimDirection((byte) (m.Direction & 7));
+                    Direction = Engine.GetAnimDirection((byte)(m.Direction & 7));
                     Action = Action % 0x23;
                     Direction &= 7;
                     int num4 = Engine.m_Animations.GetFrameCount(Body, Action, Direction);
@@ -107,7 +107,7 @@
                     {
                         GenericAction stand;
                         m.Animation.Stop();
-                        if ((equip.Count > 0) && (((EquipEntry) equip[0]).m_Layer == Layer.Mount))
+                        if ((equip.Count > 0) && (((EquipEntry)equip[0]).m_Layer == Layer.Mount))
                         {
                             stand = GenericAction.MountedStand;
                         }
@@ -125,7 +125,7 @@
                     {
                         GenericAction action4;
                         m.Animation.Stop();
-                        if ((equip.Count > 0) && (((EquipEntry) equip[0]).m_Layer == Layer.Mount))
+                        if ((equip.Count > 0) && (((EquipEntry)equip[0]).m_Layer == Layer.Mount))
                         {
                             action4 = GenericAction.MountedStand;
                         }
@@ -147,9 +147,9 @@
         {
             if (m_InstancePool.Count > 0)
             {
-                MobileCell cell = (MobileCell) m_InstancePool.Dequeue();
+                MobileCell cell = (MobileCell)m_InstancePool.Dequeue();
                 cell.m_Mobile = m;
-                cell.m_Z = (sbyte) m.Z;
+                cell.m_Z = (sbyte)m.Z;
                 return cell;
             }
             return new MobileCell(m);
@@ -204,4 +204,3 @@
         }
     }
 }
-

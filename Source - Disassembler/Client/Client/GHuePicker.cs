@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GHuePicker : Gump
@@ -31,9 +30,9 @@
                         int num5 = (num4 >> 10) & 0x1f;
                         int num6 = (num4 >> 5) & 0x1f;
                         int num7 = num4 & 0x1f;
-                        num5 = (int) (num5 * 8.225806f);
-                        num6 = (int) (num6 * 8.225806f);
-                        num7 = (int) (num7 * 8.225806f);
+                        num5 = (int)(num5 * 8.225806f);
+                        num6 = (int)(num6 * 8.225806f);
+                        num7 = (int)(num7 * 8.225806f);
                         int num8 = ((num5 << 0x10) | (num6 << 8)) | num7;
                         this.m_ColorTable[i, j, k] = num8;
                     }
@@ -55,7 +54,7 @@
                 }
                 if (Engine.GMPrivs)
                 {
-                    ((Tooltip) base.m_Tooltip).Text = string.Format("0x{0:X}", this.Hue);
+                    ((Tooltip)base.m_Tooltip).Text = string.Format("0x{0:X}", this.Hue);
                 }
                 Engine.Redraw();
             }
@@ -178,7 +177,7 @@
                 }
                 if (Engine.GMPrivs)
                 {
-                    ((Tooltip) base.m_Tooltip).Text = string.Format("0x{0:X}", this.Hue);
+                    ((Tooltip)base.m_Tooltip).Text = string.Format("0x{0:X}", this.Hue);
                 }
                 Engine.Redraw();
             }
@@ -243,7 +242,7 @@
                 }
                 if (Engine.GMPrivs)
                 {
-                    ((Tooltip) base.m_Tooltip).Text = string.Format("0x{0:X}", this.Hue);
+                    ((Tooltip)base.m_Tooltip).Text = string.Format("0x{0:X}", this.Hue);
                 }
                 Engine.Redraw();
             }
@@ -268,7 +267,7 @@
                 }
                 if (Engine.GMPrivs)
                 {
-                    ((Tooltip) base.m_Tooltip).Text = string.Format("0x{0:X}", this.Hue);
+                    ((Tooltip)base.m_Tooltip).Text = string.Format("0x{0:X}", this.Hue);
                 }
                 Engine.Redraw();
             }
@@ -283,4 +282,3 @@
         }
     }
 }
-

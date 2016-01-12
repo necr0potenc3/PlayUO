@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class PSpeech : Packet
     {
         public PSpeech(string ToSay) : base(3, "Speech")
@@ -31,11 +29,10 @@
                 ToSay = string.Format("<OOC> {0}", ToSay.Substring(2));
             }
             base.m_Stream.Write(toWrite);
-            base.m_Stream.Write((short) textHue);
-            base.m_Stream.Write((short) 3);
+            base.m_Stream.Write((short)textHue);
+            base.m_Stream.Write((short)3);
             base.m_Stream.Write(ToSay);
-            base.m_Stream.Write((byte) 0);
+            base.m_Stream.Write((byte)0);
         }
     }
 }
-

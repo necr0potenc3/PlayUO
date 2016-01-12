@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class ItemTooltip : ITooltip
     {
         private Client.Gump m_Gump;
@@ -50,4 +48,3 @@
         }
     }
 }
-

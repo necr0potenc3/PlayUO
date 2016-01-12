@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GQuestionMenuEntry : Gump
     {
         private AnswerEntry m_Answer;
@@ -77,4 +75,3 @@
         }
     }
 }
-

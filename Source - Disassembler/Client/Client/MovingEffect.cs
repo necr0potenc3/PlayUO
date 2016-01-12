@@ -101,7 +101,7 @@
                 base.SetSource(source);
                 if ((!source.Player && !source.IsMoving) && (((xSource != 0) || (ySource != 0)) || (zSource != 0)))
                 {
-                    source.SetLocation((short) xSource, (short) ySource, (short) zSource);
+                    source.SetLocation((short)xSource, (short)ySource, (short)zSource);
                     source.Update();
                     source.UpdateReal();
                 }
@@ -114,7 +114,7 @@
                     base.SetSource(item);
                     if (((xSource != 0) || (ySource != 0)) || (zSource != 0))
                     {
-                        item.SetLocation((short) xSource, (short) ySource, (short) zSource);
+                        item.SetLocation((short)xSource, (short)ySource, (short)zSource);
                         item.Update();
                     }
                 }
@@ -129,7 +129,7 @@
                 base.SetTarget(source);
                 if ((!source.Player && !source.IsMoving) && (((xTarget != 0) || (yTarget != 0)) || (zTarget != 0)))
                 {
-                    source.SetLocation((short) xTarget, (short) yTarget, (short) zTarget);
+                    source.SetLocation((short)xTarget, (short)yTarget, (short)zTarget);
                     source.Update();
                     source.UpdateReal();
                 }
@@ -142,7 +142,7 @@
                     base.SetTarget(target);
                     if (((xTarget != 0) || (yTarget != 0)) || (zTarget != 0))
                     {
-                        target.SetLocation((short) xTarget, (short) yTarget, (short) zTarget);
+                        target.SetLocation((short)xTarget, (short)yTarget, (short)zTarget);
                         target.Update();
                     }
                 }
@@ -191,10 +191,10 @@
             num12 -= Renderer.m_yScroll;
             if ((base.m_Source != null) && (base.m_Source.GetType() == typeof(Mobile)))
             {
-                Mobile source = (Mobile) base.m_Source;
+                Mobile source = (Mobile)base.m_Source;
                 if (source.Walking.Count > 0)
                 {
-                    WalkAnimation animation = (WalkAnimation) source.Walking.Peek();
+                    WalkAnimation animation = (WalkAnimation)source.Walking.Peek();
                     if (animation.Snapshot(ref xOffset, ref yOffset, ref fOffset))
                     {
                         num11 += xOffset;
@@ -218,10 +218,10 @@
             num14 -= Renderer.m_yScroll;
             if ((base.m_Target != null) && (base.m_Target.GetType() == typeof(Mobile)))
             {
-                Mobile target = (Mobile) base.m_Target;
+                Mobile target = (Mobile)base.m_Target;
                 if (target.Walking.Count > 0)
                 {
-                    WalkAnimation animation2 = (WalkAnimation) target.Walking.Peek();
+                    WalkAnimation animation2 = (WalkAnimation)target.Walking.Peek();
                     if (animation2.Snapshot(ref xOffset, ref yOffset, ref fOffset))
                     {
                         num13 += xOffset;
@@ -229,15 +229,15 @@
                     }
                 }
             }
-            Texture item = null;
+            Texture texture = null;
             IHue hue = Renderer.m_Dead ? Hues.Grayscale : this.m_Hue;
             if (this.m_Animated)
             {
-                item = hue.GetItem(this.m_ItemID + this.m_Animation[((Renderer.m_Frames - this.m_Start) / this.m_Delay) % this.m_FrameCount]);
+                texture = hue.GetItem(this.m_ItemID + this.m_Animation[((Renderer.m_Frames - this.m_Start) / this.m_Delay) % this.m_FrameCount]);
             }
             else
             {
-                item = hue.GetItem(this.m_ItemID);
+                texture = hue.GetItem(this.m_ItemID);
             }
             switch (this.m_RenderMode)
             {
@@ -259,9 +259,9 @@
                     Renderer.SetBlendType(DrawBlendType.Normal);
                     break;
             }
-            int num15 = num11 + ((int) ((num13 - num11) * normalized));
-            int num16 = num12 + ((int) ((num14 - num12) * normalized));
-            item.DrawRotated(num15, num16, Math.Atan2((double) (num12 - num14), (double) (num11 - num13)));
+            int num15 = num11 + ((int)((num13 - num11) * normalized));
+            int num16 = num12 + ((int)((num14 - num12) * normalized));
+            texture.DrawRotated(num15, num16, Math.Atan2((double)(num12 - num14), (double)(num11 - num13)));
             switch (this.m_RenderMode)
             {
                 case 2:
@@ -287,4 +287,3 @@
         }
     }
 }
-

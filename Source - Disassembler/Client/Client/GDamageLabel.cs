@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GDamageLabel : GLabel
     {
         private Mobile m_Mobile;
@@ -41,7 +39,7 @@
             {
                 if (normalized >= 0.5)
                 {
-                    this.Alpha = (float) (1.0 - ((normalized - 0.5) * 2.0));
+                    this.Alpha = (float)(1.0 - ((normalized - 0.5) * 2.0));
                 }
                 int xWorld = Renderer.m_xWorld;
                 int yWorld = Renderer.m_yWorld;
@@ -58,7 +56,7 @@
                 num9 += Engine.GameY;
                 if (this.m_Mobile.Walking.Count > 0)
                 {
-                    WalkAnimation animation = (WalkAnimation) this.m_Mobile.Walking.Peek();
+                    WalkAnimation animation = (WalkAnimation)this.m_Mobile.Walking.Peek();
                     int xOffset = 0;
                     int yOffset = 0;
                     int fOffset = 0;
@@ -71,10 +69,9 @@
                 num8 -= Renderer.m_xScroll;
                 num9 -= Renderer.m_yScroll;
                 this.X = (num8 - (((base.Image.xMax - base.Image.xMin) + 1) / 2)) - base.Image.xMin;
-                this.Y = (num9 - 30) - ((int) (normalized * 40.0));
+                this.Y = (num9 - 30) - ((int)(normalized * 40.0));
                 base.Scissor(new Clipper(Engine.GameX, Engine.GameY, Engine.GameWidth, Engine.GameHeight));
             }
         }
     }
 }
-

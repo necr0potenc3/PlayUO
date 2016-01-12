@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class UpdateAdd : UpdateInfo
     {
         public int NewX;
@@ -16,4 +14,3 @@
         }
     }
 }
-

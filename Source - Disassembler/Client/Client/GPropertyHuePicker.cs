@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GPropertyHuePicker : GAlphaBackground
     {
         private GBrightnessBar m_Bar;
@@ -10,7 +8,7 @@
 
         public GPropertyHuePicker(GPropertyEntry entry) : base(0, 0, 200, 150)
         {
-            int num = (int) entry.Entry.Property.GetValue(entry.Object, null);
+            int num = (int)entry.Entry.Property.GetValue(entry.Object, null);
             this.m_Entry = entry;
             base.m_CanDrag = false;
             base.FillColor = GumpColors.Control;
@@ -60,4 +58,3 @@
         }
     }
 }
-

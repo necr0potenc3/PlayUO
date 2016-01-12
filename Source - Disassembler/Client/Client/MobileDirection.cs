@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public enum MobileDirection : byte
     {
         Down = 3,
@@ -17,4 +15,3 @@
         West = 6
     }
 }
-

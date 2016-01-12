@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class PUseRequest : Packet
     {
         private static IEntity m_Last;
@@ -32,4 +30,3 @@
         }
     }
 }
-

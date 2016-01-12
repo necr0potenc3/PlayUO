@@ -1,8 +1,6 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
-    using System.Reflection;
 
     public class TextureCache
     {
@@ -19,7 +17,7 @@
             IEnumerator enumerator = this.m_Cache.Values.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                ((Texture) enumerator.Current).Dispose();
+                ((Texture)enumerator.Current).Dispose();
             }
             this.m_Cache.Clear();
             this.m_Cache = null;
@@ -37,9 +35,8 @@
                     obj2 = Engine.TextureArt.ReadFromDisk(textureID, this.m_Hue);
                     this.m_Cache.Add(textureID, obj2);
                 }
-                return (Texture) obj2;
+                return (Texture)obj2;
             }
         }
     }
 }
-

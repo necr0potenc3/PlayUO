@@ -1,7 +1,6 @@
 ﻿namespace Client
 {
     using Microsoft.DirectX.Direct3D;
-    using System;
 
     public class VertexConstructor
     {
@@ -16,4 +15,3 @@
         }
     }
 }
-

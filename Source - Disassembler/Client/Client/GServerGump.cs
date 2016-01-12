@@ -47,12 +47,12 @@
 
         private void OnScroll(double vNew, double vOld, Gump g)
         {
-            int y = (int) vNew;
-            Gump tag = (Gump) g.GetTag("toScroll");
-            int num2 = (int) g.GetTag("yBase");
-            int h = (int) g.GetTag("viewHeight");
+            int y = (int)vNew;
+            Gump tag = (Gump)g.GetTag("toScroll");
+            int num2 = (int)g.GetTag("yBase");
+            int h = (int)g.GetTag("viewHeight");
             tag.Y = num2 - y;
-            ((GHtmlLabel) tag).Scissor(0, y, tag.Width, h);
+            ((GHtmlLabel)tag).Scissor(0, y, tag.Width, h);
         }
 
         public GumpList Pages(int page)
@@ -62,7 +62,7 @@
             {
                 obj2 = this.m_Pages[page] = new GumpList(this);
             }
-            return (GumpList) obj2;
+            return (GumpList)obj2;
         }
 
         private LayoutEntry[] ParseLayout(string layout)
@@ -76,7 +76,7 @@
                 startIndex = layout.IndexOf('}', num);
                 dataStore.Add(new LayoutEntry(layout.Substring(num, startIndex - num).Trim()));
             }
-            LayoutEntry[] entryArray = (LayoutEntry[]) dataStore.ToArray(typeof(LayoutEntry));
+            LayoutEntry[] entryArray = (LayoutEntry[])dataStore.ToArray(typeof(LayoutEntry));
             Engine.ReleaseDataStore(dataStore);
             return entryArray;
         }
@@ -128,7 +128,7 @@
                     {
                         this.Pages(thisPage).Add(new GImage(0x100, x + width, i));
                     }
-                    GVSlider slider = new GVSlider(0xfe, (x + width) + 1, (y + 1) + 12, 13, (height - 2) - 0x18, 0.0, 0.0, (double) (label3.Height - num), 1.0);
+                    GVSlider slider = new GVSlider(0xfe, (x + width) + 1, (y + 1) + 12, 13, (height - 2) - 0x18, 0.0, 0.0, (double)(label3.Height - num), 1.0);
                     slider.SetTag("yBase", label3.Y);
                     slider.SetTag("toScroll", label3);
                     slider.SetTag("viewHeight", num);
@@ -165,15 +165,15 @@
                 GLabel label;
                 object obj2;
                 LayoutEntry le = list[i];
-                if (((obj2 = le.Name) != null) && ((obj2 = <PrivateImplementationDetails>.$$method0x60000f4-1[obj2]) != null))
+                if (((obj2 = le.Name) != null) /*&& ((obj2 = < PrivateImplementationDetails >.$$method0x60000f4 - 1[obj2]) != null)*/)
                 {
-                    switch (((int) obj2))
+                    switch (((int)obj2))
                     {
                         case 0:
                         case 1:
-                        {
-                            continue;
-                        }
+                            {
+                                continue;
+                            }
                         case 2:
                             goto Label_020B;
 
@@ -181,59 +181,59 @@
                             goto Label_0243;
 
                         case 4:
-                        {
-                            this.m_CanClose = false;
-                            continue;
-                        }
+                            {
+                                this.m_CanClose = false;
+                                continue;
+                            }
                         case 5:
-                        {
-                            this.m_CanMove = false;
-                            continue;
-                        }
+                            {
+                                this.m_CanMove = false;
+                                continue;
+                            }
                         case 6:
-                        {
-                            this.Pages(page).Add(new GServerBackground(this, le[0], le[1], le[3], le[4], le[2] + 4, true));
-                            continue;
-                        }
+                            {
+                                this.Pages(page).Add(new GServerBackground(this, le[0], le[1], le[3], le[4], le[2] + 4, true));
+                                continue;
+                            }
                         case 7:
-                        {
-                            this.Pages(page).Add(new GServerBackground(this, le[0], le[1], le[2], le[3], le[4], false));
-                            continue;
-                        }
+                            {
+                                this.Pages(page).Add(new GServerBackground(this, le[0], le[1], le[2], le[3], le[4], false));
+                                continue;
+                            }
                         case 8:
                             goto Label_0301;
 
                         case 9:
-                        {
-                            this.Pages(page).Add(new GServerTextBox(text[le[6]], le));
-                            continue;
-                        }
+                            {
+                                this.Pages(page).Add(new GServerTextBox(text[le[6]], le));
+                                continue;
+                            }
                         case 10:
-                        {
-                            this.Pages(page).Add(new GItemArt(le[0], le[1], le[2]));
-                            continue;
-                        }
+                            {
+                                this.Pages(page).Add(new GItemArt(le[0], le[1], le[2]));
+                                continue;
+                            }
                         case 11:
-                        {
-                            this.Pages(page).Add(new GServerButton(this, le));
-                            continue;
-                        }
+                            {
+                                this.Pages(page).Add(new GServerButton(this, le));
+                                continue;
+                            }
                         case 12:
-                        {
-                            this.Pages(page).Add(new GServerRadio(this, le));
-                            continue;
-                        }
+                            {
+                                this.Pages(page).Add(new GServerRadio(this, le));
+                                continue;
+                            }
                         case 13:
-                        {
-                            this.Pages(page).Add(new GServerCheckBox(this, le));
-                            continue;
-                        }
+                            {
+                                this.Pages(page).Add(new GServerCheckBox(this, le));
+                                continue;
+                            }
                         case 14:
-                        {
-                            int num4 = le[2];
-                            this.Pages(page).Add(new GLabel(text[le[3]], Engine.GetUniFont(1), Hues.Load(num4 + 1), le[0] - 1, le[1]));
-                            continue;
-                        }
+                            {
+                                int num4 = le[2];
+                                this.Pages(page).Add(new GLabel(text[le[3]], Engine.GetUniFont(1), Hues.Load(num4 + 1), le[0] - 1, le[1]));
+                                continue;
+                            }
                         case 15:
                             num5 = le[4];
                             str3 = text[le[5]];
@@ -246,20 +246,20 @@
                             goto Label_04EB;
 
                         case 0x10:
-                        {
-                            this.ProcessHtmlGump(page, le[0], le[1], le[2], le[3], Localization.GetString(le[4]), le[5] != 0, le[6] != 0, ((le[5] == 0) && (le[6] != 0)) ? 0xffffff : 0);
-                            continue;
-                        }
+                            {
+                                this.ProcessHtmlGump(page, le[0], le[1], le[2], le[3], Localization.GetString(le[4]), le[5] != 0, le[6] != 0, ((le[5] == 0) && (le[6] != 0)) ? 0xffffff : 0);
+                                continue;
+                            }
                         case 0x11:
-                        {
-                            this.ProcessHtmlGump(page, le[0], le[1], le[2], le[3], Localization.GetString(le[4]), le[5] != 0, le[6] != 0, Engine.C16232(le[7]));
-                            continue;
-                        }
+                            {
+                                this.ProcessHtmlGump(page, le[0], le[1], le[2], le[3], Localization.GetString(le[4]), le[5] != 0, le[6] != 0, Engine.C16232(le[7]));
+                                continue;
+                            }
                         case 0x12:
-                        {
-                            this.ProcessHtmlGump(page, le[0], le[1], le[2], le[3], text[le[4]], le[5] != 0, le[6] != 0, ((le[5] == 0) && (le[6] != 0)) ? 0xffffff : 0);
-                            continue;
-                        }
+                            {
+                                this.ProcessHtmlGump(page, le[0], le[1], le[2], le[3], text[le[4]], le[5] != 0, le[6] != 0, ((le[5] == 0) && (le[6] != 0)) ? 0xffffff : 0);
+                                continue;
+                            }
                     }
                 }
                 goto Label_06A2;
@@ -356,7 +356,7 @@
                     list.Add(rect);
                     for (int j = num3; j < this.m_AlphaRegions.Count; j++)
                     {
-                        Gump gump2 = (Gump) this.m_AlphaRegions[j];
+                        Gump gump2 = (Gump)this.m_AlphaRegions[j];
                         if (gump2 is GTransparentRegion)
                         {
                             Rectangle a = new Rectangle(gump2.X, gump2.Y, gump2.Width, gump2.Height);
@@ -372,7 +372,7 @@
                             Gump gump3 = gumpArray[k];
                             if (gump3 is GServerBackground)
                             {
-                                GServerBackground background = (GServerBackground) gump3;
+                                GServerBackground background = (GServerBackground)gump3;
                                 Rectangle rectangle4 = new Rectangle(background.X + background.OffsetX, background.Y + background.OffsetY, background.UseWidth, background.UseHeight);
                                 list.Remove(rectangle4);
                                 list2.Remove(rectangle4);
@@ -495,7 +495,7 @@
             }
         }
 
-        private class LocationCacheEntry
+        public class LocationCacheEntry
         {
             public int m_DialogID;
             public int m_xOffset;
@@ -508,4 +508,3 @@
         }
     }
 }
-

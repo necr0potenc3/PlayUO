@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.IO;
 
     public class Packet
@@ -16,7 +15,7 @@
             this.m_Name = name;
             this.m_Stream = new PacketWriter();
             this.m_Stream.Write(packetID);
-            this.m_Stream.Write((short) 0);
+            this.m_Stream.Write((short)0);
         }
 
         public Packet(byte packetID, string name, int length)
@@ -35,7 +34,7 @@
             {
                 long length = this.m_Stream.Length;
                 this.m_Stream.Seek(1L, SeekOrigin.Begin);
-                this.m_Stream.Write((ushort) length);
+                this.m_Stream.Write((ushort)length);
                 this.m_Stream.Flush();
             }
             return this.m_Stream.Compile();
@@ -65,4 +64,3 @@
         }
     }
 }
-

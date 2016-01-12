@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public enum GenericAction
     {
         Die,
@@ -13,4 +11,3 @@
         Stand
     }
 }
-

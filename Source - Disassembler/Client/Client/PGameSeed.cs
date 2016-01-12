@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.IO;
 
     public class PGameSeed : Packet
@@ -14,8 +13,7 @@
             }
             base.m_Stream.Seek(0L, SeekOrigin.Begin);
             base.m_Stream.Write(gameSeed);
-            Network.SetupCrypto((uint) gameSeed);
+            Network.SetupCrypto((uint)gameSeed);
         }
     }
 }
-

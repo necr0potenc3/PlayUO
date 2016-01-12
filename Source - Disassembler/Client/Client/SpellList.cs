@@ -20,9 +20,8 @@
             bool flag = true;
             if (File.Exists(path))
             {
-                XmlTextReader xml = new XmlTextReader(path) {
-                    WhitespaceHandling = WhitespaceHandling.None
-                };
+                XmlTextReader xml = new XmlTextReader(path);
+                xml.WhitespaceHandling = WhitespaceHandling.None;
                 flag = !this.Parse(xml);
                 xml.Close();
             }
@@ -56,9 +55,9 @@
 
                     case XmlNodeType.Comment:
                     case XmlNodeType.XmlDeclaration:
-                    {
-                        continue;
-                    }
+                        {
+                            continue;
+                        }
                 }
                 return false;
             }
@@ -143,15 +142,15 @@
                 switch (xml.Name)
                 {
                     case "name":
-                    {
-                        name = xml.Value;
-                        continue;
-                    }
+                        {
+                            name = xml.Value;
+                            continue;
+                        }
                     case "power":
-                    {
-                        power = xml.Value;
-                        continue;
-                    }
+                        {
+                            power = xml.Value;
+                            continue;
+                        }
                 }
                 return false;
             }
@@ -178,29 +177,29 @@
                         switch (xml.Name)
                         {
                             case "reagent":
-                            {
-                                if (!this.Parse_Reagent(xml, spell))
                                 {
-                                    return false;
+                                    if (!this.Parse_Reagent(xml, spell))
+                                    {
+                                        return false;
+                                    }
+                                    continue;
                                 }
-                                continue;
-                            }
                             case "tithing":
-                            {
-                                if (!this.Parse_Tithing(xml, spell))
                                 {
-                                    return false;
+                                    if (!this.Parse_Tithing(xml, spell))
+                                    {
+                                        return false;
+                                    }
+                                    continue;
                                 }
-                                continue;
-                            }
                             case "skill":
-                            {
-                                if (!this.Parse_Skill(xml, spell))
                                 {
-                                    return false;
+                                    if (!this.Parse_Skill(xml, spell))
+                                    {
+                                        return false;
+                                    }
+                                    continue;
                                 }
-                                continue;
-                            }
                             case "mana":
                                 if (this.Parse_Mana(xml, spell))
                                 {
@@ -286,9 +285,9 @@
                         return false;
 
                     case XmlNodeType.Comment:
-                    {
-                        continue;
-                    }
+                        {
+                            continue;
+                        }
                 }
                 return (nodeType == XmlNodeType.EndElement);
             }
@@ -367,4 +366,3 @@
         }
     }
 }
-

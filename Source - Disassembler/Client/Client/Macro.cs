@@ -5,18 +5,18 @@
 
     public class Macro : IComparable
     {
-        private Action[] m_Actions;
+        private Client.Action[] m_Actions;
         private static Macro m_Current;
         private DateTime m_DelayEnd;
         private int m_FileIndex;
         private int m_Index;
         private Keys m_Key;
         private Keys m_Mods;
-        public const Keys WheelDown = 0x11001;
-        public const Keys WheelPress = 0x11002;
-        public const Keys WheelUp = 0x11000;
+        public const Keys WheelDown = (Keys)0x11001;
+        public const Keys WheelPress = (Keys)0x11002;
+        public const Keys WheelUp = (Keys)0x11000;
 
-        public Macro(Keys key, Keys mods, Action[] actions)
+        public Macro(Keys key, Keys mods, Client.Action[] actions)
         {
             this.m_Key = key;
             this.m_Mods = mods;
@@ -24,10 +24,10 @@
             this.m_Index = -1;
         }
 
-        public void AddAction(Action a)
+        public void AddAction(Client.Action a)
         {
-            Action[] actions = this.m_Actions;
-            this.m_Actions = new Action[actions.Length + 1];
+            Client.Action[] actions = this.m_Actions;
+            this.m_Actions = new Client.Action[actions.Length + 1];
             for (int i = 0; i < actions.Length; i++)
             {
                 this.m_Actions[i] = actions[i];
@@ -43,7 +43,7 @@
 
         public int CompareTo(object obj)
         {
-            Macro macro = (Macro) obj;
+            Macro macro = (Macro)obj;
             if (this.IsWheelMacro() && !macro.IsWheelMacro())
             {
                 return -1;
@@ -61,7 +61,7 @@
             {
                 if (m_Current.m_DelayEnd == DateTime.MinValue)
                 {
-                    m_Current.m_DelayEnd = DateTime.Now + TimeSpan.FromMilliseconds((double) ms);
+                    m_Current.m_DelayEnd = DateTime.Now + TimeSpan.FromMilliseconds((double)ms);
                     return false;
                 }
                 if (DateTime.Now >= m_Current.m_DelayEnd)
@@ -81,7 +81,7 @@
 
         public bool IsWheelMacro()
         {
-            return (((this.m_Key == 0x11000) || (this.m_Key == 0x11001)) || (this.m_Key == 0x11002));
+            return (((this.m_Key == (Keys)0x11000) || (this.m_Key == (Keys)0x11001)) || (this.m_Key == (Keys)0x11002));
         }
 
         public static void Repeat()
@@ -109,7 +109,7 @@
             m_Current = this;
             if (this.m_Index < this.m_Actions.Length)
             {
-                Action action = this.m_Actions[this.m_Index];
+                Client.Action action = this.m_Actions[this.m_Index];
                 ActionHandler handler = action.Handler;
                 if ((handler == null) || handler.Plugin.OnMacroAction(action.Param))
                 {
@@ -138,7 +138,7 @@
             Macros.Running.Remove(this);
         }
 
-        public Action[] Actions
+        public Client.Action[] Actions
         {
             get
             {
@@ -231,4 +231,3 @@
         }
     }
 }
-

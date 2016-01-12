@@ -23,7 +23,7 @@
 
         public int CompareTo(object obj)
         {
-            return this.m_Name.CompareTo(((ActionHandler) obj).m_Name);
+            return this.m_Name.CompareTo(((ActionHandler)obj).m_Name);
         }
 
         public static ActionHandler Find(string action)
@@ -149,4 +149,3 @@
         }
     }
 }
-

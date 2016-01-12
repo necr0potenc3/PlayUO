@@ -1,9 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-    using System.Drawing;
-    using System.Windows.Forms;
-
     public class Cursor
     {
         private static CursorEntry[,] m_Cursors = new CursorEntry[0x10, 3];
@@ -70,7 +66,7 @@
             }
             else if (Engine.m_Ingame)
             {
-                idCursor = (int) Engine.pointingDir;
+                idCursor = (int)Engine.pointingDir;
             }
             if (Engine.m_Ingame)
             {
@@ -123,27 +119,27 @@
                 default:
                     return null;
             }
-            Texture item = hue.GetItem(num);
-            if ((item == null) || item.IsEmpty())
+            Texture tex = hue.GetItem(num);
+            if ((tex == null) || tex.IsEmpty())
             {
                 return new CursorEntry(0, 0, 0, 0, Texture.Empty);
             }
-            if (item.m_Factory != null)
+            if (tex.m_Factory != null)
             {
-                item.m_Factory.Remove(item);
-                item.m_Factory = null;
-                item.m_FactoryArgs = null;
+                tex.m_Factory.Remove(tex);
+                tex.m_Factory = null;
+                tex.m_FactoryArgs = null;
             }
             int xOffset = 0;
             int yOffset = 0;
             if (idType < 2)
             {
-                LockData data = item.Lock(LockFlags.ReadWrite);
+                LockData data = tex.Lock(LockFlags.ReadWrite);
                 int width = data.Width;
                 int height = data.Height;
                 int num6 = data.Pitch >> 1;
-                short* pvSrc = (short*) data.pvSrc;
-                short* numPtr2 = (short*) (data.pvSrc + (((height - 1) * num6) * 2));
+                short* pvSrc = (short*)data.pvSrc;
+                short* numPtr2 = (short*)((int)data.pvSrc + (((height - 1) * num6) * 2));
                 for (int i = 0; i < width; i++)
                 {
                     if ((pvSrc[0] & 0x7fff) == 0x3e0)
@@ -155,8 +151,8 @@
                     numPtr2++;
                     numPtr2[0] = 0;
                 }
-                pvSrc = (short*) data.pvSrc;
-                numPtr2 = (short*) (data.pvSrc + ((width - 1) * 2));
+                pvSrc = (short*)data.pvSrc;
+                numPtr2 = (short*)((int)data.pvSrc + ((width - 1) * 2));
                 for (int j = 0; j < height; j++)
                 {
                     if ((pvSrc[0] & 0x7fff) == 0x3e0)
@@ -168,7 +164,7 @@
                     pvSrc += num6;
                     numPtr2 += num6;
                 }
-                item.Unlock();
+                tex.Unlock();
             }
             else
             {
@@ -183,12 +179,12 @@
                 }
                 xOffset = entry.m_xOffset;
                 yOffset = entry.m_yOffset;
-                LockData data2 = item.Lock(LockFlags.ReadWrite);
+                LockData data2 = tex.Lock(LockFlags.ReadWrite);
                 int num9 = data2.Width;
                 int num10 = data2.Height;
                 int num11 = data2.Pitch >> 1;
-                short* numPtr3 = (short*) data2.pvSrc;
-                short* numPtr4 = (short*) (data2.pvSrc + (((num10 - 1) * num11) * 2));
+                short* numPtr3 = (short*)data2.pvSrc;
+                short* numPtr4 = (short*)((int)data2.pvSrc + (((num10 - 1) * num11) * 2));
                 for (int k = 0; k < num9; k++)
                 {
                     numPtr3++;
@@ -196,8 +192,8 @@
                     numPtr4++;
                     numPtr4[0] = 0;
                 }
-                numPtr3 = (short*) data2.pvSrc;
-                numPtr4 = (short*) (data2.pvSrc + ((num9 - 1) * 2));
+                numPtr3 = (short*)data2.pvSrc;
+                numPtr4 = (short*)((int)data2.pvSrc + ((num9 - 1) * 2));
                 for (int m = 0; m < num10; m++)
                 {
                     numPtr3[0] = 0;
@@ -205,15 +201,15 @@
                     numPtr3 += num11;
                     numPtr4 += num11;
                 }
-                item.Unlock();
+                tex.Unlock();
             }
-            return new CursorEntry(idCursor, idType, xOffset, yOffset, item);
+            return new CursorEntry(idCursor, idType, xOffset, yOffset, tex);
         }
 
         public static void MoveTo(Gump who)
         {
-            Point point = who.PointToScreen(new Point(who.Width / 2, who.Height / 2));
-            Cursor.Position = Engine.m_Display.PointToScreen((Point) point);
+            Client.Point point = who.PointToScreen(new Client.Point(who.Width / 2, who.Height / 2));
+            System.Windows.Forms.Cursor.Position = Engine.m_Display.PointToScreen((System.Drawing.Point)point);
             Gumps.Invalidate();
         }
 
@@ -272,4 +268,3 @@
         }
     }
 }
-

@@ -54,7 +54,7 @@
             m_MapDataBuffer = new byte[0xc4];
             m_StaIndexBuffer = new byte[12];
             m_StaDataBuffer = new byte[0x100];
-            m_pAnims = (sbyte*) Memory.Alloc(0x100000);
+            m_pAnims = (sbyte*)Memory.Alloc(0x100000);
             string path = "Data/QuickLoad/TileData.mul";
             string str2 = Engine.FileManager.BasePath(path);
             FileInfo info = new FileInfo(Engine.FileManager.ResolveMUL(Files.Tiledata));
@@ -85,7 +85,7 @@
                                 fixed (byte* numRef = buffer)
                                 {
                                     byte* numPtr = numRef;
-                                    LandData* dataPtr4 = (LandData*) numPtr;
+                                    LandData* dataPtr4 = (LandData*)numPtr;
                                     int num = 0x4000;
                                     while (--num >= 0)
                                     {
@@ -93,7 +93,7 @@
                                         dataPtr4++;
                                         dataPtr[0] = dataPtr4[0];
                                     }
-                                    ItemData* dataPtr5 = (ItemData*) dataPtr4;
+                                    ItemData* dataPtr5 = (ItemData*)dataPtr4;
                                     num = 0x4000;
                                     int num2 = -1;
                                     m_ItemFlags = new TileFlags[0x4000];
@@ -105,14 +105,14 @@
                                         dataPtr2[0] = dataPtr5[0];
                                     }
                                     num = 0x4000;
-                                    numPtr = (byte*) dataPtr5;
+                                    numPtr = (byte*)dataPtr5;
                                     sbyte* pAnims = m_pAnims;
                                     while (--num >= 0)
                                     {
                                         dataPtr3->pvFrames = pAnims;
                                         pAnims += 0x40;
-                                        int* pvFrames = (int*) dataPtr3->pvFrames;
-                                        int* numPtr4 = (int*) numPtr;
+                                        int* pvFrames = (int*)dataPtr3->pvFrames;
+                                        int* numPtr4 = (int*)numPtr;
                                         pvFrames[0] = numPtr4[0];
                                         pvFrames[1] = numPtr4[1];
                                         pvFrames[2] = numPtr4[2];
@@ -165,8 +165,8 @@
                         int num5 = 0;
                         while (num5++ < 0x20)
                         {
-                            dataPtr6->m_Flags = *((int*) numPtr5);
-                            dataPtr6->m_Texture = *((short*) (numPtr5 + 4));
+                            dataPtr6->m_Flags = *((int*)numPtr5);
+                            dataPtr6->m_Texture = *((short*)(numPtr5 + 4));
                             dataPtr6++;
                             numPtr5 += 0x1a;
                         }
@@ -191,12 +191,12 @@
                         while (num8++ < 0x20)
                         {
                             num7++;
-                            dataPtr7->m_Flags = *((int*) numPtr6);
+                            dataPtr7->m_Flags = *((int*)numPtr6);
                             dataPtr7->m_Weight = numPtr6[4];
                             dataPtr7->m_Quality = numPtr6[5];
                             dataPtr7->m_Extra = numPtr6[6];
                             dataPtr7->m_Quantity = numPtr6[9];
-                            dataPtr7->m_Animation = *((short*) (numPtr6 + 10));
+                            dataPtr7->m_Animation = *((short*)(numPtr6 + 10));
                             dataPtr7->m_Value = numPtr6[15];
                             dataPtr7->m_Height = numPtr6[0x10];
                             dataPtr7++;
@@ -228,7 +228,7 @@
                         {
                             dataPtr8->pvFrames = numPtr8;
                             numPtr8 += 0x40;
-                            sbyte* numPtr9 = (sbyte*) numPtr7;
+                            sbyte* numPtr9 = (sbyte*)numPtr7;
                             for (int i = 0; i < 0x40; i++)
                             {
                                 dataPtr8->pvFrames[i] = *(numPtr9++);
@@ -249,7 +249,7 @@
             stream3.Close();
             fixed (byte* numRef5 = buffer2)
             {
-                int* numPtr10 = (int*) numRef5;
+                int* numPtr10 = (int*)numRef5;
                 numPtr10++;
                 int num12 = numPtr10[0];
                 int num13 = 0;
@@ -277,8 +277,8 @@
                                 int num19 = 0;
                                 while (num19++ < 0x20)
                                 {
-                                    dataPtr9->m_Flags = *((int*) numPtr11);
-                                    dataPtr9->m_Texture = *((short*) (numPtr11 + 4));
+                                    dataPtr9->m_Flags = *((int*)numPtr11);
+                                    dataPtr9->m_Texture = *((short*)(numPtr11 + 4));
                                     dataPtr9++;
                                     numPtr11 += 0x1a;
                                 }
@@ -294,11 +294,11 @@
                                 int num20 = 0;
                                 while (num20++ < 0x20)
                                 {
-                                    dataPtr10->m_Flags = *((int*) numPtr12);
+                                    dataPtr10->m_Flags = *((int*)numPtr12);
                                     dataPtr10->m_Weight = numPtr12[4];
                                     dataPtr10->m_Quality = numPtr12[5];
                                     dataPtr10->m_Quantity = numPtr12[9];
-                                    dataPtr10->m_Animation = *((short*) (numPtr12 + 10));
+                                    dataPtr10->m_Animation = *((short*)(numPtr12 + 10));
                                     dataPtr10->m_Value = numPtr12[15];
                                     dataPtr10->m_Height = numPtr12[0x10];
                                     dataPtr10++;
@@ -329,14 +329,14 @@
                         byte[] buffer3 = new byte[(0x4000 * sizeof(LandData)) + (0x4000 * sizeof(ItemData))];
                         fixed (byte* numRef6 = buffer3)
                         {
-                            LandData* dataPtr14 = (LandData*) numRef6;
+                            LandData* dataPtr14 = (LandData*)numRef6;
                             for (int k = 0; k < 0x4000; k++)
                             {
                                 dataPtr14++;
                                 dataPtr11++;
                                 dataPtr14[0] = dataPtr11[0];
                             }
-                            ItemData* dataPtr15 = (ItemData*) dataPtr14;
+                            ItemData* dataPtr15 = (ItemData*)dataPtr14;
                             m_ItemFlags = new TileFlags[0x4000];
                             for (int m = 0; m < 0x4000; m++)
                             {
@@ -394,14 +394,14 @@
 
         private static float CalcZ(int xOffset, int yOffset, sbyte Z, byte height)
         {
-            return (float) (xOffset + yOffset);
+            return (float)(xOffset + yOffset);
         }
 
         public static unsafe void Dispose()
         {
             if (m_pAnims != null)
             {
-                Memory.Free((void*) m_pAnims);
+                Memory.Free((void*)m_pAnims);
             }
             for (int i = 0; i < 0x4000; i++)
             {
@@ -495,13 +495,13 @@
             {
                 top = num4;
             }
-            if (Math.Abs((int) (num - num4)) <= Math.Abs((int) (num2 - num3)))
+            if (Math.Abs((int)(num - num4)) <= Math.Abs((int)(num2 - num3)))
             {
-                avg = (int) Math.Floor((double) (((double) (num + num4)) / 2.0));
+                avg = (int)Math.Floor((double)(((double)(num + num4)) / 2.0));
             }
             else
             {
-                avg = (int) Math.Floor((double) (((double) (num2 + num3)) / 2.0));
+                avg = (int)Math.Floor((double)(((double)(num2 + num3)) / 2.0));
             }
         }
 
@@ -514,7 +514,7 @@
         {
             Tile landTile = GetMatrix(world).GetLandTile(xCell, yCell);
             LandTile t = new LandTile();
-            LandTile.Initialize(t, (short) landTile.ID, (sbyte) landTile.Z);
+            LandTile.Initialize(t, (short)landTile.ID, (sbyte)landTile.Z);
             return t;
         }
 
@@ -586,7 +586,7 @@
                             int count = list.Count;
                             for (int num6 = 0; num6 < count; num6++)
                             {
-                                ((ICell) list[num6]).Dispose();
+                                ((ICell)list[num6]).Dispose();
                             }
                         }
                     }
@@ -646,12 +646,11 @@
             }
             ArrayList[,] cellPool = m_CellPool;
             IComparer comparer = TileSorter.Comparer;
-            MapPackage map = new MapPackage {
-                cells = cellPool,
-                CellX = X << 3,
-                CellY = Y << 3,
-                landTiles = m_LandTiles
-            };
+            MapPackage map = new MapPackage();
+            map.cells = cellPool;
+            map.CellX = X << 3;
+            map.CellY = Y << 3;
+            map.landTiles = m_LandTiles;
             Engine.Multis.Update(map);
             TileMatrix matrix = GetMatrix(Engine.m_World);
             int num15 = 0;
@@ -679,7 +678,7 @@
                             }
                             tile = m_LandTiles[num21, num24];
                             Tile tile2 = tileArray2[(num22 * 8) + index];
-                            LandTile.Initialize(tile, (short) tile2.ID, (sbyte) tile2.Z);
+                            LandTile.Initialize(tile, (short)tile2.ID, (sbyte)tile2.Z);
                             cellPool[num21, num24].Add(tile);
                             num22++;
                             num23++;
@@ -696,7 +695,7 @@
             IEnumerator enumerator = World.Items.Values.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                Item current = (Item) enumerator.Current;
+                Item current = (Item)enumerator.Current;
                 if (current.Serial == 0x40000430)
                 {
                     int num30 = 0;
@@ -717,7 +716,7 @@
             enumerator = World.Mobiles.Values.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                Mobile mobile = (Mobile) enumerator.Current;
+                Mobile mobile = (Mobile)enumerator.Current;
                 if (mobile.Visible)
                 {
                     num28 = mobile.X - num26;
@@ -751,13 +750,13 @@
                     {
                         num36 = m_LandTiles[j + 1, num32 + 1].m_Z;
                     }
-                    if (tile.m_FoldLeftRight = Math.Abs((int) (num33 - num36)) <= Math.Abs((int) (num34 - z)))
+                    if (tile.m_FoldLeftRight = Math.Abs((int)(num33 - num36)) <= Math.Abs((int)(num34 - z)))
                     {
-                        tile.SortZ = (sbyte) Math.Floor((double) (((double) (num33 + num36)) / 2.0));
+                        tile.SortZ = (sbyte)Math.Floor((double)(((double)(num33 + num36)) / 2.0));
                     }
                     else
                     {
-                        tile.SortZ = (sbyte) Math.Floor((double) (((double) (num34 + z)) / 2.0));
+                        tile.SortZ = (sbyte)Math.Floor((double)(((double)(num34 + z)) / 2.0));
                     }
                     tile.m_Guarded = !GetLandFlags(tile.m_ID)[TileFlag.Impassable] && (Region.Find(Region.GuardedRegions, j + num26, num32 + num27, tile.SortZ, Engine.m_World) != null);
                     ArrayList list2 = cellPool[j, num32];
@@ -767,13 +766,12 @@
                     }
                 }
             }
-            map = new MapPackage {
-                flags = m_FlagPool,
-                cells = cellPool,
-                CellX = X << 3,
-                CellY = Y << 3,
-                landTiles = m_LandTiles
-            };
+            map = new MapPackage();
+            map.flags = m_FlagPool;
+            map.cells = cellPool;
+            map.CellX = X << 3;
+            map.CellY = Y << 3;
+            map.landTiles = m_LandTiles;
             MapLighting.GetColorMap(ref map);
             m_Cached = map;
             m_IsCached = true;
@@ -820,21 +818,25 @@
             Point3D pointd;
             if (o is Mobile)
             {
-                Mobile mobile = (Mobile) o;
-                return new Point3D(mobile.X, mobile.Y, mobile.Z) { Z = pointd.Z + 14 };
+                Mobile mobile = (Mobile)o;
+                pointd = new Point3D(mobile.X, mobile.Y, mobile.Z);
+                pointd.Z += 14;
+                return pointd;
             }
             if (o is Item)
             {
-                Item item = (Item) o;
-                return new Point3D(item.X, item.Y, item.Z) { Z = pointd.Z + ((GetHeight(item.ID) / 2) + 1) };
+                Item item = (Item)o;
+                pointd = new Point3D(item.X, item.Y, item.Z);
+                pointd.Z += (GetHeight(item.ID) / 2) + 1;
+                return pointd;
             }
             if (o is Point3D)
             {
-                return (Point3D) o;
+                return (Point3D)o;
             }
             if (o is IPoint3D)
             {
-                return new Point3D((IPoint3D) o);
+                return new Point3D((IPoint3D)o);
             }
             Console.WriteLine("Warning: Invalid object ({0}) in line of sight", o);
             return new Point3D(0, 0, 0);
@@ -874,18 +876,18 @@
             if (TileID < 0x4000)
             {
                 TileID &= 0x3fff;
-                m_TileDataStream.Seek((long) (((((TileID >> 5) + 1) * 4) + (TileID * 0x1a)) + 6), SeekOrigin.Begin);
+                m_TileDataStream.Seek((long)(((((TileID >> 5) + 1) * 4) + (TileID * 0x1a)) + 6), SeekOrigin.Begin);
             }
             else
             {
                 TileID &= 0x3fff;
-                m_TileDataStream.Seek((long) (((0x68800 + (((TileID >> 5) + 1) * 4)) + (TileID * 0x25)) + 0x11), SeekOrigin.Begin);
+                m_TileDataStream.Seek((long)(((0x68800 + (((TileID >> 5) + 1) * 4)) + (TileID * 0x25)) + 0x11), SeekOrigin.Begin);
             }
             int num2 = 20;
             StringBuilder builder = new StringBuilder(20);
             while ((--num2 >= 0) && ((num = m_TileDataStream.ReadByte()) != 0))
             {
-                builder.Append((char) num);
+                builder.Append((char)num);
             }
             return builder.ToString();
         }
@@ -946,11 +948,9 @@
 
         public static bool LineOfSight(Mobile from, Point3D target)
         {
-            Point3D pointd;
-            pointd = new Point3D(from.X, from.Y, from.Z) {
-                Z = pointd.Z + 14
-            };
-            return LineOfSight(pointd, target);
+            Point3D org = new Point3D(from.X, from.Y, from.Z);
+            org.Z += 14;
+            return LineOfSight(org, target);
         }
 
         public static bool LineOfSight(Point3D org, Point3D dest)
@@ -978,7 +978,7 @@
                 int num8 = dest.X - org.X;
                 int num9 = dest.Y - org.Y;
                 int num10 = dest.Z - org.Z;
-                double num3 = Math.Sqrt((double) ((num8 * num8) + (num9 * num9)));
+                double num3 = Math.Sqrt((double)((num8 * num8) + (num9 * num9)));
                 if (num10 != 0)
                 {
                     num4 = Math.Sqrt((num3 * num3) + (num10 * num10));
@@ -987,17 +987,17 @@
                 {
                     num4 = num3;
                 }
-                double num = ((double) num9) / num4;
-                double num2 = ((double) num8) / num4;
-                num3 = ((double) num10) / num4;
+                double num = ((double)num9) / num4;
+                double num2 = ((double)num8) / num4;
+                num3 = ((double)num10) / num4;
                 double y = org.Y;
                 double z = org.Z;
                 double x = org.X;
                 while ((NumberBetween(x, dest.X, org.X, 0.5) && NumberBetween(y, dest.Y, org.Y, 0.5)) && NumberBetween(z, dest.Z, org.Z, 0.5))
                 {
-                    int num11 = (int) Math.Round(x);
-                    int num12 = (int) Math.Round(y);
-                    int num13 = (int) Math.Round(z);
+                    int num11 = (int)Math.Round(x);
+                    int num12 = (int)Math.Round(y);
+                    int num13 = (int)Math.Round(z);
                     if (pathList.Count > 0)
                     {
                         Point3D last = pathList.Last;
@@ -1043,10 +1043,10 @@
                     {
                         int height;
                         TileFlags flags;
-                        ICell cell = (ICell) list2[j];
+                        ICell cell = (ICell)list2[j];
                         if (cell is LandTile)
                         {
-                            LandTile tile = (LandTile) cell;
+                            LandTile tile = (LandTile)cell;
                             for (int k = 0; k < m_InvalidLandTiles.Length; k++)
                             {
                                 if (tile.ID == m_InvalidLandTiles[k])
@@ -1068,7 +1068,7 @@
                         if (cell is StaticItem)
                         {
                             flag2 = true;
-                            StaticItem item = (StaticItem) cell;
+                            StaticItem item = (StaticItem)cell;
                             flags = m_ItemFlags[item.m_RealID & 0x3fff];
                             height = m_Item[item.m_RealID & 0x3fff].m_Height;
                             if (flags[TileFlag.Bridge])
@@ -1083,7 +1083,7 @@
                         else if (cell is DynamicItem)
                         {
                             flag2 = true;
-                            DynamicItem item2 = (DynamicItem) cell;
+                            DynamicItem item2 = (DynamicItem)cell;
                             flags = m_ItemFlags[item2.m_ID & 0x3fff];
                             height = m_Item[item2.m_ID & 0x3fff].m_Height;
                             if (flags[TileFlag.Bridge])
@@ -1141,10 +1141,10 @@
                 int count = list.Count;
                 for (int i = 0; i < count; i++)
                 {
-                    ICell cell = (ICell) list[i];
+                    ICell cell = (ICell)list[i];
                     if (cell.CellType == tDynamicItem)
                     {
-                        if (((DynamicItem) cell).m_Item != item)
+                        if (((DynamicItem)cell).m_Item != item)
                         {
                             continue;
                         }
@@ -1152,7 +1152,7 @@
                         list.RemoveAt(i);
                         break;
                     }
-                    if ((cell.CellType == tCorpseCell) && (((CorpseCell) cell).Serial == item.Serial))
+                    if ((cell.CellType == tCorpseCell) && (((CorpseCell)cell).Serial == item.Serial))
                     {
                         cell.Dispose();
                         list.RemoveAt(i);
@@ -1172,8 +1172,8 @@
                 int count = list.Count;
                 for (int i = 0; i < count; i++)
                 {
-                    ICell cell = (ICell) list[i];
-                    if ((cell.CellType == tMobileCell) && (((MobileCell) cell).m_Mobile == m))
+                    ICell cell = (ICell)list[i];
+                    if ((cell.CellType == tMobileCell) && (((MobileCell)cell).m_Mobile == m))
                     {
                         cell.Dispose();
                         list.RemoveAt(i);
@@ -1264,7 +1264,7 @@
             m_Locked = false;
             while (m_LockQueue.Count > 0)
             {
-                ((ILocked) m_LockQueue.Dequeue()).Invoke();
+                ((ILocked)m_LockQueue.Dequeue()).Invoke();
             }
         }
 
@@ -1425,4 +1425,3 @@
         }
     }
 }
-

@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class UpdateZ : UpdateInfo
     {
         public int Serial;
@@ -16,4 +14,3 @@
         }
     }
 }
-

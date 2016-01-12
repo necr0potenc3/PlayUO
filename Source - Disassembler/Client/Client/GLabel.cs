@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GLabel : Gump, ITranslucent, IClipable
     {
         protected bool m_bAlpha;
@@ -332,4 +330,3 @@
         }
     }
 }
-

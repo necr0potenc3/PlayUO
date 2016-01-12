@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GFlatButton : GAlphaBackground
     {
         protected OnClick m_OnClick;
@@ -33,4 +31,3 @@
         }
     }
 }
-

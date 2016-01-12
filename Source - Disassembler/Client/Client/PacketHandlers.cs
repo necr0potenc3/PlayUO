@@ -39,7 +39,7 @@
         internal static int m_MultiSequenceCount = -20;
         private static int m_PathfindIndex = 20;
         private static int m_RepeatCast;
-        private static Queue m_Sequences = new Queue();
+        private static System.Collections.Queue m_Sequences = new System.Collections.Queue();
         internal static DateTime m_StartMultiSequence;
         private static DateTime m_TimeLastCast;
         private static DateTime m_TimeLastSpell;
@@ -243,71 +243,71 @@
                 case 8:
                 case 9:
                 case 10:
-                {
-                    if ((type == 3) || (type == 4))
                     {
-                        StreamWriter writer = new StreamWriter("Messages.log", true);
-                        writer.WriteLine("Serial = 0x{0:X8}", serial);
-                        writer.WriteLine("Font = {0}", font);
-                        writer.WriteLine("Hue = {0}", hue);
-                        writer.WriteLine("Type = {0}", type);
-                        writer.WriteLine("Name = \"{0}\"", name);
-                        writer.WriteLine("Text = \"{0}\"", text);
-                        writer.WriteLine(new string('#', 20));
-                        writer.Flush();
-                        writer.Close();
-                    }
-                    bool flag = false;
-                    if ((type == 10) || ((number >= 0x102f6e) && (number <= 0x102f77)))
-                    {
-                        Spell spellByPower = Spells.GetSpellByPower(text);
-                        if (spellByPower == null)
+                        if ((type == 3) || (type == 4))
                         {
-                            text = text + " - Unknown";
+                            StreamWriter writer = new StreamWriter("Messages.log", true);
+                            writer.WriteLine("Serial = 0x{0:X8}", serial);
+                            writer.WriteLine("Font = {0}", font);
+                            writer.WriteLine("Hue = {0}", hue);
+                            writer.WriteLine("Type = {0}", type);
+                            writer.WriteLine("Name = \"{0}\"", name);
+                            writer.WriteLine("Text = \"{0}\"", text);
+                            writer.WriteLine(new string('#', 20));
+                            writer.Flush();
+                            writer.Close();
                         }
-                        else
+                        bool flag = false;
+                        if ((type == 10) || ((number >= 0x102f6e) && (number <= 0x102f77)))
                         {
-                            if (serial == World.Serial)
+                            Spell spellByPower = Spells.GetSpellByPower(text);
+                            if (spellByPower == null)
                             {
-                                m_LastSpell = spellByPower.Name;
-                                m_TimeLastSpell = DateTime.Now;
-                                TargetActions.Lookahead = (TargetAction) (spellByPower.SpellID - 1);
+                                text = text + " - Unknown";
                             }
-                            text = text + " - " + spellByPower.Name;
+                            else
+                            {
+                                if (serial == World.Serial)
+                                {
+                                    m_LastSpell = spellByPower.Name;
+                                    m_TimeLastSpell = DateTime.Now;
+                                    TargetActions.Lookahead = (TargetAction)(spellByPower.SpellID - 1);
+                                }
+                                text = text + " - " + spellByPower.Name;
+                            }
+                            flag = true;
                         }
-                        flag = true;
-                    }
-                    Mobile owner = World.FindMobile(serial);
-                    if (owner != null)
-                    {
-                        if (flag && !owner.Player)
+                        Mobile owner = World.FindMobile(serial);
+                        if (owner != null)
                         {
-                            hue = Hues.GetNotoriety(owner.Notoriety, false);
-                        }
-                        if (type == 7)
-                        {
-                            MessageManager.ClearMessages(owner);
-                        }
-                        owner.AddTextMessage(name, text, font, hue, (type == 10) || (type == 7));
-                    }
-                    else
-                    {
-                        Item item = World.FindItem(serial);
-                        if (item != null)
-                        {
+                            if (flag && !owner.Player)
+                            {
+                                hue = Hues.GetNotoriety(owner.Notoriety, false);
+                            }
                             if (type == 7)
                             {
                                 MessageManager.ClearMessages(owner);
                             }
-                            item.AddTextMessage(name, text, font, hue, (type == 10) || (type == 7));
+                            owner.AddTextMessage(name, text, font, hue, (type == 10) || (type == 7));
                         }
                         else
                         {
-                            Engine.AddTextMessage(text, font, hue);
+                            Item item = World.FindItem(serial);
+                            if (item != null)
+                            {
+                                if (type == 7)
+                                {
+                                    MessageManager.ClearMessages(owner);
+                                }
+                                item.AddTextMessage(name, text, font, hue, (type == 10) || (type == 7));
+                            }
+                            else
+                            {
+                                Engine.AddTextMessage(text, font, hue);
+                            }
                         }
+                        return;
                     }
-                    return;
-                }
                 case 1:
                     if (name.Length <= 0)
                     {
@@ -318,24 +318,24 @@
                     return;
 
                 case 6:
-                {
-                    Mobile mobile4 = World.FindMobile(serial);
-                    if (mobile4 == null)
                     {
-                        Item item2 = World.FindItem(serial);
-                        if (item2 != null)
+                        Mobile mobile4 = World.FindMobile(serial);
+                        if (mobile4 == null)
                         {
-                            item2.AddTextMessage("You see", text, font, hue, false);
+                            Item item2 = World.FindItem(serial);
+                            if (item2 != null)
+                            {
+                                item2.AddTextMessage("You see", text, font, hue, false);
+                            }
+                            else
+                            {
+                                Engine.AddTextMessage(text, font, hue);
+                            }
+                            return;
                         }
-                        else
-                        {
-                            Engine.AddTextMessage(text, font, hue);
-                        }
+                        mobile4.AddTextMessage("You see", text, font, hue, false);
                         return;
                     }
-                    mobile4.AddTextMessage("You see", text, font, hue, false);
-                    return;
-                }
             }
             StreamWriter writer2 = new StreamWriter("Messages.log", true);
             writer2.WriteLine("Serial = 0x{0:X8}", serial);
@@ -595,7 +595,7 @@
                         }
                     }
                     Array.Sort(shard.Characters, new CharacterComparer());
-                    Timer timer = new Timer(new OnTick(PacketHandlers.Update_OnTick), 0, 1);
+                    Client.Timer timer = new Client.Timer(new OnTick(PacketHandlers.Update_OnTick), 0, 1);
                     timer.SetTag("shard", shard);
                     timer.Start(false);
                 }
@@ -734,7 +734,7 @@
             {
                 if (gumpArray[i] is GServerGump)
                 {
-                    GServerGump g = (GServerGump) gumpArray[i];
+                    GServerGump g = (GServerGump)gumpArray[i];
                     if (g.DialogID == num)
                     {
                         GServerGump.SetCachedLocation(g.DialogID, g.X, g.Y);
@@ -827,20 +827,20 @@
                         switch (num5)
                         {
                             case -4:
-                            {
-                                AddMessage(num3, uniFont, bright, 6, "", "[" + Localization.GetString(0xfd6b0) + "]");
-                                continue;
-                            }
-                            case -3:
-                            {
-                                int fixedLength = pvSrc.ReadInt16();
-                                string str = pvSrc.ReadString(fixedLength).Trim();
-                                if (str.Length > 0)
                                 {
-                                    AddMessage(num3, uniFont, bright, 6, "", Localization.GetString(0xfd2d1) + " " + str);
+                                    AddMessage(num3, uniFont, bright, 6, "", "[" + Localization.GetString(0xfd6b0) + "]");
+                                    continue;
                                 }
-                                continue;
-                            }
+                            case -3:
+                                {
+                                    int fixedLength = pvSrc.ReadInt16();
+                                    string str = pvSrc.ReadString(fixedLength).Trim();
+                                    if (str.Length > 0)
+                                    {
+                                        AddMessage(num3, uniFont, bright, 6, "", Localization.GetString(0xfd2d1) + " " + str);
+                                    }
+                                    continue;
+                                }
                         }
                         Engine.ReleaseDataStore(dataStore);
                         pvSrc.Trace();
@@ -929,107 +929,107 @@
             switch (num)
             {
                 case 1:
-                {
-                    pvSrc.ReturnName = "Party Member List";
-                    int num2 = pvSrc.ReadByte();
-                    Mobile[] mobileArray = new Mobile[num2];
-                    for (int i = 0; i < num2; i++)
                     {
-                        mobileArray[i] = World.WantMobile(pvSrc.ReadInt32());
-                        mobileArray[i].QueryStats();
-                    }
-                    Party.State = PartyState.Joined;
-                    Party.Members = mobileArray;
-                    int num4 = (Engine.GameY + Engine.GameHeight) - 50;
-                    for (int j = 0; j < num2; j++)
-                    {
-                        if (!mobileArray[j].Player)
+                        pvSrc.ReturnName = "Party Member List";
+                        int num2 = pvSrc.ReadByte();
+                        Mobile[] mobileArray = new Mobile[num2];
+                        for (int i = 0; i < num2; i++)
                         {
-                            if (mobileArray[j].StatusBar == null)
+                            mobileArray[i] = World.WantMobile(pvSrc.ReadInt32());
+                            mobileArray[i].QueryStats();
+                        }
+                        Party.State = PartyState.Joined;
+                        Party.Members = mobileArray;
+                        int num4 = (Engine.GameY + Engine.GameHeight) - 50;
+                        for (int j = 0; j < num2; j++)
+                        {
+                            if (!mobileArray[j].Player)
                             {
-                                mobileArray[j].OpenStatus(false);
-                                if (mobileArray[j].StatusBar != null)
+                                if (mobileArray[j].StatusBar == null)
                                 {
-                                    mobileArray[j].StatusBar.Gump.X = ((Engine.GameX + Engine.GameWidth) - 30) - mobileArray[j].StatusBar.Gump.Width;
-                                    mobileArray[j].StatusBar.Gump.Y = num4 - mobileArray[j].StatusBar.Gump.Height;
+                                    mobileArray[j].OpenStatus(false);
+                                    if (mobileArray[j].StatusBar != null)
+                                    {
+                                        mobileArray[j].StatusBar.Gump.X = ((Engine.GameX + Engine.GameWidth) - 30) - mobileArray[j].StatusBar.Gump.Width;
+                                        mobileArray[j].StatusBar.Gump.Y = num4 - mobileArray[j].StatusBar.Gump.Height;
+                                        num4 -= mobileArray[j].StatusBar.Gump.Height + 5;
+                                    }
+                                }
+                                else
+                                {
                                     num4 -= mobileArray[j].StatusBar.Gump.Height + 5;
                                 }
                             }
-                            else
-                            {
-                                num4 -= mobileArray[j].StatusBar.Gump.Height + 5;
-                            }
                         }
+                        return;
                     }
-                    return;
-                }
                 case 2:
-                {
-                    pvSrc.ReturnName = "Remove Party Member";
-                    int num6 = pvSrc.ReadByte();
-                    int num7 = pvSrc.ReadInt32();
-                    Mobile[] mobileArray2 = new Mobile[num6];
-                    for (int k = 0; k < num6; k++)
                     {
-                        mobileArray2[k] = World.WantMobile(pvSrc.ReadInt32());
-                        mobileArray2[k].QueryStats();
+                        pvSrc.ReturnName = "Remove Party Member";
+                        int num6 = pvSrc.ReadByte();
+                        int num7 = pvSrc.ReadInt32();
+                        Mobile[] mobileArray2 = new Mobile[num6];
+                        for (int k = 0; k < num6; k++)
+                        {
+                            mobileArray2[k] = World.WantMobile(pvSrc.ReadInt32());
+                            mobileArray2[k].QueryStats();
+                        }
+                        Party.State = PartyState.Joined;
+                        Party.Members = mobileArray2;
+                        return;
                     }
-                    Party.State = PartyState.Joined;
-                    Party.Members = mobileArray2;
-                    return;
-                }
                 case 3:
                 case 4:
-                {
-                    string str2;
-                    IHue hue;
-                    pvSrc.ReturnName = (num == 3) ? "Private Party Message" : "Public Party Message";
-                    int serial = pvSrc.ReadInt32();
-                    string str = pvSrc.ReadUnicodeString();
-                    Mobile mobile = World.FindMobile(serial);
-                    if (((mobile == null) || ((str2 = mobile.Name) == null)) || ((str2 = str2.Trim()).Length <= 0))
                     {
-                        str2 = "Someone";
-                    }
-                    if (str == "I'm stunned !!")
-                    {
-                        hue = Hues.Load(0x22);
-                        if (mobile != null)
+                        string str2;
+                        IHue hue;
+                        pvSrc.ReturnName = (num == 3) ? "Private Party Message" : "Public Party Message";
+                        int serial = pvSrc.ReadInt32();
+                        string str = pvSrc.ReadUnicodeString();
+                        Mobile mobile = World.FindMobile(serial);
+                        if (((mobile == null) || ((str2 = mobile.Name) == null)) || ((str2 = str2.Trim()).Length <= 0))
                         {
-                            Engine.Sounds.PlaySound(0x157, mobile.X, mobile.Y, mobile.Z);
+                            str2 = "Someone";
                         }
-                    }
-                    else if (str.StartsWith("I stunned ") && str.EndsWith(" !!"))
-                    {
-                        hue = Hues.Load(0x22);
-                        if (mobile != null)
+                        if (str == "I'm stunned !!")
                         {
-                            Engine.Sounds.PlaySound(0x1e1, mobile.X, mobile.Y, mobile.Z);
+                            hue = Hues.Load(0x22);
+                            if (mobile != null)
+                            {
+                                Engine.Sounds.PlaySound(0x157, mobile.X, mobile.Y, mobile.Z);
+                            }
                         }
+                        else if (str.StartsWith("I stunned ") && str.EndsWith(" !!"))
+                        {
+                            hue = Hues.Load(0x22);
+                            if (mobile != null)
+                            {
+                                Engine.Sounds.PlaySound(0x1e1, mobile.X, mobile.Y, mobile.Z);
+                            }
+                        }
+                        else if (str.StartsWith("Changing last target to "))
+                        {
+                            hue = Hues.Load(0x35);
+                        }
+                        else if (num == 3)
+                        {
+                            hue = Hues.Load(World.CharData.WhisperHue);
+                        }
+                        else
+                        {
+                            hue = Hues.Load(World.CharData.TextHue);
+                        }
+                        Engine.AddTextMessage(string.Format("<{0}{1}> {2}", (num == 3) ? "Whisper: " : "", str2, str), Engine.DefaultFont, hue);
+                        return;
                     }
-                    else if (str.StartsWith("Changing last target to "))
-                    {
-                        hue = Hues.Load(0x35);
-                    }
-                    else if (num == 3)
-                    {
-                        hue = Hues.Load(World.CharData.WhisperHue);
-                    }
-                    else
-                    {
-                        hue = Hues.Load(World.CharData.TextHue);
-                    }
-                    Engine.AddTextMessage(string.Format("<{0}{1}> {2}", (num == 3) ? "Whisper: " : "", str2, str), Engine.DefaultFont, hue);
-                    return;
-                }
                 case 7:
-                {
-                    pvSrc.ReturnName = "Party Invitation";
-                    int num10 = pvSrc.ReadInt32();
-                    Party.State = PartyState.Joining;
-                    Party.Leader = World.WantMobile(num10);
-                    return;
-                }
+                    {
+                        pvSrc.ReturnName = "Party Invitation";
+                        int num10 = pvSrc.ReadInt32();
+                        Party.State = PartyState.Joining;
+                        Party.Leader = World.WantMobile(num10);
+                        return;
+                    }
             }
             pvSrc.ReturnName = "Unknown Party Message";
             pvSrc.Trace();
@@ -1113,7 +1113,7 @@
                     int num3 = pvSrc.ReadByte();
                     for (int j = 0; j < 8; j++)
                     {
-                        container.SetSpellContained((i * 8) + j, (num3 & (((int) 1) << j)) != 0);
+                        container.SetSpellContained((i * 8) + j, (num3 & (((int)1) << j)) != 0);
                     }
                 }
                 if (!container.OpenSB)
@@ -1126,7 +1126,7 @@
                     Gump gump = Gumps.FindGumpByGUID(string.Format("Spellbook Icon #{0}", container.Serial));
                     if (gump != null)
                     {
-                        ((GSpellbookIcon) gump).OnDoubleClick(gump.Width / 2, gump.Height / 2);
+                        ((GSpellbookIcon)gump).OnDoubleClick(gump.Width / 2, gump.Height / 2);
                     }
                 }
             }
@@ -1172,11 +1172,11 @@
                     item.Parent.RemoveItem(item);
                 }
                 Engine.ItemArt.Translate(ref itemID, ref hue);
-                item.ID = (short) itemID;
-                item.Hue = (ushort) hue;
-                item.Amount = (short) num3;
-                item.ContainerX = (short) num4;
-                item.ContainerY = (short) num5;
+                item.ID = (short)itemID;
+                item.Hue = (ushort)hue;
+                item.Amount = (short)num3;
+                item.ContainerX = (short)num4;
+                item.ContainerY = (short)num5;
                 item2.AddItem(item);
                 if (((item.Parent != null) && ((item.Parent.ID & 0x3fff) == 0x2006)) && (item.PropertyList == null))
                 {
@@ -1214,11 +1214,11 @@
                     item.Parent.RemoveItem(item);
                 }
                 Engine.ItemArt.Translate(ref itemID, ref hue);
-                item.ID = (short) itemID;
-                item.Hue = (ushort) hue;
-                item.Amount = (short) num4;
-                item.ContainerX = (short) num5;
-                item.ContainerY = (short) num6;
+                item.ID = (short)itemID;
+                item.Hue = (ushort)hue;
+                item.Amount = (short)num4;
+                item.ContainerX = (short)num5;
+                item.ContainerY = (short)num6;
                 item2.AddItem(item);
                 if (!dataStore.Contains(item2))
                 {
@@ -1232,7 +1232,7 @@
             count = dataStore.Count;
             for (int j = 0; j < count; j++)
             {
-                Item container = (Item) dataStore[j];
+                Item container = (Item)dataStore[j];
                 if (container.QueueOpenSB)
                 {
                     container.QueueOpenSB = false;
@@ -1241,7 +1241,7 @@
                     container.SpellContained = 0L;
                     for (int k = 0; k < container.Items.Count; k++)
                     {
-                        container.SetSpellContained(((Item) container.Items[k]).Amount - container.SpellbookOffset, true);
+                        container.SetSpellContained(((Item)container.Items[k]).Amount - container.SpellbookOffset, true);
                     }
                     if (!container.OpenSB)
                     {
@@ -1253,7 +1253,7 @@
                         Gump gump = Gumps.FindGumpByGUID(string.Format("Spellbook Icon #{0}", container.Serial));
                         if (gump != null)
                         {
-                            ((GSpellbookIcon) gump).OnDoubleClick(gump.Width / 2, gump.Height / 2);
+                            ((GSpellbookIcon)gump).OnDoubleClick(gump.Width / 2, gump.Height / 2);
                         }
                     }
                 }
@@ -1285,17 +1285,17 @@
                     break;
 
                 case 8:
-                {
-                    Mobile mobile = World.FindMobile(serial);
-                    mobile.BigStatus = true;
-                    mobile.OpenStatus(false);
-                    break;
-                }
+                    {
+                        Mobile mobile = World.FindMobile(serial);
+                        mobile.BigStatus = true;
+                        mobile.OpenStatus(false);
+                        break;
+                    }
                 case 0x30:
                     if ((m_BuyMenuPrices != null) && (m_BuyMenuNames != null))
                     {
-                        ArrayList items = item.Items;
-                        int count = items.Count;
+                        ArrayList list = item.Items;
+                        int count = list.Count;
                         if (count > m_BuyMenuPrices.Length)
                         {
                             count = m_BuyMenuPrices.Length;
@@ -1308,7 +1308,7 @@
                         BuyInfo info = null;
                         for (int i = 0; i < count; i++)
                         {
-                            infoArray[i] = new BuyInfo((Item) items[i], m_BuyMenuPrices[i], m_BuyMenuNames[i]);
+                            infoArray[i] = new BuyInfo((Item)list[i], m_BuyMenuPrices[i], m_BuyMenuNames[i]);
                             if (((infoArray[i].ItemID == 0x2124) && (Engine.m_BuyHorse != null)) && (Engine.m_BuyHorse.Serial == num3))
                             {
                                 info = infoArray[i];
@@ -1353,9 +1353,9 @@
             Layer layer;
             Item item = World.WantItem(pvSrc.ReadInt32());
             item.CorpseEquip.Clear();
-            while ((layer = (Layer) pvSrc.ReadByte()) != Layer.Invalid)
+            while ((layer = (Layer)pvSrc.ReadByte()) != Layer.Invalid)
             {
-                layer = (Layer) (((int) layer) + 1);
+                layer = (Layer)(((int)layer) + 1);
                 Item item2 = World.FindItem(pvSrc.ReadInt32());
                 if ((layer < Layer.Mount) && (item2 != null))
                 {
@@ -1590,7 +1590,7 @@
             int num = pvSrc.ReadByte();
             int source = pvSrc.ReadInt32();
             int target = pvSrc.ReadInt32();
-            int itemID = pvSrc.ReadInt16();
+            int num4 = pvSrc.ReadInt16();
             int xSource = pvSrc.ReadInt16();
             int ySource = pvSrc.ReadInt16();
             int zSource = pvSrc.ReadSByte();
@@ -1609,13 +1609,13 @@
             int num18 = hasParticleData ? pvSrc.ReadInt16() : 0;
             int num19 = hasParticleData ? pvSrc.ReadInt16() : 0;
             int num20 = hasParticleData ? pvSrc.ReadInt32() : 0;
-            EffectLayer layer = hasParticleData ? ((EffectLayer) pvSrc.ReadByte()) : EffectLayer.Head;
+            EffectLayer layer = hasParticleData ? ((EffectLayer)pvSrc.ReadByte()) : EffectLayer.Head;
             int num21 = hasParticleData ? pvSrc.ReadInt16() : 0;
-            if ((((((num17 == 0x139d) || (num17 == 0x13bc)) || ((num17 == 0x13b4) || (num17 == 0xbe3))) || (((num17 == 0x251e) || (num17 == 0x1395)) || ((num == 1) || (num17 == 0xbbe)))) || (num17 == 0x13ae)) || (itemID == 0x113a))
+            if ((((((num17 == 0x139d) || (num17 == 0x13bc)) || ((num17 == 0x13b4) || (num17 == 0xbe3))) || (((num17 == 0x251e) || (num17 == 0x1395)) || ((num == 1) || (num17 == 0xbbe)))) || (num17 == 0x13ae)) || (num4 == 0x113a))
             {
                 m_EffectTime = DateTime.Now;
             }
-            if ((itemID & 0x3fff) > 1)
+            if ((num4 & 0x3fff) > 1)
             {
                 if ((num13 > 1) || (num14 != 0))
                 {
@@ -1628,8 +1628,8 @@
                 switch (num)
                 {
                     case 0:
-                        effect = new MovingEffect(source, target, xSource, ySource, zSource, xTarget, yTarget, zTarget, itemID, Hues.GetItemHue(itemID, hue));
-                        ((MovingEffect) effect).m_RenderMode = num16;
+                        effect = new MovingEffect(source, target, xSource, ySource, zSource, xTarget, yTarget, zTarget, num4, Hues.GetItemHue(num4, hue));
+                        ((MovingEffect)effect).m_RenderMode = num16;
                         if (flag2)
                         {
                             effect.Children.Add(new AnimatedItemEffect(target, xTarget, yTarget, zTarget, 0x36cb, Hues.GetItemHue(0x36cb, hue), duration));
@@ -1641,13 +1641,13 @@
                         goto Label_0274;
 
                     case 2:
-                        effect = new AnimatedItemEffect(xSource, ySource, zSource, itemID, Hues.GetItemHue(itemID, hue), duration);
-                        ((AnimatedItemEffect) effect).m_RenderMode = num16;
+                        effect = new AnimatedItemEffect(xSource, ySource, zSource, num4, Hues.GetItemHue(num4, hue), duration);
+                        ((AnimatedItemEffect)effect).m_RenderMode = num16;
                         goto Label_0274;
 
                     case 3:
-                        effect = new AnimatedItemEffect(source, xSource, ySource, zSource, itemID, Hues.GetItemHue(itemID, hue), duration);
-                        ((AnimatedItemEffect) effect).m_RenderMode = num16;
+                        effect = new AnimatedItemEffect(source, xSource, ySource, zSource, num4, Hues.GetItemHue(num4, hue), duration);
+                        ((AnimatedItemEffect)effect).m_RenderMode = num16;
                         goto Label_0274;
                 }
                 pvSrc.Trace();
@@ -1659,11 +1659,11 @@
 
         private static string EffLay(EffectLayer layer)
         {
-            if (Enum.IsDefined(typeof(EffectLayer), layer))
+            if (System.Enum.IsDefined(typeof(EffectLayer), layer))
             {
                 return string.Format("EffectLayer.{0}", layer);
             }
-            int num = (int) layer;
+            int num = (int)layer;
             if (num < 0)
             {
                 return string.Format("(EffectLayer)({0})", num);
@@ -1680,7 +1680,7 @@
             {
                 pvSrc.Trace();
             }
-            Layer layer = (Layer) pvSrc.ReadByte();
+            Layer layer = (Layer)pvSrc.ReadByte();
             Mobile mobile = World.FindMobile(pvSrc.ReadInt32());
             if (mobile != null)
             {
@@ -1701,13 +1701,13 @@
                     item.Parent.RemoveItem(item);
                 }
                 Engine.ItemArt.Translate(ref itemID, ref hue);
-                item.ID = (short) itemID;
-                item.Hue = (ushort) hue;
+                item.ID = (short)itemID;
+                item.Hue = (ushort)hue;
                 item.IsEquip = true;
                 item.EquipParent = mobile;
                 if (layer == Layer.Mount)
                 {
-                    animation = (short) Engine.m_Animations.ConvertMountItemToBody(itemID);
+                    animation = (short)Engine.m_Animations.ConvertMountItemToBody(itemID);
                 }
                 else
                 {
@@ -1789,7 +1789,7 @@
             Item item = PPickupItem.m_Item;
             if (item != null)
             {
-                if (((Gumps.Drag != null) && (Gumps.Drag.GetType() == typeof(GDraggedItem))) && (((GDraggedItem) Gumps.Drag).Item == item))
+                if (((Gumps.Drag != null) && (Gumps.Drag.GetType() == typeof(GDraggedItem))) && (((GDraggedItem)Gumps.Drag).Item == item))
                 {
                     Gumps.Destroy(Gumps.Drag);
                 }
@@ -1812,7 +1812,7 @@
                     item.Visible = true;
                     if (restoreInfo.m_InWorld)
                     {
-                        item.SetLocation((short) restoreInfo.m_X, (short) restoreInfo.m_Y, (short) restoreInfo.m_Z);
+                        item.SetLocation((short)restoreInfo.m_X, (short)restoreInfo.m_Y, (short)restoreInfo.m_Z);
                         item.InWorld = true;
                         item.Update();
                     }
@@ -1824,7 +1824,7 @@
                     {
                         if (restoreInfo.m_EquipParent is Mobile)
                         {
-                            Mobile equipParent = (Mobile) restoreInfo.m_EquipParent;
+                            Mobile equipParent = (Mobile)restoreInfo.m_EquipParent;
                             equipParent.AddEquip(restoreInfo.m_EquipEntry);
                             if (equipParent.Paperdoll != null)
                             {
@@ -1833,7 +1833,7 @@
                         }
                         else if (restoreInfo.m_EquipParent is Item)
                         {
-                            ((Item) restoreInfo.m_EquipParent).Equip.Add(restoreInfo.m_EquipEntry);
+                            ((Item)restoreInfo.m_EquipParent).Equip.Add(restoreInfo.m_EquipEntry);
                         }
                         item.IsEquip = true;
                     }
@@ -1920,7 +1920,7 @@
             }
             for (int m = 0; m < typeArray.Length; m++)
             {
-                list[length + m] = new ItemIDValidator(new int[] { 0xf06 + typeArray[m] });
+                list[length + m] = new ItemIDValidator(new int[] { 0xf06 + (int)typeArray[m] });
             }
             list[length + typeArray.Length] = new ItemIDValidator(new int[] { 0xe21, 0xee9 });
             Gumps.Desktop.Children.Add(new GItemCounters(list));
@@ -1939,14 +1939,13 @@
                 switch (layout.Type)
                 {
                     case 0:
-                    {
-                        GSpellIcon toAdd = new GSpellIcon(layout.Extra - 1) {
-                            X = layout.X,
-                            Y = layout.Y
-                        };
-                        Gumps.Desktop.Children.Add(toAdd);
-                        break;
-                    }
+                        {
+                            GSpellIcon toAdd = new GSpellIcon(layout.Extra - 1);
+                            toAdd.X = layout.X;
+                            toAdd.Y = layout.Y;
+                            Gumps.Desktop.Children.Add(toAdd);
+                            break;
+                        }
                     case 1:
                         if (!Engine.m_SkillsOpen)
                         {
@@ -1962,29 +1961,28 @@
                         break;
 
                     case 2:
-                    {
-                        Mobile mobile2 = World.FindMobile(layout.Extra);
-                        if (mobile2 != null)
                         {
-                            Network.Send(new POpenPaperdoll(mobile2.Serial));
-                            mobile2.PaperdollX = layout.X;
-                            mobile2.PaperdollY = layout.Y;
+                            Mobile mobile2 = World.FindMobile(layout.Extra);
+                            if (mobile2 != null)
+                            {
+                                Network.Send(new POpenPaperdoll(mobile2.Serial));
+                                mobile2.PaperdollX = layout.X;
+                                mobile2.PaperdollY = layout.Y;
+                            }
+                            break;
                         }
-                        break;
-                    }
                     case 3:
-                    {
-                        Skill skill = Engine.Skills[layout.Extra];
-                        if (skill != null)
                         {
-                            GSkillIcon icon2 = new GSkillIcon(skill) {
-                                X = layout.X,
-                                Y = layout.Y
-                            };
-                            Gumps.Desktop.Children.Add(icon2);
+                            Skill skill = Engine.Skills[layout.Extra];
+                            if (skill != null)
+                            {
+                                GSkillIcon icon2 = new GSkillIcon(skill);
+                                icon2.X = layout.X;
+                                icon2.Y = layout.Y;
+                                Gumps.Desktop.Children.Add(icon2);
+                            }
+                            break;
                         }
-                        break;
-                    }
                 }
             }
             charData.Save();
@@ -2053,12 +2051,11 @@
             switch (num2)
             {
                 case 1:
-                {
-                    GMapTracker.MapX = m_xMapLeft + ((int) ((m_xMapRight - m_xMapLeft) * (((double) num3) / ((double) m_xMapWidth))));
-                    GMapTracker.MapY = m_yMapTop + ((int) ((m_yMapBottom - m_yMapTop) * (((double) num4) / ((double) m_yMapHeight))));
+                    GMapTracker.MapX = m_xMapLeft + ((int)((m_xMapRight - m_xMapLeft) * (((double)num3) / ((double)m_xMapWidth))));
+                    GMapTracker.MapY = m_yMapTop + ((int)((m_yMapBottom - m_yMapTop) * (((double)num4) / ((double)m_yMapHeight))));
                     GRadar.AddTag(GMapTracker.MapX, GMapTracker.MapY, "Treasure Map");
                     Engine.AddTextMessage(string.Format("Map: ({0}, {1})", GMapTracker.MapX, GMapTracker.MapY));
-                }
+                    break;
             }
         }
 
@@ -2156,10 +2153,10 @@
                     Engine.m_Stealth = true;
                     if (!Engine.Features.AOS)
                     {
-                        Engine.m_StealthSteps = (int) (Engine.Skills[SkillName.Stealth].Value / 10f);
+                        Engine.m_StealthSteps = (int)(Engine.Skills[SkillName.Stealth].Value / 10f);
                         break;
                     }
-                    Engine.m_StealthSteps = (int) (Engine.Skills[SkillName.Stealth].Value / 5f);
+                    Engine.m_StealthSteps = (int)(Engine.Skills[SkillName.Stealth].Value / 5f);
                     break;
             }
             if (str2.Length > 0)
@@ -2282,26 +2279,26 @@
 
                     case BodyType.Sea:
                     case BodyType.Animal:
-                    {
-                        object obj2 = Engine.m_Animations.ActionDef1[num];
-                        if (obj2 != null)
                         {
-                            num = (int) obj2;
+                            object obj2 = Engine.m_Animations.ActionDef1[num];
+                            if (obj2 != null)
+                            {
+                                num = (int)obj2;
+                            }
+                            num = num % 13;
+                            goto Label_00D9;
                         }
-                        num = num % 13;
-                        goto Label_00D9;
-                    }
                     case BodyType.Human:
                     case BodyType.Equipment:
-                    {
-                        object obj3 = Engine.m_Animations.ActionDef2[num];
-                        if (obj3 != null)
                         {
-                            num = (int) obj3;
+                            object obj3 = Engine.m_Animations.ActionDef2[num];
+                            if (obj3 != null)
+                            {
+                                num = (int)obj3;
+                            }
+                            num = num % 0x23;
+                            goto Label_00D9;
                         }
-                        num = num % 0x23;
-                        goto Label_00D9;
-                    }
                 }
             }
             return;
@@ -2309,13 +2306,12 @@
             num5 = Engine.GetAnimDirection(mobile.Direction) & 7;
             if (Engine.m_Animations.IsValid(mobile.Body, num, num5))
             {
-                Animation animation = new Animation {
-                    Action = num,
-                    RepeatCount = num3,
-                    Forward = flag,
-                    Repeat = flag2,
-                    Delay = num4
-                };
+                Animation animation = new Animation();
+                animation.Action = num;
+                animation.RepeatCount = num3;
+                animation.Forward = flag;
+                animation.Repeat = flag2;
+                animation.Delay = num4;
                 mobile.Animation = animation;
                 animation.Run();
             }
@@ -2395,9 +2391,9 @@
             {
                 while (p.Walking.Count > 0)
                 {
-                    WalkAnimation animation = (WalkAnimation) p.Walking.Dequeue();
-                    p.SetLocation((short) animation.NewX, (short) animation.NewY, (short) animation.NewZ);
-                    p.Direction = (byte) animation.NewDir;
+                    WalkAnimation animation = (WalkAnimation)p.Walking.Dequeue();
+                    p.SetLocation((short)animation.NewX, (short)animation.NewY, (short)animation.NewZ);
+                    p.Direction = (byte)animation.NewDir;
                     animation.Dispose();
                 }
                 p.UpdateReal();
@@ -2424,7 +2420,7 @@
                 p.Animation.Forward = true;
                 p.Animation.Repeat = false;
                 Animation animation1 = p.Animation;
-                animation1.OnAnimationEnd = (OnAnimationEnd) Delegate.Combine(animation1.OnAnimationEnd, new OnAnimationEnd(Engine.DeathAnim_OnAnimationEnd));
+                animation1.OnAnimationEnd = (OnAnimationEnd)Delegate.Combine(animation1.OnAnimationEnd, new OnAnimationEnd(Engine.DeathAnim_OnAnimationEnd));
                 p.Animation.Run();
                 if ((Engine.m_Screenshots && p.Visible) && (p.HumanOrGhost && World.InRange(p)))
                 {
@@ -2475,7 +2471,7 @@
                 byte dir = pvSrc.ReadByte();
                 short num8 = pvSrc.ReadInt16();
                 byte num9 = pvSrc.ReadByte();
-                Notoriety notoriety = (Notoriety) pvSrc.ReadByte();
+                Notoriety notoriety = (Notoriety)pvSrc.ReadByte();
                 ArrayList list = new ArrayList();
                 LayerComparer comparer = LayerComparer.FromDirection(dir);
                 bool wasFound = false;
@@ -2485,7 +2481,7 @@
                     Item item = World.WantItem(num10);
                     item.Query();
                     int itemID = pvSrc.ReadInt16();
-                    Layer layer = (Layer) pvSrc.ReadByte();
+                    Layer layer = (Layer)pvSrc.ReadByte();
                     int hue = ((itemID & 0x8000) != 0) ? pvSrc.ReadUInt16() : 0;
                     if (comparer.IsValid(layer))
                     {
@@ -2506,11 +2502,11 @@
                         }
                         itemID &= 0x3fff;
                         Engine.ItemArt.Translate(ref itemID, ref hue);
-                        item.ID = (short) itemID;
-                        item.Hue = (ushort) hue;
+                        item.ID = (short)itemID;
+                        item.Hue = (ushort)hue;
                         if (layer == Layer.Mount)
                         {
-                            animation = (short) Engine.m_Animations.ConvertMountItemToBody(itemID);
+                            animation = (short)Engine.m_Animations.ConvertMountItemToBody(itemID);
                         }
                         else
                         {
@@ -2524,8 +2520,8 @@
                 list.Sort(comparer);
                 if (mobile.Player)
                 {
-                    dir = (byte) (dir & 7);
-                    dir = (byte) (dir | ((byte) (mobile.Direction & 0x80)));
+                    dir = (byte)(dir & 7);
+                    dir = (byte)(dir | ((byte)(mobile.Direction & 0x80)));
                 }
                 if ((!mobile.Visible && !mobile.Player) && World.CharData.IncomingNames)
                 {
@@ -2584,12 +2580,12 @@
                     m.Walking.Enqueue(WalkAnimation.PoolInstance(m, x, y, z, dir));
                     if (m.Walking.Count > 4)
                     {
-                        WalkAnimation animation = (WalkAnimation) m.Walking.Dequeue();
-                        m.SetLocation((short) animation.NewX, (short) animation.NewY, (short) animation.NewZ);
+                        WalkAnimation animation = (WalkAnimation)m.Walking.Dequeue();
+                        m.SetLocation((short)animation.NewX, (short)animation.NewY, (short)animation.NewZ);
                         animation.Dispose();
                         flag = true;
                     }
-                    ((WalkAnimation) m.Walking.Peek()).Start();
+                    ((WalkAnimation)m.Walking.Peek()).Start();
                     m.SetReal(x, y, z);
                 }
                 else
@@ -2598,7 +2594,7 @@
                 }
                 m.Hue = pvSrc.ReadInt16();
                 m.Flags.Value = pvSrc.ReadByte();
-                m.Notoriety = (Notoriety) pvSrc.ReadByte();
+                m.Notoriety = (Notoriety)pvSrc.ReadByte();
                 m.IsMoving = !m.Player || Engine.amMoving;
                 if (!m.Visible)
                 {
@@ -2763,7 +2759,7 @@
             Mobile player = World.Player;
             if (player != null)
             {
-                player.Notoriety = (Notoriety) pvSrc.ReadByte();
+                player.Notoriety = (Notoriety)pvSrc.ReadByte();
             }
             if (m_Sequences.Count == 0)
             {
@@ -2771,7 +2767,7 @@
             }
             else
             {
-                int[] numArray = (int[]) m_Sequences.Dequeue();
+                int[] numArray = (int[])m_Sequences.Dequeue();
                 if (num != numArray[0])
                 {
                     Engine.Resync();
@@ -2833,7 +2829,7 @@
             int num5 = -1000;
             for (int i = 0; i < count; i++)
             {
-                MultiItem item = (MultiItem) list[i];
+                MultiItem item = (MultiItem)list[i];
                 if (item.X < x)
                 {
                     x = item.X;
@@ -2865,10 +2861,10 @@
                     int index = 0;
                     while (index < count)
                     {
-                        MultiItem item2 = (MultiItem) list[index];
+                        MultiItem item2 = (MultiItem)list[index];
                         if ((item2.X == j) && (item2.Y == k))
                         {
-                            list3.Add(StaticItem.Instantiate(item2.ItemID, (sbyte) item2.Z, item2.Flags));
+                            list3.Add(StaticItem.Instantiate(item2.ItemID, (sbyte)item2.Z, item2.Flags));
                             list.RemoveAt(index);
                             count--;
                         }
@@ -2881,14 +2877,13 @@
                     count = list3.Count;
                     for (index = 0; index < count; index++)
                     {
-                        StaticItem item3 = (StaticItem) list3[index];
-                        MultiItem item4 = new MultiItem {
-                            X = (short) j,
-                            Y = (short) k,
-                            Z = item3.Z,
-                            ItemID = (short) ((item3.ID & 0x3fff) | 0x4000),
-                            Flags = item3.Serial
-                        };
+                        StaticItem item3 = (StaticItem)list3[index];
+                        MultiItem item4 = new MultiItem();
+                        item4.X = (short)j;
+                        item4.Y = (short)k;
+                        item4.Z = item3.Z;
+                        item4.ItemID = (short)((item3.ID & 0x3fff) | 0x4000);
+                        item4.Flags = item3.Serial;
                         list2.Add(item4);
                     }
                 }
@@ -3017,7 +3012,7 @@
                 string arguments = Encoding.Unicode.GetString(pvSrc.ReadBytes(length));
                 dataStore.Add(new ObjectProperty(num6, arguments));
             }
-            ObjectPropertyList list2 = new ObjectPropertyList(serial, number, (ObjectProperty[]) dataStore.ToArray(typeof(ObjectProperty)));
+            ObjectPropertyList list2 = new ObjectPropertyList(serial, number, (ObjectProperty[])dataStore.ToArray(typeof(ObjectProperty)));
             Engine.ReleaseDataStore(dataStore);
             Item item = World.FindItem(serial);
             if (item != null)
@@ -3039,8 +3034,8 @@
                     {
                         break;
                     }
-                    Item item2 = (Item) parent;
-                    if (((item2.Container != null) && (item2.Container.Gump is GContainer)) && ((GContainer) item2.Container.Gump).m_TradeContainer)
+                    Item item2 = (Item)parent;
+                    if (((item2.Container != null) && (item2.Container.Gump is GContainer)) && ((GContainer)item2.Container.Gump).m_TradeContainer)
                     {
                         flag = true;
                     }
@@ -3052,10 +3047,10 @@
                 }
                 if (flag && (parent is Item))
                 {
-                    Item item3 = (Item) parent;
+                    Item item3 = (Item)parent;
                     if ((item3.Container != null) && (item3.Container.Gump.Tooltip is ItemTooltip))
                     {
-                        GObjectProperties gump = ((ItemTooltip) item3.Container.Gump.Tooltip).Gump as GObjectProperties;
+                        GObjectProperties gump = ((ItemTooltip)item3.Container.Gump.Tooltip).Gump as GObjectProperties;
                         if (gump != null)
                         {
                             gump.SetList(0xf9060 + (item3.ID & 0x3fff), item3.PropertyList);
@@ -3181,8 +3176,8 @@
                     Gump gump = item.Container.Gump;
                     if (gump != null)
                     {
-                        ((GSecureTradeCheck) gump.GetTag("Check1")).Checked = flag;
-                        ((GSecureTradeCheck) gump.GetTag("Check2")).Checked = flag2;
+                        ((GSecureTradeCheck)gump.GetTag("Check1")).Checked = flag;
+                        ((GSecureTradeCheck)gump.GetTag("Check2")).Checked = flag2;
                     }
                 }
             }
@@ -3233,19 +3228,19 @@
             toAdd.m_Container = container.Gump;
             container.Gump.X = 13;
             container.Gump.Y = 0x21;
-            ((GContainer) container).m_TradeContainer = true;
+            ((GContainer)container).m_TradeContainer = true;
             container.Gump.SetTag("Check1", check2);
             container.Gump.SetTag("Check2", partner);
             toAdd.Children.Add(container.Gump);
             item.Container = container;
             Item item2 = World.WantItem(num2);
-            IContainer container2 = new GContainer(item2, 0x52, hue2) {
-                Gump = { X = 0x8e, Y = 0x21 }
-            };
+            IContainer container2 = new GContainer(item2, 0x52, hue2);
+            container2.Gump.X = 0x8e;
+            container2.Gump.Y = 0x21;
             container2.Gump.SetTag("Check1", check2);
             container2.Gump.SetTag("Check2", partner);
-            ((GContainer) container2).m_HitTest = false;
-            ((GContainer) container2).m_TradeContainer = true;
+            ((GContainer)container2).m_HitTest = false;
+            ((GContainer)container2).m_TradeContainer = true;
             toAdd.Children.Add(container2.Gump);
             item2.Container = container2;
             if (Engine.Features.AOS)
@@ -3257,46 +3252,42 @@
 
         private static void SelectHue(PacketReader pvSrc)
         {
-            GItemArt art;
             int num = pvSrc.ReadInt32();
             short num2 = pvSrc.ReadInt16();
             short itemID = pvSrc.ReadInt16();
-            GAlphaBackground background = new GAlphaBackground(0, 0, 0xf4, 110) {
-                m_NonRestrictivePicking = true
-            };
+            GAlphaBackground background = new GAlphaBackground(0, 0, 0xf4, 110);
+            background.m_NonRestrictivePicking = true;
             background.Center();
-            art = new GItemArt(0xb7, 3, itemID) {
-                X = art.X + (((0x3a - (art.Image.xMax - art.Image.xMin)) / 2) - art.Image.xMin),
-                Y = art.Y + (((0x52 - (art.Image.yMax - art.Image.yMin)) / 2) - art.Image.yMin)
-            };
-            background.Children.Add(art);
-            GHuePicker toAdd = new GHuePicker(4, 4) {
-                Brightness = 1
-            };
-            toAdd.SetTag("ItemID", (int) itemID);
-            toAdd.SetTag("Item Art", art);
-            toAdd.SetTag("Dialog", background);
-            toAdd.OnHueSelect = new OnHueSelect(Engine.HuePicker_OnHueSelect);
+            GItemArt toAdd = new GItemArt(0xb7, 3, itemID);
+            toAdd.X += ((0x3a - (toAdd.Image.xMax - toAdd.Image.xMin)) / 2) - toAdd.Image.xMin;
+            toAdd.Y += ((0x52 - (toAdd.Image.yMax - toAdd.Image.yMin)) / 2) - toAdd.Image.yMin;
             background.Children.Add(toAdd);
+            GHuePicker picker = new GHuePicker(4, 4);
+            picker.Brightness = 1;
+            picker.SetTag("ItemID", (int)itemID);
+            picker.SetTag("Item Art", toAdd);
+            picker.SetTag("Dialog", background);
+            picker.OnHueSelect = new OnHueSelect(Engine.HuePicker_OnHueSelect);
+            background.Children.Add(picker);
             background.Children.Add(new GSingleBorder(3, 3, 0xa2, 0x52));
             background.Children.Add(new GSingleBorder(0xa4, 3, 0x11, 0x52));
-            GBrightnessBar bar = new GBrightnessBar(0xa5, 4, 15, 80, toAdd);
+            GBrightnessBar bar = new GBrightnessBar(0xa5, 4, 15, 80, picker);
             background.Children.Add(bar);
             bar.Refresh();
             GFlatButton button = new GFlatButton(0x7b, 0x57, 0x3a, 20, "Picker", new OnClick(Engine.HuePickerPicker_OnClick));
             GFlatButton okay = new GFlatButton(0xb7, 0x57, 0x3a, 20, "Okay", new OnClick(Engine.HuePickerOk_OnClick));
-            okay.SetTag("Hue Picker", toAdd);
+            okay.SetTag("Hue Picker", picker);
             okay.SetTag("Dialog", background);
             okay.SetTag("Serial", num);
             okay.SetTag("ItemID", itemID);
             okay.SetTag("Relay", num2);
-            button.SetTag("Hue Picker", toAdd);
+            button.SetTag("Hue Picker", picker);
             button.SetTag("Brightness Bar", bar);
-            background.Children.Add(new GQuickHues(toAdd, bar, okay));
+            background.Children.Add(new GQuickHues(picker, bar, okay));
             background.Children.Add(button);
             background.Children.Add(okay);
             Gumps.Desktop.Children.Add(background);
-            Engine.HuePicker_OnHueSelect(toAdd.Hue, toAdd);
+            Engine.HuePicker_OnHueSelect(picker.Hue, picker);
         }
 
         private static void SellContent(PacketReader pvSrc)
@@ -3393,7 +3384,7 @@
                 Server server = null;
                 for (int i = 0; i < num; i++)
                 {
-                    array[i] = new Server(pvSrc.ReadInt16(), pvSrc.ReadString(0x20), pvSrc.ReadByte(), pvSrc.ReadSByte(), new IPAddress((long) pvSrc.ReadUInt32()));
+                    array[i] = new Server(pvSrc.ReadInt16(), pvSrc.ReadString(0x20), pvSrc.ReadByte(), pvSrc.ReadSByte(), new IPAddress((long)pvSrc.ReadUInt32()));
                     if (array[i].ServerID == NewConfig.LastServerID)
                     {
                         server = array[i];
@@ -3521,9 +3512,9 @@
                 Skill skill = skills[num - 1];
                 if (skill != null)
                 {
-                    skill.Value = ((float) pvSrc.ReadInt16()) / 10f;
-                    skill.Real = ((float) pvSrc.ReadInt16()) / 10f;
-                    skill.Lock = (SkillLock) pvSrc.ReadByte();
+                    skill.Value = ((float)pvSrc.ReadInt16()) / 10f;
+                    skill.Real = ((float)pvSrc.ReadInt16()) / 10f;
+                    skill.Lock = (SkillLock)pvSrc.ReadByte();
                     if (hasCapData)
                     {
                         pvSrc.Seek(2, SeekOrigin.Current);
@@ -3541,7 +3532,7 @@
             Skill skill = Engine.Skills[pvSrc.ReadInt16()];
             if (skill != null)
             {
-                float num = ((float) pvSrc.ReadInt16()) / 10f;
+                float num = ((float)pvSrc.ReadInt16()) / 10f;
                 if (skill.Value != num)
                 {
                     float num2 = num - skill.Value;
@@ -3549,8 +3540,8 @@
                     Engine.AddTextMessage(string.Format("Your skill in {0} has {1} by {2:F1}. Is it now {3:F1}.", new object[] { skill.Name, (num2 > 0f) ? "increased" : "decreased", Math.Abs(num2), num }), Engine.GetFont(3), Hues.Load(0x59));
                     skill.Value = num;
                 }
-                skill.Real = ((float) pvSrc.ReadInt16()) / 10f;
-                skill.Lock = (SkillLock) pvSrc.ReadByte();
+                skill.Real = ((float)pvSrc.ReadInt16()) / 10f;
+                skill.Lock = (SkillLock)pvSrc.ReadByte();
                 if (hasCapData)
                 {
                     pvSrc.Seek(2, SeekOrigin.Current);
@@ -3569,8 +3560,6 @@
 
         private static void StringQuery(PacketReader pvSrc)
         {
-            GDragable dragable;
-            GWrappedLabel label2;
             int num = pvSrc.ReadInt32();
             short num2 = pvSrc.ReadInt16();
             int fixedLength = pvSrc.ReadInt16();
@@ -3580,12 +3569,11 @@
             int num5 = pvSrc.ReadInt32();
             int num6 = pvSrc.ReadInt16();
             string str2 = pvSrc.ReadString(num6);
-            dragable = new GDragable(0x474, 0, 0) {
-                CanClose = false,
-                Modal = true,
-                X = (Engine.ScreenWidth - dragable.Width) / 2,
-                Y = (Engine.ScreenHeight - dragable.Height) / 2
-            };
+            GDragable dragable = new GDragable(0x474, 0, 0);
+            dragable.CanClose = false;
+            dragable.Modal = true;
+            dragable.X = (Engine.ScreenWidth - dragable.Width) / 2;
+            dragable.Y = (Engine.ScreenHeight - dragable.Height) / 2;
             GButton toAdd = new GButton(0x47b, 0x47d, 0x47c, 0x75, 190, new OnClick(Engine.StringQueryOkay_OnClick));
             GButton button2 = new GButton(0x478, 0x47a, 0x479, 0xcc, 190, flag ? new OnClick(Engine.StringQueryCancel_OnClick) : null);
             if (!flag)
@@ -3594,9 +3582,8 @@
             }
             GImage image = new GImage(0x477, 60, 0x91);
             GWrappedLabel label = new GWrappedLabel(text, Engine.GetFont(2), Hues.Load(0x455), 60, 0x30, 0x110);
-            label2 = new GWrappedLabel(str2, Engine.GetFont(2), Hues.Load(0x455), 60, 0x30, 0x110) {
-                Y = image.Y - label2.Height
-            };
+            GWrappedLabel label2 = new GWrappedLabel(str2, Engine.GetFont(2), Hues.Load(0x455), 60, 0x30, 0x110);
+            label2.Y = image.Y - label2.Height;
             GTextBox box = new GTextBox(0, false, 0x44, 140, image.Width - 8, image.Height, "", Engine.GetFont(1), Hues.Load(0x455), Hues.Load(0x455), Hues.Load(0x455));
             box.Focus();
             if (num4 == 1)
@@ -3652,13 +3639,13 @@
                 {
                     pvSrc.Trace();
                 }
-                Engine.TargetHandler = handler = new ServerTargetHandler(targetID, num != 1, (ServerTargetFlags) num3);
+                Engine.TargetHandler = handler = new ServerTargetHandler(targetID, num != 1, (ServerTargetFlags)num3);
                 TargetActions.Identify();
                 if (handler.Action != TargetAction.Unknown)
                 {
                     for (int i = 0; i < Engine.m_AutoTarget.Count; i++)
                     {
-                        AutoTargetSession session = (AutoTargetSession) Engine.m_AutoTarget[i];
+                        AutoTargetSession session = (AutoTargetSession)Engine.m_AutoTarget[i];
                         if (session.m_Action == handler.Action)
                         {
                             session.m_Timer.Delete();
@@ -3681,9 +3668,9 @@
             Engine.AddTextMessage(pvSrc.ReadBoolean().ToString());
         }
 
-        internal static void Update_OnTick(Timer t)
+        internal static void Update_OnTick(Client.Timer t)
         {
-            ShardProfile tag = (ShardProfile) t.GetTag("shard");
+            ShardProfile tag = (ShardProfile)t.GetTag("shard");
             Profiles.Save();
             GMenuItem item = tag.Menu;
             if (item == null)
@@ -3792,7 +3779,7 @@
             num5 &= 0x3fff;
             bool wasFound = false;
             Item i = World.WantItem(serial, ref wasFound);
-            bool isMulti = i.IsMulti;
+            bool flag6 = i.IsMulti;
             i.IsMulti = itemID >= 0x4000;
             int id = 0;
             if (i.IsMulti)
@@ -3801,17 +3788,17 @@
                 Engine.Multis.Register(i, id);
                 itemID = 1;
             }
-            else if (isMulti)
+            else if (flag6)
             {
                 Engine.Multis.Unregister(i);
             }
             Engine.ItemArt.Translate(ref itemID, ref hue);
             itemID &= 0x3fff;
-            i.SetLocation((short) num4, (short) num5, (short) num7);
-            i.ID = (short) itemID;
-            i.Amount = (short) num3;
-            i.Direction = (byte) num6;
-            i.Hue = (ushort) hue;
+            i.SetLocation((short)num4, (short)num5, (short)num7);
+            i.ID = (short)itemID;
+            i.Amount = (short)num3;
+            i.Direction = (byte)num6;
+            i.Hue = (ushort)hue;
             i.Flags.Value = num9;
             if ((!i.Visible && (i.IsCorpse || i.IsBones)) && World.CharData.IncomingNames)
             {
@@ -3890,4 +3877,3 @@
         }
     }
 }
-

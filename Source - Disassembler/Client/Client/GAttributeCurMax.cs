@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GAttributeCurMax : GEmpty
     {
         private int m_Current;
@@ -78,4 +76,3 @@
         }
     }
 }
-

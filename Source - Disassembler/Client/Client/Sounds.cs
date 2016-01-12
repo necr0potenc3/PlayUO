@@ -13,15 +13,19 @@
         public static WaveFormat m_Format;
         private static BinaryReader m_Index = new BinaryReader(Engine.FileManager.OpenMUL(Files.SoundIdx));
         private int[] m_SCC_SoundTable = new int[] { 0x58, 0x2e, 0x2c };
-        private int[] m_SCC_TransTable = new int[] { 
-            0, 0, 1, 0, 3, 0, 2, 2, 2, 3, 3, 3, 1, 2, 2, 2, 
+
+        private int[] m_SCC_TransTable = new int[] {
+            0, 0, 1, 0, 3, 0, 2, 2, 2, 3, 3, 3, 1, 2, 2, 2,
             2, 1, 2, 2, 3, 1
-         };
+        };
+
         private int[] m_SOC_SoundTable = new int[] { 0x48, 0x2f, 0x4f, 0x2d };
-        private int[] m_SOC_TransTable = new int[] { 
-            0, 0, 1, 2, 4, 2, 3, 3, 3, 4, 4, 4, 1, 3, 3, 3, 
+
+        private int[] m_SOC_TransTable = new int[] {
+            0, 0, 1, 2, 4, 2, 3, 3, 3, 4, 4, 4, 1, 3, 3, 3,
             3, 1, 3, 3, 4, 1
-         };
+        };
+
         private static Stream m_Stream = Engine.FileManager.OpenMUL(Files.SoundMul);
 
         public Sounds()
@@ -29,14 +33,14 @@
             try
             {
                 m_Device = new Microsoft.DirectX.DirectSound.Device();
-                m_Device.SetCooperativeLevel(Engine.m_Display, 2);
+                m_Device.SetCooperativeLevel(Engine.m_Display, CooperativeLevel.Priority);
                 m_Format = new WaveFormat();
-                m_Format.set_Channels(1);
-                m_Format.set_FormatTag(1);
-                m_Format.set_BlockAlign(2);
-                m_Format.set_BitsPerSample(0x10);
-                m_Format.set_SamplesPerSecond(0x5622);
-                m_Format.set_AverageBytesPerSecond(0xac44);
+                m_Format.Channels = 1;
+                m_Format.FormatTag = WaveFormatTag.Pcm;
+                m_Format.BlockAlign = 2;
+                m_Format.BitsPerSample = 0x10;
+                m_Format.SamplesPerSecond = 0x5622;
+                m_Format.AverageBytesPerSecond = 0xac44;
             }
             catch (Exception exception)
             {
@@ -139,14 +143,14 @@
                         {
                             try
                             {
-                                buffer.set_Pan(0);
+                                buffer.Pan = 0;
                             }
                             catch
                             {
                             }
                             try
                             {
-                                buffer.set_Volume(-10000 + (this.ScaledVolume * 100));
+                                buffer.Volume = -10000 + (this.ScaledVolume * 100);
                             }
                             catch
                             {
@@ -154,15 +158,15 @@
                         }
                         else
                         {
-                            int num = Math.Abs((int) ((X - player.X) * 11));
-                            int num2 = Math.Abs((int) ((Y - player.Y) * 11));
-                            int num3 = Math.Abs((int) (Z - player.Z));
-                            int num4 = (int) Math.Sqrt((double) (((num * num) + (num2 * num2)) + (num3 * num3)));
+                            int num = Math.Abs((int)((X - player.X) * 11));
+                            int num2 = Math.Abs((int)((Y - player.Y) * 11));
+                            int num3 = Math.Abs((int)(Z - player.Z));
+                            int num4 = (int)Math.Sqrt((double)(((num * num) + (num2 * num2)) + (num3 * num3)));
                             int num5 = (X - Y) - (player.X - player.Y);
                             num5 *= 350;
                             num4 *= 10;
                             num4 = -num4;
-                            num4 -= (int) (5000f * (1f - Volume));
+                            num4 -= (int)(5000f * (1f - Volume));
                             int scaledVolume = this.ScaledVolume;
                             num4 = ((-10000 * (100 - scaledVolume)) + (num4 * scaledVolume)) / 100;
                             if (num4 > 0)
@@ -183,21 +187,21 @@
                             }
                             try
                             {
-                                buffer.set_Pan(num5);
+                                buffer.Pan = num5;
                             }
                             catch
                             {
                             }
                             try
                             {
-                                buffer.set_Volume(num4);
+                                buffer.Volume = num4;
                             }
                             catch
                             {
                             }
                         }
                         buffer.SetCurrentPosition(0);
-                        buffer.Play(0, 0);
+                        buffer.Play(0, BufferPlayFlags.Default);
                     }
                 }
                 catch (Exception exception)
@@ -217,42 +221,42 @@
             {
                 return null;
             }
-            m_Index.BaseStream.Seek((long) (SoundID * 12), SeekOrigin.Begin);
+            m_Index.BaseStream.Seek((long)(SoundID * 12), SeekOrigin.Begin);
             int num = m_Index.ReadInt32();
-            int num2 = m_Index.ReadInt32();
+            int numberBytesToWrite = m_Index.ReadInt32();
             int num3 = m_Index.ReadInt32();
-            if ((num < 0) || (num2 <= 0))
+            if ((num < 0) || (numberBytesToWrite <= 0))
             {
                 if (!this.Translate(ref SoundID))
                 {
                     return null;
                 }
-                m_Index.BaseStream.Seek((long) (SoundID * 12), SeekOrigin.Begin);
+                m_Index.BaseStream.Seek((long)(SoundID * 12), SeekOrigin.Begin);
                 num = m_Index.ReadInt32();
-                num2 = m_Index.ReadInt32();
+                numberBytesToWrite = m_Index.ReadInt32();
                 num3 = m_Index.ReadInt32();
             }
-            if ((num < 0) || (num2 <= 0))
+            if ((num < 0) || (numberBytesToWrite <= 0))
             {
                 return null;
             }
-            num2 -= 40;
-            m_Stream.Seek((long) (num + 40), SeekOrigin.Begin);
-            BufferDescription description = new BufferDescription(m_Format);
-            description.set_BufferBytes(num2);
-            description.set_ControlPan(true);
-            description.set_ControlVolume(true);
-            SecondaryBuffer buffer = new SecondaryBuffer(description, m_Device);
-            buffer.Write(0, m_Stream, num2, 2);
+            numberBytesToWrite -= 40;
+            m_Stream.Seek((long)(num + 40), SeekOrigin.Begin);
+            BufferDescription desc = new BufferDescription(m_Format);
+            desc.BufferBytes = numberBytesToWrite;
+            desc.ControlPan = true;
+            desc.ControlVolume = true;
+            SecondaryBuffer buffer = new SecondaryBuffer(desc, m_Device);
+            buffer.Write(0, m_Stream, numberBytesToWrite, LockFlag.EntireBuffer);
             return buffer;
         }
 
         private bool Translate(ref int index)
         {
-            object obj2 = SoundTable.m_Map[(int) index];
+            object obj2 = SoundTable.m_Map[(int)index];
             if (obj2 != null)
             {
-                index = (int) obj2;
+                index = (int)obj2;
             }
             return (obj2 != null);
         }
@@ -287,4 +291,3 @@
         }
     }
 }
-

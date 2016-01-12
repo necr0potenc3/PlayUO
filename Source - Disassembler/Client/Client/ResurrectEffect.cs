@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class ResurrectEffect : Fade
     {
         public ResurrectEffect() : base(0xffffff, 0f, 1f, 0.5f)
@@ -21,4 +19,3 @@
         }
     }
 }
-

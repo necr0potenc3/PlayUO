@@ -15,7 +15,7 @@
             if (o is IPoint3D)
             {
                 Engine.AddTextMessage("Target another location to complete the bounding box.");
-                Engine.TargetHandler = new InternalTargetHandler(new Point3D((IPoint3D) o));
+                Engine.TargetHandler = new InternalTargetHandler(new Point3D((IPoint3D)o));
             }
             else
             {
@@ -63,7 +63,7 @@
                 if (o is IPoint3D)
                 {
                     Point3D start = this.m_Start;
-                    Point3D bottom = new Point3D((IPoint3D) o);
+                    Point3D bottom = new Point3D((IPoint3D)o);
                     FixPoints(ref start, ref bottom);
                     using (StreamWriter writer = new StreamWriter("exported.log", true))
                     {
@@ -87,4 +87,3 @@
         }
     }
 }
-

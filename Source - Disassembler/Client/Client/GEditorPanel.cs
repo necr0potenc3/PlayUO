@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
 
     public class GEditorPanel : GEmpty
@@ -13,7 +12,7 @@
 
         public GEditorPanel(ArrayList panels, int height) : base(0, 0, 0, height)
         {
-            this.m_Panels = (GCategoryPanel[]) panels.ToArray(typeof(GCategoryPanel));
+            this.m_Panels = (GCategoryPanel[])panels.ToArray(typeof(GCategoryPanel));
             base.m_NonRestrictivePicking = true;
             this.Layout();
         }
@@ -94,4 +93,3 @@
         }
     }
 }
-

@@ -40,7 +40,7 @@
         {
             if (o is Item)
             {
-                Item item = (Item) o;
+                Item item = (Item)o;
                 if (!Map.m_ItemFlags[item.ID & 0x3fff][TileFlag.Container])
                 {
                     Engine.AddTextMessage("That is not a container.");
@@ -151,14 +151,14 @@
                             else
                             {
                                 Engine.QueueAutoMove(item4, item4.Amount, -1, -1, 0, item.Serial);
-                                num += (ushort) item4.Amount;
+                                num += (ushort)item4.Amount;
                             }
                         }
                     }
                     int num3 = num;
                     if (item != null)
                     {
-                        num3 += (ushort) item.Amount;
+                        num3 += (ushort)item.Amount;
                     }
                     if (num3 > amount)
                     {
@@ -172,9 +172,9 @@
                         {
                             Item item5 = itemArray2[i];
                             int num6 = num4;
-                            if (num6 > ((ushort) item5.Amount))
+                            if (num6 > ((ushort)item5.Amount))
                             {
-                                num6 = (ushort) item5.Amount;
+                                num6 = (ushort)item5.Amount;
                             }
                             if (item == null)
                             {
@@ -204,4 +204,3 @@
         }
     }
 }
-

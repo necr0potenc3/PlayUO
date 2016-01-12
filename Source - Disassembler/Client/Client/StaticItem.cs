@@ -13,11 +13,11 @@
         public IHue m_Hue;
         public short m_ID;
         private static Queue m_InstancePool = new Queue();
-        private Texture m_LastImage;
+        private Client.Texture m_LastImage;
         private IHue m_LastImageHue;
         private short m_LastImageID;
         public short m_RealID;
-        public Texture m_sDraw;
+        public Client.Texture m_sDraw;
         public int m_SortInfluence;
         public byte m_vAlpha;
         public CustomVertex.TransformedColoredTextured[] m_vPool;
@@ -27,11 +27,11 @@
 
         private StaticItem(HuedTile tile, int influence, int serial)
         {
-            this.m_ID = (short) tile.ID;
-            this.m_Z = (sbyte) tile.Z;
-            this.m_RealID = (short) ((tile.ID & 0x3fff) | 0x4000);
-            this.m_ID = (short) (this.m_ID & 0x3fff);
-            this.m_ID = (short) (this.m_ID + 0x4000);
+            this.m_ID = (short)tile.ID;
+            this.m_Z = (sbyte)tile.Z;
+            this.m_RealID = (short)((tile.ID & 0x3fff) | 0x4000);
+            this.m_ID = (short)(this.m_ID & 0x3fff);
+            this.m_ID = (short)(this.m_ID + 0x4000);
             this.m_Hue = Hues.GetItemHue(this.m_ID, tile.Hue);
             this.m_Height = Map.GetHeight(this.m_ID);
             this.m_SortInfluence = influence;
@@ -41,12 +41,12 @@
 
         private unsafe StaticItem(byte* pvSrc, int si, int serial)
         {
-            this.m_ID = *((short*) pvSrc);
-            this.m_Z = *((sbyte*) (pvSrc + 4));
-            this.m_RealID = (short) ((this.m_ID & 0x3fff) | 0x4000);
-            this.m_ID = (short) (this.m_ID & 0x3fff);
-            this.m_ID = (short) (this.m_ID + 0x4000);
-            this.m_Hue = Hues.GetItemHue(this.m_ID, *((ushort*) (pvSrc + 5)));
+            this.m_ID = *((short*)pvSrc);
+            this.m_Z = *((sbyte*)(pvSrc + 4));
+            this.m_RealID = (short)((this.m_ID & 0x3fff) | 0x4000);
+            this.m_ID = (short)(this.m_ID & 0x3fff);
+            this.m_ID = (short)(this.m_ID + 0x4000);
+            this.m_Hue = Hues.GetItemHue(this.m_ID, *((ushort*)(pvSrc + 5)));
             this.m_Height = Map.GetHeight(this.m_ID);
             this.m_SortInfluence = si;
             this.Serial = serial;
@@ -56,9 +56,9 @@
         private StaticItem(short ItemID, sbyte Z, int serial)
         {
             this.m_ID = ItemID;
-            this.m_RealID = (short) ((this.m_ID & 0x3fff) | 0x4000);
-            this.m_ID = (short) (this.m_ID & 0x3fff);
-            this.m_ID = (short) (this.m_ID + 0x4000);
+            this.m_RealID = (short)((this.m_ID & 0x3fff) | 0x4000);
+            this.m_ID = (short)(this.m_ID & 0x3fff);
+            this.m_ID = (short)(this.m_ID + 0x4000);
             this.m_Z = Z;
             this.m_Height = Map.GetHeight(this.m_ID);
             this.m_Hue = Hues.Default;
@@ -66,7 +66,7 @@
             this.m_vPool = VertexConstructor.Create();
         }
 
-        public Texture GetItem(IHue hue, short itemID)
+        public Client.Texture GetItem(IHue hue, short itemID)
         {
             if ((this.m_LastImageHue != hue) || (this.m_LastImageID != itemID))
             {
@@ -81,12 +81,12 @@
         {
             if (m_InstancePool.Count > 0)
             {
-                StaticItem item = (StaticItem) m_InstancePool.Dequeue();
-                item.m_RealID = (short) ((tile.ID & 0x3fff) | 0x4000);
-                item.m_ID = (short) tile.ID;
-                item.m_ID = (short) (item.m_ID & 0x3fff);
-                item.m_ID = (short) (item.m_ID + 0x4000);
-                item.m_Z = (sbyte) tile.Z;
+                StaticItem item = (StaticItem)m_InstancePool.Dequeue();
+                item.m_RealID = (short)((tile.ID & 0x3fff) | 0x4000);
+                item.m_ID = (short)tile.ID;
+                item.m_ID = (short)(item.m_ID & 0x3fff);
+                item.m_ID = (short)(item.m_ID + 0x4000);
+                item.m_Z = (sbyte)tile.Z;
                 item.m_Hue = Hues.GetItemHue(item.m_ID, tile.Hue);
                 item.m_Height = Map.GetHeight(item.m_ID);
                 item.m_SortInfluence = influence;
@@ -107,13 +107,13 @@
         {
             if (m_InstancePool.Count > 0)
             {
-                StaticItem item = (StaticItem) m_InstancePool.Dequeue();
-                item.m_RealID = (short) ((*(((short*) pSrc)) & 0x3fff) | 0x4000);
-                item.m_ID = *((short*) pSrc);
-                item.m_ID = (short) (item.m_ID & 0x3fff);
-                item.m_ID = (short) (item.m_ID + 0x4000);
-                item.m_Z = *((sbyte*) (pSrc + 4));
-                item.m_Hue = Hues.GetItemHue(item.m_ID, *((ushort*) (pSrc + 5)));
+                StaticItem item = (StaticItem)m_InstancePool.Dequeue();
+                item.m_RealID = (short)((*(((short*)pSrc)) & 0x3fff) | 0x4000);
+                item.m_ID = *((short*)pSrc);
+                item.m_ID = (short)(item.m_ID & 0x3fff);
+                item.m_ID = (short)(item.m_ID + 0x4000);
+                item.m_Z = *((sbyte*)(pSrc + 4));
+                item.m_Hue = Hues.GetItemHue(item.m_ID, *((ushort*)(pSrc + 5)));
                 item.m_Height = Map.GetHeight(item.m_ID);
                 item.m_SortInfluence = sortInfluence;
                 item.Serial = serial;
@@ -133,11 +133,11 @@
         {
             if (m_InstancePool.Count > 0)
             {
-                StaticItem item = (StaticItem) m_InstancePool.Dequeue();
-                item.m_RealID = (short) ((itemID & 0x3fff) | 0x4000);
+                StaticItem item = (StaticItem)m_InstancePool.Dequeue();
+                item.m_RealID = (short)((itemID & 0x3fff) | 0x4000);
                 item.m_ID = itemID;
-                item.m_ID = (short) (item.m_ID & 0x3fff);
-                item.m_ID = (short) (item.m_ID + 0x4000);
+                item.m_ID = (short)(item.m_ID & 0x3fff);
+                item.m_ID = (short)(item.m_ID + 0x4000);
                 item.m_Z = z;
                 item.m_Hue = Hues.Default;
                 item.m_Height = Map.GetHeight(item.m_ID);
@@ -159,11 +159,11 @@
         {
             if (m_InstancePool.Count > 0)
             {
-                StaticItem item = (StaticItem) m_InstancePool.Dequeue();
-                item.m_RealID = (short) ((realID & 0x3fff) | 0x4000);
+                StaticItem item = (StaticItem)m_InstancePool.Dequeue();
+                item.m_RealID = (short)((realID & 0x3fff) | 0x4000);
                 item.m_ID = itemID;
-                item.m_ID = (short) (item.m_ID & 0x3fff);
-                item.m_ID = (short) (item.m_ID + 0x4000);
+                item.m_ID = (short)(item.m_ID & 0x3fff);
+                item.m_ID = (short)(item.m_ID + 0x4000);
                 item.m_Z = z;
                 item.m_Hue = Hues.Default;
                 item.m_Height = Map.GetHeight(item.m_ID);
@@ -192,7 +192,7 @@
             {
                 if (Map.m_ItemFlags[this.m_ID & 0x3fff][TileFlag.Bridge])
                 {
-                    return (byte) (this.m_Height / 2);
+                    return (byte)(this.m_Height / 2);
                 }
                 return this.m_Height;
             }
@@ -258,4 +258,3 @@
         }
     }
 }
-

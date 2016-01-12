@@ -17,8 +17,8 @@
 
         static GNetwork()
         {
-            Network.OnSend = (NetworkHandler) Delegate.Combine(Network.OnSend, new NetworkHandler(GNetwork.OnSend));
-            Network.OnRecv = (NetworkHandler) Delegate.Combine(Network.OnRecv, new NetworkHandler(GNetwork.OnRecv));
+            Network.OnSend = (NetworkHandler)Delegate.Combine(Network.OnSend, new NetworkHandler(GNetwork.OnSend));
+            Network.OnRecv = (NetworkHandler)Delegate.Combine(Network.OnRecv, new NetworkHandler(GNetwork.OnRecv));
         }
 
         private GNetwork() : base(Engine.ScreenWidth - 200, 0, 200, 400)
@@ -26,7 +26,7 @@
             m_pcBytesIn = 0;
             m_pcBytesOut = 0;
             this.m_Start = Environment.TickCount;
-            IFont uniFont = Engine.GetUniFont(1);
+            Client.IFont uniFont = Engine.GetUniFont(1);
             IHue bright = Hues.Bright;
             GLabel toAdd = new GLabel("Network Statistics", uniFont, bright, 0, 0);
             base.m_Children.Add(toAdd);
@@ -44,9 +44,8 @@
             base.m_Children.Add(m_InSpeed);
             base.m_Children.Add(m_InTotal = new GLabel("", uniFont, bright, 3, y));
             y += m_InSpeed.Height + 3;
-            GPacketStats stats = new GPacketStats {
-                Y = y
-            };
+            GPacketStats stats = new GPacketStats();
+            stats.Y = y;
             base.m_Children.Add(stats);
             y += stats.Height + 3;
             base.m_Height = y;
@@ -58,10 +57,10 @@
             num /= 1000.0;
             num *= 1024.0;
             m_Ping.Text = string.Format("<-> Ping: {0}", Engine.Ping);
-            m_OutSpeed.Text = string.Format("--> Kbps: {0:F2}", ((double) m_pcBytesOut) / num);
+            m_OutSpeed.Text = string.Format("--> Kbps: {0:F2}", ((double)m_pcBytesOut) / num);
             m_OutTotal.Text = this.Measure(m_pcBytesOut);
             m_OutTotal.X = (base.m_Width - 4) - m_OutTotal.Width;
-            m_InSpeed.Text = string.Format("<-- Kbps: {0:F2}", ((double) m_pcBytesIn) / num);
+            m_InSpeed.Text = string.Format("<-- Kbps: {0:F2}", ((double)m_pcBytesIn) / num);
             m_InTotal.Text = this.Measure(m_pcBytesIn);
             m_InTotal.X = (base.m_Width - 4) - m_InTotal.Width;
             base.Draw(X, Y);
@@ -69,8 +68,8 @@
 
         private string Measure(int Bytes)
         {
-            double num = ((double) Bytes) / 1024.0;
-            num = ((double) ((int) (num * 100.0))) / 100.0;
+            double num = ((double)Bytes) / 1024.0;
+            num = ((double)((int)(num * 100.0))) / 100.0;
             if (num == 0.0)
             {
                 return "None";
@@ -121,4 +120,3 @@
         }
     }
 }
-

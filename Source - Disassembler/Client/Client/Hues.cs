@@ -37,9 +37,8 @@
                     int srcOffset = 0;
                     while (num2 < num)
                     {
-                        HueData data = new HueData {
-                            colors = new ushort[0x40]
-                        };
+                        HueData data = new HueData();
+                        data.colors = new ushort[0x40];
                         Buffer.BlockCopy(src, srcOffset, data.colors, 0x40, 0x40);
                         srcOffset += 0x44;
                         m_HueData[num2++] = data;
@@ -60,20 +59,19 @@
             {
                 int num5 = 0;
                 int num6 = 0;
-                short* numPtr = (short*) numRef;
+                short* numPtr = (short*)numRef;
                 do
                 {
                     numPtr += 2;
                     int num7 = 0;
                     do
                     {
-                        HueData data2 = new HueData {
-                            colors = new ushort[0x40]
-                        };
+                        HueData data2 = new HueData();
+                        data2.colors = new ushort[0x40];
                         for (int j = 0; j < 0x20; j++)
                         {
                             numPtr++;
-                            data2.colors[0x20 + j] = (ushort) numPtr[0];
+                            data2.colors[0x20 + j] = (ushort)numPtr[0];
                         }
                         numPtr++;
                         data2.tableStart = numPtr[0];
@@ -92,7 +90,7 @@
             stream2.Close();
             fixed (byte* numRef2 = buffer2)
             {
-                int* numPtr2 = (int*) numRef2;
+                int* numPtr2 = (int*)numRef2;
                 numPtr2++;
                 int num9 = numPtr2[0];
                 int num10 = 0;
@@ -110,16 +108,15 @@
                         int num14 = numPtr2[0];
                         numPtr2++;
                         int num15 = numPtr2[0];
-                        short* numPtr3 = (short*) ((numRef2 + num13) + 4);
+                        short* numPtr3 = (short*)((numRef2 + num13) + 4);
                         for (int k = 0; k < 8; k++)
                         {
-                            HueData data3 = new HueData {
-                                colors = new ushort[0x40]
-                            };
+                            HueData data3 = new HueData();
+                            data3.colors = new ushort[0x40];
                             for (int m = 0; m < 0x20; m++)
                             {
                                 numPtr3++;
-                                data3.colors[0x20 + m] = (ushort) numPtr3[0];
+                                data3.colors[0x20 + m] = (ushort)numPtr3[0];
                             }
                             numPtr3++;
                             data3.tableStart = numPtr3[0];
@@ -146,7 +143,7 @@
                 {
                     ushort[] numArray;
                     IntPtr ptr;
-                    (numArray = data4.colors)[(int) (ptr = (IntPtr) (0x20 + n))] = (ushort) (numArray[(int) ptr] | 0x8000);
+                    (numArray = data4.colors)[(int)(ptr = (IntPtr)(0x20 + n))] = (ushort)(numArray[(int)ptr] | 0x8000);
                     writer.Write(data4.colors[0x20 + n]);
                 }
                 writer.Write(data4.tableStart);
@@ -224,7 +221,7 @@
         {
             if ((n >= Notoriety.Innocent) && (n <= Notoriety.Vendor))
             {
-                int index = ((int) n) - 1;
+                int index = ((int)n) - 1;
                 int num2 = full ? 1 : 0;
                 IHue hue = m_NotorietyHues[index, num2];
                 if (hue == null)
@@ -240,7 +237,7 @@
         {
             if ((n >= Notoriety.Innocent) && (n <= Notoriety.Vendor))
             {
-                return m_HueData[World.CharData.NotorietyHues[((int) n) - 1]];
+                return m_HueData[World.CharData.NotorietyHues[((int)n) - 1]];
             }
             return new HueData();
         }
@@ -286,9 +283,9 @@
                 int num8 = (num7 >> 10) & 0x1f;
                 int num9 = (num7 >> 5) & 0x1f;
                 int num10 = num7 & 0x1f;
-                num8 = Math.Abs((int) (num8 - num));
-                num9 = Math.Abs((int) (num9 - num2));
-                num10 = Math.Abs((int) (num10 - num3));
+                num8 = Math.Abs((int)(num8 - num));
+                num9 = Math.Abs((int)(num9 - num2));
+                num10 = Math.Abs((int)(num10 - num3));
                 int num11 = (num8 + num9) + num10;
                 if (num11 < num4)
                 {
@@ -309,7 +306,7 @@
                 {
                     num2 = 0x1f;
                 }
-                data.colors[0x20 + i] = (ushort) (((0x8000 | (num2 << 10)) | (num2 << 5)) | num2);
+                data.colors[0x20 + i] = (ushort)(((0x8000 | (num2 << 10)) | (num2 << 5)) | num2);
             }
             m_HueData[0xbb7] = data;
         }
@@ -356,7 +353,7 @@
 
             public unsafe void Apply(LockData ld)
             {
-                ushort* pvSrc = (ushort*) ld.pvSrc;
+                ushort* pvSrc = (ushort*)ld.pvSrc;
                 int num = ld.Height * (ld.Pitch >> 1);
                 while (num-- != 0)
                 {
@@ -367,13 +364,13 @@
                     }
                     else
                     {
-                        int num3 = (int) (Engine.GrayScale(color) * 1.15);
+                        int num3 = (int)(Engine.GrayScale(color) * 1.15);
                         if (num3 > 0x1f)
                         {
                             num3 = 0x1f;
                         }
                         pvSrc++;
-                        pvSrc[0] = (ushort) (((num3 | (num3 << 5)) | (num3 << 10)) | (color & 0x8000));
+                        pvSrc[0] = (ushort)(((num3 | (num3 << 5)) | (num3 << 10)) | (color & 0x8000));
                     }
                 }
             }
@@ -387,19 +384,19 @@
 
             public unsafe void CopyPixels(void* pvSrc, void* pvDest, int Pixels)
             {
-                ushort* numPtr = (ushort*) pvSrc;
-                ushort* numPtr2 = (ushort*) pvDest;
+                ushort* numPtr = (ushort*)pvSrc;
+                ushort* numPtr2 = (ushort*)pvDest;
                 while (--Pixels >= 0)
                 {
                     numPtr++;
                     ushort color = numPtr[0];
-                    int num2 = (int) (Engine.GrayScale(color) * 1.15);
+                    int num2 = (int)(Engine.GrayScale(color) * 1.15);
                     if (num2 > 0x1f)
                     {
                         num2 = 0x1f;
                     }
                     numPtr2++;
-                    numPtr2[0] = (ushort) ((((num2 << 10) | (num2 << 5)) | num2) | 0x8000);
+                    numPtr2[0] = (ushort)((((num2 << 10) | (num2 << 5)) | num2) | 0x8000);
                 }
             }
 
@@ -443,7 +440,7 @@
                     numPtr += num2;
                     if (num != 0)
                     {
-                        num = this.Pixel((ushort) (num | 0x8000));
+                        num = this.Pixel((ushort)(num | 0x8000));
                         while (pDest < numPtr)
                         {
                             pDest++;
@@ -459,8 +456,8 @@
 
             public unsafe void FillLine(void* pSrc, void* pDest, int Count)
             {
-                short* numPtr = (short*) pSrc;
-                byte* numPtr2 = (byte*) pDest;
+                short* numPtr = (short*)pSrc;
+                byte* numPtr2 = (byte*)pDest;
                 while (--Count >= 0)
                 {
                     numPtr++;
@@ -469,28 +466,28 @@
                     int num2 = numPtr[0];
                     if (num != 0)
                     {
-                        num = this.Pixel((ushort) (num | 0x8000));
+                        num = this.Pixel((ushort)(num | 0x8000));
                         int num3 = num2 >> 1;
                         int num4 = (num << 0x10) | num;
-                        int* numPtr3 = (int*) numPtr2;
+                        int* numPtr3 = (int*)numPtr2;
                         while (--num3 >= 0)
                         {
                             numPtr3++;
                             numPtr3[0] = num4;
                         }
-                        numPtr2 = (byte*) numPtr3;
+                        numPtr2 = (byte*)numPtr3;
                         switch ((num2 & 1))
                         {
                             case 0:
-                            {
-                                continue;
-                            }
+                                {
+                                    continue;
+                                }
                             case 1:
-                            {
-                                *((short*) numPtr2) = (short) num;
-                                numPtr2 += 2;
-                                continue;
-                            }
+                                {
+                                    *((short*)numPtr2) = (short)num;
+                                    numPtr2 += 2;
+                                    continue;
+                                }
                         }
                     }
                     else
@@ -502,9 +499,9 @@
 
             public unsafe void FillPixels(void* pvDest, int Color, int Pixels)
             {
-                Color = this.Pixel((ushort) (Color | 0x8000));
+                Color = this.Pixel((ushort)(Color | 0x8000));
                 int num = Pixels >> 1;
-                int* numPtr = (int*) pvDest;
+                int* numPtr = (int*)pvDest;
                 int num2 = (Color << 0x10) | Color;
                 while (--num >= 0)
                 {
@@ -513,7 +510,7 @@
                 }
                 if ((Pixels & 1) != 0)
                 {
-                    *((short*) numPtr) = (short) Color;
+                    *((short*)numPtr) = (short)Color;
                 }
             }
 
@@ -569,12 +566,12 @@
 
             public ushort Pixel(ushort input)
             {
-                int num = (int) (Engine.GrayScale(input) * 1.15);
+                int num = (int)(Engine.GrayScale(input) * 1.15);
                 if (num > 0x1f)
                 {
                     num = 0x1f;
                 }
-                return (ushort) ((((num << 10) | (num << 5)) | num) | (input & 0x8000));
+                return (ushort)((((num << 10) | (num << 5)) | num) | (input & 0x8000));
             }
 
             public override string ToString()
@@ -605,8 +602,8 @@
 
             public unsafe void CopyPixels(void* pvSrc, void* pvDest, int Pixels)
             {
-                int* numPtr = (int*) pvSrc;
-                int* numPtr2 = (int*) pvDest;
+                int* numPtr = (int*)pvSrc;
+                int* numPtr2 = (int*)pvDest;
                 int* numPtr3 = numPtr + ((Pixels >> 1) & -4);
                 while (numPtr < numPtr3)
                 {
@@ -641,7 +638,7 @@
                 numPtr += num;
                 if ((Pixels & 1) != 0)
                 {
-                    *((short*) numPtr2) = (short) (0x8000 | *(((ushort*) numPtr)));
+                    *((short*)numPtr2) = (short)(0x8000 | *(((ushort*)numPtr)));
                 }
             }
 
@@ -725,7 +722,7 @@
                     numPtr += num2;
                     if (num != 0)
                     {
-                        num = (ushort) (num | 0x8000);
+                        num = (ushort)(num | 0x8000);
                         while (pDest < numPtr)
                         {
                             pDest++;
@@ -862,8 +859,8 @@
                 num3 = num3 >> 3;
                 num = num << 10;
                 num2 = num2 << 5;
-                this.m_Color = (ushort) ((num | num2) | num3);
-                this.m_Color = (ushort) (this.m_Color | 0x8000);
+                this.m_Color = (ushort)((num | num2) | num3);
+                this.m_Color = (ushort)(this.m_Color | 0x8000);
             }
 
             public void Apply(LockData ld)
@@ -878,7 +875,7 @@
 
             public unsafe void CopyPixels(void* pvSrc, void* pvDest, int count)
             {
-                ushort* numPtr = (ushort*) pvDest;
+                ushort* numPtr = (ushort*)pvDest;
                 ushort* numPtr2 = numPtr + count;
                 ushort color = this.m_Color;
                 while (numPtr < numPtr2)
@@ -894,7 +891,7 @@
 
             public override bool Equals(object obj)
             {
-                return ((obj is Hues.HFill) && (((Hues.HFill) obj).m_Color == this.m_Color));
+                return ((obj is Hues.HFill) && (((Hues.HFill)obj).m_Color == this.m_Color));
             }
 
             public unsafe void FillLine(ushort* pSrc, ushort* pDest, ushort* pEnd)
@@ -979,101 +976,101 @@
                         int num2 = 0x20;
                         while (--num2 >= 0)
                         {
-                            int num3 = (int) (num6 * 31f);
-                            numPtr[0] = (ushort) (0x8000 | (num3 * 0x421));
+                            int num3 = (int)(num6 * 31f);
+                            numPtr[0] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[1] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[1] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[2] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[2] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[3] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[3] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[4] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[4] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[5] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[5] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[6] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[6] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[7] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[7] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[8] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[8] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[9] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[9] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[10] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[10] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[11] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[11] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[12] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[12] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[13] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[13] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[14] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[14] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[15] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[15] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[0x10] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[0x10] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[0x11] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[0x11] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[0x12] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[0x12] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[0x13] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[0x13] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[20] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[20] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[0x15] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[0x15] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[0x16] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[0x16] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[0x17] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[0x17] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[0x18] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[0x18] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[0x19] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[0x19] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[0x1a] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[0x1a] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[0x1b] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[0x1b] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[0x1c] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[0x1c] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[0x1d] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[0x1d] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[30] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[30] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
-                            num3 = (int) (num6 * 31f);
-                            numPtr[0x1f] = (ushort) (0x8000 | (num3 * 0x421));
+                            num3 = (int)(num6 * 31f);
+                            numPtr[0x1f] = (ushort)(0x8000 | (num3 * 0x421));
                             num6 += 0.003677419f;
                             numPtr += 0x20;
                             num5 += 0.01893548f;
@@ -1087,7 +1084,7 @@
 
             public unsafe void Apply(LockData ld)
             {
-                ushort* pvSrc = (ushort*) ld.pvSrc;
+                ushort* pvSrc = (ushort*)ld.pvSrc;
                 int height = ld.Height;
                 int width = ld.Width;
                 int num3 = 0;
@@ -1117,8 +1114,8 @@
 
             public unsafe void CopyPixels(void* pvSrc, void* pvDest, int Pixels)
             {
-                ushort* numPtr = (ushort*) pvSrc;
-                ushort* numPtr2 = (ushort*) pvDest;
+                ushort* numPtr = (ushort*)pvSrc;
+                ushort* numPtr2 = (ushort*)pvDest;
                 ushort* numPtr3 = numPtr + Pixels;
                 fixed (ushort* numRef = m_Colors)
                 {
@@ -1215,7 +1212,7 @@
             {
                 Color = m_Colors[Color | 0x8000];
                 int num = Pixels >> 1;
-                int* numPtr = (int*) pvDest;
+                int* numPtr = (int*)pvDest;
                 int num2 = (Color << 0x10) | Color;
                 while (--num >= 0)
                 {
@@ -1224,7 +1221,7 @@
                 }
                 if ((Pixels & 1) != 0)
                 {
-                    *((short*) numPtr) = (short) Color;
+                    *((short*)numPtr) = (short)Color;
                 }
             }
 
@@ -1349,7 +1346,7 @@
 
             public unsafe void Apply(LockData ld)
             {
-                ushort* pvSrc = (ushort*) ld.pvSrc;
+                ushort* pvSrc = (ushort*)ld.pvSrc;
                 int height = ld.Height;
                 int width = ld.Width;
                 int num3 = 0;
@@ -1394,8 +1391,8 @@
             {
                 fixed (ushort* numRef = this.m_Data.colors)
                 {
-                    ushort* numPtr = (ushort*) pvSrc;
-                    ushort* numPtr2 = (ushort*) pvDest;
+                    ushort* numPtr = (ushort*)pvSrc;
+                    ushort* numPtr2 = (ushort*)pvDest;
                     ushort* numPtr3 = numPtr + Pixels;
                     while (numPtr < numPtr3)
                     {
@@ -1409,7 +1406,7 @@
                         else
                         {
                             numPtr2++;
-                            numPtr2[0] = (ushort) (num | 0x8000);
+                            numPtr2[0] = (ushort)(num | 0x8000);
                         }
                     }
                 }
@@ -1461,7 +1458,7 @@
                         }
                         else
                         {
-                            num = (ushort) (num | 0x8000);
+                            num = (ushort)(num | 0x8000);
                         }
                         while (pDest < numPtr)
                         {
@@ -1487,7 +1484,7 @@
                     Color |= 0x8000;
                 }
                 int num = Pixels >> 1;
-                int* numPtr = (int*) pvDest;
+                int* numPtr = (int*)pvDest;
                 int num2 = (Color << 0x10) | Color;
                 while (--num >= 0)
                 {
@@ -1496,7 +1493,7 @@
                 }
                 if ((Pixels & 1) != 0)
                 {
-                    *((short*) numPtr) = (short) Color;
+                    *((short*)numPtr) = (short)Color;
                 }
             }
 
@@ -1583,7 +1580,7 @@
 
             public unsafe void Apply(LockData ld)
             {
-                ushort* pvSrc = (ushort*) ld.pvSrc;
+                ushort* pvSrc = (ushort*)ld.pvSrc;
                 int height = ld.Height;
                 int width = ld.Width;
                 int num3 = 0;
@@ -1615,8 +1612,8 @@
             {
                 fixed (ushort* numRef = this.m_Data.colors)
                 {
-                    ushort* numPtr = (ushort*) pvSrc;
-                    ushort* numPtr2 = (ushort*) pvDest;
+                    ushort* numPtr = (ushort*)pvSrc;
+                    ushort* numPtr2 = (ushort*)pvDest;
                     ushort* numPtr3 = numPtr + (Pixels & -4);
                     while (numPtr < numPtr3)
                     {
@@ -1707,7 +1704,7 @@
             {
                 Color = this.m_Data.colors[(Color >> 10) | 0x20];
                 int num = Pixels >> 1;
-                int* numPtr = (int*) pvDest;
+                int* numPtr = (int*)pvDest;
                 int num2 = (Color << 0x10) | Color;
                 while (--num >= 0)
                 {
@@ -1716,7 +1713,7 @@
                 }
                 if ((Pixels & 1) != 0)
                 {
-                    *((short*) numPtr) = (short) Color;
+                    *((short*)numPtr) = (short)Color;
                 }
             }
 
@@ -1813,14 +1810,14 @@
                         int num11 = ((num4 * num2) + (num8 * num)) / 0x1f;
                         int num12 = ((num5 * num2) + (num9 * num)) / 0x1f;
                         numPtr++;
-                        numPtr[0] = (ushort) (((0x8000 | num10) | (num11 << 5)) | (num12 << 10));
+                        numPtr[0] = (ushort)(((0x8000 | num10) | (num11 << 5)) | (num12 << 10));
                     }
                 }
             }
 
             public unsafe void Apply(LockData ld)
             {
-                ushort* pvSrc = (ushort*) ld.pvSrc;
+                ushort* pvSrc = (ushort*)ld.pvSrc;
                 int height = ld.Height;
                 int width = ld.Width;
                 int num3 = 0;
@@ -1850,8 +1847,8 @@
 
             public unsafe void CopyPixels(void* pvSrc, void* pvDest, int Pixels)
             {
-                ushort* numPtr = (ushort*) pvSrc;
-                ushort* numPtr2 = (ushort*) pvDest;
+                ushort* numPtr = (ushort*)pvSrc;
+                ushort* numPtr2 = (ushort*)pvDest;
                 ushort* numPtr3 = numPtr + Pixels;
                 fixed (ushort* numRef = this.m_Colors)
                 {
@@ -1948,7 +1945,7 @@
             {
                 Color = this.m_Colors[Color | 0x8000];
                 int num = Pixels >> 1;
-                int* numPtr = (int*) pvDest;
+                int* numPtr = (int*)pvDest;
                 int num2 = (Color << 0x10) | Color;
                 while (--num >= 0)
                 {
@@ -1957,7 +1954,7 @@
                 }
                 if ((Pixels & 1) != 0)
                 {
-                    *((short*) numPtr) = (short) Color;
+                    *((short*)numPtr) = (short)Color;
                 }
             }
 
@@ -2065,4 +2062,3 @@
         }
     }
 }
-

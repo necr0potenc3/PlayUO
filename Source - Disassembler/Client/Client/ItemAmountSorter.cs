@@ -27,9 +27,8 @@
             {
                 throw new ArgumentException();
             }
-            ushort amount = (ushort) item.Amount;
-            return amount.CompareTo((ushort) item2.Amount);
+            ushort amount = (ushort)item.Amount;
+            return amount.CompareTo((ushort)item2.Amount);
         }
     }
 }
-

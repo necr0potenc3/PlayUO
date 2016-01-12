@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GServerEntry : Gump
     {
         private Client.Clipper m_Clipper;
@@ -135,4 +133,3 @@
         }
     }
 }
-

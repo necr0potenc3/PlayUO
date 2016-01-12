@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.IO;
     using System.Text;
 
@@ -58,7 +57,7 @@
             {
                 this.Flush();
             }
-            this.m_Buffer[this.m_Index++] = toWrite ? ((byte) 1) : ((byte) 0);
+            this.m_Buffer[this.m_Index++] = toWrite ? ((byte)1) : ((byte)0);
         }
 
         public void Write(byte[] toWrite)
@@ -85,8 +84,8 @@
             {
                 this.Flush();
             }
-            this.m_Buffer[this.m_Index++] = (byte) (toWrite >> 8);
-            this.m_Buffer[this.m_Index++] = (byte) toWrite;
+            this.m_Buffer[this.m_Index++] = (byte)(toWrite >> 8);
+            this.m_Buffer[this.m_Index++] = (byte)toWrite;
         }
 
         public void Write(int toWrite)
@@ -95,10 +94,10 @@
             {
                 this.Flush();
             }
-            this.m_Buffer[this.m_Index++] = (byte) (toWrite >> 0x18);
-            this.m_Buffer[this.m_Index++] = (byte) (toWrite >> 0x10);
-            this.m_Buffer[this.m_Index++] = (byte) (toWrite >> 8);
-            this.m_Buffer[this.m_Index++] = (byte) toWrite;
+            this.m_Buffer[this.m_Index++] = (byte)(toWrite >> 0x18);
+            this.m_Buffer[this.m_Index++] = (byte)(toWrite >> 0x10);
+            this.m_Buffer[this.m_Index++] = (byte)(toWrite >> 8);
+            this.m_Buffer[this.m_Index++] = (byte)toWrite;
         }
 
         public void Write(sbyte toWrite)
@@ -107,7 +106,7 @@
             {
                 this.Flush();
             }
-            this.m_Buffer[this.m_Index++] = (byte) toWrite;
+            this.m_Buffer[this.m_Index++] = (byte)toWrite;
         }
 
         public void Write(string toWrite)
@@ -125,8 +124,8 @@
             {
                 this.Flush();
             }
-            this.m_Buffer[this.m_Index++] = (byte) (toWrite >> 8);
-            this.m_Buffer[this.m_Index++] = (byte) toWrite;
+            this.m_Buffer[this.m_Index++] = (byte)(toWrite >> 8);
+            this.m_Buffer[this.m_Index++] = (byte)toWrite;
         }
 
         public void Write(uint toWrite)
@@ -135,10 +134,10 @@
             {
                 this.Flush();
             }
-            this.m_Buffer[this.m_Index++] = (byte) (toWrite >> 0x18);
-            this.m_Buffer[this.m_Index++] = (byte) (toWrite >> 0x10);
-            this.m_Buffer[this.m_Index++] = (byte) (toWrite >> 8);
-            this.m_Buffer[this.m_Index++] = (byte) toWrite;
+            this.m_Buffer[this.m_Index++] = (byte)(toWrite >> 0x18);
+            this.m_Buffer[this.m_Index++] = (byte)(toWrite >> 0x10);
+            this.m_Buffer[this.m_Index++] = (byte)(toWrite >> 8);
+            this.m_Buffer[this.m_Index++] = (byte)toWrite;
         }
 
         public void Write(string toWrite, int cb)
@@ -165,7 +164,7 @@
 
         public void WriteEncoded(int toWrite)
         {
-            this.Write((byte) 0);
+            this.Write((byte)0);
             this.Write(toWrite);
         }
 
@@ -200,4 +199,3 @@
         }
     }
 }
-

@@ -1,7 +1,6 @@
 ﻿namespace Client
 {
     using Client.Prompts;
-    using System;
     using System.Windows.Forms;
 
     public class GQuickHues : GAlphaBackground
@@ -19,7 +18,7 @@
         protected GFlatButton m_Okay;
         protected GHuePicker m_Picker;
         protected TimeSync m_Sync;
-        protected Timer m_Timer;
+        protected Client.Timer m_Timer;
         protected int m_To;
 
         public GQuickHues(GHuePicker Picker, GBrightnessBar Brightness, GFlatButton Okay) : base(3, 0x57, 0x76, 20)
@@ -30,7 +29,7 @@
             this.m_Brightness = Brightness;
             this.m_Okay = Okay;
             base.m_CanDrag = false;
-            this.m_Timer = new Timer(new OnTick(this.Roll_OnTick), 0);
+            this.m_Timer = new Client.Timer(new OnTick(this.Roll_OnTick), 0);
             GLabel toAdd = new GLabel("Quick Hues", Engine.GetUniFont(0), Hues.Default, 2, 2);
             this.Height = 20;
             this.m_CompactHeight = base.m_Height;
@@ -50,7 +49,7 @@
             OnHighlight highlight = new OnHighlight(this.Entry_OnHighlight);
             for (int i = 0; i < count; i++)
             {
-                QuickHueEntry entry = (QuickHueEntry) QuickHues.Entries[i];
+                QuickHueEntry entry = (QuickHueEntry)QuickHues.Entries[i];
                 GTextButton button2 = new GTextButton(entry.Name, Engine.GetUniFont(0), Hues.Load(0x58), Hues.Load(0x35), 2, 2, onClick);
                 base.m_Children.Add(button2);
                 button2.Center();
@@ -82,7 +81,7 @@
                 Gump[] gumpArray = base.m_Children.ToArray();
                 for (int i = 1; i < gumpArray.Length; i++)
                 {
-                    ((GTextButton) gumpArray[i]).Scissor(clipper);
+                    ((GTextButton)gumpArray[i]).Scissor(clipper);
                 }
             }
             if ((Gumps.LastOver != null) && Gumps.LastOver.IsChildOf(this))
@@ -124,12 +123,12 @@
         {
             if ((g.HasTag("HueID") && g.HasTag("Buttons")) && g.HasTag("Index"))
             {
-                int tag = (int) g.GetTag("HueID");
-                MouseButtons buttons = (MouseButtons) g.GetTag("Buttons");
-                int index = (int) g.GetTag("Index");
+                int tag = (int)g.GetTag("HueID");
+                MouseButtons buttons = (MouseButtons)g.GetTag("Buttons");
+                int num2 = (int)g.GetTag("Index");
                 if ((buttons & MouseButtons.Right) != MouseButtons.None)
                 {
-                    QuickHues.Remove(index);
+                    QuickHues.Remove(num2);
                     Gumps.Destroy(this);
                     GQuickHues toAdd = new GQuickHues(this.m_Picker, this.m_Brightness, this.m_Okay);
                     if (this.m_Expanded)
@@ -160,7 +159,7 @@
         {
             if (g.HasTag("HueID"))
             {
-                int tag = (int) g.GetTag("HueID");
+                int tag = (int)g.GetTag("HueID");
                 if ((tag >= 2) && (tag < 0x3ea))
                 {
                     tag -= 2;
@@ -177,10 +176,10 @@
             }
         }
 
-        protected void Roll_OnTick(Timer t)
+        protected void Roll_OnTick(Client.Timer t)
         {
             double normalized = this.m_Sync.Normalized;
-            this.Height = this.m_From + ((int) ((this.m_To - this.m_From) * normalized));
+            this.Height = this.m_From + ((int)((this.m_To - this.m_From) * normalized));
             Engine.Redraw();
             if (normalized >= 1.0)
             {
@@ -222,7 +221,7 @@
                 Gump[] gumpArray = base.m_Children.ToArray();
                 for (int i = 1; i < gumpArray.Length; i++)
                 {
-                    ((GTextButton) gumpArray[i]).Scissor(clipper);
+                    ((GTextButton)gumpArray[i]).Scissor(clipper);
                 }
             }
         }
@@ -248,10 +247,9 @@
 
             public void OnReturn(string message)
             {
-                QuickHueEntry e = new QuickHueEntry {
-                    Name = message,
-                    Hue = this.m_Hue
-                };
+                QuickHueEntry e = new QuickHueEntry();
+                e.Name = message;
+                e.Hue = this.m_Hue;
                 QuickHues.Add(e);
                 Gumps.Destroy(this.m_Target);
                 GQuickHues toAdd = new GQuickHues(this.m_Target.m_Picker, this.m_Target.m_Brightness, this.m_Target.m_Okay);
@@ -266,4 +264,3 @@
         }
     }
 }
-

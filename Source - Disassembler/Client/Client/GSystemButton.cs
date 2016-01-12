@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Drawing;
     using System.Windows.Forms;
 
@@ -13,7 +12,7 @@
         private Color m_PressedColor;
         private ButtonState m_State;
 
-        public GSystemButton(int x, int y, int width, int height, Color backColor, Color foreColor, string text, IFont font) : base(x, y, width, height)
+        public GSystemButton(int x, int y, int width, int height, Color backColor, Color foreColor, string text, Client.IFont font) : base(x, y, width, height)
         {
             this.m_InactiveColor = backColor;
             this.m_ActiveColor = ControlPaint.Dark(backColor, -this.Darkness);
@@ -209,4 +208,3 @@
         }
     }
 }
-

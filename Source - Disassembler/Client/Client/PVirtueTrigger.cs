@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class PVirtueTrigger : Packet
     {
         public PVirtueTrigger(Mobile m) : base(0xb1, "Virtue Trigger")
@@ -14,4 +12,3 @@
         }
     }
 }
-

@@ -1,7 +1,6 @@
 ﻿namespace Client.Targeting
 {
     using Client;
-    using System;
 
     public class IgnoreTargetHandler : ITargetHandler
     {
@@ -14,7 +13,7 @@
         {
             if (o is Mobile)
             {
-                Mobile mobile = (Mobile) o;
+                Mobile mobile = (Mobile)o;
                 mobile.Ignored = !mobile.Ignored;
                 string name = mobile.Name;
                 string str2 = mobile.Ignored ? "now being ignored." : "no longer being ignored.";
@@ -34,4 +33,3 @@
         }
     }
 }
-

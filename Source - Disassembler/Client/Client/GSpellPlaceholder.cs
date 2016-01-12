@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GSpellPlaceholder : Gump
@@ -101,4 +100,3 @@
         }
     }
 }
-

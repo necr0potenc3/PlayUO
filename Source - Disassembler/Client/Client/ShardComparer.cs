@@ -11,7 +11,7 @@
             ShardProfile profile2 = null;
             if (x is GShardMenu)
             {
-                shard = ((GShardMenu) x).Shard;
+                shard = ((GShardMenu)x).Shard;
             }
             else
             {
@@ -19,7 +19,7 @@
             }
             if (y is GShardMenu)
             {
-                profile2 = ((GShardMenu) y).Shard;
+                profile2 = ((GShardMenu)y).Shard;
             }
             else
             {
@@ -38,8 +38,8 @@
             int hours = currentTimeZone.GetUtcOffset(now).Hours;
             int num2 = -shard.TimeZone;
             int num3 = -profile2.TimeZone;
-            int num4 = Math.Abs((int) (hours - num2));
-            int num5 = Math.Abs((int) (hours - num3));
+            int num4 = Math.Abs((int)(hours - num2));
+            int num5 = Math.Abs((int)(hours - num3));
             int num6 = num4 - num5;
             if (num6 == 0)
             {
@@ -53,4 +53,3 @@
         }
     }
 }
-

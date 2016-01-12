@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GCriminalAttackQuery : GMessageBoxYesNo
     {
         private Mobile m_Mobile;
@@ -20,4 +18,3 @@
         }
     }
 }
-

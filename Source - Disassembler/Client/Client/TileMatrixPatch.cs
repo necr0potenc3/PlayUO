@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.IO;
 
     public class TileMatrixPatch
@@ -42,7 +41,7 @@
         public int[][] SlurpRefs(int width, int height, FileStream fs)
         {
             BinaryReader reader = new BinaryReader(fs);
-            int num = (int) (fs.Length / 4L);
+            int num = (int)(fs.Length / 4L);
             int[][] numArray = new int[width][];
             for (int i = 0; i < num; i++)
             {
@@ -111,4 +110,3 @@
         }
     }
 }
-

@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GVResizer : Gump
@@ -33,7 +32,7 @@
         {
             if (Gumps.Capture == this)
             {
-                Point point = ((Gump) this.m_Target).PointToScreen(new Point(0, 0));
+                Point point = ((Gump)this.m_Target).PointToScreen(new Point(0, 0));
                 int minHeight = ((base.PointToScreen(new Point(X, Y)).Y - point.Y) + 6) - this.m_yOffset;
                 if (minHeight < this.m_Target.MinHeight)
                 {
@@ -70,4 +69,3 @@
         }
     }
 }
-

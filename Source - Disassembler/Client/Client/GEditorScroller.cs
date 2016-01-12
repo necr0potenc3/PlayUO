@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GEditorScroller : GSliderBase
@@ -29,7 +28,7 @@
                 ushort num2 = Engine.C32216(GumpColors.ScrollBar);
                 for (int i = 0; i < 0x10; i++)
                 {
-                    ushort* numPtr = (ushort*) (data.pvSrc + (i * data.Pitch));
+                    ushort* numPtr = (ushort*)((int)data.pvSrc + (i * data.Pitch));
                     for (int j = 0; j < 0x10; j++)
                     {
                         if ((((i & 1) + j) & 1) == 0)
@@ -230,4 +229,3 @@
         }
     }
 }
-

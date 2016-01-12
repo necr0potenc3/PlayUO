@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GImageClip : Gump, ITranslucent
     {
         protected bool m_bAlpha;
@@ -29,7 +27,7 @@
             this.m_Gump = this.m_Hue.GetGump(GumpID);
             if ((this.m_Gump != null) && !this.m_Gump.IsEmpty())
             {
-                this.m_Width = (int) (this.m_Gump.Width * this.Normal);
+                this.m_Width = (int)(this.m_Gump.Width * this.Normal);
                 this.m_Height = this.m_Gump.Height;
                 this.m_Draw = true;
             }
@@ -68,7 +66,7 @@
         {
             this.m_Val = Val;
             this.m_Max = Max;
-            this.m_Width = (int) (this.m_Gump.Width * this.Normal);
+            this.m_Width = (int)(this.m_Gump.Width * this.Normal);
         }
 
         public float Alpha
@@ -98,7 +96,7 @@
                     this.m_Gump = this.m_Hue.GetGump(this.m_GumpID);
                     if ((this.m_Gump != null) && !this.m_Gump.IsEmpty())
                     {
-                        this.m_Width = (int) (this.m_Gump.Width * this.Normal);
+                        this.m_Width = (int)(this.m_Gump.Width * this.Normal);
                         this.m_Height = this.m_Gump.Height;
                         this.m_Draw = true;
                     }
@@ -133,7 +131,7 @@
                     this.m_Gump = this.m_Hue.GetGump(this.m_GumpID);
                     if ((this.m_Gump != null) && !this.m_Gump.IsEmpty())
                     {
-                        this.m_Width = (int) (this.m_Gump.Width * this.Normal);
+                        this.m_Width = (int)(this.m_Gump.Width * this.Normal);
                         this.m_Height = this.m_Gump.Height;
                         this.m_Draw = true;
                     }
@@ -150,7 +148,7 @@
         {
             get
             {
-                double num = ((double) this.m_Val) / ((double) this.m_Max);
+                double num = ((double)this.m_Val) / ((double)this.m_Max);
                 if (num < 0.0)
                 {
                     return 0.0;
@@ -172,4 +170,3 @@
         }
     }
 }
-

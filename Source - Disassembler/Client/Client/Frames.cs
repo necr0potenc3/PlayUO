@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class Frames
     {
         public int FrameCount;
@@ -12,7 +10,7 @@
         {
             for (int i = 0; i < this.FrameList.Length; i++)
             {
-                if ((this.FrameList[i].Image.m_Surface != null) && !this.FrameList[i].Image.m_Surface.get_Disposed())
+                if ((this.FrameList[i].Image.m_Surface != null) && !this.FrameList[i].Image.m_Surface.Disposed)
                 {
                     this.FrameList[i].Image.m_Surface.Dispose();
                     Texture.m_Textures.Remove(this.FrameList[i].Image);
@@ -26,7 +24,7 @@
             {
                 for (int i = 0; i < this.FrameList.Length; i++)
                 {
-                    if ((this.FrameList[i].Image.m_Surface != null) && this.FrameList[i].Image.m_Surface.get_Disposed())
+                    if ((this.FrameList[i].Image.m_Surface != null) && this.FrameList[i].Image.m_Surface.Disposed)
                     {
                         return true;
                     }
@@ -65,4 +63,3 @@
         }
     }
 }
-

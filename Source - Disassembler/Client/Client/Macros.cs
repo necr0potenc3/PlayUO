@@ -14,7 +14,7 @@
         {
             for (int i = 0; i < m_List.Count; i++)
             {
-                Macro macro = (Macro) m_List[i];
+                Macro macro = (Macro)m_List[i];
                 if (macro.Actions.Length == 0)
                 {
                     m_List.RemoveAt(i--);
@@ -113,23 +113,23 @@
                         {
                             case "WheelUp":
                             case "Wheel Up":
-                                key = 0x11000;
+                                key = (Keys)0x11000;
                                 break;
 
                             case "WheelDown":
                             case "Wheel Down":
-                                key = 0x11001;
+                                key = (Keys)0x11001;
                                 break;
 
                             case "WheelPress":
                             case "Wheel Press":
-                                key = 0x11002;
+                                key = (Keys)0x11002;
                                 break;
 
                             default:
                                 try
                                 {
-                                    key = (Keys) Enum.Parse(typeof(Keys), str3, true);
+                                    key = (Keys)Enum.Parse(typeof(Keys), str3, true);
                                 }
                                 catch
                                 {
@@ -148,16 +148,15 @@
                             {
                                 break;
                             }
-                            Action action = new Action(str4);
+                            Client.Action action = new Client.Action(str4);
                             if (action.Handler == null)
                             {
                                 Debug.Trace("Bad macro action: {0}", str4);
                             }
                             dataStore.Add(action);
                         }
-                        Macro macro = new Macro(key, none, (Action[]) dataStore.ToArray(typeof(Action))) {
-                            FileIndex = num++
-                        };
+                        Macro macro = new Macro(key, none, (Client.Action[])dataStore.ToArray(typeof(Client.Action)));
+                        macro.FileIndex = num++;
                         m_List.Add(macro);
                         Engine.ReleaseDataStore(dataStore);
                     }
@@ -218,19 +217,19 @@
                     Cleanup();
                     for (int i = 0; i < m_List.Count; i++)
                     {
-                        Macro macro = (Macro) m_List[i];
+                        Macro macro = (Macro)m_List[i];
                         writer.WriteLine("{0} {1} {2}", macro.Control ? "1" : "0", macro.Alt ? "1" : "0", macro.Shift ? "1" : "0");
                         switch (macro.Key)
                         {
-                            case 0x11000:
+                            case (Keys)0x11000:
                                 writer.WriteLine("Wheel Up");
                                 break;
 
-                            case 0x11001:
+                            case (Keys)0x11001:
                                 writer.WriteLine("Wheel Down");
                                 break;
 
-                            case 0x11002:
+                            case (Keys)0x11002:
                                 writer.WriteLine("Wheel Press");
                                 break;
 
@@ -240,7 +239,7 @@
                         }
                         for (int j = 0; j < macro.Actions.Length; j++)
                         {
-                            Action action = macro.Actions[j];
+                            Client.Action action = macro.Actions[j];
                             if (action.Handler == null)
                             {
                                 writer.WriteLine(action.Line);
@@ -283,7 +282,7 @@
             {
                 for (int i = 0; i < m_Running.Count; i++)
                 {
-                    Macro macro = (Macro) m_Running[i];
+                    Macro macro = (Macro)m_Running[i];
                     if (!macro.Slice())
                     {
                         m_Running.RemoveAt(i--);
@@ -296,7 +295,7 @@
         {
             for (int i = 0; i < m_List.Count; i++)
             {
-                Macro macro = (Macro) m_List[i];
+                Macro macro = (Macro)m_List[i];
                 if (macro.CheckKey(key))
                 {
                     if (macro.Running)
@@ -318,7 +317,7 @@
                 {
                     if (i < m_Running.Count)
                     {
-                        ((Macro) m_Running[i]).Stop();
+                        ((Macro)m_Running[i]).Stop();
                     }
                 }
                 m_Running.Clear();
@@ -350,4 +349,3 @@
         }
     }
 }
-

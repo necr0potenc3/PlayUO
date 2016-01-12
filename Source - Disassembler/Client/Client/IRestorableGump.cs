@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public interface IRestorableGump
     {
         int Extra { get; }
@@ -17,4 +15,3 @@
         int Y { get; }
     }
 }
-

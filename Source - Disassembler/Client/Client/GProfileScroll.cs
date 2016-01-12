@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GProfileScroll : GImage
@@ -56,4 +55,3 @@
         }
     }
 }
-

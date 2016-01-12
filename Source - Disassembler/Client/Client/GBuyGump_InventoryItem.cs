@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GBuyGump_InventoryItem : GRegion
@@ -20,7 +19,7 @@
             this.m_Owner = owner;
             this.m_yBase = y;
             this.m_Info = si;
-            IFont uniFont = Engine.GetUniFont(3);
+            Client.IFont uniFont = Engine.GetUniFont(3);
             IHue hue = Hues.Load(0x288);
             this.m_Image = new GItemArt(0, 0, si.ItemID, si.Hue);
             this.m_Description = new GWrappedLabel(string.Format("{0} at {1} gp", si.Name, si.Price), uniFont, hue, 0x3a, 0, 0x69);
@@ -172,4 +171,3 @@
         }
     }
 }
-

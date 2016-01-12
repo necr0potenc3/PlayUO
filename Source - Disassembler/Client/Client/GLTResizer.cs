@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GLTResizer : Gump
@@ -30,7 +29,7 @@
         {
             if (Gumps.Capture == this)
             {
-                Point point = ((Gump) this.m_Target).PointToScreen(new Point(this.m_Target.Width, this.m_Target.Height));
+                Point point = ((Gump)this.m_Target).PointToScreen(new Point(this.m_Target.Width, this.m_Target.Height));
                 Point point2 = base.PointToScreen(new Point(X, Y));
                 int num = point.X - (point2.X - this.m_xOffset);
                 bool flag = false;
@@ -46,7 +45,7 @@
                 if (!flag)
                 {
                     this.m_Target.Width = num;
-                    ((Gump) this.m_Target).X = point2.X - this.m_xOffset;
+                    ((Gump)this.m_Target).X = point2.X - this.m_xOffset;
                     flag2 = true;
                 }
                 flag = false;
@@ -62,7 +61,7 @@
                 if (!flag)
                 {
                     this.m_Target.Height = num2;
-                    ((Gump) this.m_Target).Y = point2.Y - this.m_yOffset;
+                    ((Gump)this.m_Target).Y = point2.Y - this.m_yOffset;
                     flag2 = true;
                 }
                 if (flag2)
@@ -94,4 +93,3 @@
         }
     }
 }
-

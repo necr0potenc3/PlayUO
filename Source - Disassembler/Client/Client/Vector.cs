@@ -9,9 +9,10 @@
         public float m_X;
         public float m_Y;
         public float m_Z;
+
         public override bool Equals(object o)
         {
-            return (this == ((Vector) o));
+            return (this == ((Vector)o));
         }
 
         public override int GetHashCode()
@@ -78,9 +79,8 @@
 
         public Vector Normalize()
         {
-            float num = (float) Math.Sqrt((double) (((this.m_X * this.m_X) + (this.m_Y * this.m_Y)) + (this.m_Z * this.m_Z)));
+            float num = (float)Math.Sqrt((double)(((this.m_X * this.m_X) + (this.m_Y * this.m_Y)) + (this.m_Z * this.m_Z)));
             return new Vector(this.m_X / num, this.m_Y / num, this.m_Z / num);
         }
     }
 }
-

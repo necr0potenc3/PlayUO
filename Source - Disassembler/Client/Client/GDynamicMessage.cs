@@ -1,7 +1,6 @@
 ﻿namespace Client
 {
     using System;
-    using System.Drawing;
     using System.Windows.Forms;
 
     public class GDynamicMessage : GTextButton, IMessage
@@ -13,27 +12,24 @@
         private float m_SolidDuration;
         private bool m_Unremovable;
 
-        public GDynamicMessage(bool unremovable, Item i, string text, IFont font, IHue hue) : this(unremovable, i, text, font, hue, Engine.ItemDuration)
+        public GDynamicMessage(bool unremovable, Item i, string text, Client.IFont font, IHue hue) : this(unremovable, i, text, font, hue, Engine.ItemDuration)
         {
         }
 
-        public GDynamicMessage(bool unremovable, Mobile m, string text, IFont font, IHue hue) : this(unremovable, m, text, font, hue, Engine.MobileDuration)
+        public GDynamicMessage(bool unremovable, Mobile m, string text, Client.IFont font, IHue hue) : this(unremovable, m, text, font, hue, Engine.MobileDuration)
         {
         }
 
-        private GDynamicMessage(bool unremovable, IMessageOwner owner, string text, IFont font, IHue hue, float duration) : base(text, font, hue, Hues.Load(0x35), 0, 0, null)
+        private GDynamicMessage(bool unremovable, IMessageOwner owner, string text, Client.IFont font, IHue hue, float duration) : base(text, font, hue, Hues.Load(0x35), 0, 0, null)
         {
             this.m_Unremovable = unremovable;
             base.m_OverridesCursor = false;
             this.m_Owner = owner;
             this.m_SolidDuration = duration;
-            this.m_Dispose = new TimeSync((double) (this.m_SolidDuration + 1f));
+            this.m_Dispose = new TimeSync((double)(this.m_SolidDuration + 1f));
         }
 
-        bool IMessage.get_Visible()
-        {
-            return base.Visible;
-        }
+        public bool Visible { get { return base.Visible; } }
 
         protected internal override void Draw(int x, int y)
         {
@@ -44,7 +40,7 @@
                 Gump gump = array[i];
                 if (gump is IMessage)
                 {
-                    IMessage message = (IMessage) gump;
+                    IMessage message = (IMessage)gump;
                     if (message.Visible && message.ImageRect.IntersectsWith(this.m_ImageRect))
                     {
                         num += message.Alpha;
@@ -52,7 +48,7 @@
                 }
             }
             float alpha = this.Alpha;
-            this.Alpha = (float) ((1.0 / ((double) num)) * alpha);
+            this.Alpha = (float)((1.0 / ((double)num)) * alpha);
             base.Draw(x, y);
             this.Alpha = alpha;
         }
@@ -77,7 +73,7 @@
             }
             if (elapsed >= this.m_SolidDuration)
             {
-                this.Alpha = (float) (1.0 - (elapsed - this.m_SolidDuration));
+                this.Alpha = (float)(1.0 - (elapsed - this.m_SolidDuration));
             }
             if (this.m_Owner.MessageFrame == Renderer.m_ActFrames)
             {
@@ -90,7 +86,7 @@
             {
                 base.Visible = false;
             }
-            if ((this.m_Owner is Item) && !((Item) this.m_Owner).InWorld)
+            if ((this.m_Owner is Item) && !((Item)this.m_Owner).InWorld)
             {
                 if (this.X < 2)
                 {
@@ -148,7 +144,7 @@
         {
             if ((mb & MouseButtons.Right) != MouseButtons.None)
             {
-                Point point = base.PointToScreen(new Point(x, y));
+                Client.Point point = base.PointToScreen(new Client.Point(x, y));
                 int distance = 0;
                 Engine.movingDir = Engine.GetDirection(point.X, point.Y, ref distance);
                 Engine.amMoving = true;
@@ -165,7 +161,7 @@
         {
             if (((mb & MouseButtons.Right) != MouseButtons.None) && Engine.amMoving)
             {
-                Point point = base.PointToScreen(new Point(X, Y));
+                Client.Point point = base.PointToScreen(new Client.Point(X, Y));
                 int distance = 0;
                 Engine.movingDir = Engine.GetDirection(point.X, point.Y, ref distance);
             }
@@ -227,4 +223,3 @@
         }
     }
 }
-

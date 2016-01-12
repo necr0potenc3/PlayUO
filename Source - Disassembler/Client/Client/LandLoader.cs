@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class LandLoader : ILoader
     {
         private bool m_Grayscale;
@@ -46,4 +44,3 @@
         }
     }
 }
-

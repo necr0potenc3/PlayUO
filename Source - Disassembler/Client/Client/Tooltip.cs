@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class Tooltip : ITooltip
     {
         protected bool m_Big;
@@ -31,19 +29,17 @@
         {
             if (this.m_Gump == null)
             {
-                GWrappedLabel label;
                 if ((this.m_Text == null) || (this.m_Text.Length <= 0))
                 {
-                    return (Gump) (this.m_Gump = null);
+                    return (Gump)(this.m_Gump = null);
                 }
                 this.m_Gump = new GAlphaBackground(0, 0, 100, 100);
-                label = new GWrappedLabel(this.m_Text, Engine.GetUniFont(1), Hues.Load(0x481), 4, 4, this.m_WrapWidth) {
-                    X = label.X - label.Image.xMin,
-                    Y = label.Y - label.Image.yMin
-                };
-                this.m_Gump.Width = (label.Image.xMax - label.Image.xMin) + 9;
-                this.m_Gump.Height = (label.Image.yMax - label.Image.yMin) + 9;
-                this.m_Gump.Children.Add(label);
+                GWrappedLabel toAdd = new GWrappedLabel(this.m_Text, Engine.GetUniFont(1), Hues.Load(0x481), 4, 4, this.m_WrapWidth);
+                toAdd.X -= toAdd.Image.xMin;
+                toAdd.Y -= toAdd.Image.yMin;
+                this.m_Gump.Width = (toAdd.Image.xMax - toAdd.Image.xMin) + 9;
+                this.m_Gump.Height = (toAdd.Image.yMax - toAdd.Image.yMin) + 9;
+                this.m_Gump.Children.Add(toAdd);
             }
             return this.m_Gump;
         }
@@ -93,4 +89,3 @@
         }
     }
 }
-

@@ -37,7 +37,7 @@
 
         public static object GetValue(string name)
         {
-            return ((ConfigEntry) m_Entries[name]).Value;
+            return ((ConfigEntry)m_Entries[name]).Value;
         }
 
         public static void Load()
@@ -57,7 +57,7 @@
                             {
                                 string str2 = str.Substring(0, index);
                                 string str3 = str.Substring(index + 1);
-                                ConfigEntry entry = (ConfigEntry) m_Entries[str2.Trim()];
+                                ConfigEntry entry = (ConfigEntry)m_Entries[str2.Trim()];
                                 if (entry != null)
                                 {
                                     if (entry.Type == typeof(int))
@@ -79,18 +79,18 @@
                                             case "yes":
                                             case "on":
                                             case "1":
-                                            {
-                                                entry.Value = true;
-                                                continue;
-                                            }
+                                                {
+                                                    entry.Value = true;
+                                                    continue;
+                                                }
                                             case "false":
                                             case "off":
                                             case "no":
                                             case "0":
-                                            {
-                                                entry.Value = false;
-                                                continue;
-                                            }
+                                                {
+                                                    entry.Value = false;
+                                                    continue;
+                                                }
                                         }
                                         Debug.Trace("Config: Bad boolean value (Name={0}; Value={1}). Valid values are: true, yes, on, 1, false, off, no, 0.", entry.Name, str3);
                                     }
@@ -127,14 +127,14 @@
 
         public static void SetValue(string name, object value)
         {
-            ((ConfigEntry) m_Entries[name]).Value = value;
+            ((ConfigEntry)m_Entries[name]).Value = value;
         }
 
         public static bool EncodeSpeech
         {
             get
             {
-                return (bool) GetValue("EncodeSpeech");
+                return (bool)GetValue("EncodeSpeech");
             }
             set
             {
@@ -146,7 +146,7 @@
         {
             get
             {
-                return (bool) GetValue("EncryptionFix");
+                return (bool)GetValue("EncryptionFix");
             }
             set
             {
@@ -158,7 +158,7 @@
         {
             get
             {
-                return (bool) GetValue("ExtendProtocol");
+                return (bool)GetValue("ExtendProtocol");
             }
             set
             {
@@ -170,7 +170,7 @@
         {
             get
             {
-                return (bool) GetValue("FullScreen");
+                return (bool)GetValue("FullScreen");
             }
             set
             {
@@ -182,7 +182,7 @@
         {
             get
             {
-                return (string) GetValue("GameSize");
+                return (string)GetValue("GameSize");
             }
             set
             {
@@ -194,7 +194,7 @@
         {
             get
             {
-                return (bool) GetValue("IncomingFix");
+                return (bool)GetValue("IncomingFix");
             }
             set
             {
@@ -206,7 +206,7 @@
         {
             get
             {
-                return (int) GetValue("LastServerID");
+                return (int)GetValue("LastServerID");
             }
             set
             {
@@ -218,7 +218,7 @@
         {
             get
             {
-                return (bool) GetValue("OldCharCreate");
+                return (bool)GetValue("OldCharCreate");
             }
             set
             {
@@ -230,7 +230,7 @@
         {
             get
             {
-                return (bool) GetValue("OldMovement");
+                return (bool)GetValue("OldMovement");
             }
             set
             {
@@ -242,7 +242,7 @@
         {
             get
             {
-                return (string) GetValue("Password");
+                return (string)GetValue("Password");
             }
             set
             {
@@ -254,7 +254,7 @@
         {
             get
             {
-                return (bool) GetValue("PlayMusic");
+                return (bool)GetValue("PlayMusic");
             }
             set
             {
@@ -266,7 +266,7 @@
         {
             get
             {
-                return (string) GetValue("ScreenSize");
+                return (string)GetValue("ScreenSize");
             }
             set
             {
@@ -278,7 +278,7 @@
         {
             get
             {
-                return (bool) GetValue("SendUpdateRange");
+                return (bool)GetValue("SendUpdateRange");
             }
             set
             {
@@ -290,7 +290,7 @@
         {
             get
             {
-                return (string) GetValue("ServerHost");
+                return (string)GetValue("ServerHost");
             }
             set
             {
@@ -302,7 +302,7 @@
         {
             get
             {
-                return (int) GetValue("ServerPort");
+                return (int)GetValue("ServerPort");
             }
             set
             {
@@ -314,7 +314,7 @@
         {
             get
             {
-                return (bool) GetValue("SmoothWalk");
+                return (bool)GetValue("SmoothWalk");
             }
             set
             {
@@ -326,7 +326,7 @@
         {
             get
             {
-                return (string) GetValue("Username");
+                return (string)GetValue("Username");
             }
             set
             {
@@ -405,4 +405,3 @@
         }
     }
 }
-

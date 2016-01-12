@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class CastingInfoProvider : InfoProvider
     {
         public CastingInfoProvider() : base("Casting Speeds")
@@ -28,7 +26,7 @@
             {
                 num3 = 1;
             }
-            return (((double) num3) / 4.0);
+            return (((double)num3) / 4.0);
         }
 
         private object MageryRecovery(int row, int column)
@@ -39,7 +37,7 @@
             {
                 num2 = 0;
             }
-            return (((double) num2) / 4.0);
+            return (((double)num2) / 4.0);
         }
 
         private object MagerySummoning(int row, int column)
@@ -50,7 +48,7 @@
             {
                 num2 = 1;
             }
-            return (((double) num2) / 4.0);
+            return (((double)num2) / 4.0);
         }
 
         private object NecromancerCasting(int row, int column)
@@ -82,7 +80,7 @@
             {
                 num3 = 1;
             }
-            return (((double) num3) / 4.0);
+            return (((double)num3) / 4.0);
         }
 
         private object NecromancerNames(int row, int column)
@@ -138,7 +136,7 @@
             {
                 num3 = 1;
             }
-            return (((double) num3) / 4.0);
+            return (((double)num3) / 4.0);
         }
 
         private object PaladinNames(int row, int column)
@@ -168,7 +166,7 @@
             {
                 num2 = 0;
             }
-            return (((double) num2) / 4.0);
+            return (((double)num2) / 4.0);
         }
 
         public override void UpdateGump(Gump g)
@@ -185,9 +183,8 @@
                 int num = 0;
                 for (int i = 0; i < active.Descriptors.Length; i++)
                 {
-                    TableGump gump = new TableGump(active.Descriptors[i]) {
-                        Y = num
-                    };
+                    TableGump gump = new TableGump(active.Descriptors[i]);
+                    gump.Y = num;
                     num += gump.Height + 10;
                     g.Children.Add(gump);
                 }
@@ -195,4 +192,3 @@
         }
     }
 }
-

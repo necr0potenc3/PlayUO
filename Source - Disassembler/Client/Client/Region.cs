@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
     using System.IO;
 
@@ -99,7 +98,7 @@
                         flag = w == 4;
                         break;
                 }
-                if (((flag && (((ulong) (x - region.m_X)) < region.m_Width)) && ((((ulong) (y - region.m_Y)) < region.m_Height) && (z >= region.m_StartZ))) && (z <= region.m_EndZ))
+                if (((flag && (((x - region.m_X)) < region.m_Width)) && ((((y - region.m_Y)) < region.m_Height) && (z >= region.m_StartZ))) && (z <= region.m_EndZ))
                 {
                     return region;
                 }
@@ -131,7 +130,7 @@
             catch
             {
             }
-            return (Region[]) list.ToArray(typeof(Region));
+            return (Region[])list.ToArray(typeof(Region));
         }
 
         public static Region[] GuardedRegions
@@ -187,4 +186,3 @@
         }
     }
 }
-

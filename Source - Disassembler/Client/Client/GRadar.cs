@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
     using System.IO;
     using System.Windows.Forms;
@@ -53,7 +52,7 @@
         {
             for (int i = 0; i < m_Tags.Count; i++)
             {
-                TagEntry entry = (TagEntry) m_Tags[i];
+                TagEntry entry = (TagEntry)m_Tags[i];
                 if (entry.m_Key.Equals(key))
                 {
                     entry.m_X = x;
@@ -127,12 +126,12 @@
             if (((m_xBlock == num) && (m_yBlock == num2)) && ((m_World == world) && (m_Image != null)))
             {
                 Renderer.SetFilterEnable(true);
-                m_Image.Draw(X, Y, Width, Height, 0f + ((float) (((double) num5) / ((double) m_Image.Width))), 0.5f + ((float) (((double) num6) / ((double) m_Image.Height))), 0.5f + ((float) (((double) num5) / ((double) m_Image.Width))), 0f + ((float) (((double) num6) / ((double) m_Image.Height))), 1f + ((float) (((double) num5) / ((double) m_Image.Width))), 0.5f + ((float) (((double) num6) / ((double) m_Image.Height))), 0.5f + ((float) (((double) num5) / ((double) m_Image.Width))), 1f + ((float) (((double) num6) / ((double) m_Image.Height))));
+                m_Image.Draw(X, Y, Width, Height, 0f + ((float)(((double)num5) / ((double)m_Image.Width))), 0.5f + ((float)(((double)num6) / ((double)m_Image.Height))), 0.5f + ((float)(((double)num5) / ((double)m_Image.Width))), 0f + ((float)(((double)num6) / ((double)m_Image.Height))), 1f + ((float)(((double)num5) / ((double)m_Image.Width))), 0.5f + ((float)(((double)num6) / ((double)m_Image.Height))), 0.5f + ((float)(((double)num5) / ((double)m_Image.Width))), 1f + ((float)(((double)num6) / ((double)m_Image.Height))));
                 Renderer.SetFilterEnable(false);
                 x = (X + (Width >> 1)) - 1;
                 y = (m_Image.Height >> 1) - 0x10;
-                num9 = ((double) y) / ((double) m_Image.Height);
-                y = (int) (num9 * Height);
+                num9 = ((double)y) / ((double)m_Image.Height);
+                y = (int)(num9 * Height);
                 y += Y;
                 DrawTags(X, Y, Width, Height, xCenter, yCenter);
                 Renderer.SetTexture(null);
@@ -172,13 +171,13 @@
                 if ((m_Image != null) && !m_Image.IsEmpty())
                 {
                     Renderer.SetFilterEnable(true);
-                    m_Image.Draw(X, Y, Width, Height, 0f + ((float) (((double) num5) / ((double) m_Image.Width))), 0.5f + ((float) (((double) num6) / ((double) m_Image.Height))), 0.5f + ((float) (((double) num5) / ((double) m_Image.Width))), 0f + ((float) (((double) num6) / ((double) m_Image.Height))), 1f + ((float) (((double) num5) / ((double) m_Image.Width))), 0.5f + ((float) (((double) num6) / ((double) m_Image.Height))), 0.5f + ((float) (((double) num5) / ((double) m_Image.Width))), 1f + ((float) (((double) num6) / ((double) m_Image.Height))));
+                    m_Image.Draw(X, Y, Width, Height, 0f + ((float)(((double)num5) / ((double)m_Image.Width))), 0.5f + ((float)(((double)num6) / ((double)m_Image.Height))), 0.5f + ((float)(((double)num5) / ((double)m_Image.Width))), 0f + ((float)(((double)num6) / ((double)m_Image.Height))), 1f + ((float)(((double)num5) / ((double)m_Image.Width))), 0.5f + ((float)(((double)num6) / ((double)m_Image.Height))), 0.5f + ((float)(((double)num5) / ((double)m_Image.Width))), 1f + ((float)(((double)num6) / ((double)m_Image.Height))));
                     Renderer.SetFilterEnable(false);
                 }
                 x = (X + (Width >> 1)) - 1;
                 y = (m_Image.Height >> 1) - 0x10;
-                num9 = ((double) y) / ((double) m_Image.Height);
-                y = (int) (num9 * Height);
+                num9 = ((double)y) / ((double)m_Image.Height);
+                y = (int)(num9 * Height);
                 y += Y;
                 DrawTags(X, Y, Width, Height, xCenter, yCenter);
                 Renderer.SetTexture(null);
@@ -209,10 +208,10 @@
         {
             int num = (width >> 1) - 1;
             int num2 = (m_Image.Height >> 1) - 0x10;
-            double num3 = ((double) num2) / ((double) m_Image.Height);
-            num2 = (int) (num3 * height);
-            double num4 = ((double) width) / 256.0;
-            double num5 = ((double) height) / 256.0;
+            double num3 = ((double)num2) / ((double)m_Image.Height);
+            num2 = (int)(num3 * height);
+            double num4 = ((double)width) / 256.0;
+            double num5 = ((double)height) / 256.0;
             if ((m_FocusMob != World.Player) && (m_FocusMob != null))
             {
                 Mobile player = World.Player;
@@ -220,8 +219,8 @@
                 int num7 = player.Y - yCenter;
                 int num8 = num;
                 int num9 = num2;
-                num8 += (int) ((num6 - num7) * num4);
-                num9 += (int) ((num6 + num7) * num5);
+                num8 += (int)((num6 - num7) * num4);
+                num9 += (int)((num6 + num7) * num5);
                 if (num8 <= 1)
                 {
                     num8 = 2;
@@ -281,13 +280,13 @@
             }
             for (int i = 0; i < m_Tags.Count; i++)
             {
-                TagEntry entry = (TagEntry) m_Tags[i];
+                TagEntry entry = (TagEntry)m_Tags[i];
                 int num11 = entry.m_X - xCenter;
                 int num12 = entry.m_Y - yCenter;
                 int num13 = num;
                 int num14 = num2;
-                num13 += (int) ((num11 - num12) * num4);
-                num14 += (int) ((num11 + num12) * num5);
+                num13 += (int)((num11 - num12) * num4);
+                num14 += (int)((num11 + num12) * num5);
                 if (num13 <= 1)
                 {
                     num13 = 2;
@@ -353,8 +352,8 @@
             int num2 = yTile - yCenter;
             int x = xDotCenter;
             int num4 = yDotCenter;
-            x += (int) ((num - num2) * xScale);
-            return new Point(x, num4 + ((int) ((num + num2) * yScale)));
+            x += (int)((num - num2) * xScale);
+            return new Point(x, num4 + ((int)((num + num2) * yScale)));
         }
 
         protected internal override bool HitTest(int X, int Y)
@@ -454,7 +453,7 @@
             {
                 for (int m = 0; m < w; m++)
                 {
-                    short* numPtr = (short*) (data.pvSrc + ((m << 3) * 2));
+                    short* numPtr = (short*)((int)data.pvSrc + ((m << 3) * 2));
                     for (int num14 = 0; num14 < h; num14++)
                     {
                         MapBlock block = matrix.GetBlock(x + m, y + num14);
@@ -473,8 +472,8 @@
                                 for (int num24 = 0; num24 < tileArray[num17][index].Length; num24++)
                                 {
                                     HuedTile tile = tileArray[num17][index][num24];
-                                    int iD = tile.ID;
-                                    switch (iD)
+                                    int tileID = tile.ID;
+                                    switch (tileID)
                                     {
                                         case 0x4001:
                                         case 0x5796:
@@ -485,18 +484,18 @@
                                             break;
 
                                         default:
-                                        {
-                                            int z = tile.Z;
-                                            int num23 = z + Map.GetHeight(iD);
-                                            if ((num23 > num18) || ((z > num19) && (num23 >= num18)))
                                             {
-                                                num18 = num23;
-                                                num19 = z;
-                                                num20 = iD;
-                                                hue = tile.Hue;
+                                                int z = tile.Z;
+                                                int num23 = z + Map.GetHeight(tileID);
+                                                if ((num23 > num18) || ((z > num19) && (num23 >= num18)))
+                                                {
+                                                    num18 = num23;
+                                                    num19 = z;
+                                                    num20 = tileID;
+                                                    hue = tile.Hue;
+                                                }
+                                                break;
                                             }
-                                            break;
-                                        }
                                     }
                                 }
                                 if ((tileArray2[num16 + num17].Z > num18) && (tileArray2[num16 + num17].ID != 2))
@@ -515,7 +514,7 @@
                                 }
                                 else
                                 {
-                                    numPtr[num17] = (short) Hues.Load((hue & 0x3fff) | 0x8000).Pixel((ushort) numRef[num20]);
+                                    numPtr[num17] = (short)Hues.Load((hue & 0x3fff) | 0x8000).Pixel((ushort)numRef[num20]);
                                 }
                             }
                             numPtr += num12;
@@ -523,10 +522,10 @@
                         }
                     }
                 }
-                ArrayList items = Engine.Multis.Items;
-                for (int n = 0; n < items.Count; n++)
+                ArrayList list = Engine.Multis.Items;
+                for (int n = 0; n < list.Count; n++)
                 {
-                    Item item = (Item) items[n];
+                    Item item = (Item)list[n];
                     if (item.InWorld && item.Visible)
                     {
                         CustomMultiEntry customMulti = CustomMultiLoader.GetCustomMulti(item.Serial, item.Revision);
@@ -554,7 +553,7 @@
                                 {
                                     if ((num33 >= 0) && (num33 < (h << 3)))
                                     {
-                                        short* numPtr2 = (short*) (data.pvSrc + ((num33 * num12) * 2));
+                                        short* numPtr2 = (short*)((int)data.pvSrc + ((num33 * num12) * 2));
                                         short[] numArray2 = radar[num32];
                                         int num34 = 0;
                                         for (int num35 = (item.X - (x << 3)) + num28; num34 < numArray2.Length; num35++)
@@ -582,20 +581,20 @@
             m_Colors = new short[0x8000];
             byte[] buffer = new byte[0x10000];
             Stream stream = Engine.FileManager.OpenMUL("RadarCol.mul");
-            Engine.NativeRead((FileStream) stream, buffer, 0, buffer.Length);
+            Engine.NativeRead((FileStream)stream, buffer, 0, buffer.Length);
             stream.Close();
             fixed (byte* numRef = buffer)
             {
                 fixed (short* numRef2 = m_Colors)
                 {
-                    ushort* numPtr = (ushort*) numRef;
-                    ushort* numPtr2 = (ushort*) numRef2;
+                    ushort* numPtr = (ushort*)numRef;
+                    ushort* numPtr2 = (ushort*)numRef2;
                     int num = 0;
                     while (num++ < 0x8000)
                     {
                         numPtr2++;
                         numPtr++;
-                        numPtr2[0] = (ushort) (numPtr[0] | 0x8000);
+                        numPtr2[0] = (ushort)(numPtr[0] | 0x8000);
                     }
                     for (int i = 0; i < 0x4000; i++)
                     {
@@ -649,9 +648,9 @@
 
         public static void Swap()
         {
-            Texture image = m_Image;
+            Texture texture = m_Image;
             m_Image = m_Swap;
-            m_Swap = image;
+            m_Swap = texture;
         }
 
         public override int Height
@@ -727,4 +726,3 @@
         }
     }
 }
-

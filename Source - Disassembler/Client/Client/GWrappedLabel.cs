@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GWrappedLabel : GLabel
     {
         protected int m_WrapWidth;
@@ -35,4 +33,3 @@
         }
     }
 }
-

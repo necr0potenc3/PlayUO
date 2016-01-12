@@ -1,14 +1,15 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <PropertyGroup>
     <ProjectType>local</ProjectType>
     <ProjectVersion>7.10.377</ProjectVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>d34efbd1-d130-4a11-889c-291406b4a4c7</ProjectGuid>
+    <ProjectGuid>{D28095DC-B35D-4C33-A7E1-1C7AD967BD75}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <AssemblyName>Client</AssemblyName>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -19,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -29,17 +31,38 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>Client</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Client.Engine</StartupObject>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <Reference Include="Exposer, Version=1.0.1816.29653, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\Exposer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\Microsoft.DirectX.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.AudioVideoPlayback, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\Microsoft.DirectX.AudioVideoPlayback.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.Direct3D, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\Microsoft.DirectX.Direct3D.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.DirectSound, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\Microsoft.DirectX.DirectSound.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="Exposer" />
     <Reference Include="System.Drawing" />
-    <Reference Include="Microsoft.DirectX.Direct3D" />
     <Reference Include="System" />
     <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.DirectX.AudioVideoPlayback" />
-    <Reference Include="Microsoft.DirectX.DirectSound" />
-    <Reference Include="Microsoft.DirectX" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Client\BBPAItem.cs" />
@@ -299,7 +322,9 @@
     <Compile Include="Client\FontImage.cs" />
     <Compile Include="Client\MobileDirection.cs" />
     <Compile Include="Client\Direction.cs" />
-    <Compile Include="Client\Display.cs" />
+    <Compile Include="Client\Display.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Client\Fade.cs" />
     <Compile Include="Client\ResurrectEffect.cs" />
     <Compile Include="Client\DeathEffect.cs" />
@@ -668,5 +693,8 @@
     <Compile Include="Client\StaticMessage.cs" />
     <Compile Include="Client\World.cs" />
     <EmbeddedResource Include="Client.Display.resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
 </Project>

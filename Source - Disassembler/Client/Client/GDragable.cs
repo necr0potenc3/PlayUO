@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
     using System.Windows.Forms;
 
@@ -72,7 +71,7 @@
             int count = this.m_Linked.Count;
             for (int i = 0; i < count; i++)
             {
-                Client.Linked linked = (Client.Linked) this.m_Linked[i];
+                Client.Linked linked = (Client.Linked)this.m_Linked[i];
                 if (linked.Gump == g)
                 {
                     return false;
@@ -96,11 +95,11 @@
             int count = this.m_Linked.Count;
             for (int i = 0; i < count; i++)
             {
-                Client.Linked linked2 = (Client.Linked) this.m_Linked[i];
+                Client.Linked linked2 = (Client.Linked)this.m_Linked[i];
                 if (linked2.Gump == gOld)
                 {
-                    linked2 = (Client.Linked) this.m_Linked[i];
-                    linked2 = (Client.Linked) this.m_Linked[i];
+                    linked2 = (Client.Linked)this.m_Linked[i];
+                    linked2 = (Client.Linked)this.m_Linked[i];
                     Client.Linked linked = new Client.Linked(gNew, linked2.Dock, linked2.TheirDock);
                     this.m_Linked.RemoveAt(i);
                     this.m_Linked.Add(linked);
@@ -273,4 +272,3 @@
         }
     }
 }
-

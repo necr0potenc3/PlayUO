@@ -1,7 +1,6 @@
 ﻿namespace Client
 {
     using Microsoft.DirectX.Direct3D;
-    using System;
 
     public class GContextMenu : Gump
     {
@@ -87,7 +86,7 @@
 
         private void Entry_OnClick(Gump Sender)
         {
-            int tag = (int) Sender.GetTag("EntryID");
+            int tag = (int)Sender.GetTag("EntryID");
             Network.Send(new PPopupResponse(this.m_Owner, tag));
             Gumps.Destroy(this);
         }
@@ -120,11 +119,11 @@
                 int num;
                 if (this.m_Owner is Mobile)
                 {
-                    num = ((Mobile) this.m_Owner).ScreenX - (this.m_Width / 2);
+                    num = ((Mobile)this.m_Owner).ScreenX - (this.m_Width / 2);
                 }
                 else
                 {
-                    num = ((Item) this.m_Owner).MessageX - (this.m_Width / 2);
+                    num = ((Item)this.m_Owner).MessageX - (this.m_Width / 2);
                 }
                 if (num < 0)
                 {
@@ -145,7 +144,7 @@
                 int screenY;
                 if (this.m_Owner is Mobile)
                 {
-                    Mobile owner = (Mobile) this.m_Owner;
+                    Mobile owner = (Mobile)this.m_Owner;
                     screenY = owner.ScreenY;
                     if (((Renderer.MiniHealth && owner.OpenedStatus) && ((owner.StatusBar == null) && (owner.HPMax > 0))) && (owner.HPCur > 0))
                     {
@@ -155,7 +154,7 @@
                 }
                 else
                 {
-                    Item item = (Item) this.m_Owner;
+                    Item item = (Item)this.m_Owner;
                     screenY = item.BottomY + 4;
                 }
                 if (screenY < 0)
@@ -171,4 +170,3 @@
         }
     }
 }
-

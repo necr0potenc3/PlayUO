@@ -1,7 +1,6 @@
 ﻿namespace Client.Targeting
 {
     using Client;
-    using System;
 
     public class TurnTargetHandler : ITargetHandler
     {
@@ -22,7 +21,7 @@
                     if ((player.Direction & 7) != newDir)
                     {
                         Engine.EquipSort(player, newDir);
-                        player.Direction = (byte) newDir;
+                        player.Direction = (byte)newDir;
                         Engine.SendMovementRequest(newDir, player.X, player.Y, player.Z);
                     }
                 }
@@ -30,4 +29,3 @@
         }
     }
 }
-

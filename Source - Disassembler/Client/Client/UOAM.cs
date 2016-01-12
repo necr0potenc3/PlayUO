@@ -28,34 +28,34 @@
                 return false;
             }
             UOAMPacket p = new UOAMPacket();
-            p.Write((short) 5);
-            p.Write((short) 0x300);
+            p.Write((short)5);
+            p.Write((short)0x300);
             p.Write(0x10);
             p.Write(0);
             p.Write(m_Sequence++);
             p.Write(0);
-            p.Write((byte) 1);
-            p.Write((byte) 0);
-            p.Write((byte) 0);
-            p.Write((byte) 0);
+            p.Write((byte)1);
+            p.Write((byte)0);
+            p.Write((byte)0);
+            p.Write((byte)0);
             p.Write(m_Password, 20);
             p.Write(m_Address);
             p.Write(0);
             p.Write(1);
-            p.Write((ushort) 0xe390);
-            p.Write((short) 0xdb);
-            p.Write((int) (m_Username.Length + 1));
+            p.Write((ushort)0xe390);
+            p.Write((short)0xdb);
+            p.Write((int)(m_Username.Length + 1));
             p.Write(0);
-            p.Write((int) (m_Username.Length + 1));
+            p.Write((int)(m_Username.Length + 1));
             p.Write(m_Username, m_Username.Length + 1);
             p.Align(4);
-            p.Write((int) (text.Length + 1));
-            p.Write((short) 0x4480);
-            p.Write((short) 0xd6);
-            p.Write((int) (text.Length + 1));
+            p.Write((int)(text.Length + 1));
+            p.Write((short)0x4480);
+            p.Write((short)0xd6);
+            p.Write((int)(text.Length + 1));
             p.Write(text, text.Length + 1);
             p.Seek(0x10L, SeekOrigin.Begin);
-            p.Write((int) (p.Length - 0x18L));
+            p.Write((int)(p.Length - 0x18L));
             return Send(p);
         }
 
@@ -210,8 +210,8 @@
             }
             m_LastPost = DateTime.Now;
             UOAMPacket p = new UOAMPacket();
-            p.Write((short) 5);
-            p.Write((short) 0x300);
+            p.Write((short)5);
+            p.Write((short)0x300);
             p.Write(0x10);
             p.Write(0);
             p.Write(m_Sequence++);
@@ -220,12 +220,12 @@
             p.Write(m_Password, 20);
             p.Write(m_Address);
             p.Write(m_Username, 0x4f);
-            p.Write((byte) ch);
-            p.Write((int) player.X);
-            p.Write((int) player.Y);
+            p.Write((byte)ch);
+            p.Write((int)player.X);
+            p.Write((int)player.Y);
             p.Write(0);
             p.Seek(0x10L, SeekOrigin.Begin);
-            p.Write((int) (p.Length - 0x18L));
+            p.Write((int)(p.Length - 0x18L));
             return Send(p);
         }
 
@@ -233,46 +233,46 @@
         {
             m_LastQuery = DateTime.Now;
             UOAMPacket p = new UOAMPacket();
-            p.Write((short) 5);
-            p.Write((short) 0x300);
+            p.Write((short)5);
+            p.Write((short)0x300);
             p.Write(0x10);
             p.Write(0);
             p.Write(m_Sequence++);
             p.Write(0);
-            p.Write((byte) 0);
-            p.Write((byte) 0);
-            p.Write((byte) 2);
-            p.Write((byte) 0);
+            p.Write((byte)0);
+            p.Write((byte)0);
+            p.Write((byte)2);
+            p.Write((byte)0);
             p.Write(m_Password, 20);
             p.Write(m_Address);
             p.Seek(0x10L, SeekOrigin.Begin);
-            p.Write((int) (p.Length - 0x18L));
+            p.Write((int)(p.Length - 0x18L));
             return Send(p);
         }
 
         public static bool Query2()
         {
             UOAMPacket p = new UOAMPacket();
-            p.Write((short) 5);
-            p.Write((short) 0x300);
+            p.Write((short)5);
+            p.Write((short)0x300);
             p.Write(0x10);
             p.Write(0);
             p.Write(m_Sequence++);
             p.Write(0);
-            p.Write((byte) 1);
-            p.Write((byte) 0);
-            p.Write((byte) 1);
-            p.Write((byte) 0);
+            p.Write((byte)1);
+            p.Write((byte)0);
+            p.Write((byte)1);
+            p.Write((byte)0);
             p.Write(m_Password, 20);
             p.Write(m_Address);
-            p.Write((short) 0x70);
-            p.Write((short) 0xd7);
-            p.Write((int) (m_Username.Length + 1));
+            p.Write((short)0x70);
+            p.Write((short)0xd7);
+            p.Write((int)(m_Username.Length + 1));
             p.Write(0);
-            p.Write((int) (m_Username.Length + 1));
+            p.Write((int)(m_Username.Length + 1));
             p.Write(m_Username, m_Username.Length + 1);
             p.Seek(0x10L, SeekOrigin.Begin);
-            p.Write((int) (p.Length - 0x18L));
+            p.Write((int)(p.Length - 0x18L));
             return Send(p);
         }
 
@@ -297,13 +297,13 @@
 
         public static bool SendConnectPacket()
         {
-            byte[] buffer = new byte[] { 
-                5, 0, 11, 3, 0x10, 0, 0, 0, 0x48, 0, 0, 0, 1, 0, 0, 0, 
-                0xd0, 0x16, 0xd0, 0x16, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 
-                0x10, 0x66, 0x15, 0x9e, 0x5c, 0x7b, 210, 0x11, 0xb8, 0xcf, 0, 0x80, 0xc7, 0x97, 0x1b, 0xe1, 
-                1, 0, 0, 0, 4, 0x5d, 0x88, 0x8a, 0xeb, 0x1c, 0xc9, 0x11, 0x9f, 0xe8, 8, 0, 
+            byte[] buffer = new byte[] {
+                5, 0, 11, 3, 0x10, 0, 0, 0, 0x48, 0, 0, 0, 1, 0, 0, 0,
+                0xd0, 0x16, 0xd0, 0x16, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0,
+                0x10, 0x66, 0x15, 0x9e, 0x5c, 0x7b, 210, 0x11, 0xb8, 0xcf, 0, 0x80, 0xc7, 0x97, 0x1b, 0xe1,
+                1, 0, 0, 0, 4, 0x5d, 0x88, 0x8a, 0xeb, 0x1c, 0xc9, 0x11, 0x9f, 0xe8, 8, 0,
                 0x2b, 0x10, 0x48, 0x60, 2, 0, 0, 0
-             };
+            };
             UOAMPacket p = new UOAMPacket();
             p.Write(buffer);
             return Send(p);
@@ -311,13 +311,13 @@
 
         public static bool SendLoginPacket2()
         {
-            byte[] buffer = new byte[] { 
-                5, 0, 14, 3, 0x10, 0, 0, 0, 0x48, 0, 0, 0, 2, 0, 0, 0, 
-                0xd0, 0x16, 0xd0, 0x16, 0x39, 0x79, 0x53, 0x30, 1, 0, 0, 0, 1, 0, 1, 0, 
-                0xa2, 160, 110, 0xd7, 240, 0x2c, 0xb9, 70, 0xa8, 0x7b, 0xe4, 0x22, 0x77, 0xbc, 30, 0xf2, 
-                1, 0, 0, 0, 4, 0x5d, 0x88, 0x8a, 0xeb, 0x1c, 0xc9, 0x11, 0x9f, 0xe8, 8, 0, 
+            byte[] buffer = new byte[] {
+                5, 0, 14, 3, 0x10, 0, 0, 0, 0x48, 0, 0, 0, 2, 0, 0, 0,
+                0xd0, 0x16, 0xd0, 0x16, 0x39, 0x79, 0x53, 0x30, 1, 0, 0, 0, 1, 0, 1, 0,
+                0xa2, 160, 110, 0xd7, 240, 0x2c, 0xb9, 70, 0xa8, 0x7b, 0xe4, 0x22, 0x77, 0xbc, 30, 0xf2,
+                1, 0, 0, 0, 4, 0x5d, 0x88, 0x8a, 0xeb, 0x1c, 0xc9, 0x11, 0x9f, 0xe8, 8, 0,
                 0x2b, 0x10, 0x48, 0x60, 2, 0, 0, 0
-             };
+            };
             UOAMPacket p = new UOAMPacket();
             p.Write(buffer);
             return Send(p);
@@ -326,8 +326,8 @@
         public static bool SendLoginPacket3()
         {
             UOAMPacket p = new UOAMPacket();
-            p.Write((short) 5);
-            p.Write((short) 0x300);
+            p.Write((short)5);
+            p.Write((short)0x300);
             p.Write(0x10);
             p.Write(0);
             p.Write(m_Sequence++);
@@ -337,22 +337,22 @@
             p.Write(m_Address);
             p.Write(0);
             p.Write(2);
-            p.Write((short) 0x70);
-            p.Write((short) 0xd5);
-            p.Write((int) (m_Username.Length + 1));
+            p.Write((short)0x70);
+            p.Write((short)0xd5);
+            p.Write((int)(m_Username.Length + 1));
             p.Write(0);
-            p.Write((int) (m_Username.Length + 1));
+            p.Write((int)(m_Username.Length + 1));
             p.Write(m_Username, m_Username.Length + 1);
             p.Seek(0x10L, SeekOrigin.Begin);
-            p.Write((int) (p.Length - 0x18L));
+            p.Write((int)(p.Length - 0x18L));
             return Send(p);
         }
 
         public static bool SendLoginPacket4()
         {
             UOAMPacket p = new UOAMPacket();
-            p.Write((short) 5);
-            p.Write((short) 0x300);
+            p.Write((short)5);
+            p.Write((short)0x300);
             p.Write(0x10);
             p.Write(0);
             p.Write(m_Sequence++);
@@ -362,21 +362,21 @@
             p.Write(m_Address);
             p.Write(0);
             p.Write(3);
-            p.Write((short) 0x76e8);
-            p.Write((short) 0xdb);
-            p.Write((int) (m_Username.Length + 1));
+            p.Write((short)0x76e8);
+            p.Write((short)0xdb);
+            p.Write((int)(m_Username.Length + 1));
             p.Write(0);
-            p.Write((int) (m_Username.Length + 1));
+            p.Write((int)(m_Username.Length + 1));
             p.Write(m_Username, m_Username.Length + 1);
             p.Align(4);
             p.Write(0x40);
-            p.Write((short) 0x4390);
-            p.Write((short) 0xd8);
+            p.Write((short)0x4390);
+            p.Write((short)0xd8);
             p.Write(0x40);
-            p.Write((ushort) 0xf200);
-            p.Write((short) 0xff);
-            p.Write((ushort) 0xfff6);
-            p.Write((ushort) 0xffff);
+            p.Write((ushort)0xf200);
+            p.Write((short)0xff);
+            p.Write((ushort)0xfff6);
+            p.Write((ushort)0xffff);
             p.Write(0);
             p.Write(0);
             p.Write(0);
@@ -385,7 +385,7 @@
             p.Write(0);
             p.Write("Comic Sans MS", 0x20);
             p.Seek(0x10L, SeekOrigin.Begin);
-            p.Write((int) (p.Length - 0x18L));
+            p.Write((int)(p.Length - 0x18L));
             return Send(p);
         }
 
@@ -469,4 +469,3 @@
         }
     }
 }
-

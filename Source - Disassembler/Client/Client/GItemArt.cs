@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GItemArt : Gump, IClipable
     {
         protected Client.Clipper m_Clipper;
@@ -103,4 +101,3 @@
         }
     }
 }
-

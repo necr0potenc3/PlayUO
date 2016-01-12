@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class RemoveItemLock : ILocked
     {
         private Item m_Item;
@@ -17,4 +15,3 @@
         }
     }
 }
-

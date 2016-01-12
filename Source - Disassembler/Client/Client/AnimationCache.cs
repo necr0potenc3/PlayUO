@@ -1,8 +1,6 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
-    using System.Reflection;
 
     public class AnimationCache
     {
@@ -19,7 +17,7 @@
             IEnumerator enumerator = this.m_Cache.Values.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                Frames current = (Frames) enumerator.Current;
+                Frames current = (Frames)enumerator.Current;
                 for (int i = 0; i < current.FrameCount; i++)
                 {
                     Frame frame = current.FrameList[i];
@@ -39,14 +37,13 @@
             get
             {
                 object obj2 = this.m_Cache[realID];
-                if ((obj2 == null) || ((Frames) obj2).Disposed)
+                if ((obj2 == null) || ((Frames)obj2).Disposed)
                 {
                     obj2 = Engine.m_Animations.Create(realID, this.m_Hue);
                     this.m_Cache[realID] = obj2;
                 }
-                return (Frames) obj2;
+                return (Frames)obj2;
             }
         }
     }
 }
-

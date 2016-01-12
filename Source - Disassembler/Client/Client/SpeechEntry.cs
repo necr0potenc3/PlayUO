@@ -9,7 +9,7 @@
 
         public SpeechEntry(int idKeyword, string keyword)
         {
-            this.m_KeywordID = (short) idKeyword;
+            this.m_KeywordID = (short)idKeyword;
             this.m_Keywords = keyword.Split(new char[] { '*' });
         }
 
@@ -21,7 +21,7 @@
             }
             if (x != this)
             {
-                SpeechEntry entry = (SpeechEntry) x;
+                SpeechEntry entry = (SpeechEntry)x;
                 if (this.m_KeywordID < entry.m_KeywordID)
                 {
                     return -1;
@@ -35,4 +35,3 @@
         }
     }
 }
-

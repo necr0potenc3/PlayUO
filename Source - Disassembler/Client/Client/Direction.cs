@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public enum Direction : byte
     {
         Down = 4,
@@ -14,4 +12,3 @@
         West = 7
     }
 }
-

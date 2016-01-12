@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class BBPosterAppearance
     {
         private int m_Body;
@@ -40,4 +38,3 @@
         }
     }
 }
-

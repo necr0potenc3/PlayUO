@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GComboBox : GBackground
     {
         protected int m_BackID;
@@ -64,7 +62,7 @@
 
         private void SetIndex_OnClick(Gump g)
         {
-            this.Index = (int) g.GetTag("Index");
+            this.Index = (int)g.GetTag("Index");
             Gumps.Destroy(this.m_Dropdown);
         }
 
@@ -117,4 +115,3 @@
         }
     }
 }
-

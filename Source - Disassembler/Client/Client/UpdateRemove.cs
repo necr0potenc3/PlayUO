@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class UpdateRemove : UpdateInfo
     {
         public int OldX;
@@ -16,4 +14,3 @@
         }
     }
 }
-

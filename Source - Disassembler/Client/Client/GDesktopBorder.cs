@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GDesktopBorder : GBackground
     {
         public static GDesktopBorder Instance;
@@ -37,4 +35,3 @@
         }
     }
 }
-

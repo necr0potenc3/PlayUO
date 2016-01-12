@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GumpLayout
     {
         private int m_Extra;
@@ -70,4 +68,3 @@
         }
     }
 }
-

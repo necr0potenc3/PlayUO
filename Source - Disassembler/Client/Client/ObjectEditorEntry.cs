@@ -22,7 +22,7 @@
 
         public int CompareTo(object obj)
         {
-            ObjectEditorEntry entry = (ObjectEditorEntry) obj;
+            ObjectEditorEntry entry = (ObjectEditorEntry)obj;
             return this.m_Optionable.Name.CompareTo(entry.m_Optionable.Name);
         }
 
@@ -67,4 +67,3 @@
         }
     }
 }
-

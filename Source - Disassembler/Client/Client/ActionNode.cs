@@ -18,14 +18,14 @@
 
         public int CompareTo(object obj)
         {
-            return this.m_Name.CompareTo(((ActionNode) obj).m_Name);
+            return this.m_Name.CompareTo(((ActionNode)obj).m_Name);
         }
 
         public ActionHandler GetHandler(string action)
         {
             for (int i = 0; i < this.m_Handlers.Count; i++)
             {
-                ActionHandler handler = (ActionHandler) this.m_Handlers[i];
+                ActionHandler handler = (ActionHandler)this.m_Handlers[i];
                 if (handler.Action == action)
                 {
                     return handler;
@@ -38,7 +38,7 @@
         {
             for (int i = 0; i < this.m_Nodes.Count; i++)
             {
-                ActionNode node = (ActionNode) this.m_Nodes[i];
+                ActionNode node = (ActionNode)this.m_Nodes[i];
                 if (node.m_Name == name)
                 {
                     return node;
@@ -72,4 +72,3 @@
         }
     }
 }
-

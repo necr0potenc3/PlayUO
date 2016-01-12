@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GUpdateScroll : GBackground
     {
         public GUpdateScroll(string text) : base(0x13c2, 100, 100, 40, 30, true)
@@ -24,4 +22,3 @@
         }
     }
 }
-

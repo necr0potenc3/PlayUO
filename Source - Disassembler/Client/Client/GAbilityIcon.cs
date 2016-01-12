@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
 
     public class GAbilityIcon : GDragable
@@ -41,19 +40,17 @@
         {
             if (this.m_InBook)
             {
-                GAbilityIcon icon;
                 base.m_IsDragging = false;
                 Gumps.Drag = null;
-                icon = new GAbilityIcon(false, this.m_Primary, base.GumpID, Engine.m_xMouse, Engine.m_yMouse) {
-                    Hue = base.Hue,
-                    m_OffsetX = icon.Width / 2,
-                    m_OffsetY = icon.Height / 2,
-                    X = Engine.m_xMouse - icon.m_OffsetX,
-                    Y = Engine.m_yMouse - icon.m_OffsetY,
-                    m_IsDragging = true
-                };
-                Gumps.Desktop.Children.Add(icon);
-                Gumps.Drag = icon;
+                GAbilityIcon toAdd = new GAbilityIcon(false, this.m_Primary, base.GumpID, Engine.m_xMouse, Engine.m_yMouse);
+                toAdd.Hue = base.Hue;
+                toAdd.m_OffsetX = toAdd.Width / 2;
+                toAdd.m_OffsetY = toAdd.Height / 2;
+                toAdd.X = Engine.m_xMouse - toAdd.m_OffsetX;
+                toAdd.Y = Engine.m_yMouse - toAdd.m_OffsetY;
+                toAdd.m_IsDragging = true;
+                Gumps.Desktop.Children.Add(toAdd);
+                Gumps.Drag = toAdd;
             }
             else
             {
@@ -65,7 +62,7 @@
         {
             for (int i = 0; i < m_Instances.Count; i++)
             {
-                GAbilityIcon icon = (GAbilityIcon) m_Instances[i];
+                GAbilityIcon icon = (GAbilityIcon)m_Instances[i];
                 AbilityInfo info = icon.m_Primary ? AbilityInfo.Primary : AbilityInfo.Secondary;
                 icon.GumpID = info.Icon;
                 icon.Hue = (info == AbilityInfo.Active) ? Hues.Load(0x8026) : Hues.Default;
@@ -75,4 +72,3 @@
         }
     }
 }
-

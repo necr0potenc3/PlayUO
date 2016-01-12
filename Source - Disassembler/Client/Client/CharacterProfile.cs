@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class CharacterProfile
     {
         private int m_Index;
@@ -61,4 +59,3 @@
         }
     }
 }
-

@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public interface IItemGump
     {
         Client.Item Item { get; }
@@ -13,4 +11,3 @@
         int yOffset { get; }
     }
 }
-

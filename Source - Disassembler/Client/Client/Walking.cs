@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections;
-    using System.Runtime.InteropServices;
     using System.Windows.Forms;
 
     public class Walking
@@ -103,10 +102,10 @@
             }
             for (int i = 0; i < tiles.Count; i++)
             {
-                ICell cell = (ICell) tiles[i];
+                ICell cell = (ICell)tiles[i];
                 if (cell is StaticItem)
                 {
-                    StaticItem item = (StaticItem) cell;
+                    StaticItem item = (StaticItem)cell;
                     TileFlags flags = Map.m_ItemFlags[item.m_RealID & 0x3fff];
                     if (flags[TileFlag.Surface] && !flags[TileFlag.Impassable])
                     {
@@ -117,7 +116,7 @@
                         int ourTop = num11;
                         if (flag3)
                         {
-                            int num18 = Math.Abs((int) (ourZ - player.Z)) - Math.Abs((int) (zNew - player.Z));
+                            int num18 = Math.Abs((int)(ourZ - player.Z)) - Math.Abs((int)(zNew - player.Z));
                             if ((num18 > 0) || ((num18 == 0) && (ourZ > zNew)))
                             {
                                 continue;
@@ -152,7 +151,7 @@
                 }
                 else if (cell is DynamicItem)
                 {
-                    Item item2 = ((DynamicItem) cell).m_Item;
+                    Item item2 = ((DynamicItem)cell).m_Item;
                     TileFlags flags2 = Map.m_ItemFlags[item2.ID & 0x3fff];
                     if (flags2[TileFlag.Surface] && !flags2[TileFlag.Impassable])
                     {
@@ -170,7 +169,7 @@
                         }
                         if (flag3)
                         {
-                            int num24 = Math.Abs((int) (num22 - player.Z)) - Math.Abs((int) (zNew - player.Z));
+                            int num24 = Math.Abs((int)(num22 - player.Z)) - Math.Abs((int)(zNew - player.Z));
                             if ((num24 > 0) || ((num24 == 0) && (num22 > zNew)))
                             {
                                 continue;
@@ -218,7 +217,7 @@
                 bool flag6 = true;
                 if (flag3)
                 {
-                    int num31 = Math.Abs((int) (num28 - player.Z)) - Math.Abs((int) (zNew - player.Z));
+                    int num31 = Math.Abs((int)(num28 - player.Z)) - Math.Abs((int)(zNew - player.Z));
                     if ((num31 > 0) || ((num31 == 0) && (num28 > zNew)))
                     {
                         flag6 = false;
@@ -269,10 +268,10 @@
                 }
                 for (int i = 0; i < list.Count; i++)
                 {
-                    ICell cell = (ICell) list[i];
+                    ICell cell = (ICell)list[i];
                     if (cell is StaticItem)
                     {
-                        StaticItem item = (StaticItem) cell;
+                        StaticItem item = (StaticItem)cell;
                         TileFlags flags = Map.m_ItemFlags[item.m_RealID & 0x3fff];
                         int num8 = item.m_Z + item.CalcHeight;
                         if ((flags[TileFlag.Surface] && (zStart >= num8)) && (!flag3 || (num8 >= num6)))
@@ -289,7 +288,7 @@
                     }
                     else if (cell is DynamicItem)
                     {
-                        Item item2 = ((DynamicItem) cell).m_Item;
+                        Item item2 = ((DynamicItem)cell).m_Item;
                         TileFlags flags2 = Map.m_ItemFlags[item2.ID & 0x3fff];
                         int num10 = item2.Z;
                         if (flags2[TileFlag.Bridge])
@@ -333,10 +332,10 @@
         {
             for (int i = 0; i < tiles.Count; i++)
             {
-                ICell cell = (ICell) tiles[i];
+                ICell cell = (ICell)tiles[i];
                 if (cell is StaticItem)
                 {
-                    StaticItem item = (StaticItem) cell;
+                    StaticItem item = (StaticItem)cell;
                     TileFlags flags = Map.m_ItemFlags[item.m_RealID & 0x3fff];
                     if (flags[TileFlag.Surface | TileFlag.Impassable])
                     {
@@ -350,7 +349,7 @@
                 }
                 else if (cell is DynamicItem)
                 {
-                    Item item2 = ((DynamicItem) cell).m_Item;
+                    Item item2 = ((DynamicItem)cell).m_Item;
                     TileFlags flags2 = Map.m_ItemFlags[item2.ID & 0x3fff];
                     if (flags2[TileFlag.Surface | TileFlag.Impassable] && !item2.IsDoor)
                     {
@@ -378,7 +377,7 @@
                 }
                 else if (!ignoreMobs && (cell is MobileCell))
                 {
-                    Mobile mobile = ((MobileCell) cell).m_Mobile;
+                    Mobile mobile = ((MobileCell)cell).m_Mobile;
                     if (!mobile.Ghost && !mobile.Bonded)
                     {
                         int num6 = mobile.Z;
@@ -441,4 +440,3 @@
         }
     }
 }
-

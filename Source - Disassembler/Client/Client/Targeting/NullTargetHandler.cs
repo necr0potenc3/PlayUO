@@ -1,7 +1,6 @@
 ﻿namespace Client.Targeting
 {
     using Client;
-    using System;
 
     public class NullTargetHandler : ITargetHandler
     {
@@ -13,15 +12,15 @@
         {
             if (o is Mobile)
             {
-                ((Mobile) o).AddTextMessage("", "Last target set.", Engine.DefaultFont, Hues.Load(0x59), false);
-                if (((Party.State == PartyState.Joined) && (((Mobile) o).Name != null)) && (((Mobile) o).Name.Length > 0))
+                ((Mobile)o).AddTextMessage("", "Last target set.", Engine.DefaultFont, Hues.Load(0x59), false);
+                if (((Party.State == PartyState.Joined) && (((Mobile)o).Name != null)) && (((Mobile)o).Name.Length > 0))
                 {
-                    Network.Send(new PParty_PublicMessage("Changing last target to " + ((Mobile) o).Name));
+                    Network.Send(new PParty_PublicMessage("Changing last target to " + ((Mobile)o).Name));
                 }
             }
             else if (o is Item)
             {
-                ((Item) o).AddTextMessage("", "Last target set.", Engine.DefaultFont, Hues.Load(0x59), false);
+                ((Item)o).AddTextMessage("", "Last target set.", Engine.DefaultFont, Hues.Load(0x59), false);
             }
             else
             {
@@ -30,4 +29,3 @@
         }
     }
 }
-

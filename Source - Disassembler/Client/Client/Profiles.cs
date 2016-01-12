@@ -1,8 +1,6 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
-    using System.IO;
     using System.Net;
     using System.Text;
     using System.Xml;
@@ -24,7 +22,7 @@
 
         private static ServerProfile[] Load()
         {
-            if (!File.Exists(Engine.FileManager.BasePath("Data/Profiles.xml")))
+            if (!System.IO.File.Exists(Engine.FileManager.BasePath("Data/Profiles.xml")))
             {
                 return new ServerProfile[0];
             }
@@ -65,7 +63,7 @@
                 }
                 list.Add(server);
             }
-            return (ServerProfile[]) list.ToArray(typeof(ServerProfile));
+            return (ServerProfile[])list.ToArray(typeof(ServerProfile));
         }
 
         public static void Save()
@@ -73,11 +71,10 @@
             ServerProfile[] list = m_List;
             if (list != null)
             {
-                XmlTextWriter writer = new XmlTextWriter(Engine.FileManager.BasePath("Data/Profiles.xml"), Encoding.UTF8) {
-                    Indentation = 3,
-                    IndentChar = ' ',
-                    Formatting = Formatting.Indented
-                };
+                XmlTextWriter writer = new XmlTextWriter(Engine.FileManager.BasePath("Data/Profiles.xml"), Encoding.UTF8);
+                writer.Indentation = 3;
+                writer.IndentChar = ' ';
+                writer.Formatting = Formatting.Indented;
                 writer.WriteStartDocument(true);
                 writer.WriteStartElement("profiles");
                 foreach (ServerProfile profile in list)
@@ -137,4 +134,3 @@
         }
     }
 }
-

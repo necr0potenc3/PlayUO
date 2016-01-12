@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GNewAccount : GWindowsForm
     {
         private GTextBox m_Password;
@@ -24,26 +22,23 @@
 
         private GWindowsButton AddButton(string name, int index, OnClick onClick)
         {
-            GWindowsButton toAdd = new GWindowsButton(name, 0x103, (30 + (index * 0x19)) - 0x16, 0x2f, 0x16) {
-                OnClick = onClick
-            };
+            GWindowsButton toAdd = new GWindowsButton(name, 0x103, (30 + (index * 0x19)) - 0x16, 0x2f, 0x16);
+            toAdd.OnClick = onClick;
             base.Client.Children.Add(toAdd);
             return toAdd;
         }
 
         private GTextBox AddTextBox(string name, int index, char pc)
         {
-            GLabel label;
             int y = (30 + (index * 0x19)) - 0x16;
-            label = new GLabel(name, Engine.GetUniFont(2), GumpHues.ControlText, 0, 0) {
-                X = (10 - label.Image.xMin) - 4,
-                Y = (y + ((0x16 - ((label.Image.yMax - label.Image.yMin) + 1)) / 2)) - label.Image.yMin
-            };
-            base.Client.Children.Add(label);
-            IHue windowText = GumpHues.WindowText;
-            GWindowsTextBox toAdd = new GWindowsTextBox(0x38, y, 200, 0x16, "", Engine.GetUniFont(2), windowText, windowText, windowText, pc);
+            GLabel toAdd = new GLabel(name, Engine.GetUniFont(2), GumpHues.ControlText, 0, 0);
+            toAdd.X = (10 - toAdd.Image.xMin) - 4;
+            toAdd.Y = (y + ((0x16 - ((toAdd.Image.yMax - toAdd.Image.yMin) + 1)) / 2)) - toAdd.Image.yMin;
             base.Client.Children.Add(toAdd);
-            return toAdd.TextBox;
+            IHue windowText = GumpHues.WindowText;
+            GWindowsTextBox box = new GWindowsTextBox(0x38, y, 200, 0x16, "", Engine.GetUniFont(2), windowText, windowText, windowText, pc);
+            base.Client.Children.Add(box);
+            return box.TextBox;
         }
 
         private void Cancel_OnClick(Gump g)
@@ -65,4 +60,3 @@
         }
     }
 }
-

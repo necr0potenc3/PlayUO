@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
 
     public class VertexCachePool
@@ -11,7 +10,7 @@
         {
             if (this.m_Queue.Count > 0)
             {
-                VertexCache cache = (VertexCache) this.m_Queue.Dequeue();
+                VertexCache cache = (VertexCache)this.m_Queue.Dequeue();
                 cache.Invalidate();
                 return cache;
             }
@@ -27,4 +26,3 @@
         }
     }
 }
-

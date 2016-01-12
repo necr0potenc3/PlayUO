@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public sealed class LoginCrypto : BaseCrypto
     {
         public LoginCrypto(uint seed) : base(seed)
@@ -26,4 +24,3 @@
         }
     }
 }
-

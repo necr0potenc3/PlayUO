@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Drawing;
     using System.Windows.Forms;
 
@@ -69,7 +68,7 @@
                 if (desktop != null)
                 {
                     int num5 = 1 + (num * 0x17);
-                    Point p = base.PointToScreen(new Point(0, 0));
+                    Client.Point p = base.PointToScreen(new Client.Point(0, 0));
                     int y = desktop.PointToClient(p).Y;
                     int num7 = (desktop.Height - y) - 1;
                     num7 /= 0x17;
@@ -174,7 +173,7 @@
                 {
                     if (gumpArray[i] is GMenuItem)
                     {
-                        ((GMenuItem) gumpArray[i]).Visible = false;
+                        ((GMenuItem)gumpArray[i]).Visible = false;
                     }
                 }
             }
@@ -186,7 +185,7 @@
                 {
                     if (gumpArray2[j] is GMenuItem)
                     {
-                        ((GMenuItem) gumpArray2[j]).Visible = true;
+                        ((GMenuItem)gumpArray2[j]).Visible = true;
                         flag2 = true;
                     }
                 }
@@ -230,12 +229,12 @@
             {
                 if (gumpArray[i] is GMenuItem)
                 {
-                    ((GMenuItem) gumpArray[i]).Visible = false;
+                    ((GMenuItem)gumpArray[i]).Visible = false;
                 }
             }
             if (base.m_Parent is GMenuItem)
             {
-                ((GMenuItem) base.m_Parent).Unexpand();
+                ((GMenuItem)base.m_Parent).Unexpand();
             }
         }
 
@@ -327,4 +326,3 @@
         }
     }
 }
-

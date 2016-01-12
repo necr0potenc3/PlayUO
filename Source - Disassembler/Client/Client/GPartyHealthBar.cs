@@ -156,7 +156,7 @@
         {
             if (g is GDraggedItem)
             {
-                Item item = ((GDraggedItem) g).Item;
+                Item item = ((GDraggedItem)g).Item;
                 if (item != null)
                 {
                     Network.Send(new PDropItem(item.Serial, -1, -1, 0, this.m_Mobile.Serial));
@@ -413,4 +413,3 @@
         }
     }
 }
-

@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class PickupValidator : IItemValidator
     {
         private IItemValidator m_Parent;
@@ -25,4 +23,3 @@
         }
     }
 }
-

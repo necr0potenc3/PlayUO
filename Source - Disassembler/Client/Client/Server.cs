@@ -44,8 +44,8 @@
             int hours = currentTimeZone.GetUtcOffset(now).Hours;
             int num2 = -this.m_TimeZone;
             int num3 = -server.m_TimeZone;
-            int num4 = Math.Abs((int) (hours - num2));
-            int num5 = Math.Abs((int) (hours - num3));
+            int num4 = Math.Abs((int)(hours - num2));
+            int num5 = Math.Abs((int)(hours - num3));
             int num6 = num4.CompareTo(num5);
             if (num6 == 0)
             {
@@ -103,4 +103,3 @@
         }
     }
 }
-

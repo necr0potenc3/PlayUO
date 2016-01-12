@@ -2,20 +2,19 @@
 {
     using Client.Targeting;
     using Microsoft.DirectX.Direct3D;
-    using System;
 
     public class CursorEntry
     {
         private bool m_Draw;
         public int m_Graphic;
-        public Texture m_Image;
+        public Client.Texture m_Image;
         public int m_Type;
-        private VertexCache m_vCache;
+        private Client.VertexCache m_vCache;
         private static CustomVertex.TransformedColoredTextured[] m_vTargetPool = VertexConstructor.Create();
         public int m_xOffset;
         public int m_yOffset;
 
-        public CursorEntry(int graphic, int type, int xOffset, int yOffset, Texture image)
+        public CursorEntry(int graphic, int type, int xOffset, int yOffset, Client.Texture image)
         {
             this.m_Graphic = graphic;
             this.m_Type = type;
@@ -23,7 +22,7 @@
             this.m_yOffset = yOffset;
             this.m_Image = image;
             this.m_Draw = (this.m_Image != null) && !this.m_Image.IsEmpty();
-            this.m_vCache = new VertexCache();
+            this.m_vCache = new Client.VertexCache();
         }
 
         public void Draw(int xMouse, int yMouse)
@@ -81,4 +80,3 @@
         }
     }
 }
-

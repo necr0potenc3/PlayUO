@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GSlider : Gump
@@ -65,10 +64,10 @@
             }
             double num = (this.m_End - this.m_Start) + 1.0;
             num -= 1E-13;
-            double num2 = ((double) Position) / ((double) (this.m_Width - 1));
+            double num2 = ((double)Position) / ((double)(this.m_Width - 1));
             double num3 = num2 * num;
             num3 += this.m_Start;
-            return (double) ((int) num3);
+            return (double)((int)num3);
         }
 
         protected internal override bool HitTest(int X, int Y)
@@ -130,7 +129,7 @@
             {
                 num2 = 1.0;
             }
-            this.m_Position = (int) (num2 * (this.m_Width - 1));
+            this.m_Position = (int)(num2 * (this.m_Width - 1));
             if (CallOnChange && (this.m_OnValueChange != null))
             {
                 this.m_OnValueChange(Value, old, this);
@@ -154,7 +153,7 @@
             }
             double num4 = (this.m_End - this.m_Start) + 1.0;
             num4 -= 1E-13;
-            double num5 = ((double) this.m_Position) / ((double) (this.m_Width - 1));
+            double num5 = ((double)this.m_Position) / ((double)(this.m_Width - 1));
             if (this.m_Position == 0)
             {
                 num5 = 0.0;
@@ -165,7 +164,7 @@
             }
             double num6 = num5 * num4;
             num6 += this.m_Start;
-            num6 = (int) num6;
+            num6 = (int)num6;
             if (((old != num6) || (position != this.m_Position)) || (num3 != position))
             {
                 if (this.m_OnValueChange != null)
@@ -253,4 +252,3 @@
         }
     }
 }
-

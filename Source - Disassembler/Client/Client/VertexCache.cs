@@ -1,7 +1,6 @@
 ﻿namespace Client
 {
     using Microsoft.DirectX.Direct3D;
-    using System;
 
     public class VertexCache
     {
@@ -21,7 +20,7 @@
             this.m_xPool = this.m_yPool = -2147483648;
         }
 
-        public unsafe void Draw(Texture t, int x, int y)
+        public unsafe void Draw(Client.Texture t, int x, int y)
         {
             if (((this.m_xPool != x) || (this.m_yPool != y)) || (this.m_RenderVersion != Renderer.m_Version))
             {
@@ -45,7 +44,7 @@
             }
         }
 
-        public unsafe void Draw(Texture t, int x, int y, int color)
+        public unsafe void Draw(Client.Texture t, int x, int y, int color)
         {
             if (((this.m_xPool != x) || (this.m_yPool != y)) || (this.m_RenderVersion != Renderer.m_Version))
             {
@@ -69,7 +68,7 @@
             }
         }
 
-        public unsafe void DrawGame(Texture t, int x, int y)
+        public unsafe void DrawGame(Client.Texture t, int x, int y)
         {
             if (((this.m_xPool != x) || (this.m_yPool != y)) || (this.m_RenderVersion != Renderer.m_Version))
             {
@@ -107,4 +106,3 @@
         }
     }
 }
-

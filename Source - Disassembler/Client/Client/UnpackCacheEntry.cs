@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Sequential)]
@@ -11,4 +10,3 @@
         public int m_ByteCount;
     }
 }
-

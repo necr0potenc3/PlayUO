@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GAlphaBackground : Gump
     {
         protected int m_BorderColor;
@@ -28,12 +26,12 @@
 
         protected internal override void Draw(int X, int Y)
         {
-            ClipType inside = ClipType.Inside;
+            ClipType type = ClipType.Inside;
             if (this.m_Clipper != null)
             {
-                inside = this.m_Clipper.Evaluate(X, Y, this.m_Width, this.m_Height);
+                type = this.m_Clipper.Evaluate(X, Y, this.m_Width, this.m_Height);
             }
-            if (inside == ClipType.Inside)
+            if (type == ClipType.Inside)
             {
                 Renderer.SetTexture(null);
                 Renderer.AlphaTestEnable = false;
@@ -69,7 +67,7 @@
                 }
                 Renderer.AlphaTestEnable = true;
             }
-            else if (inside == ClipType.Partial)
+            else if (type == ClipType.Partial)
             {
                 Renderer.SetTexture(null);
                 Renderer.AlphaTestEnable = false;
@@ -232,4 +230,3 @@
         }
     }
 }
-

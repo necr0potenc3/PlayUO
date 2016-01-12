@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class BodyTableEntry
     {
         public int m_NewHue;
@@ -16,4 +14,3 @@
         }
     }
 }
-

@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class ItemIDValidator : IItemValidator
     {
         private int[] m_List;
@@ -46,4 +44,3 @@
         }
     }
 }
-

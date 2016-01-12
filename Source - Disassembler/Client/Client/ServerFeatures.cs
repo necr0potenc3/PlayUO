@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class ServerFeatures
     {
         private bool m_AOS = false;
@@ -45,4 +43,3 @@
         }
     }
 }
-

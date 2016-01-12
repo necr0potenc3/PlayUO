@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
 
     public class TransparentDraw
@@ -41,7 +40,7 @@
             }
             if (m_Pool.Count > 0)
             {
-                TransparentDraw draw = (TransparentDraw) m_Pool.Dequeue();
+                TransparentDraw draw = (TransparentDraw)m_Pool.Dequeue();
                 draw.m_Texture = tex;
                 draw.m_X = x;
                 draw.m_Y = y;
@@ -59,4 +58,3 @@
         }
     }
 }
-

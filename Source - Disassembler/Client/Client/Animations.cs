@@ -44,10 +44,10 @@
             {
                 using (BinaryReader reader = new BinaryReader(new FileStream("Data/Binary/BodyTypes.mul", FileMode.Open, FileAccess.Read, FileShare.Read)))
                 {
-                    m_Types = new BodyType[(int) reader.BaseStream.Length];
+                    m_Types = new BodyType[(int)reader.BaseStream.Length];
                     for (int i = 0; i < m_Types.Length; i++)
                     {
-                        m_Types[i] = (BodyType) reader.ReadByte();
+                        m_Types[i] = (BodyType)reader.ReadByte();
                     }
                     if (970 < m_Types.Length)
                     {
@@ -291,57 +291,57 @@
             switch (this.ConvertRealID(ref realID))
             {
                 case 1:
-                {
-                    if (((realID < 0) || (realID >= this.m_Count)) || (realID >= this.m_Index.Length))
                     {
-                        return Frames.Empty;
+                        if (((realID < 0) || (realID >= this.m_Count)) || (realID >= this.m_Index.Length))
+                        {
+                            return Frames.Empty;
+                        }
+                        Entry3D entryd = this.m_Index[realID];
+                        length = entryd.m_Length;
+                        lookup = entryd.m_Lookup;
+                        num3 = entryd.m_Extra & 0xff;
+                        stream = m_Stream;
+                        break;
                     }
-                    Entry3D entryd = this.m_Index[realID];
-                    length = entryd.m_Length;
-                    lookup = entryd.m_Lookup;
-                    num3 = entryd.m_Extra & 0xff;
-                    stream = m_Stream;
-                    break;
-                }
                 case 2:
-                {
-                    if (((realID < 0) || (realID >= this.m_Count2)) || (realID >= this.m_Index2.Length))
                     {
-                        return Frames.Empty;
+                        if (((realID < 0) || (realID >= this.m_Count2)) || (realID >= this.m_Index2.Length))
+                        {
+                            return Frames.Empty;
+                        }
+                        Entry3D entryd2 = this.m_Index2[realID];
+                        length = entryd2.m_Length;
+                        lookup = entryd2.m_Lookup;
+                        num3 = entryd2.m_Extra & 0xff;
+                        stream = m_Stream2;
+                        break;
                     }
-                    Entry3D entryd2 = this.m_Index2[realID];
-                    length = entryd2.m_Length;
-                    lookup = entryd2.m_Lookup;
-                    num3 = entryd2.m_Extra & 0xff;
-                    stream = m_Stream2;
-                    break;
-                }
                 case 3:
-                {
-                    if (((realID < 0) || (realID >= this.m_Count3)) || (realID >= this.m_Index3.Length))
                     {
-                        return Frames.Empty;
+                        if (((realID < 0) || (realID >= this.m_Count3)) || (realID >= this.m_Index3.Length))
+                        {
+                            return Frames.Empty;
+                        }
+                        Entry3D entryd3 = this.m_Index3[realID];
+                        length = entryd3.m_Length;
+                        lookup = entryd3.m_Lookup;
+                        num3 = entryd3.m_Extra & 0xff;
+                        stream = m_Stream3;
+                        break;
                     }
-                    Entry3D entryd3 = this.m_Index3[realID];
-                    length = entryd3.m_Length;
-                    lookup = entryd3.m_Lookup;
-                    num3 = entryd3.m_Extra & 0xff;
-                    stream = m_Stream3;
-                    break;
-                }
                 default:
-                {
-                    if (((realID < 0) || (realID >= this.m_Count4)) || (realID >= this.m_Index4.Length))
                     {
-                        return Frames.Empty;
+                        if (((realID < 0) || (realID >= this.m_Count4)) || (realID >= this.m_Index4.Length))
+                        {
+                            return Frames.Empty;
+                        }
+                        Entry3D entryd4 = this.m_Index4[realID];
+                        length = entryd4.m_Length;
+                        lookup = entryd4.m_Lookup;
+                        num3 = entryd4.m_Extra & 0xff;
+                        stream = m_Stream4;
+                        break;
                     }
-                    Entry3D entryd4 = this.m_Index4[realID];
-                    length = entryd4.m_Length;
-                    lookup = entryd4.m_Lookup;
-                    num3 = entryd4.m_Extra & 0xff;
-                    stream = m_Stream4;
-                    break;
-                }
             }
             if (((lookup < 0) || (length <= 0)) || ((num3 <= 0) || (stream == null)))
             {
@@ -351,7 +351,7 @@
             {
                 this.m_Data = new byte[length];
             }
-            stream.Seek((long) lookup, SeekOrigin.Begin);
+            stream.Seek((long)lookup, SeekOrigin.Begin);
             stream.Read(this.m_Data, 0, length);
             fixed (short* numRef = this.m_Palette)
             {
@@ -360,8 +360,8 @@
                 {
                     if (hue.HueID() == 0)
                     {
-                        numPtr = (short*) numRef2;
-                        int* numPtr2 = (int*) numPtr;
+                        numPtr = (short*)numRef2;
+                        int* numPtr2 = (int*)numPtr;
                         int* numPtr3 = numPtr2 + 0x80;
                         while (numPtr2 < numPtr3)
                         {
@@ -377,17 +377,16 @@
                     }
                     else
                     {
-                        hue.CopyPixels((void*) numRef2, (void*) numPtr, 0x100);
+                        hue.CopyPixels((void*)numRef2, (void*)numPtr, 0x100);
                     }
-                    Frames frames = new Frames {
-                        FrameCount = num3,
-                        FrameList = new Frame[num3]
-                    };
+                    Frames frames = new Frames();
+                    frames.FrameCount = num3;
+                    frames.FrameList = new Frame[num3];
                     for (int i = 0; i < num3; i++)
                     {
                         int num6 = (numRef2 + 0x204)[i << 2];
                         byte* numPtr4 = (numRef2 + 0x200) + num6;
-                        short* numPtr5 = (short*) numPtr4;
+                        short* numPtr5 = (short*)numPtr4;
                         int num7 = numPtr5[0];
                         int num8 = numPtr5[1];
                         int width = numPtr5[2];
@@ -414,11 +413,11 @@
                                 int num12 = num7 - 0x200;
                                 int num13 = (num8 + height) - 0x200;
                                 LockData data = texture.Lock(LockFlags.WriteOnly);
-                                short* pvSrc = (short*) data.pvSrc;
+                                short* pvSrc = (short*)data.pvSrc;
                                 int num14 = data.Pitch >> 1;
                                 pvSrc += num12;
                                 pvSrc += num13 * num14;
-                                while ((num11 = *((int*) numPtr4)) != 0x7fff7fff)
+                                while ((num11 = *((int*)numPtr4)) != 0x7fff7fff)
                                 {
                                     numPtr4 += 4;
                                     num11 ^= -2145386496;
@@ -515,7 +514,7 @@
 
         public void DisposeInstance(object Anim)
         {
-            Frames frames = (Frames) Anim;
+            Frames frames = (Frames)Anim;
             if ((frames != null) && (frames.FrameList != null))
             {
                 int length = frames.FrameList.Length;
@@ -536,7 +535,7 @@
             int num = timeNow - 0x3a98;
             for (int i = this.m_Frames.Count - 1; i >= 0; i--)
             {
-                Frames frames = (Frames) this.m_Frames[i];
+                Frames frames = (Frames)this.m_Frames[i];
                 if (frames.Disposed || (frames.LastAccessTime < num))
                 {
                     TextureFactory.m_Disposing.Enqueue(frames);
@@ -569,7 +568,7 @@
             return this.m_Count;
         }
 
-        public Frame GetFrame(IAnimationOwner owner, int BodyID, int ActionID, int Direction, int Frame, int xCenter, int yCenter, IHue h, ref int TextureX, ref int TextureY, bool preserveHue)
+        public Frame GetFrame(IAnimationOwner owner, int BodyID, int ActionID, int Direction, int frame1, int xCenter, int yCenter, IHue h, ref int TextureX, ref int TextureY, bool preserveHue)
         {
             Frames animation;
             if (BodyID <= 0)
@@ -598,11 +597,11 @@
             {
                 animation = owner.GetOwnedFrames(h, realID);
             }
-            if ((Frame >= animation.FrameCount) || (Frame < 0))
+            if ((frame1 >= animation.FrameCount) || (frame1 < 0))
             {
                 return Frame.Empty;
             }
-            Frame frame = animation.FrameList[Frame];
+            Frame frame = animation.FrameList[frame1];
             if (((frame != null) && (frame.Image != null)) && !frame.Image.IsEmpty())
             {
                 if (Direction > 4)
@@ -798,7 +797,7 @@
                 }
                 else
                 {
-                    BodyTableEntry entry = (BodyTableEntry) obj2;
+                    BodyTableEntry entry = (BodyTableEntry)obj2;
                     this.m_Table[i] = (entry.m_OldID | -2147483648) | (((entry.m_NewHue ^ 0x8000) & 0xffff) << 15);
                 }
             }
@@ -1049,7 +1048,7 @@
                                             entrydArray = new Entry3D[num];
                                             fixed (Entry3D* entrydRef = entrydArray)
                                             {
-                                                Engine.NativeRead((FileStream) reader.BaseStream, (void*) entrydRef, num * 12);
+                                                Engine.NativeRead((FileStream)reader.BaseStream, (void*)entrydRef, num * 12);
                                             }
                                             if (this.m_Index == 1)
                                             {
@@ -1080,11 +1079,11 @@
                     }
                     using (FileStream stream2 = new FileStream(str3, FileMode.Open, FileAccess.Read, FileShare.Read))
                     {
-                        int num2 = (int) (stream2.Length / 12L);
+                        int num2 = (int)(stream2.Length / 12L);
                         Entry3D[] entrydArray2 = new Entry3D[num2];
                         fixed (Entry3D* entrydRef2 = entrydArray2)
                         {
-                            Engine.NativeRead(stream2, (void*) entrydRef2, num2 * 12);
+                            Engine.NativeRead(stream2, (void*)entrydRef2, num2 * 12);
                             using (FileStream stream3 = new FileStream(str2, FileMode.Open, FileAccess.Read, FileShare.Read))
                             {
                                 BinaryReader reader2 = new BinaryReader(stream3);
@@ -1094,14 +1093,14 @@
                                 {
                                     if (entrydPtr->m_Lookup >= 0)
                                     {
-                                        reader2.BaseStream.Seek((long) (entrydPtr->m_Lookup + 0x200), SeekOrigin.Begin);
+                                        reader2.BaseStream.Seek((long)(entrydPtr->m_Lookup + 0x200), SeekOrigin.Begin);
                                         int num3 = reader2.ReadInt32() & 0xff;
                                         int num4 = 0;
                                         int num5 = -10000;
                                         while (num4 < num3)
                                         {
-                                            reader2.BaseStream.Seek((long) ((entrydPtr->m_Lookup + 0x204) + (num4 << 2)), SeekOrigin.Begin);
-                                            reader2.BaseStream.Seek((long) ((entrydPtr->m_Lookup + 0x202) + reader2.ReadInt32()), SeekOrigin.Begin);
+                                            reader2.BaseStream.Seek((long)((entrydPtr->m_Lookup + 0x204) + (num4 << 2)), SeekOrigin.Begin);
+                                            reader2.BaseStream.Seek((long)((entrydPtr->m_Lookup + 0x202) + reader2.ReadInt32()), SeekOrigin.Begin);
                                             int num6 = reader2.ReadInt16();
                                             int num7 = reader2.ReadInt32() >> 0x10;
                                             if ((num7 + num6) > num5)
@@ -1122,7 +1121,7 @@
                                 writer.Write(Engine.GetTimeStamp(str2).ToFileTime());
                                 writer.Write(Engine.GetTimeStamp(str3).ToFileTime());
                                 writer.Write(num2);
-                                Engine.NativeWrite((FileStream) writer.BaseStream, (void*) entrydRef2, num2 * 12);
+                                Engine.NativeWrite((FileStream)writer.BaseStream, (void*)entrydRef2, num2 * 12);
                                 writer.Seek(0, SeekOrigin.Begin);
                                 writer.Write(true);
                             }
@@ -1166,4 +1165,3 @@
         }
     }
 }
-

@@ -90,9 +90,9 @@
         {
             if (ex is DirectXException)
             {
-                DirectXException exception = (DirectXException) ex;
-                Trace("Error Code -> {0}", exception.get_ErrorCode());
-                Trace("Error String -> {0}", exception.get_ErrorString());
+                DirectXException exception = (DirectXException)ex;
+                Trace("Error Code -> {0}", exception.ErrorCode);
+                Trace("Error String -> {0}", exception.ErrorString);
             }
             Trace("Type -> {0}", ex.GetType());
             Trace("Message -> {0}", ex.Message);
@@ -112,7 +112,7 @@
             for (int i = 0; i < frameCount; i++)
             {
                 MethodBase method = trace.GetFrame(i).GetMethod();
-                if ((method.DeclaringType == typeof(Debug)) && (method.Name == "Error"))
+                if ((method.DeclaringType == typeof(Client.Debug)) && (method.Name == "Error"))
                 {
                     flag = true;
                 }
@@ -279,4 +279,3 @@
         }
     }
 }
-

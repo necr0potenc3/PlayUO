@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Drawing;
     using System.Windows.Forms;
 
@@ -47,7 +46,7 @@
 
         protected internal override bool HitTest(int x, int y)
         {
-            return ((this.m_Draw[this.m_State] && ((this.m_Clipper == null) || this.m_Clipper.Evaluate(base.PointToScreen(new Point(x, y))))) && this.m_Images[this.m_State].HitTest(x, y));
+            return ((this.m_Draw[this.m_State] && ((this.m_Clipper == null) || this.m_Clipper.Evaluate(base.PointToScreen(new Client.Point(x, y))))) && this.m_Images[this.m_State].HitTest(x, y));
         }
 
         protected internal override void OnDispose()
@@ -128,4 +127,3 @@
         }
     }
 }
-

@@ -18,7 +18,7 @@
             this.m_yLast = -12345;
             m_Labels = new GLabel[0x100];
             m_Values = new GLabel[0x100];
-            IFont uniFont = Engine.GetUniFont(1);
+            Client.IFont uniFont = Engine.GetUniFont(1);
             IHue bright = Hues.Bright;
             int y = 3;
             for (int i = 0; i < 0x100; i++)
@@ -36,16 +36,15 @@
                     y += m_Labels[i].Height + 3;
                 }
             }
-            this.m_Slider = new GAlphaVSlider(0xb3, 6, 0x10, 0xb7, 0.0, 0.0, (double) (y - 0xc0), 1.0);
-            this.m_Slider.OnValueChange = (OnValueChange) Delegate.Combine(this.m_Slider.OnValueChange, new OnValueChange(this.Slider_OnValueChange));
+            this.m_Slider = new GAlphaVSlider(0xb3, 6, 0x10, 0xb7, 0.0, 0.0, (double)(y - 0xc0), 1.0);
+            this.m_Slider.OnValueChange = (OnValueChange)Delegate.Combine(this.m_Slider.OnValueChange, new OnValueChange(this.Slider_OnValueChange));
             this.m_Slider.ScrollOffset = 15.0;
             base.m_Children.Add(this.m_Slider);
-            GHotspot toAdd = new GHotspot(0xb2, 1, 0x10, 0xc0, this.m_Slider) {
-                NormalHit = false
-            };
+            GHotspot toAdd = new GHotspot(0xb2, 1, 0x10, 0xc0, this.m_Slider);
+            toAdd.NormalHit = false;
             base.m_Children.Add(toAdd);
             this.m_Event = new OnPacketHandle(this.OnRecv);
-            Network.OnPacketHandle = (OnPacketHandle) Delegate.Combine(Network.OnPacketHandle, this.m_Event);
+            Network.OnPacketHandle = (OnPacketHandle)Delegate.Combine(Network.OnPacketHandle, this.m_Event);
         }
 
         protected internal override void Draw(int X, int Y)
@@ -72,7 +71,7 @@
 
         protected internal override void OnDispose()
         {
-            Network.OnPacketHandle = (OnPacketHandle) Delegate.Remove(Network.OnPacketHandle, this.m_Event);
+            Network.OnPacketHandle = (OnPacketHandle)Delegate.Remove(Network.OnPacketHandle, this.m_Event);
         }
 
         protected internal override void OnDragStart()
@@ -127,16 +126,16 @@
 
         private void Slider_OnValueChange(double vNew, double vOld, Gump who)
         {
-            int num = (int) vNew;
+            int num = (int)vNew;
             for (int i = 0; i < 0x100; i++)
             {
                 if (m_Labels[i] != null)
                 {
-                    m_Labels[i].Y = ((int) m_Labels[i].GetTag("BaseY")) - num;
+                    m_Labels[i].Y = ((int)m_Labels[i].GetTag("BaseY")) - num;
                 }
                 if (m_Values[i] != null)
                 {
-                    m_Values[i].Y = ((int) m_Values[i].GetTag("BaseY")) - num;
+                    m_Values[i].Y = ((int)m_Values[i].GetTag("BaseY")) - num;
                 }
             }
             this.m_xLast = -12345;
@@ -144,4 +143,3 @@
         }
     }
 }
-

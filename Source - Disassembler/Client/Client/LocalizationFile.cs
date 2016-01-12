@@ -2,7 +2,6 @@
 {
     using System;
     using System.IO;
-    using System.Reflection;
     using System.Text;
 
     public class LocalizationFile
@@ -62,30 +61,30 @@
                                 while ((numPtr < numPtr2) && (*(numPtr++) != 0))
                                 {
                                 }
-                                this.m_Text[i] = new string((sbyte*) numPtr3, 0, (int) (((long) ((numPtr - numPtr3) / 1)) - 1L));
+                                this.m_Text[i] = new string((sbyte*)numPtr3, 0, (int)(((long)((numPtr - numPtr3) / 1)) - 1L));
                             }
                         }
                         return;
 
                     case 2:
-                    {
-                        this.m_Text = new string[num4];
-                        Encoding unicode = Encoding.Unicode;
-                        fixed (byte* numRef2 = m_Buffer)
                         {
-                            byte* numPtr4 = numRef2;
-                            byte* numPtr5 = numPtr4 + count;
-                            for (int j = 0; j < num4; j++)
+                            this.m_Text = new string[num4];
+                            Encoding unicode = Encoding.Unicode;
+                            fixed (byte* numRef2 = m_Buffer)
                             {
-                                byte* numPtr6 = numPtr4;
-                                while ((numPtr4 < numPtr5) && ((*(numPtr4++) | *(numPtr4++)) != 0))
+                                byte* numPtr4 = numRef2;
+                                byte* numPtr5 = numPtr4 + count;
+                                for (int j = 0; j < num4; j++)
                                 {
+                                    byte* numPtr6 = numPtr4;
+                                    while ((numPtr4 < numPtr5) && ((*(numPtr4++) | *(numPtr4++)) != 0))
+                                    {
+                                    }
+                                    this.m_Text[j] = new string((sbyte*)numPtr6, 0, (int)(((long)((numPtr4 - numPtr6) / 1)) - 2L), unicode);
                                 }
-                                this.m_Text[j] = new string((sbyte*) numPtr6, 0, (int) (((long) ((numPtr4 - numPtr6) / 1)) - 2L), unicode);
                             }
+                            return;
                         }
-                        return;
-                    }
                 }
                 throw new InvalidOperationException(string.Format("Character size invalid. (charSize={0})", num3));
             }
@@ -132,4 +131,3 @@
         }
     }
 }
-

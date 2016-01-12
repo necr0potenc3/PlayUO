@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class InfoNode
     {
         private InfoNode[] m_Children;
@@ -92,4 +90,3 @@
         }
     }
 }
-

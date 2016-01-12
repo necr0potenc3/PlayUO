@@ -70,15 +70,15 @@
         private static ArrayList[] m_Lists = new ArrayList[8];
         private static bool m_MiniHealth = true;
         private static Queue m_MiniHealthQueue;
-        private static Point m_MousePoint = Point.Empty;
-        private static Point[] m_PointPool = new Point[4];
+        private static System.Drawing.Point m_MousePoint = System.Drawing.Point.Empty;
+        private static System.Drawing.Point[] m_PointPool = new System.Drawing.Point[4];
         private static byte[] m_QuadByteBuffer;
         private static ArrayList m_RectsList;
         public static string m_ScreenShot;
-        public static Texture m_TextSurface;
+        public static Client.Texture m_TextSurface;
         public static ArrayList m_TextToDraw;
         private static ArrayList m_TextToDrawList;
-        private static Texture m_Texture;
+        private static Client.Texture m_Texture;
         private static Queue m_ToUpdateQueue;
         private static Queue m_TransDrawQueue;
         private static bool m_Transparency;
@@ -88,7 +88,7 @@
         private static CustomVertex.TransformedColoredTextured[] m_vFriendPool = VertexConstructor.Create();
         private static CustomVertex.TransformedColoredTextured[] m_vHaloPool = VertexConstructor.Create();
         private static CustomVertex.TransformedColoredTextured[] m_vMultiPool;
-        public static VertexCache m_vTextCache;
+        public static Client.VertexCache m_vTextCache;
         private static CustomVertex.TransformedColoredTextured[] m_vTransDrawPool;
         private static bool m_WasDead;
         public static int m_xBaseLast;
@@ -103,12 +103,12 @@
         public static int m_yWorld;
         public static int m_zWorld;
         private const double r21 = 0.047619047619047616;
-        private static Type tCorpseCell = typeof(CorpseCell);
-        private static Type tDynamicItem = typeof(DynamicItem);
-        private static Type tLandTile = typeof(LandTile);
-        private static Type tMobileCell = typeof(MobileCell);
+        private static System.Type tCorpseCell = typeof(CorpseCell);
+        private static System.Type tDynamicItem = typeof(DynamicItem);
+        private static System.Type tLandTile = typeof(LandTile);
+        private static System.Type tMobileCell = typeof(MobileCell);
         public const int TRUE = 1;
-        private static Type tStaticItem = typeof(StaticItem);
+        private static System.Type tStaticItem = typeof(StaticItem);
         public const int VertexBufferLength = 0x8000;
         private static int xLast;
         private static int xwLast;
@@ -118,8 +118,10 @@
 
         [DllImport("gdi32")]
         private static extern int BitBlt(IntPtr hDestDC, int x, int y, int w, int h, IntPtr hSrcDC, int xSrc, int ySrc, int raster);
+
         [DllImport("User32")]
         private static extern int ClientToScreen(IntPtr Handle, ref int X, ref int Y);
+
         public static void Draw()
         {
             try
@@ -144,7 +146,7 @@
             }
             SetAlpha(1f);
             ColorAlphaEnable = true;
-            Texture texture = target ? Engine.m_TargetImage : Engine.m_Friend;
+            Client.Texture texture = target ? Engine.m_TargetImage : Engine.m_Friend;
             if (formation)
             {
                 int num = x;
@@ -155,8 +157,8 @@
                     num3 = 40 - (num3 - 40);
                 }
                 texture.DrawRotated(num, (num2 - 40) + num3, 0.0, color);
-                texture.DrawRotated(num - ((int) ((40 - num3) * 0.39073112848927377)), num2 - ((int) ((40 - num3) * 0.92050485345244037)), 157.0, color);
-                texture.DrawRotated(num + ((int) ((40 - num3) * 0.39073112848927377)), num2 - ((int) ((40 - num3) * 0.92050485345244037)), -157.0, color);
+                texture.DrawRotated(num - ((int)((40 - num3) * 0.39073112848927377)), num2 - ((int)((40 - num3) * 0.92050485345244037)), 157.0, color);
+                texture.DrawRotated(num + ((int)((40 - num3) * 0.39073112848927377)), num2 - ((int)((40 - num3) * 0.92050485345244037)), -157.0, color);
             }
             else
             {
@@ -227,7 +229,7 @@
             DrawLine(bx + 0x16, by - (landTiles[x, y].m_Z << 2), (bx + 0x16) + ((x2 - y2) * 0x16), (by + 0x16) - (landTiles[x + x2, y + y2].m_Z << 2), 0x40ff40);
         }
 
-        public static unsafe void DrawPoints(params Point[] points)
+        public static unsafe void DrawPoints(params Client.Point[] points)
         {
             int length = points.Length;
             CustomVertex.TransformedColoredTextured[] texturedArray = GeoPool(length);
@@ -260,7 +262,7 @@
             if ((Engine.m_Device != null) && Validate())
             {
                 Stats.Reset();
-                Engine.m_Device.Clear(3, Color.Black, 1f, 0);
+                Engine.m_Device.Clear(ClearFlags.ZBuffer | ClearFlags.Target, Color.Black, 1f, 0);
                 Queue toUpdateQueue = m_ToUpdateQueue;
                 if (toUpdateQueue == null)
                 {
@@ -363,7 +365,7 @@
                         m_xScroll = m_yScroll = 0;
                         if ((player != null) && (player.Walking.Count > 0))
                         {
-                            WalkAnimation animation = (WalkAnimation) player.Walking.Peek();
+                            WalkAnimation animation = (WalkAnimation)player.Walking.Peek();
                             int xOffset = 0;
                             int yOffset = 0;
                             int fOffset = 0;
@@ -405,11 +407,11 @@
                         int count = cells[num10 + 1, num11 + 1].Count;
                         for (int i = 0; i < count; i++)
                         {
-                            ICell cell = (ICell) cells[num10 + 1, num11 + 1][i];
-                            Type cellType = cell.CellType;
+                            ICell cell = (ICell)cells[num10 + 1, num11 + 1][i];
+                            System.Type cellType = cell.CellType;
                             if ((cellType == tStaticItem) || (cellType == tDynamicItem))
                             {
-                                ITile tile = (ITile) cell;
+                                ITile tile = (ITile)cell;
                                 if ((Map.m_ItemFlags[tile.ID & 0x3fff][TileFlag.Roof] && (tile.Z >= (num3 + 15))) && (tile.Z < z))
                                 {
                                     z = tile.Z;
@@ -419,11 +421,11 @@
                         count = cells[num10, num11].Count;
                         for (int j = 0; j < count; j++)
                         {
-                            ICell cell2 = (ICell) cells[num10, num11][j];
-                            Type type2 = cell2.CellType;
+                            ICell cell2 = (ICell)cells[num10, num11][j];
+                            System.Type type2 = cell2.CellType;
                             if (((type2 == tStaticItem) || (type2 == tDynamicItem)) || (type2 == tLandTile))
                             {
-                                ITile tile2 = (ITile) cell2;
+                                ITile tile2 = (ITile)cell2;
                                 if (!Map.GetTileFlags(tile2.ID)[TileFlag.Roof])
                                 {
                                     int num22 = (type2 == tLandTile) ? tile2.SortZ : tile2.Z;
@@ -510,9 +512,9 @@
                                 multiPreview = false;
                             }
                         }
-                        else if (((Control.ModifierKeys & (Keys.Control | Keys.Shift)) == (Keys.Control | Keys.Shift)) && (((Gumps.LastOver is GSpellIcon) && (((GSpellIcon) Gumps.LastOver).m_SpellID == 0x39)) || ((Gumps.LastOver is GContainerItem) && ((((GContainerItem) Gumps.LastOver).Item.ID & 0x3fff) == 0x1f65))))
+                        else if (((Control.ModifierKeys & (Keys.Control | Keys.Shift)) == (Keys.Control | Keys.Shift)) && (((Gumps.LastOver is GSpellIcon) && (((GSpellIcon)Gumps.LastOver).m_SpellID == 0x39)) || ((Gumps.LastOver is GContainerItem) && ((((GContainerItem)Gumps.LastOver).Item.ID & 0x3fff) == 0x1f65))))
                         {
-                            int num38 = 1 + ((int) (Engine.Skills[SkillName.Magery].Value / 15f));
+                            int num38 = 1 + ((int)(Engine.Skills[SkillName.Magery].Value / 15f));
                             if (m_LightRed == null)
                             {
                                 m_LightRed = new Hues.HTemperedHue(Engine.C32216(0xff0000), 80);
@@ -525,7 +527,7 @@
                         }
                         else if (Engine.TargetHandler is ServerTargetHandler)
                         {
-                            ServerTargetHandler targetHandler = (ServerTargetHandler) Engine.TargetHandler;
+                            ServerTargetHandler targetHandler = (ServerTargetHandler)Engine.TargetHandler;
                             IHue lightBlue = null;
                             int num39 = -1;
                             bool flag6 = false;
@@ -554,7 +556,7 @@
                                     m_LightBlue = new Hues.HTemperedHue(Engine.C32216(0x99ccff), 80);
                                 }
                                 lightBlue = m_LightBlue;
-                                num39 = 1 + ((int) (Engine.Skills[SkillName.Magery].Value / 20f));
+                                num39 = 1 + ((int)(Engine.Skills[SkillName.Magery].Value / 20f));
                             }
                             else if (targetHandler.Action == TargetAction.DetectHidden)
                             {
@@ -563,7 +565,7 @@
                                     m_LightBlue = new Hues.HTemperedHue(Engine.C32216(0x99ccff), 80);
                                 }
                                 lightBlue = m_LightBlue;
-                                num39 = (int) (Engine.Skills[SkillName.DetectingHidden].Value / 10f);
+                                num39 = (int)(Engine.Skills[SkillName.DetectingHidden].Value / 10f);
                             }
                             else if (targetHandler.Action == TargetAction.ArchProtection)
                             {
@@ -755,23 +757,23 @@
                                 for (int num58 = 0; num58 < num57; num58++)
                                 {
                                     TileFlags flags;
-                                    Texture texture;
+                                    Client.Texture texture;
                                     float num69;
                                     bool flag17;
                                     int num71;
                                     int num72;
-                                    ICell cell5 = (ICell) cells[x, y][num58];
-                                    Type type3 = cell5.CellType;
+                                    ICell cell5 = (ICell)cells[x, y][num58];
+                                    System.Type type3 = cell5.CellType;
                                     if ((type3 != tStaticItem) && (type3 != tDynamicItem))
                                     {
                                         goto Label_177B;
                                     }
                                     flag8 = type3 == tStaticItem;
                                     flag9 = !flag8;
-                                    IItem item3 = (IItem) cell5;
+                                    IItem item3 = (IItem)cell5;
                                     if (flag8)
                                     {
-                                        item2 = (StaticItem) item3;
+                                        item2 = (StaticItem)item3;
                                         id = item2.m_ID;
                                         switch (id)
                                         {
@@ -781,9 +783,9 @@
                                             case 0x6198:
                                             case 0x61bc:
                                             case 0x6199:
-                                            {
-                                                continue;
-                                            }
+                                                {
+                                                    continue;
+                                                }
                                         }
                                         num47 = item2.m_Z;
                                         flags = Map.m_ItemFlags[id & 0x3fff];
@@ -796,7 +798,7 @@
                                     }
                                     else
                                     {
-                                        item = (DynamicItem) item3;
+                                        item = (DynamicItem)item3;
                                         id = item.m_ID;
                                         switch (id)
                                         {
@@ -806,9 +808,9 @@
                                             case 0x6198:
                                             case 0x61bc:
                                             case 0x6199:
-                                            {
-                                                continue;
-                                            }
+                                                {
+                                                    continue;
+                                                }
                                         }
                                         num47 = item.m_Z;
                                         flags = Map.m_ItemFlags[id & 0x3fff];
@@ -818,7 +820,7 @@
                                         }
                                         hue4 = item.m_Hue;
                                         owner = item.m_Item;
-                                        id = Map.GetDispID(id, (ushort) owner.Amount, ref xDouble);
+                                        id = Map.GetDispID(id, (ushort)owner.Amount, ref xDouble);
                                     }
                                     bool flag15 = false;
                                     if ((((lightRed != null) && (x >= num32)) && ((y >= num33) && (x <= num34))) && (y <= num35))
@@ -839,7 +841,7 @@
                                                     {
                                                         m_AlphaEnable = true;
                                                     }
-                                                    m_fAlpha = ((float) item5.m_vAlpha) / 255f;
+                                                    m_fAlpha = ((float)item5.m_vAlpha) / 255f;
                                                     m_Alpha = item5.m_vAlpha << 0x18;
                                                 }
                                                 else if (m_AlphaEnable)
@@ -867,7 +869,7 @@
                                     {
                                         IHue hue5;
                                         int amount = owner.Amount;
-                                        CorpseTableEntry entry = (CorpseTableEntry) CorpseTable.m_Entries[amount];
+                                        CorpseTableEntry entry = (CorpseTableEntry)CorpseTable.m_Entries[amount];
                                         if ((entry != null) && (BodyConverter.GetFileSet(amount) == 1))
                                         {
                                             amount = entry.m_OldID;
@@ -908,7 +910,7 @@
                                         owner.MessageFrame = m_ActFrames;
                                         for (int num68 = 0; num68 < owner.CorpseEquip.Count; num68++)
                                         {
-                                            EquipEntry entry2 = (EquipEntry) owner.CorpseEquip[num68];
+                                            EquipEntry entry2 = (EquipEntry)owner.CorpseEquip[num68];
                                             if (owner.Items.Contains(entry2.m_Item))
                                             {
                                                 if (!preserveHue)
@@ -926,7 +928,7 @@
                                         texture = null;
                                         num69 = 1f;
                                         flag17 = false;
-                                        int itemID = id & 0x3fff;
+                                        int num70 = id & 0x3fff;
                                         bool flag18 = false;
                                         if (preserveHue)
                                         {
@@ -953,14 +955,14 @@
                                         {
                                             grayscale = hue4;
                                         }
-                                        AnimData anim = Map.GetAnim(itemID);
+                                        AnimData anim = Map.GetAnim(num70);
                                         if ((anim.frameCount == 0) || !flags[TileFlag.Animation])
                                         {
-                                            texture = item3.GetItem(grayscale, (short) id);
+                                            texture = item3.GetItem(grayscale, (short)id);
                                         }
                                         else
                                         {
-                                            texture = item3.GetItem(grayscale, (short) (id + anim[(m_Frames / (anim.frameInterval + 1)) % anim.frameCount]));
+                                            texture = item3.GetItem(grayscale, (short)(id + anim[(m_Frames / (anim.frameInterval + 1)) % anim.frameCount]));
                                         }
                                         if ((texture != null) && !texture.IsEmpty())
                                         {
@@ -1043,7 +1045,7 @@
                                     else
                                     {
                                         item2.m_bDraw = texture.DrawGame(num71, num72, item2.m_vPool);
-                                        item2.m_vAlpha = (byte) (m_Alpha >> 0x18);
+                                        item2.m_vAlpha = (byte)(m_Alpha >> 0x18);
                                         item2.m_bInit = !flag15;
                                         item2.m_bAlpha = flag17;
                                         item2.m_sDraw = texture;
@@ -1052,10 +1054,10 @@
                                 Label_177B:
                                     if (type3 == tLandTile)
                                     {
-                                        LandTile lt = (LandTile) cell5;
+                                        LandTile lt = (LandTile)cell5;
                                         num47 = lt.m_Z;
-                                        int iD = lt.m_ID;
-                                        if (iD != 2)
+                                        int landID = lt.m_ID;
+                                        if (landID != 2)
                                         {
                                             int num74 = bx;
                                             int num75 = by;
@@ -1107,10 +1109,10 @@
                                             {
                                                 CustomVertex.TransformedColoredTextured[] texturedArray;
                                                 IHue hue7 = flag19 ? lightRed : hue;
-                                                int textureID = Map.GetTexture(iD);
+                                                int textureID = Map.GetTexture(landID);
                                                 if ((((buffer[x, y] & 1) == 0) || (textureID == 0)) || (textureID >= 0x1000))
                                                 {
-                                                    Texture land = hue7.GetLand(iD);
+                                                    Client.Texture land = hue7.GetLand(landID);
                                                     if ((land != null) && !land.IsEmpty())
                                                     {
                                                         if ((num18 < 0x7fffffff) && (num47 >= num18))
@@ -1160,7 +1162,7 @@
                                                 }
                                                 else
                                                 {
-                                                    Texture texture3 = hue7.GetTexture(textureID);
+                                                    Client.Texture texture3 = hue7.GetTexture(textureID);
                                                     if ((texture3 == null) || texture3.IsEmpty())
                                                     {
                                                         texture3 = hue7.GetTexture(1);
@@ -1229,8 +1231,9 @@
                                                                     }
                                                                     else
                                                                     {
-                                                                        IntPtr ptr1 = texturedRef2;
-                                                                        ptr1.Color *= 0x10101;
+                                                                        //IntPtr ptr1 = (IntPtr) texturedRef2;
+                                                                        //ptr1.Color *= 0x10101;
+                                                                        texturedRef2->Color *= 0x10101;
                                                                     }
                                                                     if (texturedRef2[1].Color < 0)
                                                                     {
@@ -1242,8 +1245,9 @@
                                                                     }
                                                                     else
                                                                     {
-                                                                        IntPtr ptr2 = texturedRef2 + 1;
-                                                                        ptr2.Color *= 0x10101;
+                                                                        //IntPtr ptr2 = (IntPtr)(texturedRef2 + 1);
+                                                                        //ptr2.Color *= 0x10101;
+                                                                        (texturedRef2 + 1)->Color *= 0x10101;
                                                                     }
                                                                     if (texturedRef2[2].Color < 0)
                                                                     {
@@ -1255,8 +1259,9 @@
                                                                     }
                                                                     else
                                                                     {
-                                                                        IntPtr ptr3 = texturedRef2 + 2;
-                                                                        ptr3.Color *= 0x10101;
+                                                                        //IntPtr ptr3 = (IntPtr) (texturedRef2 + 2);
+                                                                        //ptr3.Color *= 0x10101;
+                                                                        (texturedRef2 + 2)->Color *= 0x10101;
                                                                     }
                                                                     if (texturedRef2[3].Color < 0)
                                                                     {
@@ -1268,8 +1273,9 @@
                                                                     }
                                                                     else
                                                                     {
-                                                                        IntPtr ptr4 = texturedRef2 + 3;
-                                                                        ptr4.Color *= 0x10101;
+                                                                        //IntPtr ptr4 = (IntPtr) (texturedRef2 + 3);
+                                                                        //ptr4.Color *= 0x10101;
+                                                                        (texturedRef2 + 3)->Color *= 0x10101;
                                                                     }
                                                                 }
                                                                 else
@@ -1304,7 +1310,7 @@
                                                                     else if (!flag21)
                                                                     {
                                                                         texturedRef2[1].Color = texturedRef2[2].Color = 0;
-                                                                        texturedRef2 = texturedRef2[1];
+                                                                        //texturedRef2 = *((CustomVertex.TransformedColoredTextured**) (texturedRef2 + 1));
                                                                     }
                                                                 }
                                                             }
@@ -1355,8 +1361,9 @@
                                                                     }
                                                                     else
                                                                     {
-                                                                        IntPtr ptr5 = texturedRef2;
-                                                                        ptr5.Color *= 0x10101;
+                                                                        //IntPtr ptr5 = (IntPtr) texturedRef2;
+                                                                        //ptr5.Color *= 0x10101;
+                                                                        (texturedRef2 + 0)->Color *= 0x10101;
                                                                     }
                                                                     if (texturedRef2[1].Color < 0)
                                                                     {
@@ -1368,8 +1375,9 @@
                                                                     }
                                                                     else
                                                                     {
-                                                                        IntPtr ptr6 = texturedRef2 + 1;
-                                                                        ptr6.Color *= 0x10101;
+                                                                        //IntPtr ptr6 = (IntPtr) (texturedRef2 + 1);
+                                                                        //ptr6.Color *= 0x10101;
+                                                                        (texturedRef2 + 1)->Color *= 0x10101;
                                                                     }
                                                                     if (texturedRef2[2].Color < 0)
                                                                     {
@@ -1381,8 +1389,9 @@
                                                                     }
                                                                     else
                                                                     {
-                                                                        IntPtr ptr7 = texturedRef2 + 2;
-                                                                        ptr7.Color *= 0x10101;
+                                                                        //IntPtr ptr7 = (IntPtr) (texturedRef2 + 2);
+                                                                        //ptr7.Color *= 0x10101;
+                                                                        (texturedRef2 + 2)->Color *= 0x10101;
                                                                     }
                                                                     if (texturedRef2[3].Color < 0)
                                                                     {
@@ -1394,8 +1403,9 @@
                                                                     }
                                                                     else
                                                                     {
-                                                                        IntPtr ptr8 = texturedRef2 + 3;
-                                                                        ptr8.Color *= 0x10101;
+                                                                        //IntPtr ptr8 = (IntPtr) (texturedRef2 + 3);
+                                                                        //ptr8.Color *= 0x10101;
+                                                                        (texturedRef2 + 3)->Color *= 0x10101;
                                                                     }
                                                                 }
                                                                 else
@@ -1428,26 +1438,35 @@
                                                                     }
                                                                     else if (!flag23)
                                                                     {
-                                                                        texturedRef2 = texturedRef2[1];
+                                                                        //texturedRef2 = *((CustomVertex.TransformedColoredTextured**) (texturedRef2 + 1));
                                                                     }
                                                                 }
                                                             }
-                                                            IntPtr ptr9 = texturedRef2;
-                                                            ptr9.X -= 0.5f;
-                                                            IntPtr ptr10 = texturedRef2;
-                                                            ptr10.Y -= 0.5f;
-                                                            IntPtr ptr11 = texturedRef2 + 1;
-                                                            ptr11.X -= 0.5f;
-                                                            IntPtr ptr12 = texturedRef2 + 1;
-                                                            ptr12.Y -= 0.5f;
-                                                            IntPtr ptr13 = texturedRef2 + 2;
-                                                            ptr13.X -= 0.5f;
-                                                            IntPtr ptr14 = texturedRef2 + 2;
-                                                            ptr14.Y -= 0.5f;
-                                                            IntPtr ptr15 = texturedRef2 + 3;
-                                                            ptr15.X -= 0.5f;
-                                                            IntPtr ptr16 = texturedRef2 + 3;
-                                                            ptr16.Y -= 0.5f;
+                                                            //IntPtr ptr9 = (IntPtr) texturedRef2;
+                                                            //ptr9.X -= 0.5f;
+                                                            texturedRef2->X -= 0.5f;
+                                                            //IntPtr ptr10 = (IntPtr) texturedRef2;
+                                                            //ptr10.Y -= 0.5f;
+                                                            texturedRef2->Y -= 0.5f;
+                                                            //IntPtr ptr11 = (IntPtr) (texturedRef2 + 1);
+                                                            //ptr11.X -= 0.5f;
+                                                            (texturedRef2 + 1)->X -= 0.5f;
+                                                            //IntPtr ptr12 = (IntPtr) (texturedRef2 + 1);
+                                                            //ptr12.Y -= 0.5f;
+                                                            (texturedRef2 + 1)->Y -= 0.5f;
+                                                            //IntPtr ptr13 = (IntPtr) (texturedRef2 + 2);
+                                                            //ptr13.X -= 0.5f;
+                                                            (texturedRef2 + 2)->X -= 0.5f;
+                                                            //IntPtr ptr14 = (IntPtr) (texturedRef2 + 2);
+                                                            //ptr14.Y -= 0.5f;
+                                                            (texturedRef2 + 2)->Y -= 0.5f;
+                                                            //IntPtr ptr15 = (IntPtr) (texturedRef2 + 3);
+                                                            //ptr15.X -= 0.5f;
+                                                            (texturedRef2 + 3)->X -= 0.5f;
+                                                            //IntPtr ptr16 = (IntPtr) (texturedRef2 + 3);
+                                                            //ptr16.Y -= 0.5f;
+                                                            (texturedRef2 + 3)->Y -= 0.5f;
+
                                                             if (m_AlphaEnable)
                                                             {
                                                                 SetAlphaEnablePrecalc(false);
@@ -1492,14 +1511,14 @@
                                     }
                                     else if (((type3 == tMobileCell) || (type3 == tCorpseCell)) && ((z >= 0x7fffffff) || (cell5.Z < z)))
                                     {
-                                        IAnimatedCell cell6 = (IAnimatedCell) cell5;
+                                        IAnimatedCell cell6 = (IAnimatedCell)cell5;
                                         int body = 0;
                                         int direction = 0;
                                         int num81 = 0;
                                         int action = 0;
                                         int num83 = 0;
                                         bool flag24 = type3 == tMobileCell;
-                                        Mobile mobile4 = flag24 ? ((MobileCell) cell5).m_Mobile : null;
+                                        Mobile mobile4 = flag24 ? ((MobileCell)cell5).m_Mobile : null;
                                         int frames = 0;
                                         int num85 = 0;
                                         int num86 = 0;
@@ -1512,7 +1531,7 @@
                                             }
                                             if (mobile4.Walking.Count > 0)
                                             {
-                                                WalkAnimation animation2 = (WalkAnimation) mobile4.Walking.Peek();
+                                                WalkAnimation animation2 = (WalkAnimation)mobile4.Walking.Peek();
                                                 if (!animation2.Snapshot(ref num85, ref num86, ref frames))
                                                 {
                                                     if (!animation2.Advance)
@@ -1526,8 +1545,8 @@
                                                         num86 = 0;
                                                     }
                                                     frames = animation2.Frames;
-                                                    mobile4.SetLocation((short) animation2.NewX, (short) animation2.NewY, (short) animation2.NewZ);
-                                                    ((WalkAnimation) mobile4.Walking.Dequeue()).Dispose();
+                                                    mobile4.SetLocation((short)animation2.NewX, (short)animation2.NewY, (short)animation2.NewZ);
+                                                    ((WalkAnimation)mobile4.Walking.Dequeue()).Dispose();
                                                     if (mobile4.Player)
                                                     {
                                                         if (Engine.amMoving)
@@ -1540,14 +1559,14 @@
                                                     if (mobile4.Walking.Count == 0)
                                                     {
                                                         Engine.EquipSort(mobile4, animation2.NewDir);
-                                                        mobile4.Direction = (byte) animation2.NewDir;
+                                                        mobile4.Direction = (byte)animation2.NewDir;
                                                         mobile4.IsMoving = false;
                                                         mobile4.MovedTiles = 0;
                                                         mobile4.HorseFootsteps = 0;
                                                     }
                                                     else
                                                     {
-                                                        ((WalkAnimation) mobile4.Walking.Peek()).Start();
+                                                        ((WalkAnimation)mobile4.Walking.Peek()).Start();
                                                     }
                                                     toUpdateQueue.Enqueue(mobile4);
                                                 }
@@ -1579,7 +1598,7 @@
                                                 if ((mobile4.Human && mobile4.IsMoving) && (mobile4.LastFrame != num83))
                                                 {
                                                     int num143;
-                                                    if ((equip.Count > 0) && (((EquipEntry) equip[0]).m_Layer == Layer.Mount))
+                                                    if ((equip.Count > 0) && (((EquipEntry)equip[0]).m_Layer == Layer.Mount))
                                                     {
                                                         if ((direction & 0x80) == 0x80)
                                                         {
@@ -1605,12 +1624,12 @@
                                                         {
                                                             case 1:
                                                             case 6:
-                                                            {
-                                                                mobile4.Sounds = (num143 = mobile4.Sounds) + 1;
-                                                                int num93 = 0x12b + (num143 & 1);
-                                                                Engine.Sounds.PlaySound(num93, mobile4.X, mobile4.Y, mobile4.Z, 0.65f);
-                                                                break;
-                                                            }
+                                                                {
+                                                                    mobile4.Sounds = (num143 = mobile4.Sounds) + 1;
+                                                                    int num93 = 0x12b + (num143 & 1);
+                                                                    Engine.Sounds.PlaySound(num93, mobile4.X, mobile4.Y, mobile4.Z, 0.65f);
+                                                                    break;
+                                                                }
                                                         }
                                                     }
                                                 }
@@ -1712,7 +1731,7 @@
                                             float fAlpha = 1f;
                                             int num98 = -1;
                                             int num99 = -1;
-                                            Texture t = null;
+                                            Client.Texture t = null;
                                             if ((frame2.Image != null) && !frame2.Image.IsEmpty())
                                             {
                                                 if (flag24 && (mobile4 != null))
@@ -1786,7 +1805,7 @@
                                                 flag29 = type3 == tMobileCell;
                                                 if (flag29)
                                                 {
-                                                    if (((mobile4 != null) && mobile4.HumanOrGhost) && ((equip.Count > 0) && (((EquipEntry) equip[0]).m_Layer == Layer.Mount)))
+                                                    if (((mobile4 != null) && mobile4.HumanOrGhost) && ((equip.Count > 0) && (((EquipEntry)equip[0]).m_Layer == Layer.Mount)))
                                                     {
                                                         alphaEnable = m_AlphaEnable;
                                                         fAlpha = m_fAlpha;
@@ -1831,13 +1850,13 @@
                                             }
                                             if (type3 == tCorpseCell)
                                             {
-                                                Item item6 = World.FindItem(((CorpseCell) cell5).Serial);
+                                                Item item6 = World.FindItem(((CorpseCell)cell5).Serial);
                                                 if ((item6 != null) && (Engine.m_Animations.GetBodyType(body) == BodyType.Human))
                                                 {
                                                     int num100 = item6.Equip.Count;
                                                     for (int num101 = 0; num101 < num100; num101++)
                                                     {
-                                                        EquipEntry entry3 = (EquipEntry) item6.Equip[num101];
+                                                        EquipEntry entry3 = (EquipEntry)item6.Equip[num101];
                                                         int bodyID = entry3.m_Animation;
                                                         if (!flag26)
                                                         {
@@ -1892,7 +1911,7 @@
                                                     bool flag34 = false;
                                                     for (int num109 = 0; num109 < num108; num109++)
                                                     {
-                                                        EquipEntry entry4 = (EquipEntry) equip[num109];
+                                                        EquipEntry entry4 = (EquipEntry)equip[num109];
                                                         if (!ghost || (entry4.m_Layer == Layer.OuterTorso))
                                                         {
                                                             int num110 = entry4.m_Animation;
@@ -2048,15 +2067,15 @@
                                                 }
                                                 if (flag24 && (mobile4 != null))
                                                 {
-                                                    if ((mobile4 == Engine.m_LastHarmTarget) && (player.Warmode || ((Engine.TargetHandler is ServerTargetHandler) && ((((ServerTargetHandler) Engine.TargetHandler).Flags & ServerTargetFlags.Harmful) != ServerTargetFlags.None))))
+                                                    if ((mobile4 == Engine.m_LastHarmTarget) && (player.Warmode || ((Engine.TargetHandler is ServerTargetHandler) && ((((ServerTargetHandler)Engine.TargetHandler).Flags & ServerTargetFlags.Harmful) != ServerTargetFlags.None))))
                                                     {
                                                         DrawColoredIcon(num89, num90, 0xff2200, false, true);
                                                     }
-                                                    else if ((mobile4 == Engine.m_LastBenTarget) && (player.Warmode || ((Engine.TargetHandler is ServerTargetHandler) && ((((ServerTargetHandler) Engine.TargetHandler).Flags & ServerTargetFlags.Beneficial) != ServerTargetFlags.None))))
+                                                    else if ((mobile4 == Engine.m_LastBenTarget) && (player.Warmode || ((Engine.TargetHandler is ServerTargetHandler) && ((((ServerTargetHandler)Engine.TargetHandler).Flags & ServerTargetFlags.Beneficial) != ServerTargetFlags.None))))
                                                     {
                                                         DrawColoredIcon(num89, num90, 0xffff, false, true);
                                                     }
-                                                    else if ((mobile4 == Engine.m_LastTarget) && (player.Warmode || ((Engine.TargetHandler is ServerTargetHandler) && ((((ServerTargetHandler) Engine.TargetHandler).Flags & (ServerTargetFlags.Beneficial | ServerTargetFlags.Harmful)) == ServerTargetFlags.None))))
+                                                    else if ((mobile4 == Engine.m_LastTarget) && (player.Warmode || ((Engine.TargetHandler is ServerTargetHandler) && ((((ServerTargetHandler)Engine.TargetHandler).Flags & (ServerTargetFlags.Beneficial | ServerTargetFlags.Harmful)) == ServerTargetFlags.None))))
                                                     {
                                                         DrawColoredIcon(num89, num90, 0xcccccc, false, true);
                                                     }
@@ -2110,13 +2129,13 @@
                                     }
                                     for (int num122 = 0; num122 < num27; num122++)
                                     {
-                                        MultiItem item7 = (MultiItem) Engine.m_MultiList[num122];
+                                        MultiItem item7 = (MultiItem)Engine.m_MultiList[num122];
                                         if (((item7.X == (x - num23)) && (item7.Y == (y - num24))) && (item7.Z == 0))
                                         {
                                             num26 = num122 + 1;
                                             int num123 = item7.ItemID & 0x3fff;
                                             AnimData data2 = Map.GetAnim(num123);
-                                            Texture texture5 = null;
+                                            Client.Texture texture5 = null;
                                             if ((data2.frameCount == 0) || !Map.m_ItemFlags[num123][TileFlag.Animation])
                                             {
                                                 texture5 = hue.GetItem(item7.ItemID);
@@ -2150,7 +2169,7 @@
                                 }
                                 for (int num124 = 0; num124 < list2.Count; num124++)
                                 {
-                                    DrawQueueEntry entry5 = (DrawQueueEntry) list2[num124];
+                                    DrawQueueEntry entry5 = (DrawQueueEntry)list2[num124];
                                     if ((entry5.m_TileX == x) && (entry5.m_TileY == y))
                                     {
                                         list2.RemoveAt(num124);
@@ -2192,7 +2211,7 @@
                             }
                             while (transDrawQueue.Count > 0)
                             {
-                                TransparentDraw draw = (TransparentDraw) transDrawQueue.Dequeue();
+                                TransparentDraw draw = (TransparentDraw)transDrawQueue.Dequeue();
                                 if (m_AlphaEnable != draw.m_bAlpha)
                                 {
                                     SetAlphaEnablePrecalc(draw.m_bAlpha);
@@ -2217,7 +2236,7 @@
                             {
                                 int num127;
                                 int num128;
-                                MiniHealthEntry entry6 = (MiniHealthEntry) miniHealthQueue.Dequeue();
+                                MiniHealthEntry entry6 = (MiniHealthEntry)miniHealthQueue.Dequeue();
                                 Mobile mobile5 = entry6.m_Mobile;
                                 if (m_AlphaEnable)
                                 {
@@ -2225,7 +2244,7 @@
                                 }
                                 AlphaTestEnable = false;
                                 TransparentRect(0, entry6.m_X - 0x10, entry6.m_Y + 8, 0x20, 7);
-                                double num125 = ((double) mobile5.HPCur) / ((double) mobile5.HPMax);
+                                double num125 = ((double)mobile5.HPCur) / ((double)mobile5.HPMax);
                                 if (num125 == double.NaN)
                                 {
                                     num125 = 0.0;
@@ -2238,7 +2257,7 @@
                                 {
                                     num125 = 1.0;
                                 }
-                                int width = (int) ((30.0 * num125) + 0.5);
+                                int width = (int)((30.0 * num125) + 0.5);
                                 if (!m_AlphaEnable)
                                 {
                                     SetAlphaEnablePrecalc(true);
@@ -2320,7 +2339,7 @@
                                 {
                                     int num132;
                                     int num133;
-                                    int num131 = (int) ((((double) player.HPCur) / ((double) player.HPMax)) * 40.0);
+                                    int num131 = (int)((((double)player.HPCur) / ((double)player.HPMax)) * 40.0);
                                     if (num131 > 40)
                                     {
                                         num131 = 40;
@@ -2348,7 +2367,7 @@
                                     GradientRect(num132, num133, num129, num130, num131, 5);
                                     GradientRect(0xff0000, 0x800000, num129 + num131, num130, 40 - num131, 5);
                                     num130 += 6;
-                                    num131 = (int) ((((double) player.ManaCur) / ((double) player.ManaMax)) * 40.0);
+                                    num131 = (int)((((double)player.ManaCur) / ((double)player.ManaMax)) * 40.0);
                                     if (num131 > 40)
                                     {
                                         num131 = 40;
@@ -2360,7 +2379,7 @@
                                     GradientRect(0x20c0ff, 0x106080, num129, num130, 40, 5);
                                     GradientRect(0xff0000, 0x800000, num129 + num131, num130, 40 - num131, 5);
                                     num130 += 6;
-                                    num131 = (int) ((((double) player.StamCur) / ((double) player.StamMax)) * 40.0);
+                                    num131 = (int)((((double)player.StamCur) / ((double)player.StamMax)) * 40.0);
                                     if (num131 > 40)
                                     {
                                         num131 = 40;
@@ -2403,7 +2422,7 @@
                         int num135 = textToDrawList.Count;
                         for (int num136 = 0; num136 < num135; num136++)
                         {
-                            TextMessage message = (TextMessage) textToDrawList[num136];
+                            TextMessage message = (TextMessage)textToDrawList[num136];
                             int num137 = message.X + Engine.GameX;
                             int num138 = message.Y + Engine.GameY;
                             if (num137 < (Engine.GameX + 2))
@@ -2426,16 +2445,16 @@
                         }
                         for (int num139 = 0; num139 < num135; num139++)
                         {
-                            TextMessage message2 = (TextMessage) textToDrawList[num139];
-                            Rectangle rect = (Rectangle) rectsList[num139];
+                            TextMessage message2 = (TextMessage)textToDrawList[num139];
+                            Rectangle rect = (Rectangle)rectsList[num139];
                             float num140 = 1f;
                             int num141 = rectsList.Count;
                             for (int num142 = num139 + 1; num142 < num141; num142++)
                             {
-                                Rectangle rectangle3 = (Rectangle) rectsList[num142];
+                                Rectangle rectangle3 = (Rectangle)rectsList[num142];
                                 if (rectangle3.IntersectsWith(rect))
                                 {
-                                    num140 += ((TextMessage) textToDrawList[num142]).Alpha;
+                                    num140 += ((TextMessage)textToDrawList[num142]).Alpha;
                                 }
                             }
                             if ((num140 == 1f) && !message2.Disposing)
@@ -2475,7 +2494,7 @@
                             SetAlphaEnablePrecalc(false);
                         }
                         AlphaTestEnable = true;
-                        Cursor.Draw();
+                        Client.Cursor.Draw();
                     }
                     PushAll();
                 }
@@ -2498,7 +2517,7 @@
                 m_ActFrames++;
                 while (toUpdateQueue.Count > 0)
                 {
-                    Mobile mobile6 = (Mobile) toUpdateQueue.Dequeue();
+                    Mobile mobile6 = (Mobile)toUpdateQueue.Dequeue();
                     mobile6.MovedTiles++;
                     mobile6.Update();
                 }
@@ -2561,11 +2580,11 @@
             int count = cells[num8 + 1, num9 + 1].Count;
             for (int i = 0; i < count; i++)
             {
-                ICell cell = (ICell) cells[num8 + 1, num9 + 1][i];
-                Type cellType = cell.CellType;
+                ICell cell = (ICell)cells[num8 + 1, num9 + 1][i];
+                System.Type cellType = cell.CellType;
                 if ((cellType == tStaticItem) || (cellType == tDynamicItem))
                 {
-                    ITile tile = (ITile) cell;
+                    ITile tile = (ITile)cell;
                     if ((Map.m_ItemFlags[tile.ID & 0x3fff][TileFlag.Roof] && (tile.Z >= (z + 15))) && (tile.Z < num13))
                     {
                         num13 = tile.Z;
@@ -2575,11 +2594,11 @@
             count = cells[num8, num9].Count;
             for (int j = 0; j < count; j++)
             {
-                ICell cell2 = (ICell) cells[num8, num9][j];
-                Type type2 = cell2.CellType;
+                ICell cell2 = (ICell)cells[num8, num9][j];
+                System.Type type2 = cell2.CellType;
                 if (((type2 == tStaticItem) || (type2 == tDynamicItem)) || (type2 == tLandTile))
                 {
-                    ITile tile2 = (ITile) cell2;
+                    ITile tile2 = (ITile)cell2;
                     if (!Map.GetTileFlags(tile2.ID)[TileFlag.Roof])
                     {
                         int num17 = (type2 == tLandTile) ? tile2.SortZ : tile2.Z;
@@ -2607,7 +2626,7 @@
             ICell lastFind = m_LastFind;
             if (((lastFind != null) && (xwLast == x)) && ((ywLast == y) && (zwLast == z)))
             {
-                Type type3 = lastFind.CellType;
+                System.Type type3 = lastFind.CellType;
                 if (onlyMobs ? (type3 == tMobileCell) : true)
                 {
                     int num18 = (xLast - yLast) * 0x16;
@@ -2618,7 +2637,7 @@
                         {
                             if (type3 == tLandTile)
                             {
-                                LandTile tile3 = (LandTile) lastFind;
+                                LandTile tile3 = (LandTile)lastFind;
                                 int num45 = tile3.m_Z;
                                 if (((num12 >= 0x7fffffff) || (tile3.SortZ < num12)) && (tile3.m_ID != 2))
                                 {
@@ -2636,8 +2655,8 @@
                                         m_PointPool[3].Y = (num47 + 0x16) - (landTiles[xLast, yLast + 1].m_Z << 2);
                                         if (LandTileHitTest(m_PointPool, m_MousePoint))
                                         {
-                                            TileX = (short) (num4 + xLast);
-                                            TileY = (short) (num5 + yLast);
+                                            TileX = (short)(num4 + xLast);
+                                            TileY = (short)(num5 + yLast);
                                             return lastFind;
                                         }
                                     }
@@ -2646,18 +2665,18 @@
                         }
                         else
                         {
-                            IItem item = (IItem) lastFind;
+                            IItem item = (IItem)lastFind;
                             if (((((((item.ID != 0x4001) && (item.ID != 0x5796)) && ((item.ID != 0x61a4) && (item.ID != 0x6198))) && (item.ID != 0x61bc)) && (item.ID != 0x6199)) && ((num13 >= 0x7fffffff) || ((lastFind.Z < num13) && !Map.m_ItemFlags[item.ID & 0x3fff][TileFlag.Roof]))) && (((!Map.m_ItemFlags[item.ID & 0x3fff][TileFlag.Foliage] || (xLast < num8)) || ((yLast < num9) || (xLast >= (num8 + 8)))) || (yLast >= (num8 + 8))))
                             {
-                                Texture texture;
+                                Client.Texture texture;
                                 if (item.CellType == tDynamicItem)
                                 {
-                                    DynamicItem item2 = (DynamicItem) item;
+                                    DynamicItem item2 = (DynamicItem)item;
                                     Item owner = item2.m_Item;
                                     if ((owner != null) && (owner.ID == 0x2006))
                                     {
                                         int amount = owner.Amount;
-                                        CorpseTableEntry entry = (CorpseTableEntry) CorpseTable.m_Entries[amount];
+                                        CorpseTableEntry entry = (CorpseTableEntry)CorpseTable.m_Entries[amount];
                                         if ((entry != null) && (BodyConverter.GetFileSet(amount) == 1))
                                         {
                                             amount = entry.m_OldID;
@@ -2706,7 +2725,7 @@
                                 }
                                 else
                                 {
-                                    Item item4 = ((DynamicItem) lastFind).m_Item;
+                                    Item item4 = ((DynamicItem)lastFind).m_Item;
                                     if (item4 == null)
                                     {
                                         id = Map.GetDispID(id, 0, ref xDouble);
@@ -2737,8 +2756,8 @@
                                     {
                                         if (((!xDouble && (mx >= num43)) && ((my >= num44) && (mx < (num43 + texture.Width)))) && ((my < (num44 + texture.Height)) && texture.HitTest(mx - num43, my - num44)))
                                         {
-                                            TileX = (short) (num4 + xLast);
-                                            TileY = (short) (num5 + yLast);
+                                            TileX = (short)(num4 + xLast);
+                                            TileY = (short)(num5 + yLast);
                                             return lastFind;
                                         }
                                     }
@@ -2748,8 +2767,8 @@
                                         my -= num44;
                                         if ((((mx < texture.Width) && (my < texture.Height)) && texture.HitTest(mx, my)) || (((mx >= 5) && (my >= 5)) && texture.HitTest(mx - 5, my - 5)))
                                         {
-                                            TileX = (short) (num4 + xLast);
-                                            TileY = (short) (num5 + yLast);
+                                            TileX = (short)(num4 + xLast);
+                                            TileY = (short)(num5 + yLast);
                                             return lastFind;
                                         }
                                         mx += num43;
@@ -2761,7 +2780,7 @@
                     }
                     else if ((num13 >= 0x7fffffff) || (lastFind.Z < num13))
                     {
-                        IAnimatedCell cell4 = (IAnimatedCell) lastFind;
+                        IAnimatedCell cell4 = (IAnimatedCell)lastFind;
                         int body = 0;
                         int direction = 0;
                         int num22 = 0;
@@ -2772,7 +2791,7 @@
                         int num26 = (num19 - (cell4.Z << 2)) + 0x16;
                         num25++;
                         num26 -= 2;
-                        Mobile mobile = ((MobileCell) lastFind).m_Mobile;
+                        Mobile mobile = ((MobileCell)lastFind).m_Mobile;
                         if (mobile != null)
                         {
                             IHue grayscale;
@@ -2831,14 +2850,14 @@
                                 int num51 = (k + m) * 0x16;
                                 for (int n = cells[k, m].Count - 1; n >= 0; n--)
                                 {
-                                    ICell cell5 = (ICell) cells[k, m][n];
-                                    Type type4 = cell5.CellType;
+                                    ICell cell5 = (ICell)cells[k, m][n];
+                                    System.Type type4 = cell5.CellType;
                                     if (type4 == tMobileCell)
                                     {
                                         if ((num13 >= 0x7fffffff) || (cell5.Z < num13))
                                         {
                                             IHue notoriety;
-                                            IAnimatedCell cell6 = (IAnimatedCell) cell5;
+                                            IAnimatedCell cell6 = (IAnimatedCell)cell5;
                                             int num54 = 0;
                                             int num55 = 0;
                                             int hue = 0;
@@ -2849,7 +2868,7 @@
                                             int num60 = (num51 - (cell6.Z << 2)) + 0x16;
                                             num59++;
                                             num60 -= 2;
-                                            Mobile mobile3 = ((MobileCell) cell5).m_Mobile;
+                                            Mobile mobile3 = ((MobileCell)cell5).m_Mobile;
                                             if (mobile3.Flags[MobileFlag.Hidden])
                                             {
                                                 notoriety = Hues.Grayscale;
@@ -2877,8 +2896,8 @@
                                                     {
                                                         if (frame3.Image.HitTest(mx - num63, my - num64))
                                                         {
-                                                            TileX = (short) (num4 + k);
-                                                            TileY = (short) (num5 + m);
+                                                            TileX = (short)(num4 + k);
+                                                            TileY = (short)(num5 + m);
                                                             m_LastFind = cell5;
                                                             xLast = k;
                                                             yLast = m;
@@ -2887,8 +2906,8 @@
                                                     }
                                                     else if (frame3.Image.HitTest(-(mx - num63), my - num64))
                                                     {
-                                                        TileX = (short) (num4 + k);
-                                                        TileY = (short) (num5 + m);
+                                                        TileX = (short)(num4 + k);
+                                                        TileY = (short)(num5 + m);
                                                         m_LastFind = cell5;
                                                         xLast = k;
                                                         yLast = m;
@@ -2902,18 +2921,18 @@
                                     {
                                         if ((type4 == tStaticItem) || (type4 == tDynamicItem))
                                         {
-                                            IItem item5 = (IItem) cell5;
+                                            IItem item5 = (IItem)cell5;
                                             if (((((((item5.ID != 0x4001) && (item5.ID != 0x5796)) && ((item5.ID != 0x61a4) && (item5.ID != 0x6198))) && (item5.ID != 0x61bc)) && (item5.ID != 0x6199)) && ((num13 >= 0x7fffffff) || ((cell5.Z < num13) && !Map.m_ItemFlags[item5.ID & 0x3fff][TileFlag.Roof]))) && (((!Map.m_ItemFlags[item5.ID & 0x3fff][TileFlag.Foliage] || (k < num8)) || ((m < num9) || (k >= (num8 + 8)))) || (m >= (num8 + 8))))
                                             {
-                                                Texture texture2;
+                                                Client.Texture texture2;
                                                 if (item5.CellType == tDynamicItem)
                                                 {
-                                                    DynamicItem item6 = (DynamicItem) item5;
+                                                    DynamicItem item6 = (DynamicItem)item5;
                                                     Item item7 = item6.m_Item;
                                                     if ((item7 != null) && (item7.ID == 0x2006))
                                                     {
                                                         int bodyID = item7.Amount;
-                                                        CorpseTableEntry entry2 = (CorpseTableEntry) CorpseTable.m_Entries[bodyID];
+                                                        CorpseTableEntry entry2 = (CorpseTableEntry)CorpseTable.m_Entries[bodyID];
                                                         if ((entry2 != null) && (BodyConverter.GetFileSet(bodyID) == 1))
                                                         {
                                                             bodyID = entry2.m_OldID;
@@ -2968,7 +2987,7 @@
                                                 }
                                                 else
                                                 {
-                                                    Item item8 = ((DynamicItem) cell5).m_Item;
+                                                    Item item8 = ((DynamicItem)cell5).m_Item;
                                                     if (item8 == null)
                                                     {
                                                         num76 = Map.GetDispID(num76, 0, ref flag4);
@@ -2999,8 +3018,8 @@
                                                     {
                                                         if (((!flag4 && (mx >= num77)) && ((my >= num78) && (mx < (num77 + texture2.Width)))) && ((my < (num78 + texture2.Height)) && texture2.HitTest(mx - num77, my - num78)))
                                                         {
-                                                            TileX = (short) (num4 + k);
-                                                            TileY = (short) (num5 + m);
+                                                            TileX = (short)(num4 + k);
+                                                            TileY = (short)(num5 + m);
                                                             m_LastFind = cell5;
                                                             xLast = k;
                                                             yLast = m;
@@ -3013,8 +3032,8 @@
                                                         my -= num78;
                                                         if ((((mx < texture2.Width) && (my < texture2.Height)) && texture2.HitTest(mx, my)) || (((mx >= 5) && (my >= 5)) && texture2.HitTest(mx - 5, my - 5)))
                                                         {
-                                                            TileX = (short) (num4 + k);
-                                                            TileY = (short) (num5 + m);
+                                                            TileX = (short)(num4 + k);
+                                                            TileY = (short)(num5 + m);
                                                             m_LastFind = cell5;
                                                             xLast = k;
                                                             yLast = m;
@@ -3028,7 +3047,7 @@
                                         }
                                         else if (type4 == tLandTile)
                                         {
-                                            LandTile tile4 = (LandTile) cell5;
+                                            LandTile tile4 = (LandTile)cell5;
                                             int num79 = tile4.m_Z;
                                             if ((tile4.m_ID != 2) && ((num12 >= 0x7fffffff) || (tile4.SortZ < num12)))
                                             {
@@ -3046,8 +3065,8 @@
                                                     m_PointPool[3].Y = (num81 + 0x16) - (landTiles[k, m + 1].m_Z << 2);
                                                     if (LandTileHitTest(m_PointPool, m_MousePoint))
                                                     {
-                                                        TileX = (short) (num4 + k);
-                                                        TileY = (short) (num5 + m);
+                                                        TileX = (short)(num4 + k);
+                                                        TileY = (short)(num5 + m);
                                                         m_LastFind = cell5;
                                                         xLast = k;
                                                         yLast = m;
@@ -3081,14 +3100,14 @@
                         int num85 = (num82 + num83) * 0x16;
                         for (int num87 = cells[num82, num83].Count - 1; num87 >= 0; num87--)
                         {
-                            ICell cell7 = (ICell) cells[num82, num83][num87];
-                            Type type5 = cell7.CellType;
+                            ICell cell7 = (ICell)cells[num82, num83][num87];
+                            System.Type type5 = cell7.CellType;
                             if (type5 == tMobileCell)
                             {
                                 if ((num13 >= 0x7fffffff) || (cell7.Z < num13))
                                 {
                                     IHue hue5;
-                                    IAnimatedCell cell8 = (IAnimatedCell) cell7;
+                                    IAnimatedCell cell8 = (IAnimatedCell)cell7;
                                     int num88 = 0;
                                     int num89 = 0;
                                     int num90 = 0;
@@ -3099,7 +3118,7 @@
                                     int num94 = (num85 - (cell8.Z << 2)) + 0x16;
                                     num93++;
                                     num94 -= 2;
-                                    Mobile mobile4 = ((MobileCell) cell7).m_Mobile;
+                                    Mobile mobile4 = ((MobileCell)cell7).m_Mobile;
                                     if (mobile4.Flags[MobileFlag.Hidden])
                                     {
                                         hue5 = Hues.Grayscale;
@@ -3127,8 +3146,8 @@
                                             {
                                                 if (frame5.Image.HitTest(mx - num97, my - num98))
                                                 {
-                                                    TileX = (short) (num4 + num82);
-                                                    TileY = (short) (num5 + num83);
+                                                    TileX = (short)(num4 + num82);
+                                                    TileY = (short)(num5 + num83);
                                                     m_LastFind = cell7;
                                                     xLast = num82;
                                                     yLast = num83;
@@ -3137,8 +3156,8 @@
                                             }
                                             else if (frame5.Image.HitTest(-(mx - num97), my - num98))
                                             {
-                                                TileX = (short) (num4 + num82);
-                                                TileY = (short) (num5 + num83);
+                                                TileX = (short)(num4 + num82);
+                                                TileY = (short)(num5 + num83);
                                                 m_LastFind = cell7;
                                                 xLast = num82;
                                                 yLast = num83;
@@ -3152,18 +3171,18 @@
                             {
                                 if ((type5 == tStaticItem) || (type5 == tDynamicItem))
                                 {
-                                    IItem item9 = (IItem) cell7;
+                                    IItem item9 = (IItem)cell7;
                                     if (((((((item9.ID != 0x4001) && (item9.ID != 0x5796)) && ((item9.ID != 0x61a4) && (item9.ID != 0x6198))) && (item9.ID != 0x61bc)) && (item9.ID != 0x6199)) && ((num13 >= 0x7fffffff) || ((cell7.Z < num13) && !Map.m_ItemFlags[item9.ID & 0x3fff][TileFlag.Roof]))) && (((!Map.m_ItemFlags[item9.ID & 0x3fff][TileFlag.Foliage] || (num82 < num8)) || ((num83 < num9) || (num82 >= (num8 + 8)))) || (num83 >= (num8 + 8))))
                                     {
-                                        Texture texture3;
+                                        Client.Texture texture3;
                                         if (item9.CellType == tDynamicItem)
                                         {
-                                            DynamicItem item10 = (DynamicItem) item9;
+                                            DynamicItem item10 = (DynamicItem)item9;
                                             Item item11 = item10.m_Item;
                                             if ((item11 != null) && (item11.ID == 0x2006))
                                             {
                                                 int oldID = item11.Amount;
-                                                CorpseTableEntry entry3 = (CorpseTableEntry) CorpseTable.m_Entries[oldID];
+                                                CorpseTableEntry entry3 = (CorpseTableEntry)CorpseTable.m_Entries[oldID];
                                                 if ((entry3 != null) && (BodyConverter.GetFileSet(oldID) == 1))
                                                 {
                                                     oldID = entry3.m_OldID;
@@ -3218,7 +3237,7 @@
                                         }
                                         else
                                         {
-                                            Item item12 = ((DynamicItem) cell7).m_Item;
+                                            Item item12 = ((DynamicItem)cell7).m_Item;
                                             if (item12 == null)
                                             {
                                                 num110 = Map.GetDispID(num110, 0, ref flag6);
@@ -3249,8 +3268,8 @@
                                             {
                                                 if (((!flag6 && (mx >= num111)) && ((my >= num112) && (mx < (num111 + texture3.Width)))) && ((my < (num112 + texture3.Height)) && texture3.HitTest(mx - num111, my - num112)))
                                                 {
-                                                    TileX = (short) (num4 + num82);
-                                                    TileY = (short) (num5 + num83);
+                                                    TileX = (short)(num4 + num82);
+                                                    TileY = (short)(num5 + num83);
                                                     m_LastFind = cell7;
                                                     xLast = num82;
                                                     yLast = num83;
@@ -3263,8 +3282,8 @@
                                                 my -= num112;
                                                 if ((((mx < texture3.Width) && (my < texture3.Height)) && texture3.HitTest(mx, my)) || (((mx >= 5) && (my >= 5)) && texture3.HitTest(mx - 5, my - 5)))
                                                 {
-                                                    TileX = (short) (num4 + num82);
-                                                    TileY = (short) (num5 + num83);
+                                                    TileX = (short)(num4 + num82);
+                                                    TileY = (short)(num5 + num83);
                                                     m_LastFind = cell7;
                                                     xLast = num82;
                                                     yLast = num83;
@@ -3278,7 +3297,7 @@
                                 }
                                 else if (type5 == tLandTile)
                                 {
-                                    LandTile tile5 = (LandTile) cell7;
+                                    LandTile tile5 = (LandTile)cell7;
                                     int num113 = tile5.m_Z;
                                     if ((tile5.m_ID != 2) && ((num12 >= 0x7fffffff) || (tile5.SortZ <= num12)))
                                     {
@@ -3296,8 +3315,8 @@
                                             m_PointPool[3].Y = (num115 + 0x16) - (landTiles[num82, num83 + 1].m_Z << 2);
                                             if (LandTileHitTest(m_PointPool, m_MousePoint))
                                             {
-                                                TileX = (short) (num4 + num82);
-                                                TileY = (short) (num5 + num83);
+                                                TileX = (short)(num4 + num82);
+                                                TileY = (short)(num5 + num83);
                                                 m_LastFind = cell7;
                                                 xLast = num82;
                                                 yLast = num83;
@@ -3399,6 +3418,7 @@
 
         [DllImport("user32")]
         private static extern IntPtr GetDC(IntPtr hWnd);
+
         public static int GetQuadColor(int Color)
         {
             if (!m_AlphaEnable)
@@ -3526,30 +3546,30 @@
             m_CanAAEdges = false;
             m_CanAADependent = false;
             m_CanAAIndependent = false;
-            m_CanCullNone = Caps.get_PrimitiveMiscCaps().get_SupportsCullNone();
-            m_CanCullCW = Caps.get_PrimitiveMiscCaps().get_SupportsCullClockwise();
+            m_CanCullNone = Caps.PrimitiveMiscCaps.SupportsCullNone;
+            m_CanCullCW = Caps.PrimitiveMiscCaps.SupportsCullClockwise;
             m_CanAntiAlias = m_CanAADependent || m_CanAAIndependent;
             m_AAEnable = false;
             m_EdgeAAEnable = false;
             m_AlphaTestEnable = false;
             m_CullEnable = true;
             m_AlphaEnable = false;
-            Engine.m_Device.set_VertexFormat(0x144);
-            Sampler sampler = Engine.m_Device.get_SamplerState().get_SamplerState(0);
-            sampler.set_AddressU(3);
-            sampler.set_AddressV(3);
-            sampler.set_MinFilter(1);
-            sampler.set_MagFilter(1);
-            Engine.m_Device.get_RenderState().set_ZBufferEnable(true);
-            Engine.m_Device.get_RenderState().set_ZBufferWriteEnable(true);
+            Engine.m_Device.VertexFormat = VertexFormats.Texture1 | VertexFormats.Diffuse | VertexFormats.Transformed;
+            SamplerStateManager sampler = Engine.m_Device.SamplerState[0];
+            sampler.AddressU = (TextureAddress.Clamp);
+            sampler.AddressV = (TextureAddress.Clamp);
+            sampler.MinFilter = (TextureFilter.Point);
+            sampler.MagFilter = (TextureFilter.Point);
+            Engine.m_Device.RenderState.ZBufferEnable = (true);
+            Engine.m_Device.RenderState.ZBufferWriteEnable = (true);
         }
 
-        public static void InsertAlphaState(bool lineStrip, bool alphaTest, DrawBlendType blend, Texture texture, byte[] buffer, int length, int count)
+        public static void InsertAlphaState(bool lineStrip, bool alphaTest, DrawBlendType blend, Client.Texture texture, byte[] buffer, int length, int count)
         {
             AlphaState state = null;
             if ((m_AlphaStateCount > 0) && ((m_AlphaStateCount - 1) < m_AlphaStates.Count))
             {
-                state = (AlphaState) m_AlphaStates[m_AlphaStateCount - 1];
+                state = (AlphaState)m_AlphaStates[m_AlphaStateCount - 1];
             }
             bool flag = state == null;
             if (!flag)
@@ -3560,13 +3580,12 @@
             {
                 if (m_AlphaStateCount < m_AlphaStates.Count)
                 {
-                    state = (AlphaState) m_AlphaStates[m_AlphaStateCount];
+                    state = (AlphaState)m_AlphaStates[m_AlphaStateCount];
                 }
                 else
                 {
-                    state = new AlphaState {
-                        m_TextureVB = new TextureVB()
-                    };
+                    state = new AlphaState();
+                    state.m_TextureVB = new TextureVB();
                     m_AlphaStates.Add(state);
                 }
                 state.m_LineStrip = lineStrip;
@@ -3588,7 +3607,7 @@
             m_Invalidate = true;
         }
 
-        public static bool LandTileHitTest(Point[] points, Point check)
+        public static bool LandTileHitTest(System.Drawing.Point[] points, System.Drawing.Point check)
         {
             int y = points[0].Y;
             int num2 = points[2].Y;
@@ -3600,14 +3619,14 @@
                 if ((num3 >= 0) && (num3 < 0x16))
                 {
                     double num6 = 0.047619047619047616 * num3;
-                    num4 = points[3].Y + ((int) ((points[0].Y - points[3].Y) * num6));
-                    num5 = points[3].Y + ((int) ((points[2].Y - points[3].Y) * num6));
+                    num4 = points[3].Y + ((int)((points[0].Y - points[3].Y) * num6));
+                    num5 = points[3].Y + ((int)((points[2].Y - points[3].Y) * num6));
                 }
                 else if ((num3 >= 0x16) && (num3 < 0x2c))
                 {
                     double num7 = 0.047619047619047616 * (num3 - 0x16);
-                    num4 = points[0].Y + ((int) ((points[1].Y - points[0].Y) * num7));
-                    num5 = points[2].Y + ((int) ((points[1].Y - points[2].Y) * num7));
+                    num4 = points[0].Y + ((int)((points[1].Y - points[0].Y) * num7));
+                    num5 = points[2].Y + ((int)((points[1].Y - points[2].Y) * num7));
                 }
                 else
                 {
@@ -3648,7 +3667,7 @@
                 if (alphaTest != m_CurAlphaTest)
                 {
                     m_CurAlphaTest = alphaTest;
-                    device.get_RenderState().set_AlphaTestEnable(alphaTest);
+                    device.RenderState.AlphaTestEnable = (alphaTest);
                 }
                 int num3 = lineStrip ? 2 : 4;
                 int num4 = num3 * 0x1c;
@@ -3658,21 +3677,21 @@
                 }
                 for (int i = 0; i < list.Count; i++)
                 {
-                    Texture texture = (Texture) list[i];
+                    Client.Texture texture = (Client.Texture)list[i];
                     TextureVB evb = texture.GetVB(alphaEnable, lineStrip, alphaTest, alpha);
                     if ((evb.m_Count > 0) && (evb.m_Frame == m_ActFrames))
                     {
-                        int num6 = m_VertexStream.Push(evb.m_Stream.GetBuffer(), evb.m_Count * num3, false);
-                        if (num6 >= 0)
+                        int startVertex = m_VertexStream.Push(evb.m_Stream.GetBuffer(), evb.m_Count * num3, false);
+                        if (startVertex >= 0)
                         {
                             device.SetTexture(0, texture.Surface);
                             if (lineStrip)
                             {
-                                device.DrawPrimitives(2, num6, evb.m_Count);
+                                device.DrawPrimitives(PrimitiveType.LineList, startVertex, evb.m_Count);
                             }
                             else
                             {
-                                device.DrawIndexedPrimitives(4, num6, 0, evb.m_Count * 4, 0, evb.m_Count * 2);
+                                device.DrawIndexedPrimitives(PrimitiveType.TriangleList, startVertex, 0, evb.m_Count * 4, 0, evb.m_Count * 2);
                             }
                             evb.m_Frame = -1;
                         }
@@ -3692,73 +3711,73 @@
                     m_VertexStream = new BufferedVertexStream(Engine.m_VertexBuffer, 0x8000, 0x1c);
                 }
                 Device device = Engine.m_Device;
-                device.get_RenderState().set_ZBufferWriteEnable(false);
-                device.get_RenderState().set_AlphaBlendEnable(true);
+                device.RenderState.ZBufferWriteEnable = (false);
+                device.RenderState.AlphaBlendEnable = (true);
                 for (int i = 0; i < m_AlphaStateCount; i++)
                 {
-                    AlphaState state = (AlphaState) m_AlphaStates[i];
-                    Texture texture = state.m_Texture;
+                    AlphaState state = (AlphaState)m_AlphaStates[i];
+                    Client.Texture texture = state.m_Texture;
                     TextureVB textureVB = state.m_TextureVB;
                     if ((textureVB.m_Count > 0) && (textureVB.m_Frame == m_ActFrames))
                     {
                         if (state.m_AlphaTest != m_CurAlphaTest)
                         {
                             m_CurAlphaTest = state.m_AlphaTest;
-                            device.get_RenderState().set_AlphaTestEnable(m_CurAlphaTest);
+                            device.RenderState.AlphaTestEnable = (m_CurAlphaTest);
                         }
                         if (state.m_BlendType != m_CurBlendType)
                         {
                             m_CurBlendType = state.m_BlendType;
-                            RenderStates states = device.get_RenderState();
+                            RenderStateManager states = device.RenderState;
                             switch (m_CurBlendType)
                             {
                                 case DrawBlendType.Normal:
-                                    states.set_SourceBlend(5);
-                                    states.set_DestinationBlend(6);
+                                    states.SourceBlend = (Blend.SourceAlpha);
+                                    states.DestinationBlend = (Blend.InvSourceAlpha);
                                     break;
 
                                 case DrawBlendType.Additive:
-                                    states.set_SourceBlend(2);
-                                    states.set_DestinationBlend(2);
+                                    states.SourceBlend = (Blend.One);
+                                    states.DestinationBlend = (Blend.One);
                                     break;
 
                                 case DrawBlendType.BlackTransparency:
-                                    states.set_SourceBlend(1);
-                                    states.set_DestinationBlend(3);
-                                    states.set_BlendOperation(1);
+                                    states.SourceBlend = (Blend.Zero);
+                                    states.DestinationBlend = (Blend.SourceColor);
+                                    states.BlendOperation = (BlendOperation.Add);
                                     break;
                             }
                         }
                         int num2 = state.m_LineStrip ? 2 : 4;
                         int num3 = num2 * 0x1c;
                         int vertexCount = textureVB.m_Count * num2;
-                        int num5 = m_VertexStream.Push(textureVB.m_Stream.GetBuffer(), vertexCount, false);
-                        if (num5 >= 0)
+                        int startVertex = m_VertexStream.Push(textureVB.m_Stream.GetBuffer(), vertexCount, false);
+                        if (startVertex >= 0)
                         {
                             device.SetTexture(0, texture.Surface);
                             if (state.m_LineStrip)
                             {
-                                device.DrawPrimitives(2, num5, textureVB.m_Count);
+                                device.DrawPrimitives(PrimitiveType.LineList, startVertex, textureVB.m_Count);
                             }
                             else
                             {
-                                device.DrawIndexedPrimitives(4, num5, 0, vertexCount, 0, 2 * textureVB.m_Count);
+                                device.DrawIndexedPrimitives(PrimitiveType.TriangleList, startVertex, 0, vertexCount, 0, 2 * textureVB.m_Count);
                             }
                         }
                     }
                 }
-                device.get_RenderState().set_AlphaBlendEnable(false);
-                device.get_RenderState().set_ZBufferWriteEnable(true);
+                device.RenderState.AlphaBlendEnable = (false);
+                device.RenderState.ZBufferWriteEnable = (true);
                 m_AlphaStateCount = 0;
             }
         }
 
         private static unsafe void PushLineStrip(CustomVertex.TransformedColoredTextured* pVertex, int count)
         {
-            Texture empty = m_Texture;
+            Client.Texture empty = m_Texture;
             if (empty == null)
             {
-                empty = Texture.Empty;
+                empty = Client.Texture.Empty;
             }
             if (m_LineByteBuffer == null)
             {
@@ -3775,9 +3794,9 @@
             }
             fixed (byte* numRef = m_LineByteBuffer)
             {
-                float num2 = ((float) (0x2000 - m_Count)) / 8192f;
+                float num2 = ((float)(0x2000 - m_Count)) / 8192f;
                 m_Count++;
-                CustomVertex.TransformedColoredTextured* texturedPtr = (CustomVertex.TransformedColoredTextured*) numRef;
+                CustomVertex.TransformedColoredTextured* texturedPtr = (CustomVertex.TransformedColoredTextured*)numRef;
                 CustomVertex.TransformedColoredTextured* texturedPtr2 = texturedPtr + ((count - 1) * 2);
                 while (texturedPtr < texturedPtr2)
                 {
@@ -3823,10 +3842,10 @@
 
         private static unsafe void PushQuad(CustomVertex.TransformedColoredTextured* pVertex)
         {
-            Texture empty = m_Texture;
+            Client.Texture empty = m_Texture;
             if (empty == null)
             {
-                empty = Texture.Empty;
+                empty = Client.Texture.Empty;
             }
             if (m_QuadByteBuffer == null)
             {
@@ -3843,12 +3862,12 @@
             }
             fixed (byte* numRef = m_QuadByteBuffer)
             {
-                CustomVertex.TransformedColoredTextured* texturedPtr = (CustomVertex.TransformedColoredTextured*) numRef;
+                CustomVertex.TransformedColoredTextured* texturedPtr = (CustomVertex.TransformedColoredTextured*)numRef;
                 texturedPtr[0] = pVertex[0];
                 texturedPtr[1] = pVertex[1];
                 texturedPtr[2] = pVertex[2];
                 texturedPtr[3] = pVertex[3];
-                float num2 = ((float) (0x2000 - m_Count)) / 8192f;
+                float num2 = ((float)(0x2000 - m_Count)) / 8192f;
                 m_Count++;
                 texturedPtr->Z = num2;
                 texturedPtr[1].Z = num2;
@@ -3885,6 +3904,7 @@
 
         [DllImport("user32")]
         private static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
+
         public static void ResetHitTest()
         {
             m_LastFind = null;
@@ -3924,9 +3944,9 @@
 
         private static void SaveStream(object state)
         {
-            object[] objArray = (object[]) state;
-            MemoryStream stream = (MemoryStream) objArray[0];
-            FileStream stream2 = new FileStream((string) objArray[1], FileMode.Create, FileAccess.Write, FileShare.None);
+            object[] objArray = (object[])state;
+            MemoryStream stream = (MemoryStream)objArray[0];
+            FileStream stream2 = new FileStream((string)objArray[1], FileMode.Create, FileAccess.Write, FileShare.None);
             stream.WriteTo(stream2);
             stream2.Close();
             stream.Close();
@@ -3947,7 +3967,7 @@
             if (m_fAlpha != alpha)
             {
                 m_fAlpha = alpha;
-                m_Alpha = (int) (alpha * 255f);
+                m_Alpha = (int)(alpha * 255f);
                 if (m_Alpha < 0)
                 {
                     m_Alpha = 0;
@@ -4061,7 +4081,7 @@
             }
             if (m_vTextCache == null)
             {
-                m_vTextCache = new VertexCache();
+                m_vTextCache = new Client.VertexCache();
             }
             else
             {
@@ -4070,7 +4090,7 @@
             m_TextSurface = Engine.GetUniFont(3).GetString(text, Hues.Load(emoteHue));
         }
 
-        public static void SetTexture(Texture texture)
+        public static void SetTexture(Client.Texture texture)
         {
             m_Texture = texture;
         }
@@ -4079,8 +4099,8 @@
         {
             PushAll();
             Viewport viewport = new Viewport();
-            viewport.set_MinZ(0f);
-            viewport.set_MaxZ(1f);
+            viewport.MinZ = 0f;
+            viewport.MaxZ = 1f;
             int v = x;
             int num2 = y;
             int num3 = x + w;
@@ -4089,19 +4109,19 @@
             Fix(ref num2, Engine.ScreenHeight);
             Fix(ref num3, Engine.ScreenWidth);
             Fix(ref num4, Engine.ScreenHeight);
-            viewport.set_X(v);
-            viewport.set_Y(num2);
-            viewport.set_Width(num3 - v);
-            viewport.set_Height(num4 - num2);
-            if ((viewport.get_Width() == 0) || (viewport.get_Height() == 0))
+            viewport.X = v;
+            viewport.Y = num2;
+            viewport.Width = num3 - v;
+            viewport.Height = num4 - num2;
+            if ((viewport.Width == 0) || (viewport.Height == 0))
             {
                 return false;
             }
-            Engine.m_Device.set_Viewport(viewport);
+            Engine.m_Device.Viewport = viewport;
             return true;
         }
 
-        public static unsafe void SolidQuad(int Color, Point[] pts)
+        public static unsafe void SolidQuad(int Color, Client.Point[] pts)
         {
             CustomVertex.TransformedColoredTextured[] texturedArray = GeoPool(4);
             texturedArray[0].Color = texturedArray[1].Color = texturedArray[2].Color = texturedArray[3].Color = GetQuadColor(Color);
@@ -4399,7 +4419,7 @@
             public bool m_AlphaTest;
             public DrawBlendType m_BlendType;
             public bool m_LineStrip;
-            public Texture m_Texture;
+            public Client.Texture m_Texture;
             public TextureVB m_TextureVB;
         }
 
@@ -4410,11 +4430,11 @@
             public int m_DrawY;
             public float m_fAlpha;
             public bool m_Flip;
-            public Texture m_Texture;
+            public Client.Texture m_Texture;
             public int m_TileX;
             public int m_TileY;
 
-            public DrawQueueEntry(Texture tex, int tx, int ty, int dx, int dy)
+            public DrawQueueEntry(Client.Texture tex, int tx, int ty, int dx, int dy)
             {
                 this.m_Texture = tex;
                 this.m_TileX = tx;
@@ -4428,4 +4448,3 @@
         }
     }
 }
-

@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GLogOutQuery : GMessageBoxYesNo
     {
         private static GLogOutQuery m_Instance;
@@ -36,4 +34,3 @@
         }
     }
 }
-

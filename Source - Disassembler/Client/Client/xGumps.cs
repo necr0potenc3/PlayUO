@@ -31,9 +31,8 @@
             m_MainGumps = new Hashtable();
             m_wScreen = Engine.ScreenWidth.ToString();
             m_hScreen = Engine.ScreenHeight.ToString();
-            XmlTextReader xml = new XmlTextReader(Engine.FileManager.BasePath("Data/Gumps/xGumps.xml")) {
-                WhitespaceHandling = WhitespaceHandling.None
-            };
+            XmlTextReader xml = new XmlTextReader(Engine.FileManager.BasePath("Data/Gumps/xGumps.xml"));
+            xml.WhitespaceHandling = WhitespaceHandling.None;
             Parse_xGumps(xml);
             xml.Close();
             Debug.EndBlock();
@@ -43,7 +42,7 @@
         {
             if (m_xFiles.Contains(Parent) && m_MainGumps.Contains(Parent))
             {
-                ((Gump) m_MainGumps[Parent]).Children.Add(Child);
+                ((Gump)m_MainGumps[Parent]).Children.Add(Child);
             }
         }
 
@@ -53,7 +52,7 @@
             {
                 return false;
             }
-            return Display(Name, Gumps.Desktop, (string) m_xFiles[Name]);
+            return Display(Name, Gumps.Desktop, (string)m_xFiles[Name]);
         }
 
         public static bool Display(string Name, string Parent)
@@ -70,16 +69,15 @@
             {
                 return false;
             }
-            return Display(Name, (Gump) m_MainGumps[Parent], (string) m_xFiles[Name]);
+            return Display(Name, (Gump)m_MainGumps[Parent], (string)m_xFiles[Name]);
         }
 
         private static bool Display(string Name, Gump Parent, string xFile)
         {
             string path = Engine.FileManager.BasePath(string.Format("Data/Gumps/{0}", xFile));
             StreamReader input = new StreamReader(File.OpenRead(path), Encoding.Default, true, 0x800);
-            XmlTextReader xml = new XmlTextReader(input) {
-                WhitespaceHandling = WhitespaceHandling.None
-            };
+            XmlTextReader xml = new XmlTextReader(input);
+            xml.WhitespaceHandling = WhitespaceHandling.None;
             if (m_Evaluator == null)
             {
                 m_Evaluator = new XPathDocument(path).CreateNavigator();
@@ -118,7 +116,7 @@
                 builder.Replace("||", " or ");
                 builder.Replace("&&", " and ");
                 builder.Append(" and 1");
-                return (bool) m_Evaluator.Evaluate(builder.ToString());
+                return (bool)m_Evaluator.Evaluate(builder.ToString());
             }
             catch
             {
@@ -133,9 +131,9 @@
                 object obj2;
                 string key = m.Value.Substring(9);
                 key = key.Substring(0, key.Length - 2);
-                if (((obj2 = key) != null) && ((obj2 = <PrivateImplementationDetails>.$$method0x6000dc4-1[obj2]) != null))
+                if (((obj2 = key) != null) /*&& ((obj2 = <PrivateImplementationDetails>.$$method0x6000dc4-1[obj2]) != null)*/)
                 {
-                    switch (((int) obj2))
+                    switch (((int)obj2))
                     {
                         case 0:
                             return "4.0.8b";
@@ -156,25 +154,25 @@
                             return ((Engine.LastServer != null) ? "1" : "0");
 
                         case 6:
-                        {
-                            Server lastServer = Engine.LastServer;
-                            return ((lastServer != null) ? lastServer.ServerID.ToString() : "-1");
-                        }
+                            {
+                                Server lastServer = Engine.LastServer;
+                                return ((lastServer != null) ? lastServer.ServerID.ToString() : "-1");
+                            }
                         case 7:
-                        {
-                            Server server3 = Engine.LastServer;
-                            return ((server3 != null) ? server3.Address.Address.ToString() : "-1");
-                        }
+                            {
+                                Server server3 = Engine.LastServer;
+                                return ((server3 != null) ? server3.Address.Address.ToString() : "-1");
+                            }
                         case 8:
-                        {
-                            Server server4 = Engine.LastServer;
-                            return ((server4 != null) ? server4.Name : "");
-                        }
+                            {
+                                Server server4 = Engine.LastServer;
+                                return ((server4 != null) ? server4.Name : "");
+                            }
                     }
                 }
                 if (m_Variables.Contains(key))
                 {
-                    return (string) m_Variables[key];
+                    return (string)m_Variables[key];
                 }
                 return "";
             }
@@ -342,7 +340,7 @@
                 builder.Replace("_wGame", "640");
                 builder.Replace("_hGame", "480");
                 builder.Replace("/", " div ");
-                return (int) ((double) m_Evaluator.Evaluate(builder.ToString()));
+                return (int)((double)m_Evaluator.Evaluate(builder.ToString()));
             }
             catch
             {
@@ -412,9 +410,9 @@
 
                     case XmlNodeType.Comment:
                     case XmlNodeType.XmlDeclaration:
-                    {
-                        continue;
-                    }
+                        {
+                            continue;
+                        }
                 }
                 return false;
             }
@@ -427,35 +425,35 @@
             bool flag = false;
             string str2 = "";
             bool flag2 = false;
-            bool isEmptyElement = xml.IsEmptyElement;
+            bool flag3 = xml.IsEmptyElement;
             while (xml.MoveToNextAttribute())
             {
                 switch (xml.Name)
                 {
                     case "X":
-                    {
-                        str = GetString(xml.Value);
-                        flag = true;
-                        continue;
-                    }
+                        {
+                            str = GetString(xml.Value);
+                            flag = true;
+                            continue;
+                        }
                     case "Xs":
-                    {
-                        str = xml.Value;
-                        flag = true;
-                        continue;
-                    }
+                        {
+                            str = xml.Value;
+                            flag = true;
+                            continue;
+                        }
                     case "Y":
-                    {
-                        str2 = GetString(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            str2 = GetString(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "Ys":
-                    {
-                        str2 = xml.Value;
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            str2 = xml.Value;
+                            flag2 = true;
+                            continue;
+                        }
                 }
                 return false;
             }
@@ -498,7 +496,7 @@
                 return false;
             }
         Label_01B9:
-            if (!isEmptyElement)
+            if (!flag3)
             {
                 Skip(xml);
             }
@@ -508,7 +506,7 @@
         private static bool Parse_AlignOld(XmlTextReader xml, Gump Parent)
         {
             string str = "";
-            bool isEmptyElement = xml.IsEmptyElement;
+            bool flag = xml.IsEmptyElement;
             while (xml.MoveToNextAttribute())
             {
                 string str2;
@@ -570,7 +568,7 @@
                 default:
                     return false;
             }
-            if (!isEmptyElement)
+            if (!flag)
             {
                 Skip(xml);
             }
@@ -580,7 +578,7 @@
         private static bool Parse_AlignOldNew(XmlTextReader xml, Gump toAlign, bool x)
         {
             string str = "";
-            bool isEmptyElement = xml.IsEmptyElement;
+            bool flag = xml.IsEmptyElement;
             while (xml.MoveToNextAttribute())
             {
                 string str2;
@@ -630,7 +628,7 @@
                     return false;
             }
         Label_014D:
-            if (!isEmptyElement)
+            if (!flag)
             {
                 Skip(xml);
             }
@@ -646,7 +644,7 @@
             int y = 0;
             bool hasBorder = false;
             bool flag2 = false;
-            int @int = 0;
+            int num6 = 0;
             int num7 = 0;
             int num8 = 0;
             int num9 = 0;
@@ -655,258 +653,258 @@
             int num12 = 0;
             int num13 = 0;
             int num14 = 0;
-            bool isEmptyElement = xml.IsEmptyElement;
+            bool flag3 = xml.IsEmptyElement;
             while (xml.MoveToNextAttribute())
             {
                 switch (xml.Name)
                 {
                     case "GumpID":
-                    {
-                        backID = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            backID = GetInt(xml.Value);
+                            continue;
+                        }
                     case "GumpIDi":
-                    {
-                        backID = Convert.ToInt32(xml.Value);
-                        continue;
-                    }
+                        {
+                            backID = Convert.ToInt32(xml.Value);
+                            continue;
+                        }
                     case "GumpIDh":
-                    {
-                        backID = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        continue;
-                    }
+                        {
+                            backID = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            continue;
+                        }
                     case "Width":
-                    {
-                        width = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            width = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Widthi":
-                    {
-                        width = Convert.ToInt32(xml.Value);
-                        continue;
-                    }
+                        {
+                            width = Convert.ToInt32(xml.Value);
+                            continue;
+                        }
                     case "Widthh":
-                    {
-                        width = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        continue;
-                    }
+                        {
+                            width = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            continue;
+                        }
                     case "Height":
-                    {
-                        height = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            height = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Heighti":
-                    {
-                        height = Convert.ToInt32(xml.Value);
-                        continue;
-                    }
+                        {
+                            height = Convert.ToInt32(xml.Value);
+                            continue;
+                        }
                     case "Heighth":
-                    {
-                        height = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        continue;
-                    }
+                        {
+                            height = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            continue;
+                        }
                     case "X":
-                    {
-                        x = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            x = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Xi":
-                    {
-                        x = Convert.ToInt32(xml.Value);
-                        continue;
-                    }
+                        {
+                            x = Convert.ToInt32(xml.Value);
+                            continue;
+                        }
                     case "Xh":
-                    {
-                        x = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        continue;
-                    }
+                        {
+                            x = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            continue;
+                        }
                     case "Y":
-                    {
-                        y = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            y = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Yi":
-                    {
-                        y = Convert.ToInt32(xml.Value);
-                        continue;
-                    }
+                        {
+                            y = Convert.ToInt32(xml.Value);
+                            continue;
+                        }
                     case "Yh":
-                    {
-                        y = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        continue;
-                    }
+                        {
+                            y = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            continue;
+                        }
                     case "Border":
-                    {
-                        hasBorder = GetBool(xml.Value);
-                        continue;
-                    }
+                        {
+                            hasBorder = GetBool(xml.Value);
+                            continue;
+                        }
                     case "Borderb":
-                    {
-                        hasBorder = Convert.ToBoolean(xml.Value);
-                        continue;
-                    }
+                        {
+                            hasBorder = Convert.ToBoolean(xml.Value);
+                            continue;
+                        }
                     case "G1":
-                    {
-                        @int = GetInt(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num6 = GetInt(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G1i":
-                    {
-                        @int = Convert.ToInt32(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num6 = Convert.ToInt32(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G1h":
-                    {
-                        @int = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num6 = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G2":
-                    {
-                        num7 = GetInt(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num7 = GetInt(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G2i":
-                    {
-                        num7 = Convert.ToInt32(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num7 = Convert.ToInt32(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G2h":
-                    {
-                        num7 = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num7 = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G3":
-                    {
-                        num8 = GetInt(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num8 = GetInt(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G3i":
-                    {
-                        num8 = Convert.ToInt32(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num8 = Convert.ToInt32(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G3h":
-                    {
-                        num8 = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num8 = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G4":
-                    {
-                        num9 = GetInt(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num9 = GetInt(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G4i":
-                    {
-                        num9 = Convert.ToInt32(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num9 = Convert.ToInt32(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G4h":
-                    {
-                        num9 = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num9 = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G5":
-                    {
-                        num10 = GetInt(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num10 = GetInt(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G5i":
-                    {
-                        num10 = Convert.ToInt32(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num10 = Convert.ToInt32(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G5h":
-                    {
-                        num10 = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num10 = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G6":
-                    {
-                        num11 = GetInt(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num11 = GetInt(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G6i":
-                    {
-                        num11 = Convert.ToInt32(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num11 = Convert.ToInt32(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G6h":
-                    {
-                        num11 = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num11 = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G7":
-                    {
-                        num12 = GetInt(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num12 = GetInt(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G7i":
-                    {
-                        num12 = Convert.ToInt32(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num12 = Convert.ToInt32(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G7h":
-                    {
-                        num12 = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num12 = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G8":
-                    {
-                        num13 = GetInt(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num13 = GetInt(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G8i":
-                    {
-                        num13 = Convert.ToInt32(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num13 = Convert.ToInt32(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G8h":
-                    {
-                        num13 = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num13 = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G9":
-                    {
-                        num14 = GetInt(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num14 = GetInt(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G9i":
-                    {
-                        num14 = Convert.ToInt32(xml.Value);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num14 = Convert.ToInt32(xml.Value);
+                            flag2 = true;
+                            continue;
+                        }
                     case "G9h":
-                    {
-                        num14 = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            num14 = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            flag2 = true;
+                            continue;
+                        }
                 }
                 return false;
             }
@@ -917,10 +915,10 @@
             }
             else
             {
-                toAdd = new GBackground(x, y, width, height, @int, num7, num8, num9, num10, num11, num12, num13, num14);
+                toAdd = new GBackground(x, y, width, height, num6, num7, num8, num9, num10, num11, num12, num13, num14);
             }
             Parent.Children.Add(toAdd);
-            if (isEmptyElement)
+            if (flag3)
             {
                 return true;
             }
@@ -951,96 +949,96 @@
             ITooltip tooltip = null;
             bool @bool = false;
             bool flag2 = true;
-            bool isEmptyElement = xml.IsEmptyElement;
+            bool flag3 = xml.IsEmptyElement;
             while (xml.MoveToNextAttribute())
             {
                 switch (xml.Name)
                 {
                     case "GumpID":
-                    {
-                        gumpID = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            gumpID = GetInt(xml.Value);
+                            continue;
+                        }
                     case "GumpIDi":
-                    {
-                        gumpID = Convert.ToInt32(xml.Value);
-                        continue;
-                    }
+                        {
+                            gumpID = Convert.ToInt32(xml.Value);
+                            continue;
+                        }
                     case "GumpIDh":
-                    {
-                        gumpID = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        continue;
-                    }
+                        {
+                            gumpID = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            continue;
+                        }
                     case "X":
-                    {
-                        x = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            x = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Xi":
-                    {
-                        x = Convert.ToInt32(xml.Value);
-                        continue;
-                    }
+                        {
+                            x = Convert.ToInt32(xml.Value);
+                            continue;
+                        }
                     case "Xh":
-                    {
-                        x = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        continue;
-                    }
+                        {
+                            x = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            continue;
+                        }
                     case "Y":
-                    {
-                        y = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            y = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Yi":
-                    {
-                        y = Convert.ToInt32(xml.Value);
-                        continue;
-                    }
+                        {
+                            y = Convert.ToInt32(xml.Value);
+                            continue;
+                        }
                     case "Yh":
-                    {
-                        y = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        continue;
-                    }
+                        {
+                            y = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            continue;
+                        }
                     case "OnClick":
-                    {
-                        method = GetString(xml.Value);
-                        continue;
-                    }
+                        {
+                            method = GetString(xml.Value);
+                            continue;
+                        }
                     case "OnClicks":
-                    {
-                        method = xml.Value;
-                        continue;
-                    }
+                        {
+                            method = xml.Value;
+                            continue;
+                        }
                     case "Tooltip":
-                    {
-                        tooltip = new Tooltip(GetString(xml.Value));
-                        continue;
-                    }
+                        {
+                            tooltip = new Tooltip(GetString(xml.Value));
+                            continue;
+                        }
                     case "Tooltips":
-                    {
-                        tooltip = new Tooltip(xml.Value);
-                        continue;
-                    }
+                        {
+                            tooltip = new Tooltip(xml.Value);
+                            continue;
+                        }
                     case "CanEnter":
-                    {
-                        @bool = GetBool(xml.Value);
-                        continue;
-                    }
+                        {
+                            @bool = GetBool(xml.Value);
+                            continue;
+                        }
                     case "CanEnterb":
-                    {
-                        @bool = Convert.ToBoolean(xml.Value);
-                        continue;
-                    }
+                        {
+                            @bool = Convert.ToBoolean(xml.Value);
+                            continue;
+                        }
                     case "Enabled":
-                    {
-                        flag2 = GetBool(xml.Value);
-                        continue;
-                    }
+                        {
+                            flag2 = GetBool(xml.Value);
+                            continue;
+                        }
                     case "Enabledb":
-                    {
-                        flag2 = Convert.ToBoolean(xml.Value);
-                        continue;
-                    }
+                        {
+                            flag2 = Convert.ToBoolean(xml.Value);
+                            continue;
+                        }
                 }
                 return false;
             }
@@ -1049,20 +1047,19 @@
             {
                 if (method.Length > 0)
                 {
-                    clickHandler = (OnClick) Delegate.CreateDelegate(typeof(OnClick), typeof(Engine), method);
+                    clickHandler = (OnClick)Delegate.CreateDelegate(typeof(OnClick), typeof(Engine), method);
                 }
             }
             catch
             {
                 clickHandler = null;
             }
-            GButton toAdd = new GButton(gumpID, x, y, clickHandler) {
-                Tooltip = tooltip,
-                CanEnter = @bool,
-                Enabled = flag2
-            };
+            GButton toAdd = new GButton(gumpID, x, y, clickHandler);
+            toAdd.Tooltip = tooltip;
+            toAdd.CanEnter = @bool;
+            toAdd.Enabled = flag2;
             Parent.Children.Add(toAdd);
-            if (isEmptyElement)
+            if (flag3)
             {
                 return true;
             }
@@ -1086,29 +1083,29 @@
 
         private static bool Parse_DragClip(XmlTextReader xml, Gump Parent)
         {
-            int @int = 0;
+            int num = 0;
             int num2 = 0;
-            bool isEmptyElement = xml.IsEmptyElement;
+            bool flag = xml.IsEmptyElement;
             while (xml.MoveToNextAttribute())
             {
                 switch (xml.Name)
                 {
                     case "X":
-                    {
-                        @int = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            num = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Y":
-                    {
-                        num2 = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            num2 = GetInt(xml.Value);
+                            continue;
+                        }
                 }
                 return false;
             }
-            Parent.m_DragClipX = @int;
+            Parent.m_DragClipX = num;
             Parent.m_DragClipY = num2;
-            if (!isEmptyElement)
+            if (!flag)
             {
                 Skip(xml);
             }
@@ -1264,26 +1261,26 @@
         private static bool Parse_GUID(XmlTextReader xml, Gump Parent)
         {
             string str = "";
-            bool isEmptyElement = xml.IsEmptyElement;
+            bool flag = xml.IsEmptyElement;
             while (xml.MoveToNextAttribute())
             {
                 switch (xml.Name)
                 {
                     case "Value":
-                    {
-                        str = GetString(xml.Value);
-                        continue;
-                    }
+                        {
+                            str = GetString(xml.Value);
+                            continue;
+                        }
                     case "Values":
-                    {
-                        str = xml.Value;
-                        continue;
-                    }
+                        {
+                            str = xml.Value;
+                            continue;
+                        }
                 }
                 return false;
             }
             Parent.GUID = str;
-            if (!isEmptyElement)
+            if (!flag)
             {
                 Skip(xml);
             }
@@ -1350,9 +1347,9 @@
                             return false;
 
                         case XmlNodeType.Comment:
-                        {
-                            continue;
-                        }
+                            {
+                                continue;
+                            }
                     }
                     return (nodeType == XmlNodeType.EndElement);
                 }
@@ -1367,42 +1364,42 @@
             int width = 0;
             int height = 0;
             string method = "";
-            bool isEmptyElement = xml.IsEmptyElement;
+            bool flag = xml.IsEmptyElement;
             while (xml.MoveToNextAttribute())
             {
                 switch (xml.Name)
                 {
                     case "X":
-                    {
-                        x = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            x = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Y":
-                    {
-                        y = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            y = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Width":
-                    {
-                        width = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            width = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Height":
-                    {
-                        height = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            height = GetInt(xml.Value);
+                            continue;
+                        }
                     case "OnClick":
-                    {
-                        method = GetString(xml.Value);
-                        continue;
-                    }
+                        {
+                            method = GetString(xml.Value);
+                            continue;
+                        }
                 }
                 return false;
             }
-            GHitspot toAdd = new GHitspot(x, y, width, height, (OnClick) Delegate.CreateDelegate(typeof(OnClick), typeof(Engine), method));
+            GHitspot toAdd = new GHitspot(x, y, width, height, (OnClick)Delegate.CreateDelegate(typeof(OnClick), typeof(Engine), method));
             Parent.Children.Add(toAdd);
-            if (isEmptyElement)
+            if (flag)
             {
                 return true;
             }
@@ -1431,42 +1428,42 @@
             int width = 0;
             int height = 0;
             Gump target = null;
-            bool isEmptyElement = xml.IsEmptyElement;
+            bool flag = xml.IsEmptyElement;
             while (xml.MoveToNextAttribute())
             {
                 switch (xml.Name)
                 {
                     case "X":
-                    {
-                        x = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            x = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Y":
-                    {
-                        y = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            y = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Width":
-                    {
-                        width = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            width = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Height":
-                    {
-                        height = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            height = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Target":
-                    {
-                        target = GetGump(xml.Value);
-                        continue;
-                    }
+                        {
+                            target = GetGump(xml.Value);
+                            continue;
+                        }
                 }
                 return false;
             }
             GHotspot toAdd = new GHotspot(x, y, width, height, target);
             Parent.Children.Add(toAdd);
-            if (isEmptyElement)
+            if (flag)
             {
                 return true;
             }
@@ -1491,7 +1488,7 @@
         private static bool Parse_If(XmlTextReader xml, Gump Parent, string Name)
         {
             bool @bool = false;
-            bool isEmptyElement = xml.IsEmptyElement;
+            bool flag2 = xml.IsEmptyElement;
             while (xml.MoveToNextAttribute())
             {
                 string str;
@@ -1504,11 +1501,11 @@
                     return false;
                 }
             }
-            if (!@bool && !isEmptyElement)
+            if (!@bool && !flag2)
             {
                 Skip(xml);
             }
-            else if (@bool && !isEmptyElement)
+            else if (@bool && !flag2)
             {
                 while (xml.Read())
                 {
@@ -1537,98 +1534,97 @@
             int y = 0;
             bool @bool = false;
             float num4 = 1f;
-            bool isEmptyElement = xml.IsEmptyElement;
+            bool flag2 = xml.IsEmptyElement;
             while (xml.MoveToNextAttribute())
             {
                 switch (xml.Name)
                 {
                     case "GumpID":
-                    {
-                        gumpID = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            gumpID = GetInt(xml.Value);
+                            continue;
+                        }
                     case "GumpIDi":
-                    {
-                        gumpID = Convert.ToInt32(xml.Value);
-                        continue;
-                    }
+                        {
+                            gumpID = Convert.ToInt32(xml.Value);
+                            continue;
+                        }
                     case "GumpIDh":
-                    {
-                        gumpID = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        continue;
-                    }
+                        {
+                            gumpID = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            continue;
+                        }
                     case "X":
-                    {
-                        x = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            x = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Xi":
-                    {
-                        x = Convert.ToInt32(xml.Value);
-                        continue;
-                    }
+                        {
+                            x = Convert.ToInt32(xml.Value);
+                            continue;
+                        }
                     case "Xh":
-                    {
-                        x = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        continue;
-                    }
+                        {
+                            x = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            continue;
+                        }
                     case "Y":
-                    {
-                        y = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            y = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Yi":
-                    {
-                        y = Convert.ToInt32(xml.Value);
-                        continue;
-                    }
+                        {
+                            y = Convert.ToInt32(xml.Value);
+                            continue;
+                        }
                     case "Yh":
-                    {
-                        y = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        continue;
-                    }
+                        {
+                            y = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            continue;
+                        }
                     case "HitTest":
-                    {
-                        @bool = GetBool(xml.Value);
-                        continue;
-                    }
+                        {
+                            @bool = GetBool(xml.Value);
+                            continue;
+                        }
                     case "HitTestb":
-                    {
-                        @bool = Convert.ToBoolean(xml.Value);
-                        continue;
-                    }
+                        {
+                            @bool = Convert.ToBoolean(xml.Value);
+                            continue;
+                        }
                     case "Alpha":
-                    {
-                        num4 = ((float) GetInt(xml.Value)) / 255f;
-                        continue;
-                    }
+                        {
+                            num4 = ((float)GetInt(xml.Value)) / 255f;
+                            continue;
+                        }
                     case "Alphai":
-                    {
-                        num4 = ((float) Convert.ToInt32(xml.Value)) / 255f;
-                        continue;
-                    }
+                        {
+                            num4 = ((float)Convert.ToInt32(xml.Value)) / 255f;
+                            continue;
+                        }
                     case "Alphah":
-                    {
-                        num4 = ((float) Convert.ToInt32(xml.Value.Substring(2), 0x10)) / 255f;
-                        continue;
-                    }
+                        {
+                            num4 = ((float)Convert.ToInt32(xml.Value.Substring(2), 0x10)) / 255f;
+                            continue;
+                        }
                 }
                 return false;
             }
             if (!@bool)
             {
                 gump = new GImage(gumpID, x, y);
-                ((GImage) gump).Alpha = num4;
+                ((GImage)gump).Alpha = num4;
             }
             else
             {
-                gump = new GDragable(gumpID, x, y) {
-                    m_CanDrag = false
-                };
-                ((GDragable) gump).Alpha = num4;
+                gump = new GDragable(gumpID, x, y);
+                gump.m_CanDrag = false;
+                ((GDragable)gump).Alpha = num4;
             }
             Parent.Children.Add(gump);
-            if (isEmptyElement)
+            if (flag2)
             {
                 return true;
             }
@@ -1653,29 +1649,29 @@
         private static bool Parse_Include(XmlTextReader xml, Gump Parent, string Name)
         {
             string key = "";
-            bool isEmptyElement = xml.IsEmptyElement;
+            bool flag = xml.IsEmptyElement;
             while (xml.MoveToNextAttribute())
             {
                 switch (xml.Name)
                 {
                     case "Gump":
-                    {
-                        key = GetString(xml.Value);
-                        continue;
-                    }
+                        {
+                            key = GetString(xml.Value);
+                            continue;
+                        }
                     case "Gumps":
-                    {
-                        key = xml.Value;
-                        continue;
-                    }
+                        {
+                            key = xml.Value;
+                            continue;
+                        }
                 }
                 return false;
             }
             if (m_xFiles.Contains(key))
             {
-                Display(key, Parent, (string) m_xFiles[key]);
+                Display(key, Parent, (string)m_xFiles[key]);
             }
-            if (!isEmptyElement)
+            if (!flag)
             {
                 if (m_MainGumps[key] == null)
                 {
@@ -1691,7 +1687,7 @@
                             return (nodeType == XmlNodeType.EndElement);
                         }
                     }
-                    else if (!Parse_Element(xml, (Gump) m_MainGumps[key], Name))
+                    else if (!Parse_Element(xml, (Gump)m_MainGumps[key], Name))
                     {
                         return false;
                     }
@@ -1709,99 +1705,99 @@
             int y = 0;
             int width = 0;
             bool flag = false;
-            bool isEmptyElement = xml.IsEmptyElement;
+            bool flag2 = xml.IsEmptyElement;
             while (xml.MoveToNextAttribute())
             {
                 switch (xml.Name)
                 {
                     case "Text":
-                    {
-                        text = GetString(xml.Value);
-                        continue;
-                    }
+                        {
+                            text = GetString(xml.Value);
+                            continue;
+                        }
                     case "Texts":
-                    {
-                        text = xml.Value;
-                        continue;
-                    }
+                        {
+                            text = xml.Value;
+                            continue;
+                        }
                     case "Font":
-                    {
-                        defaultFont = GetFont(xml.Value);
-                        continue;
-                    }
+                        {
+                            defaultFont = GetFont(xml.Value);
+                            continue;
+                        }
                     case "Fonti":
-                    {
-                        defaultFont = GetFonti(xml.Value);
-                        continue;
-                    }
+                        {
+                            defaultFont = GetFonti(xml.Value);
+                            continue;
+                        }
                     case "Fonth":
-                    {
-                        defaultFont = GetFonth(xml.Value);
-                        continue;
-                    }
+                        {
+                            defaultFont = GetFonth(xml.Value);
+                            continue;
+                        }
                     case "Hue":
-                    {
-                        huei = GetHue(xml.Value);
-                        continue;
-                    }
+                        {
+                            huei = GetHue(xml.Value);
+                            continue;
+                        }
                     case "Huei":
-                    {
-                        huei = GetHuei(xml.Value);
-                        continue;
-                    }
+                        {
+                            huei = GetHuei(xml.Value);
+                            continue;
+                        }
                     case "Hueh":
-                    {
-                        huei = GetHueh(xml.Value);
-                        continue;
-                    }
+                        {
+                            huei = GetHueh(xml.Value);
+                            continue;
+                        }
                     case "X":
-                    {
-                        x = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            x = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Xi":
-                    {
-                        x = Convert.ToInt32(xml.Value);
-                        continue;
-                    }
+                        {
+                            x = Convert.ToInt32(xml.Value);
+                            continue;
+                        }
                     case "Xh":
-                    {
-                        x = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        continue;
-                    }
+                        {
+                            x = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            continue;
+                        }
                     case "Y":
-                    {
-                        y = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            y = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Yi":
-                    {
-                        y = Convert.ToInt32(xml.Value);
-                        continue;
-                    }
+                        {
+                            y = Convert.ToInt32(xml.Value);
+                            continue;
+                        }
                     case "Yh":
-                    {
-                        y = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        continue;
-                    }
+                        {
+                            y = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            continue;
+                        }
                     case "Width":
-                    {
-                        width = GetInt(xml.Value);
-                        flag = true;
-                        continue;
-                    }
+                        {
+                            width = GetInt(xml.Value);
+                            flag = true;
+                            continue;
+                        }
                     case "Widthi":
-                    {
-                        width = Convert.ToInt32(xml.Value);
-                        flag = true;
-                        continue;
-                    }
+                        {
+                            width = Convert.ToInt32(xml.Value);
+                            flag = true;
+                            continue;
+                        }
                     case "Widthh":
-                    {
-                        width = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        flag = true;
-                        continue;
-                    }
+                        {
+                            width = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            flag = true;
+                            continue;
+                        }
                 }
                 return false;
             }
@@ -1815,7 +1811,7 @@
                 toAdd = new GWrappedLabel(text, defaultFont, huei, x, y, width);
             }
             Parent.Children.Add(toAdd);
-            if (isEmptyElement)
+            if (flag2)
             {
                 return true;
             }
@@ -1854,55 +1850,55 @@
                 switch (xml.Name)
                 {
                     case "GumpID":
-                    {
-                        gumpID = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            gumpID = GetInt(xml.Value);
+                            continue;
+                        }
                     case "X":
-                    {
-                        x = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            x = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Y":
-                    {
-                        y = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            y = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Width":
-                    {
-                        width = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            width = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Height":
-                    {
-                        height = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            height = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Font":
-                    {
-                        defaultFont = GetFont(xml.Value);
-                        continue;
-                    }
+                        {
+                            defaultFont = GetFont(xml.Value);
+                            continue;
+                        }
                     case "Hue":
-                    {
-                        hue = GetHue(xml.Value);
-                        continue;
-                    }
+                        {
+                            hue = GetHue(xml.Value);
+                            continue;
+                        }
                     case "SelectionBorderColor":
-                    {
-                        selectionBorderColor = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            selectionBorderColor = GetInt(xml.Value);
+                            continue;
+                        }
                     case "SelectionFillColor":
-                    {
-                        selectionFillColor = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            selectionFillColor = GetInt(xml.Value);
+                            continue;
+                        }
                     case "SelectionFillAlpha":
-                    {
-                        selectionFillAlpha = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            selectionFillAlpha = GetInt(xml.Value);
+                            continue;
+                        }
                 }
                 return false;
             }
@@ -1914,75 +1910,75 @@
         {
             string name = "";
             string str2 = "";
-            object @int = "";
-            bool isEmptyElement = xml.IsEmptyElement;
+            object @bool = "";
+            bool flag = xml.IsEmptyElement;
             while (xml.MoveToNextAttribute())
             {
                 switch (xml.Name)
                 {
                     case "Name":
-                    {
-                        name = GetString(xml.Value);
-                        continue;
-                    }
+                        {
+                            name = GetString(xml.Value);
+                            continue;
+                        }
                     case "Names":
-                    {
-                        name = xml.Value;
-                        continue;
-                    }
+                        {
+                            name = xml.Value;
+                            continue;
+                        }
                     case "Type":
-                    {
-                        str2 = GetString(xml.Value);
-                        continue;
-                    }
+                        {
+                            str2 = GetString(xml.Value);
+                            continue;
+                        }
                     case "Types":
-                    {
-                        str2 = xml.Value;
-                        continue;
-                    }
+                        {
+                            str2 = xml.Value;
+                            continue;
+                        }
                     case "Value":
                         switch (str2)
                         {
                             case "String":
-                            {
-                                @int = GetString(xml.Value);
-                                continue;
-                            }
+                                {
+                                    @bool = GetString(xml.Value);
+                                    continue;
+                                }
                             case "Integer":
-                            {
-                                @int = GetInt(xml.Value);
-                                continue;
-                            }
+                                {
+                                    @bool = GetInt(xml.Value);
+                                    continue;
+                                }
                             case "Boolean":
-                            {
-                                @int = GetBool(xml.Value);
-                                continue;
-                            }
+                                {
+                                    @bool = GetBool(xml.Value);
+                                    continue;
+                                }
                             case "Font":
-                            {
-                                @int = GetFont(xml.Value);
-                                continue;
-                            }
+                                {
+                                    @bool = GetFont(xml.Value);
+                                    continue;
+                                }
                             case "Hue":
-                            {
-                                @int = GetHue(xml.Value);
-                                continue;
-                            }
+                                {
+                                    @bool = GetHue(xml.Value);
+                                    continue;
+                                }
                             case "Gump":
-                            {
-                                @int = GetGump(xml.Value);
-                                continue;
-                            }
+                                {
+                                    @bool = GetGump(xml.Value);
+                                    continue;
+                                }
                         }
                         return false;
                 }
                 return false;
             }
-            if (!isEmptyElement)
+            if (!flag)
             {
                 Skip(xml);
             }
-            Parent.SetTag(name, @int);
+            Parent.SetTag(name, @bool);
             return true;
         }
 
@@ -2002,188 +1998,188 @@
             IHue defaultHue = Engine.DefaultHue;
             IHue hOver = Engine.DefaultHue;
             IHue hFocus = Engine.DefaultHue;
-            bool isEmptyElement = xml.IsEmptyElement;
+            bool flag3 = xml.IsEmptyElement;
             while (xml.MoveToNextAttribute())
             {
                 switch (xml.Name)
                 {
                     case "GumpID":
-                    {
-                        gumpID = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            gumpID = GetInt(xml.Value);
+                            continue;
+                        }
                     case "GumpIDi":
-                    {
-                        gumpID = Convert.ToInt32(xml.Value);
-                        continue;
-                    }
+                        {
+                            gumpID = Convert.ToInt32(xml.Value);
+                            continue;
+                        }
                     case "GumpIDh":
-                    {
-                        gumpID = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        continue;
-                    }
+                        {
+                            gumpID = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            continue;
+                        }
                     case "Width":
-                    {
-                        width = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            width = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Widthi":
-                    {
-                        width = Convert.ToInt32(xml.Value);
-                        continue;
-                    }
+                        {
+                            width = Convert.ToInt32(xml.Value);
+                            continue;
+                        }
                     case "Widthh":
-                    {
-                        width = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        continue;
-                    }
+                        {
+                            width = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            continue;
+                        }
                     case "Height":
-                    {
-                        height = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            height = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Heighti":
-                    {
-                        height = Convert.ToInt32(xml.Value);
-                        continue;
-                    }
+                        {
+                            height = Convert.ToInt32(xml.Value);
+                            continue;
+                        }
                     case "Heighth":
-                    {
-                        height = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        continue;
-                    }
+                        {
+                            height = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            continue;
+                        }
                     case "X":
-                    {
-                        x = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            x = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Xi":
-                    {
-                        x = Convert.ToInt32(xml.Value);
-                        continue;
-                    }
+                        {
+                            x = Convert.ToInt32(xml.Value);
+                            continue;
+                        }
                     case "Xh":
-                    {
-                        x = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        continue;
-                    }
+                        {
+                            x = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            continue;
+                        }
                     case "Y":
-                    {
-                        y = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            y = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Yi":
-                    {
-                        y = Convert.ToInt32(xml.Value);
-                        continue;
-                    }
+                        {
+                            y = Convert.ToInt32(xml.Value);
+                            continue;
+                        }
                     case "Yh":
-                    {
-                        y = Convert.ToInt32(xml.Value.Substring(2), 0x10);
-                        continue;
-                    }
+                        {
+                            y = Convert.ToInt32(xml.Value.Substring(2), 0x10);
+                            continue;
+                        }
                     case "Border":
-                    {
-                        hasBorder = GetBool(xml.Value);
-                        continue;
-                    }
+                        {
+                            hasBorder = GetBool(xml.Value);
+                            continue;
+                        }
                     case "Borderb":
-                    {
-                        hasBorder = Convert.ToBoolean(xml.Value);
-                        continue;
-                    }
+                        {
+                            hasBorder = Convert.ToBoolean(xml.Value);
+                            continue;
+                        }
                     case "PassChar":
-                    {
-                        passChar = GetString(xml.Value)[0];
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            passChar = GetString(xml.Value)[0];
+                            flag2 = true;
+                            continue;
+                        }
                     case "PassChars":
-                    {
-                        passChar = xml.Value[0];
-                        flag2 = true;
-                        continue;
-                    }
+                        {
+                            passChar = xml.Value[0];
+                            flag2 = true;
+                            continue;
+                        }
                     case "Text":
-                    {
-                        startText = GetString(xml.Value);
-                        continue;
-                    }
+                        {
+                            startText = GetString(xml.Value);
+                            continue;
+                        }
                     case "Texts":
-                    {
-                        startText = xml.Value;
-                        continue;
-                    }
+                        {
+                            startText = xml.Value;
+                            continue;
+                        }
                     case "Font":
-                    {
-                        defaultFont = GetFont(xml.Value);
-                        continue;
-                    }
+                        {
+                            defaultFont = GetFont(xml.Value);
+                            continue;
+                        }
                     case "Fonti":
-                    {
-                        defaultFont = GetFonti(xml.Value);
-                        continue;
-                    }
+                        {
+                            defaultFont = GetFonti(xml.Value);
+                            continue;
+                        }
                     case "Fonth":
-                    {
-                        defaultFont = GetFonth(xml.Value);
-                        continue;
-                    }
+                        {
+                            defaultFont = GetFonth(xml.Value);
+                            continue;
+                        }
                     case "RegularHue":
-                    {
-                        defaultHue = GetHue(xml.Value);
-                        continue;
-                    }
+                        {
+                            defaultHue = GetHue(xml.Value);
+                            continue;
+                        }
                     case "RegularHuei":
-                    {
-                        defaultHue = GetHuei(xml.Value);
-                        continue;
-                    }
+                        {
+                            defaultHue = GetHuei(xml.Value);
+                            continue;
+                        }
                     case "RegularHueh":
-                    {
-                        defaultHue = GetHueh(xml.Value);
-                        continue;
-                    }
+                        {
+                            defaultHue = GetHueh(xml.Value);
+                            continue;
+                        }
                     case "OverHue":
-                    {
-                        hOver = GetHue(xml.Value);
-                        continue;
-                    }
+                        {
+                            hOver = GetHue(xml.Value);
+                            continue;
+                        }
                     case "OverHuei":
-                    {
-                        hOver = GetHuei(xml.Value);
-                        continue;
-                    }
+                        {
+                            hOver = GetHuei(xml.Value);
+                            continue;
+                        }
                     case "OverHueh":
-                    {
-                        hOver = GetHueh(xml.Value);
-                        continue;
-                    }
+                        {
+                            hOver = GetHueh(xml.Value);
+                            continue;
+                        }
                     case "FocusHue":
-                    {
-                        hFocus = GetHue(xml.Value);
-                        continue;
-                    }
+                        {
+                            hFocus = GetHue(xml.Value);
+                            continue;
+                        }
                     case "FocusHuei":
-                    {
-                        hFocus = GetHuei(xml.Value);
-                        continue;
-                    }
+                        {
+                            hFocus = GetHuei(xml.Value);
+                            continue;
+                        }
                     case "FocusHueh":
-                    {
-                        hFocus = GetHueh(xml.Value);
-                        continue;
-                    }
+                        {
+                            hFocus = GetHueh(xml.Value);
+                            continue;
+                        }
                     case "EnterButton":
-                    {
-                        gumps = GetGump(xml.Value);
-                        continue;
-                    }
+                        {
+                            gumps = GetGump(xml.Value);
+                            continue;
+                        }
                     case "EnterButtons":
-                    {
-                        gumps = GetGumps(xml.Value);
-                        continue;
-                    }
+                        {
+                            gumps = GetGumps(xml.Value);
+                            continue;
+                        }
                 }
                 return false;
             }
@@ -2198,10 +2194,10 @@
             }
             if (gumps.GetType() == typeof(GButton))
             {
-                toAdd.EnterButton = (GButton) gumps;
+                toAdd.EnterButton = (GButton)gumps;
             }
             Parent.Children.Add(toAdd);
-            if (isEmptyElement)
+            if (flag3)
             {
                 return true;
             }
@@ -2233,51 +2229,51 @@
             IHue defaultHue = Engine.DefaultHue;
             IHue focusHue = Engine.DefaultHue;
             IFont defaultFont = Engine.DefaultFont;
-            bool isEmptyElement = xml.IsEmptyElement;
+            bool flag = xml.IsEmptyElement;
             while (xml.MoveToNextAttribute())
             {
                 switch (xml.Name)
                 {
                     case "Text":
-                    {
-                        text = GetString(xml.Value);
-                        continue;
-                    }
+                        {
+                            text = GetString(xml.Value);
+                            continue;
+                        }
                     case "RegularHue":
-                    {
-                        defaultHue = GetHue(xml.Value);
-                        continue;
-                    }
+                        {
+                            defaultHue = GetHue(xml.Value);
+                            continue;
+                        }
                     case "OverHue":
-                    {
-                        focusHue = GetHue(xml.Value);
-                        continue;
-                    }
+                        {
+                            focusHue = GetHue(xml.Value);
+                            continue;
+                        }
                     case "Font":
-                    {
-                        defaultFont = GetFont(xml.Value);
-                        continue;
-                    }
+                        {
+                            defaultFont = GetFont(xml.Value);
+                            continue;
+                        }
                     case "X":
-                    {
-                        x = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            x = GetInt(xml.Value);
+                            continue;
+                        }
                     case "Y":
-                    {
-                        y = GetInt(xml.Value);
-                        continue;
-                    }
+                        {
+                            y = GetInt(xml.Value);
+                            continue;
+                        }
                     case "OnClick":
-                    {
-                        method = GetString(xml.Value);
-                        continue;
-                    }
+                        {
+                            method = GetString(xml.Value);
+                            continue;
+                        }
                     case "Tooltip":
-                    {
-                        tooltip = new Tooltip(GetString(xml.Value));
-                        continue;
-                    }
+                        {
+                            tooltip = new Tooltip(GetString(xml.Value));
+                            continue;
+                        }
                 }
                 return false;
             }
@@ -2286,18 +2282,17 @@
             {
                 if (method.Length > 0)
                 {
-                    onClick = (OnClick) Delegate.CreateDelegate(typeof(OnClick), typeof(Engine), method);
+                    onClick = (OnClick)Delegate.CreateDelegate(typeof(OnClick), typeof(Engine), method);
                 }
             }
             catch
             {
                 onClick = null;
             }
-            GTextButton toAdd = new GTextButton(text, defaultFont, defaultHue, focusHue, x, y, onClick) {
-                Tooltip = tooltip
-            };
+            GTextButton toAdd = new GTextButton(text, defaultFont, defaultHue, focusHue, x, y, onClick);
+            toAdd.Tooltip = tooltip;
             Parent.Children.Add(toAdd);
-            if (isEmptyElement)
+            if (flag)
             {
                 return true;
             }
@@ -2322,7 +2317,7 @@
         private static bool Parse_Tooltip(XmlTextReader xml, Gump Parent)
         {
             string text = "";
-            bool isEmptyElement = xml.IsEmptyElement;
+            bool flag = xml.IsEmptyElement;
             while (xml.MoveToNextAttribute())
             {
                 string str2;
@@ -2336,7 +2331,7 @@
                 }
             }
             Parent.Tooltip = new Tooltip(text);
-            if (!isEmptyElement)
+            if (!flag)
             {
                 Skip(xml);
             }
@@ -2363,9 +2358,9 @@
 
                     case XmlNodeType.Comment:
                     case XmlNodeType.XmlDeclaration:
-                    {
-                        continue;
-                    }
+                        {
+                            continue;
+                        }
                 }
                 return false;
             }
@@ -2376,21 +2371,21 @@
         {
             string key = "";
             string str2 = "";
-            bool isEmptyElement = xml.IsEmptyElement;
+            bool flag = xml.IsEmptyElement;
             while (xml.MoveToNextAttribute())
             {
                 switch (xml.Name)
                 {
                     case "Name":
-                    {
-                        key = xml.Value;
-                        continue;
-                    }
+                        {
+                            key = xml.Value;
+                            continue;
+                        }
                     case "File":
-                    {
-                        str2 = xml.Value;
-                        continue;
-                    }
+                        {
+                            str2 = xml.Value;
+                            continue;
+                        }
                 }
                 return false;
             }
@@ -2398,7 +2393,7 @@
             {
                 m_xFiles.Add(key, str2);
             }
-            if (!isEmptyElement)
+            if (!flag)
             {
                 Skip(xml);
                 return false;
@@ -2428,9 +2423,9 @@
                             return false;
 
                         case XmlNodeType.Comment:
-                        {
-                            continue;
-                        }
+                            {
+                                continue;
+                            }
                     }
                     return (nodeType == XmlNodeType.EndElement);
                 }
@@ -2448,8 +2443,8 @@
             try
             {
                 string str = m.Value.Substring(8);
-                int @int = GetInt(str.Substring(0, str.Length - 9));
-                int num2 = Engine.m_Gumps.m_Index[@int].m_Extra & 0xffff;
+                int index = GetInt(str.Substring(0, str.Length - 9));
+                int num2 = Engine.m_Gumps.m_Index[index].m_Extra & 0xffff;
                 return num2.ToString();
             }
             catch
@@ -2463,8 +2458,8 @@
             try
             {
                 string str = m.Value.Substring(8);
-                int @int = GetInt(str.Substring(0, str.Length - 8));
-                int num2 = (Engine.m_Gumps.m_Index[@int].m_Extra >> 0x10) & 0xffff;
+                int index = GetInt(str.Substring(0, str.Length - 8));
+                int num2 = (Engine.m_Gumps.m_Index[index].m_Extra >> 0x10) & 0xffff;
                 return num2.ToString();
             }
             catch
@@ -2494,4 +2489,3 @@
         }
     }
 }
-

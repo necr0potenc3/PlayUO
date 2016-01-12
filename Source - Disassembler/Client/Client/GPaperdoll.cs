@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GPaperdoll : GDragable, IRestorableGump
@@ -24,7 +23,7 @@
         {
             if ((g != null) && (g.GetType() == typeof(GDraggedItem)))
             {
-                GDraggedItem item = (GDraggedItem) g;
+                GDraggedItem item = (GDraggedItem)g;
                 Item toEquip = item.Item;
                 Item item3 = null;
                 Gump[] gumpArray = base.m_Children.ToArray();
@@ -33,7 +32,7 @@
                 {
                     if ((gumpArray[i] is GPaperdollItem) && gumpArray[i].HitTest(point.X - gumpArray[i].X, point.Y - gumpArray[i].Y))
                     {
-                        item3 = ((GPaperdollItem) gumpArray[i]).Item;
+                        item3 = ((GPaperdollItem)gumpArray[i]).Item;
                         break;
                     }
                 }
@@ -62,29 +61,29 @@
         {
             if ((g != null) && (g.GetType() == typeof(GDraggedItem)))
             {
-                GDraggedItem item = (GDraggedItem) g;
+                GDraggedItem item = (GDraggedItem)g;
                 Item item2 = item.Item;
-                int iD = item2.ID;
+                int itemID = item2.ID;
                 int hue = item2.Hue;
-                Engine.ItemArt.Translate(ref iD, ref hue);
-                if (Map.m_ItemFlags[iD][TileFlag.Wearable])
+                Engine.ItemArt.Translate(ref itemID, ref hue);
+                if (Map.m_ItemFlags[itemID][TileFlag.Wearable])
                 {
                     if (this.m_Image != null)
                     {
                         Gumps.Destroy(this.m_Image);
                     }
-                    this.m_Image = new GImage(Gumps.GetEquipGumpID(iD, this.m_Gender, ref hue), Hues.GetItemHue(iD, hue), 8, 0x13);
+                    this.m_Image = new GImage(Gumps.GetEquipGumpID(itemID, this.m_Gender, ref hue), Hues.GetItemHue(itemID, hue), 8, 0x13);
                     this.m_Image.Alpha = 0.5f;
                     int count = base.m_Children.Count;
                     LayerComparer paperdoll = LayerComparer.Paperdoll;
-                    int num4 = paperdoll.GetValue(iD, (Layer) Map.GetQuality(iD));
+                    int num4 = paperdoll.GetValue(itemID, (Layer)Map.GetQuality(itemID));
                     for (int i = 0; i < base.m_Children.Count; i++)
                     {
                         Gump gump = base.m_Children[i];
                         if (gump.GetType() == typeof(GPaperdollItem))
                         {
-                            GPaperdollItem item3 = (GPaperdollItem) gump;
-                            if (paperdoll.GetValue(item3.Item.ID, (Layer) ((byte) item3.Layer)) < num4)
+                            GPaperdollItem item3 = (GPaperdollItem)gump;
+                            if (paperdoll.GetValue(item3.Item.ID, (Layer)((byte)item3.Layer)) < num4)
                             {
                                 count = i;
                                 break;
@@ -139,4 +138,3 @@
         }
     }
 }
-

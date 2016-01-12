@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class LootAppraiser : AosAppraiser
     {
         public static readonly AosAppraiser Instance = new LootAppraiser();
@@ -170,7 +168,7 @@
                 {
                     base.AddWorth(0);
                 }
-                if ((((attrs.GetAttribute((AosAttribute) 0x102e6c) != 0) || (attrs.GetAttribute((AosAttribute) 0x102e7f) != 0)) || ((attrs.GetAttribute((AosAttribute) 0x102e78) != 0) || (attrs.GetAttribute((AosAttribute) 0x102e70) != 0))) || (((attrs.GetAttribute((AosAttribute) 0x102e6d) != 0) || (attrs.GetAttribute((AosAttribute) 0x102e6a) != 0)) || ((attrs.GetAttribute((AosAttribute) 0x102e79) != 0) || (attrs.GetAttribute((AosAttribute) 0x102e6e) != 0))))
+                if ((((attrs.GetAttribute((AosAttribute)0x102e6c) != 0) || (attrs.GetAttribute((AosAttribute)0x102e7f) != 0)) || ((attrs.GetAttribute((AosAttribute)0x102e78) != 0) || (attrs.GetAttribute((AosAttribute)0x102e70) != 0))) || (((attrs.GetAttribute((AosAttribute)0x102e6d) != 0) || (attrs.GetAttribute((AosAttribute)0x102e6a) != 0)) || ((attrs.GetAttribute((AosAttribute)0x102e79) != 0) || (attrs.GetAttribute((AosAttribute)0x102e6e) != 0))))
                 {
                     base.AddWorth(1);
                 }
@@ -324,4 +322,3 @@
         }
     }
 }
-

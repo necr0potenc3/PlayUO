@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Runtime.InteropServices;
     using System.Text;
 
@@ -71,8 +70,10 @@
 
         [DllImport("Kernel32")]
         private static extern bool QueryPerformanceCounter(ref long Counter);
+
         [DllImport("Kernel32")]
         private static extern bool QueryPerformanceFrequency(ref long Frequency);
+
         public void Start()
         {
             this.m_Start = Engine.Ticks;
@@ -92,4 +93,3 @@
         }
     }
 }
-

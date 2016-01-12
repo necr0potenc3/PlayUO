@@ -1,8 +1,7 @@
 ﻿namespace Client
 {
-    using System;
+    using Microsoft.DirectX.Direct3D;
     using System.Collections;
-    using System.Runtime.InteropServices;
 
     public abstract class TextureFactory
     {
@@ -20,8 +19,8 @@
             int num = timeNow - 0x3a98;
             for (int i = 0; i < this.m_Textures.Count; i++)
             {
-                Texture texture = (Texture) this.m_Textures[i];
-                if ((texture.m_Surface == null) || texture.m_Surface.get_Disposed())
+                Client.Texture texture = (Client.Texture)this.m_Textures[i];
+                if ((texture.m_Surface == null) || texture.m_Surface.Disposed)
                 {
                     this.m_Textures.RemoveAt(i--);
                 }
@@ -32,42 +31,47 @@
             }
         }
 
-        protected unsafe Texture Construct(bool isReconstruct)
+        protected unsafe Client.Texture Construct(bool isReconstruct)
         {
             int num;
             int num2;
             if (!this.CoreLookup())
             {
-                return Texture.Empty;
+                return Client.Texture.Empty;
             }
             this.CoreGetDimensions(out num, out num2);
-            Texture tex = new Texture(num, num2, true, 0x19, 1, isReconstruct);
+            Client.Texture tex = new Client.Texture(num, num2, true, Format.A1R5G5B5, Pool.Managed, isReconstruct);
             if (tex.IsEmpty())
             {
-                return Texture.Empty;
+                return Client.Texture.Empty;
             }
-            LockData data = tex.Lock(LockFlags.WriteOnly);
-            this.CoreProcessImage(data.Width, data.Height, data.Pitch, (ushort*) data.pvSrc, (ushort*) (data.pvSrc + (data.Width * 2)), (ushort*) (data.pvSrc + (data.Height * data.Pitch)), (data.Pitch >> 1) - data.Width, data.Pitch >> 1);
+            LockData data = tex.Lock(Client.LockFlags.WriteOnly);
+            this.CoreProcessImage(data.Width, data.Height, data.Pitch, (ushort*)data.pvSrc, (ushort*)((int)data.pvSrc + (data.Width * 2)), (ushort*)((int)data.pvSrc + (data.Height * data.Pitch)), (data.Pitch >> 1) - data.Width, data.Pitch >> 1);
             tex.Unlock();
             this.CoreAssignArgs(tex);
             this.m_Textures.Add(tex);
             return tex;
         }
 
-        protected abstract void CoreAssignArgs(Texture tex);
+        protected abstract void CoreAssignArgs(Client.Texture tex);
+
         protected abstract void CoreGetDimensions(out int width, out int height);
+
         protected abstract bool CoreLookup();
+
         protected abstract unsafe void CoreProcessImage(int width, int height, int stride, ushort* pLine, ushort* pLineEnd, ushort* pImageEnd, int lineDelta, int lineEndDelta);
+
         public static void FullCleanup(int timeNow)
         {
             for (int i = 0; i < m_Factories.Count; i++)
             {
-                ((TextureFactory) m_Factories[i]).Cleanup(timeNow);
+                ((TextureFactory)m_Factories[i]).Cleanup(timeNow);
             }
         }
 
-        public abstract Texture Reconstruct(object[] args);
-        public void Remove(Texture tex)
+        public abstract Client.Texture Reconstruct(object[] args);
+
+        public void Remove(Client.Texture tex)
         {
             this.m_Textures.Remove(tex);
         }
@@ -80,7 +84,7 @@
                 object obj2 = m_Disposing.Dequeue();
                 if (obj2 is Frames)
                 {
-                    Frames frames = (Frames) obj2;
+                    Frames frames = (Frames)obj2;
                     if (frames.Disposed || (frames.LastAccessTime <= num))
                     {
                         frames.Dispose();
@@ -90,8 +94,8 @@
                 }
                 else
                 {
-                    Texture texture = (Texture) obj2;
-                    if (!texture.m_Surface.get_Disposed())
+                    Client.Texture texture = (Client.Texture)obj2;
+                    if (!texture.m_Surface.Disposed)
                     {
                         texture.m_Surface.Dispose();
                     }
@@ -104,4 +108,3 @@
         }
     }
 }
-

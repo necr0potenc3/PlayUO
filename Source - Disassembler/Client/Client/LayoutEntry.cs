@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections;
-    using System.Reflection;
 
     public class LayoutEntry
     {
@@ -42,13 +41,13 @@
                         }
                     }
                 }
-                this.m_Parameters = (int[]) dataStore.ToArray(typeof(int));
+                this.m_Parameters = (int[])dataStore.ToArray(typeof(int));
             }
         }
 
         public string GetAttribute(string name)
         {
-            return (string) this.m_Attributes[name];
+            return (string)this.m_Attributes[name];
         }
 
         public Hashtable Attributes
@@ -88,4 +87,3 @@
         }
     }
 }
-

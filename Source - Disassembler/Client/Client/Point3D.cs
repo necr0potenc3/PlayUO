@@ -9,6 +9,7 @@
         public int X;
         public int Y;
         public int Z;
+
         public Point3D(int x, int y, int z)
         {
             this.X = x;
@@ -29,7 +30,7 @@
             {
                 return false;
             }
-            IPoint3D pointd = (IPoint3D) o;
+            IPoint3D pointd = (IPoint3D)o;
             return (((this.X == pointd.X) && (this.Y == pointd.Y)) && (this.Z == pointd.Z));
         }
 
@@ -73,4 +74,3 @@
         }
     }
 }
-

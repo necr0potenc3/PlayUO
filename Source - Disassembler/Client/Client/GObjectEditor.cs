@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
     using System.Reflection;
     using System.Windows.Forms;
@@ -25,7 +24,7 @@
                 OptionableAttribute optionable = this.GetAttribute(mi, typeof(OptionableAttribute)) as OptionableAttribute;
                 if (optionable != null)
                 {
-                    ArrayList list = (ArrayList) c[optionable.Category];
+                    ArrayList list = (ArrayList)c[optionable.Category];
                     if (list == null)
                     {
                         c[optionable.Category] = list = new ArrayList();
@@ -38,8 +37,8 @@
             ArrayList panels = new ArrayList();
             foreach (DictionaryEntry entry in list2)
             {
-                string key = (string) entry.Key;
-                ArrayList entries = (ArrayList) entry.Value;
+                string key = (string)entry.Key;
+                ArrayList entries = (ArrayList)entry.Value;
                 GCategoryPanel panel = new GCategoryPanel(obj, key, entries);
                 panels.Add(panel);
             }
@@ -61,7 +60,7 @@
             }
         }
 
-        public object GetAttribute(MemberInfo mi, Type type)
+        public object GetAttribute(MemberInfo mi, System.Type type)
         {
             object[] customAttributes = mi.GetCustomAttributes(type, false);
             if (customAttributes == null)
@@ -79,7 +78,7 @@
         {
             if (this.m_Object is CharData)
             {
-                ((CharData) this.m_Object).Save();
+                ((CharData)this.m_Object).Save();
             }
             if (Engine.TargetHandler is SetItemPropertyTarget)
             {
@@ -126,4 +125,3 @@
         }
     }
 }
-

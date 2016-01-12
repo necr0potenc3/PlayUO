@@ -6,18 +6,20 @@
     public class LayerComparer : IComparer
     {
         public static readonly LayerComparer Backward = new LayerComparer(LayerComparerType.Backward);
-        private static Layer ChainTunic = ((Layer) 0xfe);
+        private static Layer ChainTunic = ((Layer)0xfe);
         public static readonly LayerComparer Forward = new LayerComparer(LayerComparerType.Forward);
-        private static Layer LeatherShorts = ((Layer) 0xfd);
+        private static Layer LeatherShorts = ((Layer)0xfd);
         private LayerComparerType m_ComparerType;
-        private static Layer[] m_DesiredLayerOrder = new Layer[] { 
-            Layer.Bracelet, Layer.Ring, Layer.Shirt, Layer.Pants, Layer.InnerLegs, Layer.Shoes, PlateLegs, LeatherShorts, Layer.Arms, Layer.InnerTorso, LeatherShorts, PlateArms, Layer.MiddleTorso, Layer.OuterLegs, Layer.Neck, Layer.Waist, 
+
+        private static Layer[] m_DesiredLayerOrder = new Layer[] {
+            Layer.Bracelet, Layer.Ring, Layer.Shirt, Layer.Pants, Layer.InnerLegs, Layer.Shoes, PlateLegs, LeatherShorts, Layer.Arms, Layer.InnerTorso, LeatherShorts, PlateArms, Layer.MiddleTorso, Layer.OuterLegs, Layer.Neck, Layer.Waist,
             Layer.Gloves, Layer.OuterTorso, Layer.OneHanded, Layer.TwoHanded, Layer.FacialHair, Layer.Hair, Layer.Helm
-         };
+        };
+
         private int[] m_TranslationTable;
         public static readonly LayerComparer Paperdoll = Forward;
-        private static Layer PlateArms = ((Layer) 0xff);
-        private static Layer PlateLegs = ((Layer) 0xfc);
+        private static Layer PlateArms = ((Layer)0xff);
+        private static Layer PlateLegs = ((Layer)0xfc);
 
         public LayerComparer(LayerComparerType comparerType)
         {
@@ -38,19 +40,19 @@
             this.m_TranslationTable = new int[0x100];
             for (int i = 0; i < destinationArray.Length; i++)
             {
-                this.m_TranslationTable[(int) destinationArray[i]] = destinationArray.Length - i;
+                this.m_TranslationTable[(int)destinationArray[i]] = destinationArray.Length - i;
             }
         }
 
         public int Compare(object x, object y)
         {
-            EquipEntry entry = (EquipEntry) x;
-            EquipEntry entry2 = (EquipEntry) y;
+            EquipEntry entry = (EquipEntry)x;
+            EquipEntry entry2 = (EquipEntry)y;
             Layer oldLayer = entry.m_Layer;
             Layer layer = entry2.m_Layer;
             oldLayer = this.Fix(entry.m_Item.ID, oldLayer);
             layer = this.Fix(entry2.m_Item.ID, layer);
-            return (this.m_TranslationTable[(int) layer] - this.m_TranslationTable[(int) oldLayer]);
+            return (this.m_TranslationTable[(int)layer] - this.m_TranslationTable[(int)oldLayer]);
         }
 
         public Layer Fix(int itemID, Layer oldLayer)
@@ -91,12 +93,12 @@
 
         public static LayerComparer FromDirection(int dir)
         {
-            return FromDirection((MobileDirection) ((byte) dir));
+            return FromDirection((MobileDirection)((byte)dir));
         }
 
         public int GetValue(int itemID, Layer layer)
         {
-            return this.m_TranslationTable[(int) this.Fix(itemID, layer)];
+            return this.m_TranslationTable[(int)this.Fix(itemID, layer)];
         }
 
         public bool IsValid(EquipEntry entry)
@@ -106,7 +108,7 @@
 
         public bool IsValid(Layer layer)
         {
-            return (this.m_TranslationTable[(int) layer] > 0);
+            return (this.m_TranslationTable[(int)layer] > 0);
         }
 
         public int[] TranslationTable
@@ -118,4 +120,3 @@
         }
     }
 }
-

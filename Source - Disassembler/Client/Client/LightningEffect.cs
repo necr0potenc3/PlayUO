@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class LightningEffect : Effect
     {
         protected IHue m_Hue;
@@ -84,10 +82,10 @@
             num11 -= Renderer.m_yScroll;
             if ((base.m_Source != null) && (base.m_Source.GetType() == typeof(Mobile)))
             {
-                Mobile source = (Mobile) base.m_Source;
+                Mobile source = (Mobile)base.m_Source;
                 if (source.Walking.Count > 0)
                 {
-                    WalkAnimation animation = (WalkAnimation) source.Walking.Peek();
+                    WalkAnimation animation = (WalkAnimation)source.Walking.Peek();
                     if (animation.Snapshot(ref xOffset, ref yOffset, ref fOffset))
                     {
                         num10 += xOffset;
@@ -118,4 +116,3 @@
         }
     }
 }
-

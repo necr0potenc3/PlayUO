@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections;
-    using System.Reflection;
 
     public class FontCache
     {
@@ -24,7 +23,7 @@
             IEnumerator enumerator = this.m_Cached.Values.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                ((Texture) enumerator.Current).Dispose();
+                ((Texture)enumerator.Current).Dispose();
             }
             this.m_Cached.Clear();
             this.m_Cached = null;
@@ -40,7 +39,7 @@
                     Key = "";
                 }
                 CacheKey key = new CacheKey(Key, Hue);
-                Texture texture = (Texture) this.m_Cached[key];
+                Texture texture = (Texture)this.m_Cached[key];
                 if (texture == null)
                 {
                     texture = this.m_Factory.CreateInstance(Key, Hue);
@@ -65,7 +64,7 @@
 
             public override bool Equals(object x)
             {
-                FontCache.CacheKey key = (FontCache.CacheKey) x;
+                FontCache.CacheKey key = (FontCache.CacheKey)x;
                 return ((this == key) || (((this.m_Hash == key.m_Hash) && this.m_Hue.Equals(key.m_Hue)) && (this.m_Text == key.m_Text)));
             }
 
@@ -76,4 +75,3 @@
         }
     }
 }
-

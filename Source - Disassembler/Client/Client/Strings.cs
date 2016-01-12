@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
     using System.IO;
     using System.Text;
@@ -43,14 +42,14 @@
                 }
             }
             dataStore.Sort();
-            SpeechEntry[] entryArray2 = (SpeechEntry[]) dataStore.ToArray(typeof(SpeechEntry));
+            SpeechEntry[] entryArray2 = (SpeechEntry[])dataStore.ToArray(typeof(SpeechEntry));
             Engine.ReleaseDataStore(dataStore);
             return entryArray2;
         }
 
         public static string GetString(string name)
         {
-            string str = (string) m_Strings[name];
+            string str = (string)m_Strings[name];
             if (str == null)
             {
                 str = string.Format("<empty:{0}>", name);
@@ -122,21 +121,20 @@
                     ArrayList list = new ArrayList();
                     FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
                     int num = 0;
-                    while ((num = Engine.NativeRead(fs, (void*) numRef, 4)) > 0)
+                    while ((num = Engine.NativeRead(fs, (void*)numRef, 4)) > 0)
                     {
                         int idKeyword = numRef[1] | (numRef[0] << 8);
                         int bytes = numRef[3] | (numRef[2] << 8);
                         if (bytes > 0)
                         {
-                            Engine.NativeRead(fs, (void*) numRef, bytes);
-                            list.Add(new SpeechEntry(idKeyword, new string((sbyte*) numRef, 0, bytes)));
+                            Engine.NativeRead(fs, (void*)numRef, bytes);
+                            list.Add(new SpeechEntry(idKeyword, new string((sbyte*)numRef, 0, bytes)));
                         }
                     }
                     fs.Close();
-                    m_Speech = (SpeechEntry[]) list.ToArray(typeof(SpeechEntry));
+                    m_Speech = (SpeechEntry[])list.ToArray(typeof(SpeechEntry));
                 }
             }
         }
     }
 }
-

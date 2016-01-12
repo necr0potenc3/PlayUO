@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
     using System.Runtime.InteropServices;
 
@@ -17,4 +16,3 @@
         public int CellY;
     }
 }
-

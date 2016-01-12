@@ -1,7 +1,6 @@
 ﻿namespace Client
 {
     using Client.Targeting;
-    using System;
     using System.Drawing;
 
     public class InfoInputTarget : InfoInput
@@ -21,7 +20,13 @@
 
         public override Gump CreateGump()
         {
-            return new GSystemButton(0, 0, 100, 0x18, SystemColors.Control, SystemColors.ControlText, base.Name, Engine.GetUniFont(1)) { FillAlpha = 1f, InactiveColor = GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float) 0.5f), ActiveColor = GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float) 0.5f), PressedColor = GumpPaint.Blend(Color.White, GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float) 0.5f), (float) 0.5f), OnClick = new OnClick(this.OnClicked) };
+            GSystemButton button = new GSystemButton(0, 0, 100, 0x18, SystemColors.Control, SystemColors.ControlText, base.Name, Engine.GetUniFont(1));
+            button.FillAlpha = 1f;
+            button.InactiveColor = GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float)0.5f);
+            button.ActiveColor = GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float)0.5f);
+            button.PressedColor = GumpPaint.Blend(Color.White, GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float)0.5f), (float)0.5f);
+            button.OnClick = new OnClick(this.OnClicked);
+            return button;
         }
 
         private void OnClicked(Gump g)
@@ -120,4 +125,3 @@
         }
     }
 }
-

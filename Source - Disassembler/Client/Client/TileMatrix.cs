@@ -105,7 +105,7 @@
             }
             else
             {
-                target = (MapBlock) reference.Target;
+                target = (MapBlock)reference.Target;
             }
             return target;
         }
@@ -159,7 +159,7 @@
                 {
                     return new Tile[0x40];
                 }
-                landData.Seek((long) (4 + (0xc4 * ~num)), SeekOrigin.Begin);
+                landData.Seek((long)(4 + (0xc4 * ~num)), SeekOrigin.Begin);
             }
             else
             {
@@ -168,12 +168,12 @@
                 {
                     return new Tile[0x40];
                 }
-                landData.Seek((long) (4 + (0xc4 * ((x * this.m_BlockHeight) + y))), SeekOrigin.Begin);
+                landData.Seek((long)(4 + (0xc4 * ((x * this.m_BlockHeight) + y))), SeekOrigin.Begin);
             }
             Tile[] tileArray = new Tile[0x40];
             fixed (Tile* tileRef = tileArray)
             {
-                Engine.NativeRead(landData, (void*) tileRef, 0xc0);
+                Engine.NativeRead(landData, (void*)tileRef, 0xc0);
             }
             return tileArray;
         }
@@ -196,7 +196,7 @@
                 {
                     return this.m_EmptyStaticBlock;
                 }
-                staticLookupReader.BaseStream.Seek((long) (12 * ~num), SeekOrigin.Begin);
+                staticLookupReader.BaseStream.Seek((long)(12 * ~num), SeekOrigin.Begin);
             }
             else
             {
@@ -206,7 +206,7 @@
                 {
                     return this.m_EmptyStaticBlock;
                 }
-                staticLookupReader.BaseStream.Seek((long) (((x * this.m_BlockHeight) + y) * 12), SeekOrigin.Begin);
+                staticLookupReader.BaseStream.Seek((long)(((x * this.m_BlockHeight) + y) * 12), SeekOrigin.Begin);
             }
             int num2 = staticLookupReader.ReadInt32();
             int bytes = staticLookupReader.ReadInt32();
@@ -215,11 +215,11 @@
                 return this.m_EmptyStaticBlock;
             }
             int num4 = bytes / 7;
-            staticData.Seek((long) num2, SeekOrigin.Begin);
+            staticData.Seek((long)num2, SeekOrigin.Begin);
             StaticTile[] tileArray = new StaticTile[num4];
             fixed (StaticTile* tileRef = tileArray)
             {
-                Engine.NativeRead(staticData, (void*) tileRef, bytes);
+                Engine.NativeRead(staticData, (void*)tileRef, bytes);
                 if (m_Lists == null)
                 {
                     m_Lists = new TileList[8][];
@@ -237,7 +237,7 @@
                 StaticTile* tilePtr2 = tileRef + num4;
                 while (tilePtr < tilePtr2)
                 {
-                    lists[tilePtr->m_X & 7][tilePtr->m_Y & 7].Add((short) ((tilePtr->m_ID & 0x3fff) + 0x4000), tilePtr->m_Hue, tilePtr->m_Z);
+                    lists[tilePtr->m_X & 7][tilePtr->m_Y & 7].Add((short)((tilePtr->m_ID & 0x3fff) + 0x4000), tilePtr->m_Hue, tilePtr->m_Z);
                     tilePtr++;
                 }
                 HuedTile[][][] tileArray2 = new HuedTile[8][][];
@@ -310,4 +310,3 @@
         }
     }
 }
-

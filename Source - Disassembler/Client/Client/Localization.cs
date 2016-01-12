@@ -1,7 +1,7 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
+    using System.Globalization;
     using System.IO;
     using System.Text;
 
@@ -32,7 +32,7 @@
 
         public static LocalizationFile GetFile(string path)
         {
-            LocalizationFile file = (LocalizationFile) m_Files[path];
+            LocalizationFile file = (LocalizationFile)m_Files[path];
             if (file == null)
             {
                 m_Files[path] = file = new LocalizationFile(path);
@@ -42,7 +42,7 @@
 
         public static string GetString(int number)
         {
-            string str = (string) m_Strings[number];
+            string str = (string)m_Strings[number];
             if (str == null)
             {
                 string str2;
@@ -121,4 +121,3 @@
         }
     }
 }
-

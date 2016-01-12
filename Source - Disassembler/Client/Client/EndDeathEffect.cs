@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class EndDeathEffect : Fade
     {
         private GLabel m_Label;
@@ -17,4 +15,3 @@
         }
     }
 }
-

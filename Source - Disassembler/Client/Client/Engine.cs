@@ -1,9 +1,8 @@
 ﻿namespace Client
 {
-    using Client.Prompts;
-    using Client.Targeting;
     using Microsoft.DirectX.Direct3D;
     using Microsoft.Win32;
+    using Prompts;
     using System;
     using System.Collections;
     using System.ComponentModel;
@@ -17,6 +16,7 @@
     using System.Text.RegularExpressions;
     using System.Threading;
     using System.Windows.Forms;
+    using Targeting;
 
     public class Engine
     {
@@ -47,17 +47,19 @@
         private static object[] m_ClickList;
         private static object m_ClickSender;
         private static Timer m_ClickTimer;
-        private static Client.ContainerBoundsTable m_ContainerBoundsTable;
+        private static ContainerBoundsTable m_ContainerBoundsTable;
         public static bool m_ContainerGrid = true;
         public static int m_ContextQueue;
-        private static ConvertStruct[] m_ConvertStructs = new ConvertStruct[] { 
-            new ConvertStruct('!', 0xff01, 1), new ConvertStruct('#', 0xff03, 1), new ConvertStruct('$', 0xff04, 1), new ConvertStruct('%', 0xff05, 1), new ConvertStruct('&', 0xff06, 1), new ConvertStruct('(', 0xff08, 1), new ConvertStruct(')', 0xff09, 1), new ConvertStruct('*', 0xff0a, 1), new ConvertStruct('+', 0xff0b, 1), new ConvertStruct(',', 0xff0c, 1), new ConvertStruct('-', 0xff0d, 1), new ConvertStruct('.', 0xff0e, 1), new ConvertStruct('/', 0xff0f, 1), new ConvertStruct('0', 0xff10, 10), new ConvertStruct(':', 0xff1a, 1), new ConvertStruct(';', 0xff1b, 1), 
-            new ConvertStruct('<', 0xff1c, 1), new ConvertStruct('=', 0xff1d, 1), new ConvertStruct('>', 0xff1e, 1), new ConvertStruct('?', 0xff1f, 1), new ConvertStruct('@', 0xff20, 1), new ConvertStruct('A', 0xff21, 0x1a), new ConvertStruct('[', 0xff3b, 1), new ConvertStruct('\\', 0xff3c, 1), new ConvertStruct(']', 0xff3d, 1), new ConvertStruct('^', 0xff3e, 1), new ConvertStruct('_', 0xff3f, 1), new ConvertStruct('`', 0xff40, 1), new ConvertStruct('a', 0xff41, 0x1a), new ConvertStruct('{', 0xff5b, 1), new ConvertStruct('|', 0xff5c, 1), new ConvertStruct('}', 0xff5d, 1), 
+
+        private static ConvertStruct[] m_ConvertStructs = new ConvertStruct[] {
+            new ConvertStruct('!', 0xff01, 1), new ConvertStruct('#', 0xff03, 1), new ConvertStruct('$', 0xff04, 1), new ConvertStruct('%', 0xff05, 1), new ConvertStruct('&', 0xff06, 1), new ConvertStruct('(', 0xff08, 1), new ConvertStruct(')', 0xff09, 1), new ConvertStruct('*', 0xff0a, 1), new ConvertStruct('+', 0xff0b, 1), new ConvertStruct(',', 0xff0c, 1), new ConvertStruct('-', 0xff0d, 1), new ConvertStruct('.', 0xff0e, 1), new ConvertStruct('/', 0xff0f, 1), new ConvertStruct('0', 0xff10, 10), new ConvertStruct(':', 0xff1a, 1), new ConvertStruct(';', 0xff1b, 1),
+            new ConvertStruct('<', 0xff1c, 1), new ConvertStruct('=', 0xff1d, 1), new ConvertStruct('>', 0xff1e, 1), new ConvertStruct('?', 0xff1f, 1), new ConvertStruct('@', 0xff20, 1), new ConvertStruct('A', 0xff21, 0x1a), new ConvertStruct('[', 0xff3b, 1), new ConvertStruct('\\', 0xff3c, 1), new ConvertStruct(']', 0xff3d, 1), new ConvertStruct('^', 0xff3e, 1), new ConvertStruct('_', 0xff3f, 1), new ConvertStruct('`', 0xff40, 1), new ConvertStruct('a', 0xff41, 0x1a), new ConvertStruct('{', 0xff5b, 1), new ConvertStruct('|', 0xff5c, 1), new ConvertStruct('}', 0xff5d, 1),
             new ConvertStruct('~', 0xff5e, 1)
-         };
+        };
+
         private static char[] m_ConvertTable;
         public static Mobile m_CriminalAttack;
-        private static Queue m_DataStores = new Queue();
+        private static System.Collections.Queue m_DataStores = new System.Collections.Queue();
         private static IFont m_DefaultFont;
         private static IHue m_DefaultHue;
         public static Device m_Device;
@@ -67,11 +69,11 @@
         internal static double m_dTicks;
         private static bool m_DyeWindowOpen;
         public static Texture[] m_Edge;
-        private static Client.Effects m_Effects;
+        private static Effects m_Effects;
         private static Regex m_Encoder = new Regex("&#(?<1>[0-9a-fA-F]+);", RegexOptions.None);
         public static bool m_EventOk;
-        private static Client.Features m_Features;
-        public static Client.FileManager m_FileManager;
+        private static Features m_Features;
+        public static FileManager m_FileManager;
         private static bool m_FirstAcctLogin = true;
         private static Font[] m_Font;
         public static Texture m_FormX;
@@ -88,7 +90,7 @@
         public static bool m_Ingame;
         public static string m_IniPath;
         public static bool m_InResync;
-        private static Client.ItemArt m_ItemArt;
+        private static ItemArt m_ItemArt;
         private static float m_ItemDuration = 5f;
         private static IItemValidator[] m_IVArray;
         public static ArrayList m_Journal;
@@ -98,7 +100,7 @@
         private static int m_KeepAliveBlockIndex;
         private static MapBlock[] m_KeepAliveBlocks = new MapBlock[0x80];
         public static bool m_land = true;
-        private static Client.LandArt m_LandArt;
+        private static LandArt m_LandArt;
         public static DateTime m_LastAction;
         public static Mobile m_LastAttacker;
         public static object m_LastBenTarget;
@@ -115,11 +117,11 @@
         public static int m_LastTargetID;
         public static Item m_LeapFrog;
         public static bool m_Loading;
-        private static Queue m_LoadQueue;
+        private static System.Collections.Queue m_LoadQueue;
         public static bool m_Locked = true;
-        private static Queue m_MapLoadQueue;
+        private static System.Collections.Queue m_MapLoadQueue;
         public static bool m_Meditating;
-        private static Client.MidiTable m_MidiTable;
+        private static MidiTable m_MidiTable;
         private static float m_MobileDuration = 7.5f;
         private static bool m_MouseMoved;
         public static TimeDelay m_MoveDelay;
@@ -130,7 +132,7 @@
         public static int m_MultiMinX;
         public static int m_MultiMinY;
         public static bool m_MultiPreview;
-        private static Client.Multis m_Multis;
+        private static Multis m_Multis;
         public static int m_MultiSerial;
         private static TimeDelay m_NewFrame;
         public static int m_OkSequence;
@@ -141,14 +143,14 @@
         public static int m_OverrideServPort = -1;
         private static int m_Ping;
         private static int m_PingID;
-        private static Queue m_Pings;
+        private static System.Collections.Queue m_Pings;
         private static Timer m_PingTimer;
         public static ArrayList m_Plugins;
         private static Timer m_PopupDelay;
         public static PresentParameters m_PresentParams;
         private static IPrompt m_Prompt;
         public static bool m_PumpFPS;
-        private static Queue m_QamList = new Queue();
+        private static System.Collections.Queue m_QamList = new System.Collections.Queue();
         private static Timer m_QamTimer;
         internal static long m_QPC;
         internal static double m_QPF;
@@ -166,20 +168,20 @@
         public static bool m_SayMacro;
         public static bool m_Screenshots = true;
         public static int m_Sequence;
-        private static Client.ServerFeatures m_ServerFeatures;
+        private static ServerFeatures m_ServerFeatures;
         public static string m_ServerName;
         private static Server[] m_Servers;
         internal static bool m_SetTicks;
         public static Texture m_SkillDown;
         public static Texture m_SkillLocked;
-        private static Client.Skills m_Skills;
+        private static Skills m_Skills;
         public static GSkills m_SkillsGump;
         public static bool m_SkillsOpen;
         public static Texture m_SkillUp;
         private static TimeDelay m_SleepMode;
         public static Texture m_Slider;
         public static Texture[] m_Snow;
-        private static Client.Sounds m_Sounds;
+        private static Sounds m_Sounds;
         public static bool m_statics = true;
         public static bool m_Stealth;
         public static int m_StealthSteps;
@@ -192,7 +194,7 @@
         private static bool m_TargetRecurse;
         public static object m_TargetSmartObj = new object();
         public static string m_Text = "";
-        private static Client.TextureArt m_TextureArt;
+        private static TextureArt m_TextureArt;
         internal static int m_Ticks;
         public static ArrayList m_Timers;
         private static UnicodeFont[] m_UniFont;
@@ -235,8 +237,8 @@
             Gump gump2 = Gumps.FindGumpByGUID("Password");
             if ((((gump != null) && (gump2 != null)) && (gump.GetType() == typeof(GTextBox))) && (gump2.GetType() == typeof(GTextBox)))
             {
-                string un = ((GTextBox) gump).String;
-                string pw = ((GTextBox) gump2).String;
+                string un = ((GTextBox)gump).String;
+                string pw = ((GTextBox)gump2).String;
                 Cursor.Hourglass = true;
                 Gumps.Desktop.Children.Clear();
                 xGumps.Display("Connecting");
@@ -254,7 +256,7 @@
                 else
                 {
                     Gumps.Desktop.Children.Clear();
-                    xGumps.SetVariable("FailMessage", "Couldn't connect to the login server.  Either the server is down, or you've entered an invalid host / port.  Check Client.cfg.");
+                    xGumps.SetVariable("FailMessage", "Couldn't connect to the login server.  Either the server is down, or you've entered an invalid host / port.  Check cfg.");
                     xGumps.Display("ConnectionFailed");
                     Cursor.Hourglass = false;
                 }
@@ -318,7 +320,7 @@
             }
         }
 
-        public static void AddTimer(Timer t)
+        public static void AddTimer(Client.Timer t)
         {
             m_Timers.Add(t);
         }
@@ -344,7 +346,7 @@
                     IEnumerator enumerator = World.Mobiles.Values.GetEnumerator();
                     while (enumerator.MoveNext())
                     {
-                        Mobile current = (Mobile) enumerator.Current;
+                        Mobile current = (Mobile)enumerator.Current;
                         if ((current.Visible && !current.Player) && World.InRange(current))
                         {
                             current.Look();
@@ -356,7 +358,7 @@
                         ArrayList dataStore = GetDataStore();
                         while (enumerator.MoveNext())
                         {
-                            item = (Item) enumerator.Current;
+                            item = (Item)enumerator.Current;
                             if ((item.Visible && (item.IsCorpse || item.IsBones)) && World.InRange(item))
                             {
                                 item.Look();
@@ -369,7 +371,7 @@
                         if (dataStore.Count > 0)
                         {
                             dataStore.Sort(PlayerDistanceSorter.Comparer);
-                            ((Item) dataStore[0]).Use();
+                            ((Item)dataStore[0]).Use();
                         }
                         ReleaseDataStore(dataStore);
                     }
@@ -377,7 +379,7 @@
                     {
                         while (enumerator.MoveNext())
                         {
-                            item = (Item) enumerator.Current;
+                            item = (Item)enumerator.Current;
                             if ((item.Visible && (item.IsCorpse || item.IsBones)) && World.InRange(item))
                             {
                                 item.Look();
@@ -390,21 +392,21 @@
 
         public static void AppearanceHuePicker_OnHueRelease(int Hue, Gump Sender)
         {
-            GImage tag = (GImage) Sender.GetTag("Image");
-            GHuePreview preview = (GHuePreview) Sender.GetTag("Preview");
-            if ((((int) tag.GetTag("ItemID")) == 0) || !Map.m_ItemFlags[((int) tag.GetTag("ItemID")) & 0x3fff][TileFlag.PartialHue])
+            GImage tag = (GImage)Sender.GetTag("Image");
+            GHuePreview preview = (GHuePreview)Sender.GetTag("Preview");
+            if ((((int)tag.GetTag("ItemID")) == 0) || !Map.m_ItemFlags[((int)tag.GetTag("ItemID")) & 0x3fff][TileFlag.PartialHue])
             {
                 Hue ^= 0x8000;
             }
             preview.Hue = Hue;
             tag.Hue = Hues.Load(Hue);
-            Gumps.Destroy((Gump) Sender.GetTag("Back"));
+            Gumps.Destroy((Gump)Sender.GetTag("Back"));
         }
 
         public static void AppearanceHuePicker_OnHueSelect(int Hue, Gump Sender)
         {
-            GImage tag = (GImage) Sender.GetTag("Image");
-            if ((((int) tag.GetTag("ItemID")) == 0) || !Map.m_ItemFlags[((int) tag.GetTag("ItemID")) & 0x3fff][TileFlag.PartialHue])
+            GImage tag = (GImage)Sender.GetTag("Image");
+            if ((((int)tag.GetTag("ItemID")) == 0) || !Map.m_ItemFlags[((int)tag.GetTag("ItemID")) & 0x3fff][TileFlag.PartialHue])
             {
                 Hue ^= 0x8000;
             }
@@ -413,9 +415,9 @@
 
         public static void AppearanceHueProperty_OnClick(Gump Sender)
         {
-            string tag = (string) Sender.GetTag("Property");
-            Gump gump = (Gump) Sender.GetTag("Preview");
-            Gump gump2 = (Gump) Sender.GetTag("Image");
+            string tag = (string)Sender.GetTag("Property");
+            Gump gump = (Gump)Sender.GetTag("Preview");
+            Gump gump2 = (Gump)Sender.GetTag("Image");
             GBackground background = new GBackground(0xe14, 0x97, 310, 0x1db, 0x7d, true);
             Gump toAdd = null;
             string str = tag;
@@ -425,8 +427,8 @@
                 if (str == "Skin Tone")
                 {
                     toAdd = new GSkinHuePickerAll(background.OffsetX, background.OffsetY, background.UseWidth, background.UseHeight);
-                    ((GSkinHuePickerAll) toAdd).OnHueRelease = new OnHueSelect(Engine.AppearanceHuePicker_OnHueRelease);
-                    ((GSkinHuePickerAll) toAdd).OnHueSelect = new OnHueSelect(Engine.AppearanceHuePicker_OnHueSelect);
+                    ((GSkinHuePickerAll)toAdd).OnHueRelease = new OnHueSelect(Engine.AppearanceHuePicker_OnHueRelease);
+                    ((GSkinHuePickerAll)toAdd).OnHueSelect = new OnHueSelect(Engine.AppearanceHuePicker_OnHueSelect);
                     toAdd.SetTag("Back", background);
                     toAdd.SetTag("Preview", gump);
                     toAdd.SetTag("Image", gump2);
@@ -435,8 +437,8 @@
                 else if (str == "Shirt Color")
                 {
                     toAdd = new GHuePickerAll(background.OffsetX, background.OffsetY, background.UseWidth, background.UseHeight);
-                    ((GHuePickerAll) toAdd).OnHueRelease = new OnHueSelect(Engine.AppearanceHuePicker_OnHueRelease);
-                    ((GHuePickerAll) toAdd).OnHueSelect = new OnHueSelect(Engine.AppearanceHuePicker_OnHueSelect);
+                    ((GHuePickerAll)toAdd).OnHueRelease = new OnHueSelect(Engine.AppearanceHuePicker_OnHueRelease);
+                    ((GHuePickerAll)toAdd).OnHueSelect = new OnHueSelect(Engine.AppearanceHuePicker_OnHueSelect);
                     toAdd.SetTag("Back", background);
                     toAdd.SetTag("Preview", gump);
                     toAdd.SetTag("Image", gump2);
@@ -445,8 +447,8 @@
                 else if (str == "Pants Color")
                 {
                     toAdd = new GHuePickerAll(background.OffsetX, background.OffsetY, background.UseWidth, background.UseHeight);
-                    ((GHuePickerAll) toAdd).OnHueRelease = new OnHueSelect(Engine.AppearanceHuePicker_OnHueRelease);
-                    ((GHuePickerAll) toAdd).OnHueSelect = new OnHueSelect(Engine.AppearanceHuePicker_OnHueSelect);
+                    ((GHuePickerAll)toAdd).OnHueRelease = new OnHueSelect(Engine.AppearanceHuePicker_OnHueRelease);
+                    ((GHuePickerAll)toAdd).OnHueSelect = new OnHueSelect(Engine.AppearanceHuePicker_OnHueSelect);
                     toAdd.SetTag("Back", background);
                     toAdd.SetTag("Preview", gump);
                     toAdd.SetTag("Image", gump2);
@@ -455,8 +457,8 @@
                 else if (str == "Hair Color")
                 {
                     toAdd = new GHairHuePickerAll(background.OffsetX, background.OffsetY, background.UseWidth, background.UseHeight);
-                    ((GHairHuePickerAll) toAdd).OnHueRelease = new OnHueSelect(Engine.AppearanceHuePicker_OnHueRelease);
-                    ((GHairHuePickerAll) toAdd).OnHueSelect = new OnHueSelect(Engine.AppearanceHuePicker_OnHueSelect);
+                    ((GHairHuePickerAll)toAdd).OnHueRelease = new OnHueSelect(Engine.AppearanceHuePicker_OnHueRelease);
+                    ((GHairHuePickerAll)toAdd).OnHueSelect = new OnHueSelect(Engine.AppearanceHuePicker_OnHueSelect);
                     toAdd.SetTag("Back", background);
                     toAdd.SetTag("Preview", gump);
                     toAdd.SetTag("Image", gump2);
@@ -469,8 +471,8 @@
                         return;
                     }
                     toAdd = new GHairHuePickerAll(background.OffsetX, background.OffsetY, background.UseWidth, background.UseHeight);
-                    ((GHairHuePickerAll) toAdd).OnHueRelease = new OnHueSelect(Engine.AppearanceHuePicker_OnHueRelease);
-                    ((GHairHuePickerAll) toAdd).OnHueSelect = new OnHueSelect(Engine.AppearanceHuePicker_OnHueSelect);
+                    ((GHairHuePickerAll)toAdd).OnHueRelease = new OnHueSelect(Engine.AppearanceHuePicker_OnHueRelease);
+                    ((GHairHuePickerAll)toAdd).OnHueSelect = new OnHueSelect(Engine.AppearanceHuePicker_OnHueSelect);
                     toAdd.SetTag("Back", background);
                     toAdd.SetTag("Preview", gump);
                     toAdd.SetTag("Image", gump2);
@@ -489,7 +491,7 @@
 
         public static bool AttackLast()
         {
-            return (((m_LastHarmTarget != null) && (m_LastHarmTarget is Mobile)) && ((Mobile) m_LastHarmTarget).Attack());
+            return (((m_LastHarmTarget != null) && (m_LastHarmTarget is Mobile)) && ((Mobile)m_LastHarmTarget).Attack());
         }
 
         public static void AttackModeToggle_OnClick(Gump Sender)
@@ -503,7 +505,7 @@
             ArrayList dataStore = GetDataStore();
             while (enumerator.MoveNext())
             {
-                Mobile current = (Mobile) enumerator.Current;
+                Mobile current = (Mobile)enumerator.Current;
                 if ((current.Visible && (current.Notoriety == Notoriety.Murderer)) && (!current.Ghost && World.InRange(current)))
                 {
                     dataStore.Add(current);
@@ -512,7 +514,7 @@
             if (dataStore.Count > 0)
             {
                 dataStore.Sort(PlayerDistanceSorter.Comparer);
-                Mobile mobile2 = (Mobile) dataStore[0];
+                Mobile mobile2 = (Mobile)dataStore[0];
                 ReleaseDataStore(dataStore);
                 return mobile2.Attack();
             }
@@ -520,11 +522,11 @@
             return false;
         }
 
-        public static void AutoTarget_Expire(Timer t)
+        public static void AutoTarget_Expire(Client.Timer t)
         {
             if (t.HasTag("Session"))
             {
-                AutoTargetSession tag = (AutoTargetSession) t.GetTag("Session");
+                AutoTargetSession tag = (AutoTargetSession)t.GetTag("Session");
                 m_AutoTarget.Remove(tag);
             }
         }
@@ -548,7 +550,7 @@
                                 int num = 0;
                                 for (int i = 0; i < array.Length; i++)
                                 {
-                                    num += (ushort) array[i].Amount;
+                                    num += (ushort)array[i].Amount;
                                 }
                                 bool flag = array[0].Use();
                                 AddTargetSelf(TargetAction.Bandage);
@@ -685,7 +687,7 @@
             {
                 return 0xff;
             }
-            return (byte) Value;
+            return (byte)Value;
         }
 
         public static int C16232(int C16)
@@ -696,9 +698,9 @@
             num *= 8.225806f;
             num2 *= 8.225806f;
             num3 *= 8.225806f;
-            int num4 = ByteCap((int) num);
-            int num5 = ByteCap((int) num2);
-            int num6 = ByteCap((int) num3);
+            int num4 = ByteCap((int)num);
+            int num5 = ByteCap((int)num2);
+            int num6 = ByteCap((int)num3);
             return (((num4 << 0x10) | (num5 << 8)) | num6);
         }
 
@@ -713,7 +715,7 @@
             num /= 0xff;
             num2 /= 0xff;
             num3 /= 0xff;
-            return (ushort) (((0x8000 | (num << 10)) | (num2 << 5)) | num3);
+            return (ushort)(((0x8000 | (num << 10)) | (num2 << 5)) | num3);
         }
 
         public static void CancelClick()
@@ -728,95 +730,95 @@
             if ((player != null) && ((player.Direction & 7) != (walkDirection & 7)))
             {
                 EquipSort(player, walkDirection);
-                player.Direction = (byte) walkDirection;
+                player.Direction = (byte)walkDirection;
                 SendMovementRequest(walkDirection, player.X, player.Y, player.Z);
             }
         }
 
         public static void CharCreationAppearanceArrow_OnClick(Gump Sender)
         {
-            int tag = (int) Sender.GetTag("Strength");
-            int dex = (int) Sender.GetTag("Dexterity");
-            int @int = (int) Sender.GetTag("Intelligence");
-            int num4 = (int) Sender.GetTag("vSkill1");
-            int num5 = (int) Sender.GetTag("vSkill2");
-            int num6 = (int) Sender.GetTag("vSkill3");
-            int num7 = (int) Sender.GetTag("iSkill1");
-            int num8 = (int) Sender.GetTag("iSkill2");
-            int num9 = (int) Sender.GetTag("iSkill3");
-            int hSkinTone = ((GHuePreview) Sender.GetTag("Skin Tone")).Hue | 0x8000;
-            int hShirtColor = ((GHuePreview) Sender.GetTag("Shirt Color")).Hue & 0x7fff;
-            int hPantsColor = ((GHuePreview) Sender.GetTag("Pants Color")).Hue & 0x7fff;
-            int hHairColor = ((GHuePreview) Sender.GetTag("Hair Color")).Hue & 0x7fff;
-            int hFacialHairColor = ((GHuePreview) Sender.GetTag("Facial Hair Color")).Hue & 0x7fff;
-            string name = ((GTextBox) Sender.GetTag("Name")).String;
-            int gender = (int) Sender.GetTag("Gender");
-            if ((((num4 + num5) + num6) == 100) && ((((((tag + dex) + @int) == 80) && (num7 != -1)) && ((num8 != -1) && (num9 != -1))) && (((num7 != num8) && (num7 != num9)) && (num8 != num9))))
+            int tag = (int)Sender.GetTag("Strength");
+            int dex = (int)Sender.GetTag("Dexterity");
+            int num3 = (int)Sender.GetTag("Intelligence");
+            int num4 = (int)Sender.GetTag("vSkill1");
+            int num5 = (int)Sender.GetTag("vSkill2");
+            int num6 = (int)Sender.GetTag("vSkill3");
+            int num7 = (int)Sender.GetTag("iSkill1");
+            int num8 = (int)Sender.GetTag("iSkill2");
+            int num9 = (int)Sender.GetTag("iSkill3");
+            int hSkinTone = ((GHuePreview)Sender.GetTag("Skin Tone")).Hue | 0x8000;
+            int hShirtColor = ((GHuePreview)Sender.GetTag("Shirt Color")).Hue & 0x7fff;
+            int hPantsColor = ((GHuePreview)Sender.GetTag("Pants Color")).Hue & 0x7fff;
+            int hHairColor = ((GHuePreview)Sender.GetTag("Hair Color")).Hue & 0x7fff;
+            int hFacialHairColor = ((GHuePreview)Sender.GetTag("Facial Hair Color")).Hue & 0x7fff;
+            string name = ((GTextBox)Sender.GetTag("Name")).String;
+            int gender = (int)Sender.GetTag("Gender");
+            if ((((num4 + num5) + num6) == 100) && ((((((tag + dex) + num3) == 80) && (num7 != -1)) && ((num8 != -1) && (num9 != -1))) && (((num7 != num8) && (num7 != num9)) && (num8 != num9))))
             {
                 if ((name == null) || (name.Length <= 1))
                 {
-                    ((GTextBox) Sender.GetTag("Name")).Focus();
-                    Cursor.MoveTo((GTextBox) Sender.GetTag("Name"));
+                    ((GTextBox)Sender.GetTag("Name")).Focus();
+                    Cursor.MoveTo((GTextBox)Sender.GetTag("Name"));
                 }
                 else
                 {
-                    ShowCharCitySelection(tag, dex, @int, num4, num5, num6, num7, num8, num9, hSkinTone, hShirtColor, hPantsColor, hHairColor, hFacialHairColor, name, gender);
+                    ShowCharCitySelection(tag, dex, num3, num4, num5, num6, num7, num8, num9, hSkinTone, hShirtColor, hPantsColor, hHairColor, hFacialHairColor, name, gender);
                 }
             }
         }
 
         public static void CharCreationSkillsArrow_OnClick(Gump Sender)
         {
-            int str = Convert.ToInt32(((GLabel) Sender.GetTag("Strength")).Text);
-            int dex = Convert.ToInt32(((GLabel) Sender.GetTag("Dexterity")).Text);
-            int @int = Convert.ToInt32(((GLabel) Sender.GetTag("Intelligence")).Text);
-            int num4 = Convert.ToInt32(((GLabel) Sender.GetTag("vSkill1")).Text);
-            int num5 = Convert.ToInt32(((GLabel) Sender.GetTag("vSkill2")).Text);
-            int num6 = Convert.ToInt32(((GLabel) Sender.GetTag("vSkill3")).Text);
-            int tag = (int) ((Gump) Sender.GetTag("iSkill1")).GetTag("Skill");
-            int num8 = (int) ((Gump) Sender.GetTag("iSkill2")).GetTag("Skill");
-            int num9 = (int) ((Gump) Sender.GetTag("iSkill3")).GetTag("Skill");
+            int str = Convert.ToInt32(((GLabel)Sender.GetTag("Strength")).Text);
+            int dex = Convert.ToInt32(((GLabel)Sender.GetTag("Dexterity")).Text);
+            int num3 = Convert.ToInt32(((GLabel)Sender.GetTag("Intelligence")).Text);
+            int num4 = Convert.ToInt32(((GLabel)Sender.GetTag("vSkill1")).Text);
+            int num5 = Convert.ToInt32(((GLabel)Sender.GetTag("vSkill2")).Text);
+            int num6 = Convert.ToInt32(((GLabel)Sender.GetTag("vSkill3")).Text);
+            int tag = (int)((Gump)Sender.GetTag("iSkill1")).GetTag("Skill");
+            int num8 = (int)((Gump)Sender.GetTag("iSkill2")).GetTag("Skill");
+            int num9 = (int)((Gump)Sender.GetTag("iSkill3")).GetTag("Skill");
             if (((num4 + num5) + num6) != 100)
             {
                 Gumps.MessageBoxOk("The total of all your skills must equal 100.0", true, null);
             }
-            else if (((str + dex) + @int) != 80)
+            else if (((str + dex) + num3) != 80)
             {
                 Gumps.MessageBoxOk("The total of all your stats must equal 100.0", true, null);
             }
             else if (tag == -1)
             {
-                GTextButton sender = (GTextButton) Sender.GetTag("iSkill1");
+                GTextButton sender = (GTextButton)Sender.GetTag("iSkill1");
                 CharSkillBox_OnClick(sender);
                 Cursor.MoveTo(sender);
             }
             else if (num8 == -1)
             {
-                GTextButton button2 = (GTextButton) Sender.GetTag("iSkill2");
+                GTextButton button2 = (GTextButton)Sender.GetTag("iSkill2");
                 CharSkillBox_OnClick(button2);
                 Cursor.MoveTo(button2);
             }
             else if (num9 == -1)
             {
-                GTextButton button3 = (GTextButton) Sender.GetTag("iSkill3");
+                GTextButton button3 = (GTextButton)Sender.GetTag("iSkill3");
                 CharSkillBox_OnClick(button3);
                 Cursor.MoveTo(button3);
             }
             else if (tag == num8)
             {
-                GTextButton button4 = (GTextButton) Sender.GetTag("iSkill2");
+                GTextButton button4 = (GTextButton)Sender.GetTag("iSkill2");
                 CharSkillBox_OnClick(button4);
                 Cursor.MoveTo(button4);
             }
             else if ((tag == num9) || (num8 == num9))
             {
-                GTextButton button5 = (GTextButton) Sender.GetTag("iSkill3");
+                GTextButton button5 = (GTextButton)Sender.GetTag("iSkill3");
                 CharSkillBox_OnClick(button5);
                 Cursor.MoveTo(button5);
             }
             else
             {
-                ShowCharAppearance(str, dex, @int, num4, num5, num6, tag, num8, num9);
+                ShowCharAppearance(str, dex, num3, num4, num5, num6, tag, num8, num9);
             }
         }
 
@@ -831,7 +833,7 @@
                     case 13:
                         return m.Groups[0].Value;
                 }
-                char ch = (char) num;
+                char ch = (char)num;
                 return ch.ToString();
             }
             catch
@@ -842,60 +844,59 @@
 
         public static void CharGender_OnClick(Gump Sender)
         {
-            GImage tag = (GImage) Sender.GetTag("Image");
-            int num = (((int) Sender.GetTag("Gender")) == 0) ? 1 : 0;
-            GButton button = (GButton) Sender;
+            GImage tag = (GImage)Sender.GetTag("Image");
+            int num = (((int)Sender.GetTag("Gender")) == 0) ? 1 : 0;
+            GButton button = (GButton)Sender;
             button.SetGumpID(0x710 - (num * 3));
             button.SetTag("Gender", num);
-            ((Gump) Sender.GetTag("Arrow")).SetTag("Gender", num);
+            ((Gump)Sender.GetTag("Arrow")).SetTag("Gender", num);
             int[,] numArray = new int[,] { { 0x761, 0x760 }, { 0x739, 0x714 }, { 0x738, 0x764 }, { 0x753, 0x737 }, { 0x759, 0 }, { 0x762, 0x763 } };
             for (int i = 0; i < 6; i++)
             {
-                ((GImage) Sender.GetTag(string.Format("Image[{0}]", i))).GumpID = numArray[i, num];
+                ((GImage)Sender.GetTag(string.Format("Image[{0}]", i))).GumpID = numArray[i, num];
             }
             bool flag = num == 0;
-            ((Gump) Sender.GetTag("HideHS")).Visible = flag;
-            ((Gump) Sender.GetTag("HideTB")).Visible = flag;
-            ((Gump) Sender.GetTag("HideHP")).Visible = flag;
+            ((Gump)Sender.GetTag("HideHS")).Visible = flag;
+            ((Gump)Sender.GetTag("HideTB")).Visible = flag;
+            ((Gump)Sender.GetTag("HideHP")).Visible = flag;
         }
 
         public static void CharSkill_OnClick(Gump Sender)
         {
             if (Sender.HasTag("Box"))
             {
-                GTextButton tag = (GTextButton) Sender.GetTag("Box");
-                Skill skill = Skills[((GListItem) Sender.GetTag("Clicked")).Index];
-                tag.SetTag("Skill", ((GListItem) Sender.GetTag("Clicked")).Index);
+                GTextButton tag = (GTextButton)Sender.GetTag("Box");
+                Skill skill = Skills[((GListItem)Sender.GetTag("Clicked")).Index];
+                tag.SetTag("Skill", ((GListItem)Sender.GetTag("Clicked")).Index);
                 tag.Text = skill.Name;
-                ((GTextButton) Sender.GetTag("Box")).DefaultHue = Hues.Load(0x76b);
-                ((GTextButton) Sender.GetTag("Box")).FocusHue = Hues.Load(0x961);
+                ((GTextButton)Sender.GetTag("Box")).DefaultHue = Hues.Load(0x76b);
+                ((GTextButton)Sender.GetTag("Box")).FocusHue = Hues.Load(0x961);
                 Sender.RemoveTag("Box");
             }
         }
 
         public static void CharSkillBox_OnClick(Gump Sender)
         {
-            if (((Gump) Sender.GetTag("List")).HasTag("Box"))
+            if (((Gump)Sender.GetTag("List")).HasTag("Box"))
             {
-                ((GTextButton) ((Gump) Sender.GetTag("List")).GetTag("Box")).DefaultHue = Hues.Load(0x76b);
-                ((GTextButton) ((Gump) Sender.GetTag("List")).GetTag("Box")).FocusHue = Hues.Load(0x961);
+                ((GTextButton)((Gump)Sender.GetTag("List")).GetTag("Box")).DefaultHue = Hues.Load(0x76b);
+                ((GTextButton)((Gump)Sender.GetTag("List")).GetTag("Box")).FocusHue = Hues.Load(0x961);
             }
-            ((Gump) Sender.GetTag("List")).SetTag("Box", Sender);
-            ((GTextButton) Sender).DefaultHue = ((GTextButton) Sender).FocusHue = Hues.Load(0x676);
+            ((Gump)Sender.GetTag("List")).SetTag("Box", Sender);
+            ((GTextButton)Sender).DefaultHue = ((GTextButton)Sender).FocusHue = Hues.Load(0x676);
         }
 
         public static void CharSlot_OnClick(Gump Sender)
         {
             if (Sender.HasTag("CharID"))
             {
-                int tag = (int) Sender.GetTag("CharID");
-                Entry e = new Entry {
-                    AccountName = NewConfig.Username,
-                    Password = NewConfig.Password,
-                    CharID = tag,
-                    CharName = m_CharacterNames[tag],
-                    ServerID = NewConfig.LastServerID
-                };
+                int tag = (int)Sender.GetTag("CharID");
+                Entry e = new Entry();
+                e.AccountName = NewConfig.Username;
+                e.Password = NewConfig.Password;
+                e.CharID = tag;
+                e.CharName = m_CharacterNames[tag];
+                e.ServerID = NewConfig.LastServerID;
                 for (int i = 0; i < m_Servers.Length; i++)
                 {
                     if (m_Servers[i].ServerID == e.ServerID)
@@ -924,26 +925,25 @@
 
         public static void City_OnClick(Gump Sender)
         {
-            int tag = (int) Sender.GetTag("Strength");
-            int num2 = (int) Sender.GetTag("Dexterity");
-            int num3 = (int) Sender.GetTag("Intelligence");
-            int num4 = (int) Sender.GetTag("vSkill1");
-            int num5 = (int) Sender.GetTag("vSkill2");
-            int num6 = (int) Sender.GetTag("vSkill3");
-            int num7 = (int) Sender.GetTag("iSkill1");
-            int num8 = (int) Sender.GetTag("iSkill2");
-            int num9 = (int) Sender.GetTag("iSkill3");
-            int num10 = (int) Sender.GetTag("Skin Tone");
-            int num11 = (int) Sender.GetTag("Shirt Color");
-            int num12 = (int) Sender.GetTag("Pants Color");
-            int num13 = (int) Sender.GetTag("Hair Color");
-            int num14 = (int) Sender.GetTag("Facial Hair Color");
-            int num15 = (int) Sender.GetTag("CityID");
-            string name = (string) Sender.GetTag("Name");
-            int num16 = (int) Sender.GetTag("Gender");
+            int tag = (int)Sender.GetTag("Strength");
+            int num2 = (int)Sender.GetTag("Dexterity");
+            int num3 = (int)Sender.GetTag("Intelligence");
+            int num4 = (int)Sender.GetTag("vSkill1");
+            int num5 = (int)Sender.GetTag("vSkill2");
+            int num6 = (int)Sender.GetTag("vSkill3");
+            int num7 = (int)Sender.GetTag("iSkill1");
+            int num8 = (int)Sender.GetTag("iSkill2");
+            int num9 = (int)Sender.GetTag("iSkill3");
+            int num10 = (int)Sender.GetTag("Skin Tone");
+            int num11 = (int)Sender.GetTag("Shirt Color");
+            int num12 = (int)Sender.GetTag("Pants Color");
+            int num13 = (int)Sender.GetTag("Hair Color");
+            int num14 = (int)Sender.GetTag("Facial Hair Color");
+            int num15 = (int)Sender.GetTag("CityID");
+            string name = (string)Sender.GetTag("Name");
+            int num16 = (int)Sender.GetTag("Gender");
             if (((((((num4 + num5) + num6) == 100) && ((num7 != num8) && (num7 != num9))) && ((num8 != num9) && (((tag + num2) + num3) == 80))) && (((name != null) && (name.Length > 1)) && ((num15 >= 0) && (num15 < 9)))) && ((num16 >= 0) && (num16 <= 1)))
             {
-                GLabel label;
                 Cursor.Hourglass = true;
                 int num17 = 0;
                 for (int i = 0; i < 5; i++)
@@ -954,7 +954,7 @@
                         break;
                     }
                 }
-                Network.Send(new PCreateCharacter(name, (byte) num16, (byte) tag, (byte) num2, (byte) num3, (byte) num7, (byte) num4, (byte) num8, (byte) num5, (byte) num9, (byte) num6, (short) (num10 | 0x8000), 0x203b, (short) (num13 & 0x7fff), 0x2040, (short) (num14 & 0x7fff), (short) num15, (short) num17, Network.ClientIP, (short) (num11 & 0x7fff), (short) (num12 & 0x7fff)));
+                Network.Send(new PCreateCharacter(name, (byte)num16, (byte)tag, (byte)num2, (byte)num3, (byte)num7, (byte)num4, (byte)num8, (byte)num5, (byte)num9, (byte)num6, (short)(num10 | 0x8000), 0x203b, (short)(num13 & 0x7fff), 0x2040, (short)(num14 & 0x7fff), (short)num15, (short)num17, Network.ClientIP, (short)(num11 & 0x7fff), (short)(num12 & 0x7fff)));
                 if (Animations.IsLoading)
                 {
                     Gumps.Desktop.Children.Clear();
@@ -967,18 +967,16 @@
                 }
                 Gumps.Desktop.Children.Clear();
                 GBackground toAdd = new GBackground(0xa2c, 0x164, 0xd4, 0x8e, 0x86, true);
-                label = new GLabel("Entering Britannia..", GetFont(2), Hues.Load(0x75f), 0x74, 0x2a) {
-                    X = (toAdd.Width - label.Width) / 2
-                };
+                GLabel label = new GLabel("Entering Britannia..", GetFont(2), Hues.Load(0x75f), 0x74, 0x2a);
+                label.X = (toAdd.Width - label.Width) / 2;
                 toAdd.Children.Add(label);
                 toAdd.Children.Add(new GButton(0x47e, 0xa4, 170, null));
                 Gumps.Desktop.Children.Add(new GBackground(0x588, ScreenWidth, ScreenHeight, false));
                 Gumps.Desktop.Children.Add(toAdd);
                 Gumps.Desktop.Children.Add(new GImage(0x157c, 0, 0));
                 Gumps.Desktop.Children.Add(new GImage(0x15a0, 0, 4));
-                GButton button = new GButton(0x1589, 0x22b, 4, new OnClick(Engine.Quit_OnClick)) {
-                    Tooltip = new Tooltip(Strings.GetString("Tooltips.Quit"))
-                };
+                GButton button = new GButton(0x1589, 0x22b, 4, new OnClick(Engine.Quit_OnClick));
+                button.Tooltip = new Tooltip(Strings.GetString("Tooltips.Quit"));
                 Gumps.Desktop.Children.Add(button);
                 DrawNow();
             }
@@ -1008,28 +1006,28 @@
                 {
                     if (cell.GetType() == typeof(DynamicItem))
                     {
-                        ((DynamicItem) cell).m_Item.OnSingleClick();
+                        ((DynamicItem)cell).m_Item.OnSingleClick();
                     }
                     else if (cell.GetType() == typeof(MobileCell))
                     {
-                        ((MobileCell) cell).m_Mobile.OnSingleClick();
+                        ((MobileCell)cell).m_Mobile.OnSingleClick();
                     }
                     else if (cell.GetType() == typeof(CorpseCell))
                     {
-                        Network.Send(new PLookRequest((CorpseCell) cell));
+                        Network.Send(new PLookRequest((CorpseCell)cell));
                     }
                     else if (cell.GetType() == typeof(StaticItem))
                     {
-                        string message = Localization.GetString(0xf9060 + (((StaticItem) cell).ID & 0x3fff)).Trim();
+                        string message = Localization.GetString(0xf9060 + (((StaticItem)cell).ID & 0x3fff)).Trim();
                         if (message.Length > 0)
                         {
-                            World.AddStaticMessage(((StaticItem) cell).Serial, message);
+                            World.AddStaticMessage(((StaticItem)cell).Serial, message);
                         }
                     }
                     else if (((cell.GetType() == typeof(LandTile)) && (Gumps.Drag != null)) && (Gumps.Drag.GetType() == typeof(GDraggedItem)))
                     {
-                        GDraggedItem drag = (GDraggedItem) Gumps.Drag;
-                        Network.Send(new PDropItem(drag.Item.Serial, tileX, tileY, (sbyte) (cell.Z + cell.Height), -1));
+                        GDraggedItem drag = (GDraggedItem)Gumps.Drag;
+                        Network.Send(new PDropItem(drag.Item.Serial, tileX, tileY, (sbyte)(cell.Z + cell.Height), -1));
                         Gumps.Destroy(drag);
                     }
                 }
@@ -1050,12 +1048,12 @@
             }
         }
 
-        private static void ClickTimer_OnTick(Timer t)
+        private static void ClickTimer_OnTick(Client.Timer t)
         {
             if (m_ClickList != null)
             {
-                Gump gump = (Gump) m_ClickList[0];
-                Point point = (Point) m_ClickList[1];
+                Gump gump = (Gump)m_ClickList[0];
+                Point point = (Client.Point)m_ClickList[1];
                 gump.OnSingleClick(point.X, point.Y);
             }
             else
@@ -1084,7 +1082,7 @@
                     int count = m_Plugins.Count;
                     for (int i = 0; i < count; i++)
                     {
-                        Plugin plugin = (Plugin) m_Plugins[i];
+                        Plugin plugin = (Plugin)m_Plugins[i];
                         if (plugin.OnCommandEntered(cmd))
                         {
                             return;
@@ -1104,63 +1102,63 @@
                         {
                             object obj2;
                             string[] strArray = cmd.Substring(". ".Length).Split(new char[] { ' ' });
-                            if (((strArray.Length > 0) && ((obj2 = strArray[0].ToLower()) != null)) && ((obj2 = <PrivateImplementationDetails>.$$method0x60008d2-1[obj2]) != null))
+                            if (((strArray.Length > 0) && ((obj2 = strArray[0].ToLower()) != null)) /*&& ((obj2 = <PrivateImplementationDetails>.$$method0x60008d2-1[obj2]) != null)*/)
                             {
-                                switch (((int) obj2))
+                                switch (((int)obj2))
                                 {
                                     case 0:
-                                    {
-                                        Gump g = Gumps.FindGumpByGUID("Volume");
-                                        if (g != null)
                                         {
-                                            Gumps.Destroy(g);
+                                            Gump g = Gumps.FindGumpByGUID("Volume");
+                                            if (g != null)
+                                            {
+                                                Gumps.Destroy(g);
+                                                break;
+                                            }
+                                            Gumps.Desktop.Children.Add(new GVolumeControl());
                                             break;
                                         }
-                                        Gumps.Desktop.Children.Add(new GVolumeControl());
-                                        break;
-                                    }
                                     case 1:
-                                    {
-                                        int num4 = 0;
-                                        try
                                         {
-                                            if (strArray.Length > 1)
+                                            int num4 = 0;
+                                            try
                                             {
-                                                num4 = Convert.ToInt32(strArray[1]);
+                                                if (strArray.Length > 1)
+                                                {
+                                                    num4 = Convert.ToInt32(strArray[1]);
+                                                }
                                             }
+                                            catch
+                                            {
+                                                num4 = 0;
+                                            }
+                                            if (num4 < 1)
+                                            {
+                                                AddTextMessage("Usage: DefaultRegs <amount>");
+                                            }
+                                            else
+                                            {
+                                                World.CharData.DefaultRegs = num4;
+                                                AddTextMessage(string.Format("Default reagent amount changed to {0}.", num4));
+                                            }
+                                            break;
                                         }
-                                        catch
-                                        {
-                                            num4 = 0;
-                                        }
-                                        if (num4 < 1)
-                                        {
-                                            AddTextMessage("Usage: DefaultRegs <amount>");
-                                        }
-                                        else
-                                        {
-                                            World.CharData.DefaultRegs = num4;
-                                            AddTextMessage(string.Format("Default reagent amount changed to {0}.", num4));
-                                        }
-                                        break;
-                                    }
                                     case 2:
-                                    {
-                                        bool flag = !World.CharData.AlwaysRun;
-                                        if ((strArray.Length <= 1) || !(strArray[0].ToLower() == "on"))
                                         {
-                                            if ((strArray.Length > 1) && (strArray[0].ToLower() == "off"))
+                                            bool flag = !World.CharData.AlwaysRun;
+                                            if ((strArray.Length <= 1) || (strArray[0].ToLower() != "on"))
                                             {
-                                                flag = false;
+                                                if ((strArray.Length > 1) && (strArray[0].ToLower() == "off"))
+                                                {
+                                                    flag = false;
+                                                }
                                             }
+                                            else
+                                            {
+                                                flag = true;
+                                            }
+                                            World.CharData.AlwaysRun = flag;
+                                            return;
                                         }
-                                        else
-                                        {
-                                            flag = true;
-                                        }
-                                        World.CharData.AlwaysRun = flag;
-                                        return;
-                                    }
                                     case 3:
                                         TargetHandler = new SetRegBagTargetHandler();
                                         AddTextMessage("Target your destination reagent container.");
@@ -1172,173 +1170,173 @@
                                         break;
 
                                     case 5:
-                                    {
-                                        int num5 = 0;
-                                        foreach (Mobile mobile2 in World.Mobiles.Values)
                                         {
-                                            if ((World.InRange(mobile2) && mobile2.Visible) && mobile2.m_IsFactionGuard)
+                                            int num5 = 0;
+                                            foreach (Mobile mobile2 in World.Mobiles.Values)
                                             {
-                                                mobile2.QueryStats();
-                                                mobile2.OpenStatus(false);
-                                                if (mobile2.StatusBar != null)
+                                                if ((World.InRange(mobile2) && mobile2.Visible) && mobile2.m_IsFactionGuard)
                                                 {
-                                                    mobile2.StatusBar.Gump.X = (GameX + 10) + ((num5 / 6) * (mobile2.StatusBar.Gump.Width + 10));
-                                                    mobile2.StatusBar.Gump.Y = (GameY + 10) + ((num5 % 6) * (mobile2.StatusBar.Gump.Height + 10));
-                                                    num5++;
+                                                    mobile2.QueryStats();
+                                                    mobile2.OpenStatus(false);
+                                                    if (mobile2.StatusBar != null)
+                                                    {
+                                                        mobile2.StatusBar.Gump.X = (GameX + 10) + ((num5 / 6) * (mobile2.StatusBar.Gump.Width + 10));
+                                                        mobile2.StatusBar.Gump.Y = (GameY + 10) + ((num5 % 6) * (mobile2.StatusBar.Gump.Height + 10));
+                                                        num5++;
+                                                    }
                                                 }
                                             }
+                                            break;
                                         }
-                                        break;
-                                    }
                                     case 6:
-                                    {
-                                        Mobile player = World.Player;
-                                        if (player != null)
                                         {
-                                            for (int j = 0; j < Multis.Items.Count; j++)
+                                            Mobile player = World.Player;
+                                            if (player != null)
                                             {
-                                                Item item = (Item) Multis.Items[j];
-                                                if (item.InWorld && item.IsMulti)
+                                                for (int j = 0; j < Multis.Items.Count; j++)
                                                 {
-                                                    CustomMultiEntry customMulti = CustomMultiLoader.GetCustomMulti(item.Serial, item.Revision);
-                                                    Multi m = null;
-                                                    if (customMulti != null)
+                                                    Item item = (Item)Multis.Items[j];
+                                                    if (item.InWorld && item.IsMulti)
                                                     {
-                                                        m = customMulti.Multi;
-                                                    }
-                                                    if (m == null)
-                                                    {
-                                                        m = item.Multi;
-                                                    }
-                                                    if ((m != null) && Multis.IsInMulti(item, m, player.X, player.Y, player.Z))
-                                                    {
-                                                        ArrayList dataStore = GetDataStore();
-                                                        foreach (Mobile mobile4 in World.Mobiles.Values)
+                                                        CustomMultiEntry customMulti = CustomMultiLoader.GetCustomMulti(item.Serial, item.Revision);
+                                                        Multi m = null;
+                                                        if (customMulti != null)
                                                         {
-                                                            switch (mobile4.Notoriety)
+                                                            m = customMulti.Multi;
+                                                        }
+                                                        if (m == null)
+                                                        {
+                                                            m = item.Multi;
+                                                        }
+                                                        if ((m != null) && Multis.IsInMulti(item, m, player.X, player.Y, player.Z))
+                                                        {
+                                                            ArrayList dataStore = GetDataStore();
+                                                            foreach (Mobile mobile4 in World.Mobiles.Values)
                                                             {
-                                                                case Notoriety.Attackable:
-                                                                case Notoriety.Criminal:
-                                                                case Notoriety.Enemy:
-                                                                case Notoriety.Murderer:
-                                                                    if ((((mobile4 != player) && !mobile4.Flags[MobileFlag.YellowHits]) && (!mobile4.m_IsFriend && mobile4.Visible)) && World.InRange(mobile4))
-                                                                    {
-                                                                        int xReal = mobile4.XReal;
-                                                                        int yReal = mobile4.YReal;
-                                                                        int zReal = mobile4.ZReal;
-                                                                        if (Multis.RunUO_IsInside(item, m, xReal, yReal, zReal))
+                                                                switch (mobile4.Notoriety)
+                                                                {
+                                                                    case Notoriety.Attackable:
+                                                                    case Notoriety.Criminal:
+                                                                    case Notoriety.Enemy:
+                                                                    case Notoriety.Murderer:
+                                                                        if ((((mobile4 != player) && !mobile4.Flags[MobileFlag.YellowHits]) && (!mobile4.m_IsFriend && mobile4.Visible)) && World.InRange(mobile4))
                                                                         {
-                                                                            dataStore.Add(mobile4);
+                                                                            int xReal = mobile4.XReal;
+                                                                            int yReal = mobile4.YReal;
+                                                                            int zReal = mobile4.ZReal;
+                                                                            if (Multis.RunUO_IsInside(item, m, xReal, yReal, zReal))
+                                                                            {
+                                                                                dataStore.Add(mobile4);
+                                                                            }
                                                                         }
-                                                                    }
-                                                                    break;
+                                                                        break;
+                                                                }
                                                             }
+                                                            if (dataStore.Count > 0)
+                                                            {
+                                                                dataStore.Sort(TargetSorter.Comparer);
+                                                                Mobile mobile5 = (Mobile)dataStore[0];
+                                                                Network.Send(new PUnicodeSpeech("; i ban thee"));
+                                                                Network.Send(new PTarget_Spoof(0, -559038737, ServerTargetFlags.None, mobile5.Serial, mobile5.X, mobile5.Y, mobile5.Z, mobile5.Body));
+                                                                PacketHandlers.m_CancelTarget = true;
+                                                            }
+                                                            ReleaseDataStore(dataStore);
+                                                            break;
                                                         }
-                                                        if (dataStore.Count > 0)
-                                                        {
-                                                            dataStore.Sort(TargetSorter.Comparer);
-                                                            Mobile mobile5 = (Mobile) dataStore[0];
-                                                            Network.Send(new PUnicodeSpeech("; i ban thee"));
-                                                            Network.Send(new PTarget_Spoof(0, -559038737, ServerTargetFlags.None, mobile5.Serial, mobile5.X, mobile5.Y, mobile5.Z, mobile5.Body));
-                                                            PacketHandlers.m_CancelTarget = true;
-                                                        }
-                                                        ReleaseDataStore(dataStore);
-                                                        break;
                                                     }
                                                 }
+                                                break;
                                             }
                                             break;
                                         }
-                                        break;
-                                    }
                                     case 7:
-                                    {
-                                        if (strArray.Length != 2)
                                         {
-                                            break;
-                                        }
-                                        int level = m_Multis.m_Level;
-                                        switch (strArray[1].ToLower())
-                                        {
-                                            case "0":
-                                            case "5":
-                                            case "off":
-                                                level = 5;
-                                                break;
-
-                                            case "1":
-                                                level = 1;
-                                                break;
-
-                                            case "2":
-                                                level = 2;
-                                                break;
-
-                                            case "3":
-                                                level = 3;
-                                                break;
-
-                                            case "4":
-                                                level = 4;
-                                                break;
-
-                                            case "up":
-                                                level++;
-                                                break;
-
-                                            case "down":
-                                                level--;
-                                                break;
-                                        }
-                                        if (level > 5)
-                                        {
-                                            level = 5;
-                                        }
-                                        else if (level < 1)
-                                        {
-                                            level = 1;
-                                        }
-                                        if (m_Multis.m_Level != level)
-                                        {
-                                            m_Multis.m_Level = level;
-                                            Map.Invalidate();
-                                        }
-                                        return;
-                                    }
-                                    case 8:
-                                    {
-                                        int defaultRegs = World.CharData.DefaultRegs;
-                                        try
-                                        {
-                                            if (strArray.Length > 1)
+                                            if (strArray.Length != 2)
                                             {
-                                                defaultRegs = Convert.ToInt32(strArray[1]);
+                                                break;
                                             }
-                                        }
-                                        catch
-                                        {
-                                            defaultRegs = World.CharData.DefaultRegs;
-                                        }
-                                        Item stock = World.CharData.Stock;
-                                        Item regBag = World.CharData.RegBag;
-                                        if ((stock != null) && (regBag != null))
-                                        {
-                                            MakeRegsTargetHandler.Transfer(stock, regBag, defaultRegs);
-                                        }
-                                        else
-                                        {
-                                            TargetHandler = new MakeRegsTargetHandler(defaultRegs, stock, regBag);
-                                            if (stock == null)
+                                            int level = m_Multis.m_Level;
+                                            switch (strArray[1].ToLower())
                                             {
-                                                AddTextMessage("Target your source reagent container.");
+                                                case "0":
+                                                case "5":
+                                                case "off":
+                                                    level = 5;
+                                                    break;
+
+                                                case "1":
+                                                    level = 1;
+                                                    break;
+
+                                                case "2":
+                                                    level = 2;
+                                                    break;
+
+                                                case "3":
+                                                    level = 3;
+                                                    break;
+
+                                                case "4":
+                                                    level = 4;
+                                                    break;
+
+                                                case "up":
+                                                    level++;
+                                                    break;
+
+                                                case "down":
+                                                    level--;
+                                                    break;
+                                            }
+                                            if (level > 5)
+                                            {
+                                                level = 5;
+                                            }
+                                            else if (level < 1)
+                                            {
+                                                level = 1;
+                                            }
+                                            if (m_Multis.m_Level != level)
+                                            {
+                                                m_Multis.m_Level = level;
+                                                Map.Invalidate();
+                                            }
+                                            return;
+                                        }
+                                    case 8:
+                                        {
+                                            int defaultRegs = World.CharData.DefaultRegs;
+                                            try
+                                            {
+                                                if (strArray.Length > 1)
+                                                {
+                                                    defaultRegs = Convert.ToInt32(strArray[1]);
+                                                }
+                                            }
+                                            catch
+                                            {
+                                                defaultRegs = World.CharData.DefaultRegs;
+                                            }
+                                            Item stock = World.CharData.Stock;
+                                            Item regBag = World.CharData.RegBag;
+                                            if ((stock != null) && (regBag != null))
+                                            {
+                                                MakeRegsTargetHandler.Transfer(stock, regBag, defaultRegs);
                                             }
                                             else
                                             {
-                                                AddTextMessage("Target your destination reagent container.");
+                                                TargetHandler = new MakeRegsTargetHandler(defaultRegs, stock, regBag);
+                                                if (stock == null)
+                                                {
+                                                    AddTextMessage("Target your source reagent container.");
+                                                }
+                                                else
+                                                {
+                                                    AddTextMessage("Target your destination reagent container.");
+                                                }
                                             }
+                                            break;
                                         }
-                                        break;
-                                    }
                                     case 9:
                                         if (m_QamList.Count <= 0)
                                         {
@@ -1375,338 +1373,338 @@
                                         break;
 
                                     case 14:
-                                    {
-                                        Mobile mob = World.Player;
-                                        if (mob != null)
                                         {
-                                            string mobilePath = Macros.GetMobilePath(mob);
-                                            string path = FileManager.BasePath(string.Format("Data/Plugins/Macros/{0}.txt", mobilePath));
-                                            string str8 = "Macros";
-                                            string str9 = FileManager.BasePath(string.Format("Data/Plugins/Macros/{0}.txt", str8));
-                                            if (GMacroEditorForm.IsOpen)
+                                            Mobile mob = World.Player;
+                                            if (mob != null)
                                             {
-                                                AddTextMessage("Close the macro editor before running this command.");
-                                            }
-                                            else if (File.Exists(path))
-                                            {
-                                                AddTextMessage("Macro definitions unique to your character were already found.");
-                                            }
-                                            else if (!File.Exists(str9))
-                                            {
-                                                AddTextMessage("No default macro definnitions were found.");
-                                            }
-                                            else
-                                            {
-                                                File.Copy(str9, path);
-                                                Macros.Load();
-                                                AddTextMessage("Default macro definitions have been copied. Any macro changes you make will now be unique to this character.");
+                                                string mobilePath = Macros.GetMobilePath(mob);
+                                                string path = FileManager.BasePath(string.Format("Data/Plugins/Macros/{0}.txt", mobilePath));
+                                                string str8 = "Macros";
+                                                string str9 = FileManager.BasePath(string.Format("Data/Plugins/Macros/{0}.txt", str8));
+                                                if (GMacroEditorForm.IsOpen)
+                                                {
+                                                    AddTextMessage("Close the macro editor before running this command.");
+                                                }
+                                                else if (System.IO.File.Exists(path))
+                                                {
+                                                    AddTextMessage("Macro definitions unique to your character were already found.");
+                                                }
+                                                else if (!System.IO.File.Exists(str9))
+                                                {
+                                                    AddTextMessage("No default macro definnitions were found.");
+                                                }
+                                                else
+                                                {
+                                                    System.IO.File.Copy(str9, path);
+                                                    Macros.Load();
+                                                    AddTextMessage("Default macro definitions have been copied. Any macro changes you make will now be unique to this character.");
+                                                }
+                                                break;
                                             }
                                             break;
                                         }
-                                        break;
-                                    }
                                     case 15:
                                         TargetHandler = new NullTargetHandler();
                                         break;
 
                                     case 0x10:
-                                    {
-                                        Mobile p = World.Player;
-                                        if (p != null)
                                         {
-                                            bool flag2 = false;
-                                            foreach (Mobile mobile8 in World.Mobiles.Values)
+                                            Mobile p = World.Player;
+                                            if (p != null)
                                             {
-                                                if (mobile8.InSquareRange(p, 8) && ((mobile8.Body == 400) || (mobile8.Body == 0x191)))
+                                                bool flag2 = false;
+                                                foreach (Mobile mobile8 in World.Mobiles.Values)
                                                 {
-                                                    Item item4 = mobile8.FindEquip(Layer.Shoes);
-                                                    if (((item4 != null) && (item4.Hue == 0)) && (((item4.ID == 0x1711) || (item4.ID == 0x170b)) || (item4.ID == 0x170c)))
+                                                    if (mobile8.InSquareRange(p, 8) && ((mobile8.Body == 400) || (mobile8.Body == 0x191)))
                                                     {
-                                                        item4 = mobile8.FindEquip(Layer.TwoHanded);
-                                                        if (((item4 != null) && (item4.Hue == 0)) && (((item4.ID == 0xe89) || (item4.ID == 0xe8a)) || ((item4.ID == 0xe81) || (item4.ID == 0xe82))))
+                                                        Item item4 = mobile8.FindEquip(Layer.Shoes);
+                                                        if (((item4 != null) && (item4.Hue == 0)) && (((item4.ID == 0x1711) || (item4.ID == 0x170b)) || (item4.ID == 0x170c)))
                                                         {
-                                                            m_ContextQueue = 0x17d7;
-                                                            m_BuyHorse = mobile8;
-                                                            Network.Send(new PPopupRequest(mobile8));
-                                                            mobile8.AddTextMessage("Vendor", "Buying horse.", DefaultFont, Hues.Load(0x59), false);
-                                                            flag2 = true;
-                                                            break;
+                                                            item4 = mobile8.FindEquip(Layer.TwoHanded);
+                                                            if (((item4 != null) && (item4.Hue == 0)) && (((item4.ID == 0xe89) || (item4.ID == 0xe8a)) || ((item4.ID == 0xe81) || (item4.ID == 0xe82))))
+                                                            {
+                                                                m_ContextQueue = 0x17d7;
+                                                                m_BuyHorse = mobile8;
+                                                                Network.Send(new PPopupRequest(mobile8));
+                                                                mobile8.AddTextMessage("Vendor", "Buying horse.", DefaultFont, Hues.Load(0x59), false);
+                                                                flag2 = true;
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                if (!flag2)
+                                                {
+                                                    AddTextMessage("Vendor not found.", DefaultFont, Hues.Load(0x26));
+                                                }
+                                                return;
+                                            }
+                                            break;
+                                        }
+                                    case 0x11:
+                                        {
+                                            Item item5 = World.FindItem(new PlayerDistanceValidator(new ItemIDValidator(new int[] { 0xf6c }), 1));
+                                            if (item5 != null)
+                                            {
+                                                item5.Use();
+                                                item5.AddTextMessage("Moongate", "Using.", DefaultFont, Hues.Load(0x59), false);
+                                                break;
+                                            }
+                                            AddTextMessage("Moongate not found.", DefaultFont, Hues.Load(0x26));
+                                            break;
+                                        }
+                                    case 0x12:
+                                        {
+                                            Gump drag = Gumps.Drag;
+                                            if (!(drag is GDraggedItem))
+                                            {
+                                                m_LeapFrog = null;
+                                                AddTextMessage("You are not holding an item. Leapfrog cleared.");
+                                                break;
+                                            }
+                                            m_LeapFrog = ((GDraggedItem)drag).Item;
+                                            AddTextMessage("Item set.");
+                                            break;
+                                        }
+                                    case 0x13:
+                                        {
+                                            IItemValidator check = new PlayerDistanceValidator(new ItemIDValidator(new int[] { 0x2006 }), 2);
+                                            Item[] itemArray = World.FindItems(check);
+                                            ArrayList list2 = new ArrayList();
+                                            AosAppraiser appraiser = LootAppraiser.Instance;
+                                            for (int k = 0; k < itemArray.Length; k++)
+                                            {
+                                                Item item6 = itemArray[k];
+                                                if ((item6.LastTextHue == null) || ((item6.LastTextHue.HueID() & 0x7fff) != 0x59))
+                                                {
+                                                    AosAppraiser.m_BlueCorpse = false;
+                                                    ArrayList list3 = item6.Items;
+                                                    for (int n = 0; n < list3.Count; n++)
+                                                    {
+                                                        Item item7 = (Item)list3[n];
+                                                        Appraisal appraisal = appraiser.Appraise(item7);
+                                                        if (appraisal != null)
+                                                        {
+                                                            list2.Add(appraisal);
                                                         }
                                                     }
                                                 }
                                             }
-                                            if (!flag2)
+                                            if (list2.Count > 0)
                                             {
-                                                AddTextMessage("Vendor not found.", DefaultFont, Hues.Load(0x26));
-                                            }
-                                            return;
-                                        }
-                                        break;
-                                    }
-                                    case 0x11:
-                                    {
-                                        Item item5 = World.FindItem(new PlayerDistanceValidator(new ItemIDValidator(new int[] { 0xf6c }), 1));
-                                        if (item5 != null)
-                                        {
-                                            item5.Use();
-                                            item5.AddTextMessage("Moongate", "Using.", DefaultFont, Hues.Load(0x59), false);
-                                            break;
-                                        }
-                                        AddTextMessage("Moongate not found.", DefaultFont, Hues.Load(0x26));
-                                        break;
-                                    }
-                                    case 0x12:
-                                    {
-                                        Gump drag = Gumps.Drag;
-                                        if (!(drag is GDraggedItem))
-                                        {
-                                            m_LeapFrog = null;
-                                            AddTextMessage("You are not holding an item. Leapfrog cleared.");
-                                            break;
-                                        }
-                                        m_LeapFrog = ((GDraggedItem) drag).Item;
-                                        AddTextMessage("Item set.");
-                                        break;
-                                    }
-                                    case 0x13:
-                                    {
-                                        IItemValidator check = new PlayerDistanceValidator(new ItemIDValidator(new int[] { 0x2006 }), 2);
-                                        Item[] itemArray = World.FindItems(check);
-                                        ArrayList list2 = new ArrayList();
-                                        AosAppraiser instance = LootAppraiser.Instance;
-                                        for (int k = 0; k < itemArray.Length; k++)
-                                        {
-                                            Item item6 = itemArray[k];
-                                            if ((item6.LastTextHue == null) || ((item6.LastTextHue.HueID() & 0x7fff) != 0x59))
-                                            {
-                                                AosAppraiser.m_BlueCorpse = false;
-                                                ArrayList items = item6.Items;
-                                                for (int n = 0; n < items.Count; n++)
+                                                list2.Sort();
+                                                Appraisal appraisal2 = (Appraisal)list2[0];
+                                                Item item8 = appraisal2.Item;
+                                                ObjectPropertyList propertyList = item8.PropertyList;
+                                                string text = null;
+                                                if (propertyList.Properties.Length > 0)
                                                 {
-                                                    Item item7 = (Item) items[n];
-                                                    Appraisal appraisal = instance.Appraise(item7);
-                                                    if (appraisal != null)
-                                                    {
-                                                        list2.Add(appraisal);
-                                                    }
+                                                    text = propertyList.Properties[0].Text;
                                                 }
-                                            }
-                                        }
-                                        if (list2.Count > 0)
-                                        {
-                                            list2.Sort();
-                                            Appraisal appraisal2 = (Appraisal) list2[0];
-                                            Item item8 = appraisal2.Item;
-                                            ObjectPropertyList propertyList = item8.PropertyList;
-                                            string text = null;
-                                            if (propertyList.Properties.Length > 0)
-                                            {
-                                                text = propertyList.Properties[0].Text;
-                                            }
-                                            if ((text == null) || (text == ""))
-                                            {
-                                                text = Localization.GetString(0xf9060 + (item8.ID & 0x3fff));
-                                            }
-                                            string str11 = string.Format("Looting {0}.", text);
-                                            if (list2.Count > 1)
-                                            {
-                                                str11 = string.Format("{0} There are {1} other valued item{2} to loot.", str11, list2.Count - 1, (list2.Count == 2) ? "" : "s");
-                                            }
-                                            AddTextMessage(str11, DefaultFont, Hues.Load(0x35));
-                                            Mobile mobile9 = World.Player;
-                                            if (mobile9 != null)
-                                            {
-                                                Network.Send(new PPickupItem(item8, item8.Amount));
-                                                Network.Send(new PDropItem(item8.Serial, -1, -1, 0, mobile9.Serial));
-                                            }
-                                        }
-                                        else
-                                        {
-                                            AddTextMessage("Nothing was found to loot.", DefaultFont, Hues.Load(0x22));
-                                        }
-                                        break;
-                                    }
-                                    case 20:
-                                    {
-                                        IItemValidator validator2 = new PlayerDistanceValidator(new ItemIDValidator(new int[] { 0x2006 }), 2);
-                                        Item[] itemArray2 = World.FindItems(validator2);
-                                        ArrayList list5 = new ArrayList();
-                                        AosAppraiser appraiser2 = LootAppraiser.Instance;
-                                        for (int num14 = 0; num14 < itemArray2.Length; num14++)
-                                        {
-                                            Item item9 = itemArray2[num14];
-                                            if ((item9.LastTextHue != null) && ((item9.LastTextHue.HueID() & 0x7fff) == 0x59))
-                                            {
-                                                AosAppraiser.m_BlueCorpse = true;
+                                                if ((text == null) || (text == ""))
+                                                {
+                                                    text = Localization.GetString(0xf9060 + (item8.ID & 0x3fff));
+                                                }
+                                                string str11 = string.Format("Looting {0}.", text);
+                                                if (list2.Count > 1)
+                                                {
+                                                    str11 = string.Format("{0} There are {1} other valued item{2} to loot.", str11, list2.Count - 1, (list2.Count == 2) ? "" : "s");
+                                                }
+                                                AddTextMessage(str11, DefaultFont, Hues.Load(0x35));
+                                                Mobile mobile9 = World.Player;
+                                                if (mobile9 != null)
+                                                {
+                                                    Network.Send(new PPickupItem(item8, item8.Amount));
+                                                    Network.Send(new PDropItem(item8.Serial, -1, -1, 0, mobile9.Serial));
+                                                }
                                             }
                                             else
                                             {
-                                                AosAppraiser.m_BlueCorpse = false;
+                                                AddTextMessage("Nothing was found to loot.", DefaultFont, Hues.Load(0x22));
                                             }
-                                            ArrayList list6 = item9.Items;
-                                            for (int num15 = 0; num15 < list6.Count; num15++)
+                                            break;
+                                        }
+                                    case 20:
+                                        {
+                                            IItemValidator validator2 = new PlayerDistanceValidator(new ItemIDValidator(new int[] { 0x2006 }), 2);
+                                            Item[] itemArray2 = World.FindItems(validator2);
+                                            ArrayList list5 = new ArrayList();
+                                            AosAppraiser appraiser2 = LootAppraiser.Instance;
+                                            for (int num14 = 0; num14 < itemArray2.Length; num14++)
                                             {
-                                                Item item10 = (Item) list6[num15];
-                                                Appraisal appraisal3 = appraiser2.Appraise(item10);
-                                                if ((appraisal3 != null) && !appraisal3.IsWorthless)
+                                                Item item9 = itemArray2[num14];
+                                                if ((item9.LastTextHue != null) && ((item9.LastTextHue.HueID() & 0x7fff) == 0x59))
                                                 {
-                                                    list5.Add(appraisal3);
+                                                    AosAppraiser.m_BlueCorpse = true;
                                                 }
-                                            }
-                                        }
-                                        if (list5.Count > 0)
-                                        {
-                                            list5.Sort();
-                                            Appraisal appraisal4 = (Appraisal) list5[0];
-                                            Item item11 = appraisal4.Item;
-                                            ObjectPropertyList list7 = item11.PropertyList;
-                                            string str12 = null;
-                                            if (list7.Properties.Length > 0)
-                                            {
-                                                str12 = list7.Properties[0].Text;
-                                            }
-                                            if ((str12 == null) || (str12 == ""))
-                                            {
-                                                str12 = Localization.GetString(0xf9060 + (item11.ID & 0x3fff));
-                                            }
-                                            string str13 = string.Format("Looting {0}.", str12);
-                                            if (list5.Count > 1)
-                                            {
-                                                str13 = string.Format("{0} There are {1} other valued item{2} to loot.", str13, list5.Count - 1, (list5.Count == 2) ? "" : "s");
-                                            }
-                                            AddTextMessage(str13, DefaultFont, Hues.Load(0x35));
-                                            Mobile mobile10 = World.Player;
-                                            if (mobile10 != null)
-                                            {
-                                                Network.Send(new PPickupItem(item11, item11.Amount));
-                                                Network.Send(new PDropItem(item11.Serial, -1, -1, 0, mobile10.Serial));
-                                            }
-                                        }
-                                        else
-                                        {
-                                            AddTextMessage("Nothing was found to loot.", DefaultFont, Hues.Load(0x22));
-                                        }
-                                        break;
-                                    }
-                                    case 0x15:
-                                    {
-                                        IPAddress address;
-                                        int num16;
-                                        if (strArray.Length != 5)
-                                        {
-                                            AddTextMessage("Usage: uoam <name> <password> <address> <port>");
-                                            break;
-                                        }
-                                        string username = strArray[1];
-                                        string password = strArray[2];
-                                        try
-                                        {
-                                            address = IPAddress.Parse(strArray[3]);
-                                            num16 = Convert.ToInt32(strArray[4]);
-                                        }
-                                        catch
-                                        {
-                                            AddTextMessage("Usage: uoam <name> <password> <address> <port>");
-                                            break;
-                                        }
-                                        UOAM.Connect(username, password, address, num16);
-                                        break;
-                                    }
-                                    case 0x16:
-                                    {
-                                        MapPackage cache = Map.GetCache();
-                                        if (cache.cells != null)
-                                        {
-                                            Mobile mobile11 = World.Player;
-                                            if (mobile11 != null)
-                                            {
-                                                int num17 = mobile11.X - cache.CellX;
-                                                int num18 = mobile11.Y - cache.CellY;
-                                                if (((num17 >= 0) && (num17 < cache.cells.GetLength(0))) && ((num18 >= 0) && (num18 < cache.cells.GetLength(1))))
+                                                else
                                                 {
-                                                    ArrayList list8 = cache.cells[num17, num18];
-                                                    if (list8 != null)
+                                                    AosAppraiser.m_BlueCorpse = false;
+                                                }
+                                                ArrayList list6 = item9.Items;
+                                                for (int num15 = 0; num15 < list6.Count; num15++)
+                                                {
+                                                    Item item10 = (Item)list6[num15];
+                                                    Appraisal appraisal3 = appraiser2.Appraise(item10);
+                                                    if ((appraisal3 != null) && !appraisal3.IsWorthless)
                                                     {
-                                                        if (list8.Count <= 0)
-                                                        {
-                                                            AddTextMessage("Nothing there.");
-                                                            break;
-                                                        }
-                                                        ICell cell = (ICell) list8[list8.Count - 1];
-                                                        if (!(cell is MobileCell))
-                                                        {
-                                                            if (cell is DynamicItem)
-                                                            {
-                                                                Target(((DynamicItem) cell).m_Item);
-                                                            }
-                                                            else if (cell is StaticItem)
-                                                            {
-                                                                Target(new StaticTarget(mobile11.X, mobile11.Y, ((StaticItem) cell).m_Z, ((StaticItem) cell).m_RealID, ((StaticItem) cell).m_RealID, ((StaticItem) cell).m_Hue));
-                                                            }
-                                                            else if (cell is LandTile)
-                                                            {
-                                                                Target(new LandTarget(mobile11.X, mobile11.Y, ((LandTile) cell).m_Z));
-                                                            }
-                                                            break;
-                                                        }
-                                                        Target(((MobileCell) cell).m_Mobile);
+                                                        list5.Add(appraisal3);
                                                     }
                                                 }
                                             }
+                                            if (list5.Count > 0)
+                                            {
+                                                list5.Sort();
+                                                Appraisal appraisal4 = (Appraisal)list5[0];
+                                                Item item11 = appraisal4.Item;
+                                                ObjectPropertyList list7 = item11.PropertyList;
+                                                string str12 = null;
+                                                if (list7.Properties.Length > 0)
+                                                {
+                                                    str12 = list7.Properties[0].Text;
+                                                }
+                                                if ((str12 == null) || (str12 == ""))
+                                                {
+                                                    str12 = Localization.GetString(0xf9060 + (item11.ID & 0x3fff));
+                                                }
+                                                string str13 = string.Format("Looting {0}.", str12);
+                                                if (list5.Count > 1)
+                                                {
+                                                    str13 = string.Format("{0} There are {1} other valued item{2} to loot.", str13, list5.Count - 1, (list5.Count == 2) ? "" : "s");
+                                                }
+                                                AddTextMessage(str13, DefaultFont, Hues.Load(0x35));
+                                                Mobile mobile10 = World.Player;
+                                                if (mobile10 != null)
+                                                {
+                                                    Network.Send(new PPickupItem(item11, item11.Amount));
+                                                    Network.Send(new PDropItem(item11.Serial, -1, -1, 0, mobile10.Serial));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                AddTextMessage("Nothing was found to loot.", DefaultFont, Hues.Load(0x22));
+                                            }
+                                            break;
                                         }
-                                        break;
-                                    }
+                                    case 0x15:
+                                        {
+                                            IPAddress address;
+                                            int num16;
+                                            if (strArray.Length != 5)
+                                            {
+                                                AddTextMessage("Usage: uoam <name> <password> <address> <port>");
+                                                break;
+                                            }
+                                            string username = strArray[1];
+                                            string password = strArray[2];
+                                            try
+                                            {
+                                                address = IPAddress.Parse(strArray[3]);
+                                                num16 = Convert.ToInt32(strArray[4]);
+                                            }
+                                            catch
+                                            {
+                                                AddTextMessage("Usage: uoam <name> <password> <address> <port>");
+                                                break;
+                                            }
+                                            UOAM.Connect(username, password, address, num16);
+                                            break;
+                                        }
+                                    case 0x16:
+                                        {
+                                            MapPackage cache = Map.GetCache();
+                                            if (cache.cells != null)
+                                            {
+                                                Mobile mobile11 = World.Player;
+                                                if (mobile11 != null)
+                                                {
+                                                    int num17 = mobile11.X - cache.CellX;
+                                                    int num18 = mobile11.Y - cache.CellY;
+                                                    if (((num17 >= 0) && (num17 < cache.cells.GetLength(0))) && ((num18 >= 0) && (num18 < cache.cells.GetLength(1))))
+                                                    {
+                                                        ArrayList list8 = cache.cells[num17, num18];
+                                                        if (list8 != null)
+                                                        {
+                                                            if (list8.Count <= 0)
+                                                            {
+                                                                AddTextMessage("Nothing there.");
+                                                                break;
+                                                            }
+                                                            ICell cell = (ICell)list8[list8.Count - 1];
+                                                            if (!(cell is MobileCell))
+                                                            {
+                                                                if (cell is DynamicItem)
+                                                                {
+                                                                    Target(((DynamicItem)cell).m_Item);
+                                                                }
+                                                                else if (cell is StaticItem)
+                                                                {
+                                                                    Target(new StaticTarget(mobile11.X, mobile11.Y, ((StaticItem)cell).m_Z, ((StaticItem)cell).m_RealID, ((StaticItem)cell).m_RealID, ((StaticItem)cell).m_Hue));
+                                                                }
+                                                                else if (cell is LandTile)
+                                                                {
+                                                                    Target(new LandTarget(mobile11.X, mobile11.Y, ((LandTile)cell).m_Z));
+                                                                }
+                                                                break;
+                                                            }
+                                                            Target(((MobileCell)cell).m_Mobile);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            break;
+                                        }
                                     case 0x17:
                                         m_AlternateFont = !m_AlternateFont;
                                         AddTextMessage(string.Format("Alternate font is now {0}.", m_AlternateFont ? "on" : "off"));
                                         break;
 
                                     case 0x18:
-                                    {
-                                        bool flag3 = !m_Sounds.Enabled;
-                                        try
                                         {
-                                            flag3 = strArray[1].ToLower() != "off";
-                                        }
-                                        catch
-                                        {
-                                            flag3 = !m_Sounds.Enabled;
-                                        }
-                                        m_Sounds.Enabled = flag3;
-                                        AddTextMessage(string.Format("Sounds are now {0}.", flag3 ? "on" : "off"));
-                                        break;
-                                    }
-                                    case 0x19:
-                                    {
-                                        bool flag4 = !World.CharData.QueueTargets;
-                                        try
-                                        {
-                                            flag4 = strArray[1].ToLower() != "off";
-                                        }
-                                        catch
-                                        {
-                                            flag4 = !World.CharData.QueueTargets;
-                                        }
-                                        World.CharData.QueueTargets = flag4;
-                                        AddTextMessage(string.Format("Target queueing is now {0}.", flag4 ? "on" : "off"));
-                                        break;
-                                    }
-                                    case 0x1a:
-                                    {
-                                        IEnumerator enumerator = World.Mobiles.Values.GetEnumerator();
-                                        int num19 = 0;
-                                        while (enumerator.MoveNext())
-                                        {
-                                            Mobile current = (Mobile) enumerator.Current;
-                                            if (((current.Visible && (current.Notoriety == Notoriety.Murderer)) && (!current.Human && !current.Ghost)) && World.InRange(current))
+                                            bool flag3 = !m_Sounds.Enabled;
+                                            try
                                             {
-                                                Timer timer = new Timer(new OnTick(Engine.DelayedPackets_OnTick), num19++ * 0x4e2, 1);
-                                                timer.SetTag("Packets", new Packet[] { new PAttackRequest(current) });
-                                                timer.Start(false);
+                                                flag3 = strArray[1].ToLower() != "off";
                                             }
+                                            catch
+                                            {
+                                                flag3 = !m_Sounds.Enabled;
+                                            }
+                                            m_Sounds.Enabled = flag3;
+                                            AddTextMessage(string.Format("Sounds are now {0}.", flag3 ? "on" : "off"));
+                                            break;
                                         }
-                                        break;
-                                    }
+                                    case 0x19:
+                                        {
+                                            bool flag4 = !World.CharData.QueueTargets;
+                                            try
+                                            {
+                                                flag4 = strArray[1].ToLower() != "off";
+                                            }
+                                            catch
+                                            {
+                                                flag4 = !World.CharData.QueueTargets;
+                                            }
+                                            World.CharData.QueueTargets = flag4;
+                                            AddTextMessage(string.Format("Target queueing is now {0}.", flag4 ? "on" : "off"));
+                                            break;
+                                        }
+                                    case 0x1a:
+                                        {
+                                            IEnumerator enumerator = World.Mobiles.Values.GetEnumerator();
+                                            int num19 = 0;
+                                            while (enumerator.MoveNext())
+                                            {
+                                                Mobile current = (Mobile)enumerator.Current;
+                                                if (((current.Visible && (current.Notoriety == Notoriety.Murderer)) && (!current.Human && !current.Ghost)) && World.InRange(current))
+                                                {
+                                                    Timer timer = new Timer(new OnTick(Engine.DelayedPackets_OnTick), num19++ * 0x4e2, 1);
+                                                    timer.SetTag("Packets", new Packet[] { new PAttackRequest(current) });
+                                                    timer.Start(false);
+                                                }
+                                            }
+                                            break;
+                                        }
                                     case 0x1b:
                                         TargetHandler = new MoveTargetHandler();
                                         AddTextMessage("Target one of the items to move.");
@@ -1723,32 +1721,32 @@
                                         break;
 
                                     case 30:
-                                    {
-                                        NotoQueryType on = (NotoQueryType) ((1 + World.CharData.NotoQuery) % 3);
-                                        try
                                         {
-                                            switch (strArray[1].ToLower())
+                                            NotoQueryType on = (NotoQueryType)((1 + (int)World.CharData.NotoQuery) % 3);
+                                            try
                                             {
-                                                case "on":
-                                                    on = NotoQueryType.On;
-                                                    break;
+                                                switch (strArray[1].ToLower())
+                                                {
+                                                    case "on":
+                                                        on = NotoQueryType.On;
+                                                        break;
 
-                                                case "off":
-                                                    on = NotoQueryType.Off;
-                                                    break;
+                                                    case "off":
+                                                        on = NotoQueryType.Off;
+                                                        break;
 
-                                                case "smart":
-                                                    on = NotoQueryType.Smart;
-                                                    break;
+                                                    case "smart":
+                                                        on = NotoQueryType.Smart;
+                                                        break;
+                                                }
                                             }
+                                            catch
+                                            {
+                                            }
+                                            World.CharData.NotoQuery = on;
+                                            AddTextMessage(string.Format("Notoriety query is now {0}.", on.ToString().ToLower()));
+                                            break;
                                         }
-                                        catch
-                                        {
-                                        }
-                                        World.CharData.NotoQuery = on;
-                                        AddTextMessage(string.Format("Notoriety query is now {0}.", on.ToString().ToLower()));
-                                        break;
-                                    }
                                     case 0x1f:
                                         Network.Send(new PWrestleDisarm());
                                         break;
@@ -1758,20 +1756,20 @@
                                         break;
 
                                     case 0x21:
-                                    {
-                                        bool flag5 = !GFader.Fade;
-                                        try
                                         {
-                                            flag5 = strArray[1].ToLower() != "off";
+                                            bool flag5 = !GFader.Fade;
+                                            try
+                                            {
+                                                flag5 = strArray[1].ToLower() != "off";
+                                            }
+                                            catch
+                                            {
+                                                flag5 = !GFader.Fade;
+                                            }
+                                            GFader.Fade = flag5;
+                                            AddTextMessage(string.Format("Interface fading is now {0}.", flag5 ? "on" : "off"));
+                                            break;
                                         }
-                                        catch
-                                        {
-                                            flag5 = !GFader.Fade;
-                                        }
-                                        GFader.Fade = flag5;
-                                        AddTextMessage(string.Format("Interface fading is now {0}.", flag5 ? "on" : "off"));
-                                        break;
-                                    }
                                     case 0x22:
                                         TargetHandler = new DragToBagTargetHandler(false);
                                         AddTextMessage("Target one of the items to move.");
@@ -1783,37 +1781,37 @@
                                         break;
 
                                     case 0x24:
-                                    {
-                                        int xOffset = 0;
-                                        int yOffset = 0;
-                                        if ((strArray.Length == 3) || (strArray.Length == 1))
                                         {
-                                            if (strArray.Length == 3)
+                                            int xOffset = 0;
+                                            int yOffset = 0;
+                                            if ((strArray.Length == 3) || (strArray.Length == 1))
                                             {
-                                                try
+                                                if (strArray.Length == 3)
                                                 {
-                                                    xOffset = Convert.ToInt32(strArray[1]);
+                                                    try
+                                                    {
+                                                        xOffset = Convert.ToInt32(strArray[1]);
+                                                    }
+                                                    catch
+                                                    {
+                                                    }
+                                                    try
+                                                    {
+                                                        yOffset = Convert.ToInt32(strArray[2]);
+                                                    }
+                                                    catch
+                                                    {
+                                                    }
                                                 }
-                                                catch
-                                                {
-                                                }
-                                                try
-                                                {
-                                                    yOffset = Convert.ToInt32(strArray[2]);
-                                                }
-                                                catch
-                                                {
-                                                }
+                                                TargetHandler = new BringToTargetHandler(xOffset, yOffset);
+                                                AddTextMessage("Target the destination item.");
                                             }
-                                            TargetHandler = new BringToTargetHandler(xOffset, yOffset);
-                                            AddTextMessage("Target the destination item.");
+                                            else
+                                            {
+                                                AddTextMessage("Format: bringto [x y]");
+                                            }
+                                            break;
                                         }
-                                        else
-                                        {
-                                            AddTextMessage("Format: bringto [x y]");
-                                        }
-                                        break;
-                                    }
                                     case 0x25:
                                         Ignore();
                                         break;
@@ -1839,66 +1837,66 @@
                                         break;
 
                                     case 0x2a:
-                                    {
-                                        bool flag6 = !NewConfig.SmoothWalk;
-                                        try
                                         {
-                                            flag6 = strArray[1].ToLower() != "off";
+                                            bool flag6 = !NewConfig.SmoothWalk;
+                                            try
+                                            {
+                                                flag6 = strArray[1].ToLower() != "off";
+                                            }
+                                            catch
+                                            {
+                                                flag6 = !NewConfig.SmoothWalk;
+                                            }
+                                            NewConfig.SmoothWalk = flag6;
+                                            AddTextMessage(string.Format("Smooth walking is now {0}.", flag6 ? "on" : "off"));
+                                            break;
                                         }
-                                        catch
-                                        {
-                                            flag6 = !NewConfig.SmoothWalk;
-                                        }
-                                        NewConfig.SmoothWalk = flag6;
-                                        AddTextMessage(string.Format("Smooth walking is now {0}.", flag6 ? "on" : "off"));
-                                        break;
-                                    }
                                     case 0x2b:
-                                    {
-                                        int num22 = 100;
-                                        try
                                         {
-                                            num22 = Convert.ToInt32(cmd.Split(new char[] { ' ' })[1]);
+                                            int num22 = 100;
+                                            try
+                                            {
+                                                num22 = Convert.ToInt32(cmd.Split(new char[] { ' ' })[1]);
+                                            }
+                                            catch
+                                            {
+                                                num22 = 100;
+                                            }
+                                            Timer timer2 = new Timer(new OnTick(Engine.TimeRefresh_OnTick), 1, 1);
+                                            timer2.SetTag("Frames", num22);
+                                            timer2.Start(false);
+                                            break;
                                         }
-                                        catch
-                                        {
-                                            num22 = 100;
-                                        }
-                                        Timer timer2 = new Timer(new OnTick(Engine.TimeRefresh_OnTick), 1, 1);
-                                        timer2.SetTag("Frames", num22);
-                                        timer2.Start(false);
-                                        break;
-                                    }
                                     case 0x2c:
-                                    {
-                                        string str16 = null;
-                                        try
                                         {
-                                            str16 = strArray[1];
-                                        }
-                                        catch
-                                        {
+                                            string str16 = null;
+                                            try
+                                            {
+                                                str16 = strArray[1];
+                                            }
+                                            catch
+                                            {
+                                                AddTextMessage("Format: music <on | off | stop>");
+                                                break;
+                                            }
+                                            switch (str16.ToLower())
+                                            {
+                                                case "on":
+                                                    NewConfig.PlayMusic = true;
+                                                    return;
+
+                                                case "off":
+                                                    NewConfig.PlayMusic = false;
+                                                    Music.Stop();
+                                                    return;
+
+                                                case "stop":
+                                                    Music.Stop();
+                                                    return;
+                                            }
                                             AddTextMessage("Format: music <on | off | stop>");
                                             break;
                                         }
-                                        switch (str16.ToLower())
-                                        {
-                                            case "on":
-                                                NewConfig.PlayMusic = true;
-                                                return;
-
-                                            case "off":
-                                                NewConfig.PlayMusic = false;
-                                                Music.Stop();
-                                                return;
-
-                                            case "stop":
-                                                Music.Stop();
-                                                return;
-                                        }
-                                        AddTextMessage("Format: music <on | off | stop>");
-                                        break;
-                                    }
                                     case 0x2d:
                                         TargetHandler = new TraceTargetHandler();
                                         AddTextMessage("Target the dynamic item or mobile to trace.");
@@ -1910,129 +1908,129 @@
                                         break;
 
                                     case 0x2f:
-                                    {
-                                        if (!GMPrivs)
                                         {
-                                            AddTextMessage("You do not have access to this command.");
-                                            break;
-                                        }
-                                        string str17 = null;
-                                        try
-                                        {
-                                            str17 = strArray[1];
-                                        }
-                                        catch
-                                        {
-                                            AddTextMessage("Format: ack <number>");
-                                            break;
-                                        }
-                                        try
-                                        {
-                                            m_WalkAckSync = Convert.ToInt32(str17);
-                                        }
-                                        catch
-                                        {
-                                            AddTextMessage("Format: ack <number>");
-                                            break;
-                                        }
-                                        AddTextMessage(string.Format("Maximum outstanding walk requests: {0}", m_WalkAckSync));
-                                        break;
-                                    }
-                                    case 0x30:
-                                    {
-                                        if (!GMPrivs)
-                                        {
-                                            AddTextMessage("You do not have access to this command.");
-                                            break;
-                                        }
-                                        string str18 = null;
-                                        try
-                                        {
-                                            str18 = strArray[1];
-                                        }
-                                        catch
-                                        {
-                                            AddTextMessage("Format: runspeed <number>");
-                                            break;
-                                        }
-                                        try
-                                        {
-                                            m_RunSpeed = ((float) Convert.ToInt32(str18)) / 1000f;
-                                        }
-                                        catch
-                                        {
-                                            AddTextMessage("Format: runspeed <number>");
-                                            break;
-                                        }
-                                        AddTextMessage(string.Format("Run speed set to: {0} seconds", m_RunSpeed));
-                                        break;
-                                    }
-                                    case 0x31:
-                                    {
-                                        if (!GMPrivs)
-                                        {
-                                            AddTextMessage("You do not have access to this command.");
-                                            break;
-                                        }
-                                        string str19 = null;
-                                        try
-                                        {
-                                            str19 = strArray[1];
-                                        }
-                                        catch
-                                        {
-                                            AddTextMessage("Format: walkspeed <number>");
-                                            break;
-                                        }
-                                        try
-                                        {
-                                            m_WalkSpeed = ((float) Convert.ToInt32(str19)) / 1000f;
-                                        }
-                                        catch
-                                        {
-                                            AddTextMessage("Format: walkspeed <number>");
-                                            break;
-                                        }
-                                        AddTextMessage(string.Format("Walk speed set to: {0} seconds", m_WalkSpeed));
-                                        break;
-                                    }
-                                    case 50:
-                                    {
-                                        if (!GMPrivs)
-                                        {
-                                            AddTextMessage("You do not have access to this command.");
-                                            break;
-                                        }
-                                        string str20 = null;
-                                        try
-                                        {
-                                            str20 = strArray[1];
-                                        }
-                                        catch
-                                        {
-                                        }
-                                        if (str20 == "on")
-                                        {
-                                            m_Weather = true;
-                                            AddTextMessage("Weather turned on.");
-                                        }
-                                        else if (str20 == "off")
-                                        {
-                                            m_Weather = false;
-                                            PacketHandlers.ClearWeather();
-                                            AddTextMessage("Weather turned off.");
-                                        }
-                                        else
-                                        {
-                                            m_Weather = !m_Weather;
-                                            if (!m_Weather)
+                                            if (!GMPrivs)
                                             {
-                                                PacketHandlers.ClearWeather();
+                                                AddTextMessage("You do not have access to this command.");
+                                                break;
                                             }
-                                            AddTextMessage(string.Format("Weather turned {0}.", m_Weather ? "on" : "off"));
+                                            string str17 = null;
+                                            try
+                                            {
+                                                str17 = strArray[1];
+                                            }
+                                            catch
+                                            {
+                                                AddTextMessage("Format: ack <number>");
+                                                break;
+                                            }
+                                            try
+                                            {
+                                                m_WalkAckSync = Convert.ToInt32(str17);
+                                            }
+                                            catch
+                                            {
+                                                AddTextMessage("Format: ack <number>");
+                                                break;
+                                            }
+                                            AddTextMessage(string.Format("Maximum outstanding walk requests: {0}", m_WalkAckSync));
+                                            break;
                                         }
-                                        break;
-                                    }
+                                    case 0x30:
+                                        {
+                                            if (!GMPrivs)
+                                            {
+                                                AddTextMessage("You do not have access to this command.");
+                                                break;
+                                            }
+                                            string str18 = null;
+                                            try
+                                            {
+                                                str18 = strArray[1];
+                                            }
+                                            catch
+                                            {
+                                                AddTextMessage("Format: runspeed <number>");
+                                                break;
+                                            }
+                                            try
+                                            {
+                                                m_RunSpeed = ((float)Convert.ToInt32(str18)) / 1000f;
+                                            }
+                                            catch
+                                            {
+                                                AddTextMessage("Format: runspeed <number>");
+                                                break;
+                                            }
+                                            AddTextMessage(string.Format("Run speed set to: {0} seconds", m_RunSpeed));
+                                            break;
+                                        }
+                                    case 0x31:
+                                        {
+                                            if (!GMPrivs)
+                                            {
+                                                AddTextMessage("You do not have access to this command.");
+                                                break;
+                                            }
+                                            string str19 = null;
+                                            try
+                                            {
+                                                str19 = strArray[1];
+                                            }
+                                            catch
+                                            {
+                                                AddTextMessage("Format: walkspeed <number>");
+                                                break;
+                                            }
+                                            try
+                                            {
+                                                m_WalkSpeed = ((float)Convert.ToInt32(str19)) / 1000f;
+                                            }
+                                            catch
+                                            {
+                                                AddTextMessage("Format: walkspeed <number>");
+                                                break;
+                                            }
+                                            AddTextMessage(string.Format("Walk speed set to: {0} seconds", m_WalkSpeed));
+                                            break;
+                                        }
+                                    case 50:
+                                        {
+                                            if (!GMPrivs)
+                                            {
+                                                AddTextMessage("You do not have access to this command.");
+                                                break;
+                                            }
+                                            string str20 = null;
+                                            try
+                                            {
+                                                str20 = strArray[1];
+                                            }
+                                            catch
+                                            {
+                                            }
+                                            if (str20 == "on")
+                                            {
+                                                m_Weather = true;
+                                                AddTextMessage("Weather turned on.");
+                                            }
+                                            else if (str20 == "off")
+                                            {
+                                                m_Weather = false;
+                                                PacketHandlers.ClearWeather();
+                                                AddTextMessage("Weather turned off.");
+                                            }
+                                            else
+                                            {
+                                                m_Weather = !m_Weather;
+                                                if (!m_Weather)
+                                                {
+                                                    PacketHandlers.ClearWeather();
+                                                }
+                                                AddTextMessage(string.Format("Weather turned {0}.", m_Weather ? "on" : "off"));
+                                            }
+                                            break;
+                                        }
                                 }
                             }
                         }
@@ -2051,90 +2049,90 @@
                                 break;
 
                             case PartyState.Joining:
-                            {
-                                string str2 = cmd.ToLower();
-                                if (!str2.StartsWith("/accept"))
                                 {
-                                    if (str2.StartsWith("/decline"))
+                                    string str2 = cmd.ToLower();
+                                    if (!str2.StartsWith("/accept"))
                                     {
-                                        Network.Send(new PParty_Decline(Party.Leader));
+                                        if (str2.StartsWith("/decline"))
+                                        {
+                                            Network.Send(new PParty_Decline(Party.Leader));
+                                        }
+                                        else
+                                        {
+                                            AddTextMessage("Use '/accept' or '/decline'.", DefaultFont, Hues.Load(0x3b2));
+                                        }
+                                        break;
                                     }
-                                    else
-                                    {
-                                        AddTextMessage("Use '/accept' or '/decline'.", DefaultFont, Hues.Load(0x3b2));
-                                    }
+                                    Network.Send(new PParty_Accept(Party.Leader));
                                     break;
                                 }
-                                Network.Send(new PParty_Accept(Party.Leader));
-                                break;
-                            }
                             case PartyState.Joined:
-                            {
-                                string str3 = cmd.ToLower();
-                                if (!Party.IsLeader || !str3.StartsWith("/add"))
                                 {
-                                    if (Party.IsLeader && str3.StartsWith("/rem"))
+                                    string str3 = cmd.ToLower();
+                                    if (!Party.IsLeader || !str3.StartsWith("/add"))
                                     {
-                                        Network.Send(new PParty_RemoveMember());
-                                    }
-                                    else if (str3.StartsWith("/quit"))
-                                    {
-                                        Network.Send(new PParty_Quit());
-                                    }
-                                    else if (str3.StartsWith("/loot on"))
-                                    {
-                                        Network.Send(new PParty_SetCanLoot(true));
-                                    }
-                                    else if (str3.StartsWith("/loot off"))
-                                    {
-                                        Network.Send(new PParty_SetCanLoot(false));
-                                    }
-                                    else if (str3.StartsWith("/loot"))
-                                    {
-                                        AddTextMessage("Use '/loot on' or '/loot off'.");
-                                    }
-                                    else if (Party.Members.Length > 1)
-                                    {
-                                        if ((cmd.Length >= 2) && char.IsDigit(cmd, 1))
+                                        if (Party.IsLeader && str3.StartsWith("/rem"))
                                         {
-                                            try
+                                            Network.Send(new PParty_RemoveMember());
+                                        }
+                                        else if (str3.StartsWith("/quit"))
+                                        {
+                                            Network.Send(new PParty_Quit());
+                                        }
+                                        else if (str3.StartsWith("/loot on"))
+                                        {
+                                            Network.Send(new PParty_SetCanLoot(true));
+                                        }
+                                        else if (str3.StartsWith("/loot off"))
+                                        {
+                                            Network.Send(new PParty_SetCanLoot(false));
+                                        }
+                                        else if (str3.StartsWith("/loot"))
+                                        {
+                                            AddTextMessage("Use '/loot on' or '/loot off'.");
+                                        }
+                                        else if (Party.Members.Length > 1)
+                                        {
+                                            if ((cmd.Length >= 2) && char.IsDigit(cmd, 1))
                                             {
-                                                int index = Convert.ToInt32(cmd.Substring(1, 1)) - 1;
-                                                if ((index >= 0) && (index < Party.Members.Length))
+                                                try
                                                 {
-                                                    if (index == Party.Index)
+                                                    int index = Convert.ToInt32(cmd.Substring(1, 1)) - 1;
+                                                    if ((index >= 0) && (index < Party.Members.Length))
                                                     {
-                                                        AddTextMessage(string.Format("Note to self: {0}", cmd.Substring(2)), DefaultFont, Hues.Load(0x3b2));
-                                                    }
-                                                    else
-                                                    {
-                                                        string str4;
-                                                        Mobile mobile = World.Player;
-                                                        if (((mobile == null) || ((str4 = mobile.Name) == null)) || ((str4 = str4.Trim()).Length <= 0))
+                                                        if (index == Party.Index)
                                                         {
-                                                            str4 = "You";
+                                                            AddTextMessage(string.Format("Note to self: {0}", cmd.Substring(2)), DefaultFont, Hues.Load(0x3b2));
                                                         }
-                                                        AddTextMessage(string.Format("<{0}> {1}", str4, cmd.Substring(2)), DefaultFont, Hues.Load(World.CharData.WhisperHue));
-                                                        Network.Send(new PParty_PrivateMessage(Party.Members[index], cmd.Substring(2)));
+                                                        else
+                                                        {
+                                                            string str4;
+                                                            Mobile mobile = World.Player;
+                                                            if (((mobile == null) || ((str4 = mobile.Name) == null)) || ((str4 = str4.Trim()).Length <= 0))
+                                                            {
+                                                                str4 = "You";
+                                                            }
+                                                            AddTextMessage(string.Format("<{0}> {1}", str4, cmd.Substring(2)), DefaultFont, Hues.Load(World.CharData.WhisperHue));
+                                                            Network.Send(new PParty_PrivateMessage(Party.Members[index], cmd.Substring(2)));
+                                                        }
+                                                        break;
                                                     }
-                                                    break;
+                                                }
+                                                catch
+                                                {
                                                 }
                                             }
-                                            catch
-                                            {
-                                            }
+                                            Network.Send(new PParty_PublicMessage(cmd.Substring(1)));
                                         }
-                                        Network.Send(new PParty_PublicMessage(cmd.Substring(1)));
+                                        else
+                                        {
+                                            AddTextMessage(string.Format("Note to self: {0}", cmd.Substring(1)), DefaultFont, Hues.Load(0x3b2));
+                                        }
+                                        break;
                                     }
-                                    else
-                                    {
-                                        AddTextMessage(string.Format("Note to self: {0}", cmd.Substring(1)), DefaultFont, Hues.Load(0x3b2));
-                                    }
+                                    Network.Send(new PParty_AddMember());
                                     break;
                                 }
-                                Network.Send(new PParty_AddMember());
-                                break;
-                            }
                         }
                     }
                 }
@@ -2155,7 +2153,7 @@
                     ConvertStruct struct2 = m_ConvertStructs[j];
                     for (int k = 0; k < struct2.m_Count; k++)
                     {
-                        m_ConvertTable[k + struct2.m_From] = (char) (k + struct2.m_To);
+                        m_ConvertTable[k + struct2.m_From] = (char)(k + struct2.m_To);
                     }
                 }
             }
@@ -2189,7 +2187,7 @@
                         int num2 = 0;
                         for (int j = 0; j < itemArray.Length; j++)
                         {
-                            num2 += (ushort) itemArray[j].Amount;
+                            num2 += (ushort)itemArray[j].Amount;
                         }
                         AddTextMessage(strArray[i] + ": " + num2, DefaultFont, (num2 < 5) ? Hues.Load(0x22) : DefaultHue);
                     }
@@ -2202,7 +2200,7 @@
             int num = 0;
             for (int i = 0; i < 0x20; i++)
             {
-                if ((input & (((int) 1) << i)) != 0)
+                if ((input & (((int)1) << i)) != 0)
                 {
                     num++;
                 }
@@ -2225,7 +2223,7 @@
                         int num2 = 0;
                         for (int j = 0; j < itemArray.Length; j++)
                         {
-                            num2 += (ushort) itemArray[j].Amount;
+                            num2 += (ushort)itemArray[j].Amount;
                         }
                         AddTextMessage(reagents[i].Name + ": " + num2, DefaultFont, (num2 < 5) ? Hues.Load(0x22) : DefaultHue);
                     }
@@ -2251,9 +2249,9 @@
             }
         }
 
-        public static void DelayedPackets_OnTick(Timer t)
+        public static void DelayedPackets_OnTick(Client.Timer t)
         {
-            Packet[] tag = (Packet[]) t.GetTag("Packets");
+            Packet[] tag = (Packet[])t.GetTag("Packets");
             for (int i = 0; i < tag.Length; i++)
             {
                 Network.Send(tag[i]);
@@ -2266,7 +2264,7 @@
             Gump g = null;
             if (Sender.HasTag("Dialog"))
             {
-                g = (Gump) Sender.GetTag("Dialog");
+                g = (Gump)Sender.GetTag("Dialog");
             }
             else
             {
@@ -2284,7 +2282,7 @@
         {
             if (Sender.HasTag("Gump"))
             {
-                Gump tag = (Gump) Sender.GetTag("Gump");
+                Gump tag = (Gump)Sender.GetTag("Gump");
                 if (tag != null)
                 {
                     Gumps.Destroy(tag);
@@ -2315,7 +2313,7 @@
                     {
                         if (cell.GetType() == typeof(DynamicItem))
                         {
-                            Item item = ((DynamicItem) cell).m_Item;
+                            Item item = ((DynamicItem)cell).m_Item;
                             if (item != null)
                             {
                                 item.OnDoubleClick();
@@ -2323,7 +2321,7 @@
                         }
                         else if (cell.GetType() == typeof(MobileCell))
                         {
-                            Mobile mobile = ((MobileCell) cell).m_Mobile;
+                            Mobile mobile = ((MobileCell)cell).m_Mobile;
                             if (mobile != null)
                             {
                                 mobile.OnDoubleClick();
@@ -2383,7 +2381,7 @@
                                     if (player.Direction != num5)
                                     {
                                         EquipSort(player, num5);
-                                        player.Direction = (byte) num5;
+                                        player.Direction = (byte)num5;
                                     }
                                 }
                                 else
@@ -2418,18 +2416,18 @@
                                         m_LastLeapfrogPickup = DateTime.Now;
                                         Walking.Offset(num5, ref num6, ref num7);
                                         Network.Send(new PPickupItem(m_LeapFrog, m_LeapFrog.Amount));
-                                        Network.Send(new PDropItem(m_LeapFrog.Serial, (short) num6, (short) num7, (sbyte) num4, -1));
+                                        Network.Send(new PDropItem(m_LeapFrog.Serial, (short)num6, (short)num7, (sbyte)num4, -1));
                                     }
                                 }
                                 else
                                 {
                                     WalkAnimation animation2 = WalkAnimation.PoolInstance(player, num6, num7, num4, num5);
                                     player.Walking.Enqueue(animation2);
-                                    bool isMoving = player.IsMoving;
+                                    bool flag4 = player.IsMoving;
                                     player.IsMoving = true;
                                     animation2.Start();
                                     player.SetReal(num6, num7, num4);
-                                    if (!isMoving && animation2.Advance)
+                                    if (!flag4 && animation2.Advance)
                                     {
                                         World.Offset(animation2.xOffset, animation2.yOffset);
                                         Effects.Offset(animation2.xOffset, animation2.yOffset);
@@ -2443,7 +2441,7 @@
                                             if (player.Direction != num5)
                                             {
                                                 EquipSort(player, num5);
-                                                player.Direction = (byte) num5;
+                                                player.Direction = (byte)num5;
                                             }
                                             return;
                                         }
@@ -2454,8 +2452,8 @@
                                         ArrayList list = cache.cells[num6 - cache.CellX, num7 - cache.CellY];
                                         for (int i = 0; i < list.Count; i++)
                                         {
-                                            ICell cell = (ICell) list[i];
-                                            if ((cell is DynamicItem) && ((DynamicItem) cell).m_Item.IsDoor)
+                                            ICell cell = (ICell)list[i];
+                                            if ((cell is DynamicItem) && ((DynamicItem)cell).m_Item.IsDoor)
                                             {
                                                 Network.Send(new POpenDoor());
                                                 break;
@@ -2470,7 +2468,7 @@
                                     if (player.Direction != num5)
                                     {
                                         EquipSort(player, num5);
-                                        player.Direction = (byte) num5;
+                                        player.Direction = (byte)num5;
                                     }
                                     if (((Gumps.Drag == null) || (Gumps.Drag.GetType() != typeof(GDraggedItem))) && ((DateTime.Now - m_LastAction) > TimeSpan.FromSeconds(0.5)))
                                     {
@@ -2487,7 +2485,7 @@
                                         IItemValidator check = new PlayerDistanceValidator(new ItemIDValidator(new int[] { 0x2006 }), 2);
                                         Item[] itemArray = World.FindItems(check);
                                         ArrayList list2 = new ArrayList();
-                                        AosAppraiser instance = LootAppraiser.Instance;
+                                        AosAppraiser appraiser = LootAppraiser.Instance;
                                         for (int j = 0; j < itemArray.Length; j++)
                                         {
                                             Item item2 = itemArray[j];
@@ -2499,11 +2497,11 @@
                                             {
                                                 AosAppraiser.m_BlueCorpse = false;
                                             }
-                                            ArrayList items = item2.Items;
-                                            for (int k = 0; k < items.Count; k++)
+                                            ArrayList list3 = item2.Items;
+                                            for (int k = 0; k < list3.Count; k++)
                                             {
-                                                Item item = (Item) items[k];
-                                                Appraisal appraisal = instance.Appraise(item);
+                                                Item item = (Item)list3[k];
+                                                Appraisal appraisal = appraiser.Appraise(item);
                                                 if ((appraisal != null) && !appraisal.IsWorthless)
                                                 {
                                                     list2.Add(appraisal);
@@ -2513,7 +2511,7 @@
                                         if (list2.Count > 0)
                                         {
                                             list2.Sort();
-                                            Appraisal appraisal2 = (Appraisal) list2[0];
+                                            Appraisal appraisal2 = (Appraisal)list2[0];
                                             Item item4 = appraisal2.Item;
                                             ObjectPropertyList propertyList = item4.PropertyList;
                                             string text = null;
@@ -2590,9 +2588,9 @@
 
         private static void EmoteHue_OnHueSelect(Gump g)
         {
-            World.CharData.EmoteHue = ((GHuePicker) g.GetTag("Hue Picker")).Hue;
+            World.CharData.EmoteHue = ((GHuePicker)g.GetTag("Hue Picker")).Hue;
             Renderer.SetText(m_Text);
-            ((GTextButton) g.GetTag("Button")).DefaultHue = Hues.Load(((GHuePicker) g.GetTag("Hue Picker")).Hue);
+            ((GTextButton)g.GetTag("Button")).DefaultHue = Hues.Load(((GHuePicker)g.GetTag("Hue Picker")).Hue);
             Gumps.Destroy(g.Parent);
             m_DyeWindowOpen = false;
         }
@@ -2614,7 +2612,7 @@
             }
         }
 
-        public static void Evict_OnTick(Timer t)
+        public static void Evict_OnTick(Client.Timer t)
         {
             m_Device.EvictManagedResources();
         }
@@ -2626,7 +2624,7 @@
             object exceptionObject = e.ExceptionObject;
             if (exceptionObject is Exception)
             {
-                Debug.Error((Exception) exceptionObject);
+                Debug.Error((Exception)exceptionObject);
             }
             else
             {
@@ -2638,7 +2636,7 @@
         {
             StreamReader reader = new StreamReader(FileManager.OpenBaseMUL("Data/Plugins/Plugins.def"));
             string message = "";
-            Type[] types = null;
+            System.Type[] types = null;
             int length = 0;
             string str2 = null;
             while ((message = reader.ReadLine()) != null)
@@ -2656,12 +2654,12 @@
                     {
                         for (int i = 0; i < length; i++)
                         {
-                            Type type = types[i];
+                            System.Type type = types[i];
                             try
                             {
                                 if ((type != null) && (type.Name == message))
                                 {
-                                    Plugin plugin = (Plugin) type.GetConstructor(Type.EmptyTypes).Invoke(null);
+                                    Plugin plugin = (Plugin)type.GetConstructor(System.Type.EmptyTypes).Invoke(null);
                                     if (plugin == null)
                                     {
                                         Debug.Trace(message);
@@ -2696,7 +2694,7 @@
         {
             if (m_DataStores.Count > 0)
             {
-                return (ArrayList) m_DataStores.Dequeue();
+                return (ArrayList)m_DataStores.Dequeue();
             }
             return new ArrayList();
         }
@@ -2707,8 +2705,8 @@
             int num2 = (GameY + (GameHeight / 2)) - y;
             int num3 = Math.Abs(num);
             int num4 = Math.Abs(num2);
-            int num5 = (int) ((((double) GameWidth) / ((double) GameHeight)) * num4);
-            distance = (int) Math.Sqrt((double) ((num * num) + (num5 * num5)));
+            int num5 = (int)((((double)GameWidth) / ((double)GameHeight)) * num4);
+            distance = (int)Math.Sqrt((double)((num * num) + (num5 * num5)));
             if (((num4 >> 1) - num3) >= 0)
             {
                 if (num2 > 0)
@@ -2787,6 +2785,7 @@
 
         [DllImport("User32")]
         private static extern int GetQueueStatus(int flags);
+
         public static IHue GetRandomBlueHue()
         {
             return Hues.Load(RandomRange(0x515, 0x36));
@@ -2848,7 +2847,7 @@
 
         public static byte GetWalkDirection(Direction d)
         {
-            return (byte) (((int) Direction.West) & (((int) d) - 1));
+            return (byte)(((int)Direction.West) & (((int)d) - 1));
         }
 
         public static int GrayScale(int Color)
@@ -2861,7 +2860,7 @@
             num3 *= 8.225806f;
             float num4 = ((num * 0.299f) + (num2 * 0.587f)) + (num3 * 0.114f);
             num4 *= 0.1215686f;
-            int num5 = (int) num4;
+            int num5 = (int)num4;
             if (num5 < 0)
             {
                 return 0;
@@ -2882,16 +2881,14 @@
         {
             if ((Sender.HasTag("Dialog") && Sender.HasTag("Item Art")) && Sender.HasTag("ItemID"))
             {
-                GItemArt art;
-                Gump tag = (Gump) Sender.GetTag("Dialog");
-                Gump g = (Gump) Sender.GetTag("Item Art");
+                Gump tag = (Gump)Sender.GetTag("Dialog");
+                Gump g = (Gump)Sender.GetTag("Item Art");
                 Gumps.Destroy(g);
-                art = new GItemArt(0xb7, 3, (int) Sender.GetTag("ItemID"), Hues.GetItemHue((int) Sender.GetTag("ItemID"), Hue)) {
-                    X = art.X + (((0x3a - (art.Image.xMax - art.Image.xMin)) / 2) - art.Image.xMin),
-                    Y = art.Y + (((0x52 - (art.Image.yMax - art.Image.yMin)) / 2) - art.Image.yMin)
-                };
-                tag.Children.Add(art);
-                Sender.SetTag("Item Art", art);
+                GItemArt toAdd = new GItemArt(0xb7, 3, (int)Sender.GetTag("ItemID"), Hues.GetItemHue((int)Sender.GetTag("ItemID"), Hue));
+                toAdd.X += ((0x3a - (toAdd.Image.xMax - toAdd.Image.xMin)) / 2) - toAdd.Image.xMin;
+                toAdd.Y += ((0x52 - (toAdd.Image.yMax - toAdd.Image.yMin)) / 2) - toAdd.Image.yMin;
+                tag.Children.Add(toAdd);
+                Sender.SetTag("Item Art", toAdd);
             }
         }
 
@@ -2899,19 +2896,19 @@
         {
             if ((Sender.HasTag("Dialog") && Sender.HasTag("Hue Picker")) && (Sender.HasTag("Serial") && Sender.HasTag("Relay")))
             {
-                Gump tag = (Gump) Sender.GetTag("Dialog");
+                Gump tag = (Gump)Sender.GetTag("Dialog");
                 if (tag != null)
                 {
-                    GHuePicker picker = (GHuePicker) Sender.GetTag("Hue Picker");
+                    GHuePicker picker = (GHuePicker)Sender.GetTag("Hue Picker");
                     if (picker == null)
                     {
                         Gumps.Destroy(tag);
                     }
                     else
                     {
-                        int serial = (int) Sender.GetTag("Serial");
-                        short relay = (short) Sender.GetTag("Relay");
-                        Network.Send(new PSelectHueResponse(serial, relay, (short) picker.Hue));
+                        int serial = (int)Sender.GetTag("Serial");
+                        short relay = (short)Sender.GetTag("Relay");
+                        Network.Send(new PSelectHueResponse(serial, relay, (short)picker.Hue));
                         Gumps.Destroy(tag);
                     }
                 }
@@ -2922,8 +2919,8 @@
         {
             if (Sender.HasTag("Hue Picker") && Sender.HasTag("Brightness Bar"))
             {
-                GHuePicker tag = (GHuePicker) Sender.GetTag("Hue Picker");
-                GBrightnessBar bar = (GBrightnessBar) Sender.GetTag("Brightness Bar");
+                GHuePicker tag = (GHuePicker)Sender.GetTag("Hue Picker");
+                GBrightnessBar bar = (GBrightnessBar)Sender.GetTag("Brightness Bar");
                 if ((tag != null) && (bar != null))
                 {
                     TargetHandler = new HuePickerTargetHandler(tag, bar);
@@ -2935,10 +2932,10 @@
         {
             if (Sender.HasTag("Hue Picker"))
             {
-                GHuePicker tag = (GHuePicker) Sender.GetTag("Hue Picker");
+                GHuePicker tag = (GHuePicker)Sender.GetTag("Hue Picker");
                 if (tag != null)
                 {
-                    tag.Brightness = (int) Value;
+                    tag.Brightness = (int)Value;
                 }
             }
         }
@@ -2949,65 +2946,61 @@
             AddTextMessage("Target a mobile.");
         }
 
-        public static unsafe void InitDX()
+        public static void InitDX()
         {
             m_Fullscreen = NewConfig.FullScreen;
             PresentParameters parameters = m_PresentParams = new PresentParameters();
-            parameters.set_SwapEffect(1);
-            parameters.set_EnableAutoDepthStencil(true);
-            parameters.set_AutoDepthStencilFormat(80);
-            parameters.set_PresentationInterval(-2147483648);
-            parameters.set_DeviceWindow(m_Display);
+            parameters.SwapEffect = SwapEffect.Discard;
+            parameters.EnableAutoDepthStencil = true;
+            parameters.AutoDepthStencilFormat = DepthFormat.D16;
+            parameters.PresentationInterval = PresentInterval.Immediate;
+            parameters.DeviceWindow = m_Display;
             if (m_Fullscreen)
             {
-                parameters.set_Windowed(false);
+                parameters.Windowed = false;
                 ArrayList list = new ArrayList();
-                AdapterListEnumerator enumerator = Manager.get_Adapters();
-                if ((enumerator != null) && (enumerator.get_Count() > 0))
+                AdapterListCollection enumerator = Manager.Adapters;
+                if ((enumerator != null) && (enumerator.Count > 0))
                 {
-                    using (IEnumerator enumerator2 = enumerator.get_Item(0).get_SupportedDisplayModes().GetEnumerator())
+                    foreach (DisplayMode mode in enumerator[0].SupportedDisplayModes)
                     {
-                        while (enumerator2.MoveNext())
-                        {
-                            DisplayMode mode = *((DisplayMode*) enumerator2.Current);
-                            list.Add(mode);
-                        }
+                        list.Add(mode);
                     }
-                    list.Sort(new DisplayModeComparer(ScreenWidth, ScreenHeight, 0x19));
+                    list.Sort(new DisplayModeComparer(ScreenWidth, ScreenHeight, Microsoft.DirectX.Direct3D.Format.A1R5G5B5));
                 }
                 if (list.Count == 0)
                 {
                     throw new Exception("No display modes found");
                 }
-                DisplayMode mode2 = *((DisplayMode*) list[0]);
-                Debug.Trace("Display Mode: {0}x{1}, {2}, {3}hz", new object[] { mode2.get_Width(), mode2.get_Height(), mode2.get_Format(), mode2.get_RefreshRate() });
-                parameters.set_BackBufferCount(1);
-                parameters.set_SwapEffect(2);
-                parameters.set_BackBufferFormat(mode2.get_Format());
-                parameters.set_BackBufferWidth(mode2.get_Width());
-                parameters.set_BackBufferHeight(mode2.get_Height());
+                DisplayMode mode2 = (DisplayMode)list[0];
+                Debug.Trace("Display Mode: {0}x{1}, {2}, {3}hz", new object[] { mode2.Width, mode2.Height, mode2.Format, mode2.RefreshRate });
+                parameters.BackBufferCount = 1;
+                parameters.SwapEffect = SwapEffect.Flip;
+                parameters.BackBufferFormat = mode2.Format;
+                parameters.BackBufferWidth = mode2.Width;
+                parameters.BackBufferHeight = mode2.Height;
             }
             else
             {
-                parameters.set_Windowed(true);
+                parameters.Windowed = true;
             }
             try
             {
-                m_Device = new Device(0, 1, m_Display, 0x40, parameters);
+                m_Device = new Device(0, DeviceType.Hardware, m_Display, CreateFlags.HardwareVertexProcessing, parameters);
             }
             catch
             {
-                m_Device = new Device(0, 1, m_Display, 0x20, parameters);
+                m_Device = new Device(0, DeviceType.Hardware, m_Display, CreateFlags.SoftwareVertexProcessing, parameters);
             }
             Renderer.m_Version++;
-            m_Device.add_DeviceCreated(new EventHandler(Engine.OnDeviceCreated));
-            m_Device.add_DeviceReset(new EventHandler(Engine.OnDeviceReset));
-            m_Device.add_DeviceLost(new EventHandler(Engine.OnDeviceLost));
-            m_Device.add_DeviceResizing(new CancelEventHandler(Engine.OnDeviceResizing));
+            //m_Device.add_DeviceCreated(new EventHandler(Engine.OnDeviceCreated));
+            m_Device.DeviceReset += new EventHandler(Engine.OnDeviceReset);
+            m_Device.DeviceLost += new EventHandler(Engine.OnDeviceLost);
+            m_Device.DeviceResizing += new CancelEventHandler(Engine.OnDeviceResizing);
             OnDeviceReset(m_Device, null);
             Debug.Trace("Fullscreen = {0}", m_Fullscreen);
             m_rRender = new Rectangle(0, 0, ScreenWidth, ScreenHeight);
-            if (!Texture.CanSysMem && !Texture.CanVidMem)
+            if (!Client.Texture.CanSysMem && !Client.Texture.CanVidMem)
             {
                 throw new Exception("Device does not support textures in video memory nor system memory.");
             }
@@ -3025,7 +3018,7 @@
             OpenJournal();
         }
 
-        public static unsafe void KeyDown(object sender, KeyEventArgs e)
+        public static void KeyDown(object sender, KeyEventArgs e)
         {
             if (m_EventOk)
             {
@@ -3067,37 +3060,33 @@
                         PresentParameters presentParams = m_PresentParams;
                         if (m_Fullscreen)
                         {
-                            presentParams.set_Windowed(true);
-                            presentParams.set_BackBufferCount(0);
-                            presentParams.set_SwapEffect(1);
+                            presentParams.Windowed = true;
+                            presentParams.BackBufferCount = 0;
+                            presentParams.SwapEffect = SwapEffect.Discard;
                         }
                         else
                         {
-                            presentParams.set_Windowed(false);
+                            presentParams.Windowed = false;
                             ArrayList list = new ArrayList();
-                            if (Manager.get_Adapters().get_Count() > 0)
+                            if (Manager.Adapters.Count > 0)
                             {
-                                using (IEnumerator enumerator = Manager.get_Adapters().get_Item(0).get_SupportedDisplayModes().GetEnumerator())
+                                foreach (DisplayMode mode in Manager.Adapters[0].SupportedDisplayModes)
                                 {
-                                    while (enumerator.MoveNext())
-                                    {
-                                        DisplayMode mode = *((DisplayMode*) enumerator.Current);
-                                        list.Add(mode);
-                                    }
+                                    list.Add(mode);
                                 }
-                                list.Sort(new DisplayModeComparer(w, h, 0x19));
+                                list.Sort(new DisplayModeComparer(w, h, Microsoft.DirectX.Direct3D.Format.A1R5G5B5));
                             }
                             if (list.Count == 0)
                             {
                                 return;
                             }
-                            DisplayMode mode2 = *((DisplayMode*) list[0]);
-                            presentParams.set_BackBufferCount(1);
-                            presentParams.set_SwapEffect(2);
-                            presentParams.set_BackBufferWidth(mode2.get_Width());
-                            presentParams.set_BackBufferHeight(mode2.get_Height());
-                            presentParams.set_BackBufferFormat(mode2.get_Format());
-                            presentParams.set_PresentationInterval(-2147483648);
+                            DisplayMode mode2 = (DisplayMode)list[0];
+                            presentParams.BackBufferCount = 1;
+                            presentParams.SwapEffect = SwapEffect.Flip;
+                            presentParams.BackBufferWidth = mode2.Width;
+                            presentParams.BackBufferHeight = mode2.Height;
+                            presentParams.BackBufferFormat = mode2.Format;
+                            presentParams.PresentationInterval = PresentInterval.Immediate;
                         }
                         m_EventOk = false;
                         m_Fullscreen = !m_Fullscreen;
@@ -3128,7 +3117,7 @@
                         int count = m_Plugins.Count;
                         for (int i = 0; i < count; i++)
                         {
-                            if (((Plugin) m_Plugins[i]).OnKeyDown(e))
+                            if (((Plugin)m_Plugins[i]).OnKeyDown(e))
                             {
                                 e.Handled = true;
                                 return;
@@ -3152,10 +3141,10 @@
         {
             if (Sender.HasTag("ListBox"))
             {
-                GListBox tag = (GListBox) Sender.GetTag("ListBox");
+                GListBox tag = (GListBox)Sender.GetTag("ListBox");
                 if (tag != null)
                 {
-                    tag.StartIndex = (int) Value;
+                    tag.StartIndex = (int)Value;
                 }
             }
         }
@@ -3165,16 +3154,16 @@
             try
             {
                 string path = FileManager.BasePath(string.Format("Data/Images/{0}", FileName));
-                if (File.Exists(path))
+                if (System.IO.File.Exists(path))
                 {
                     Bitmap bmp = new Bitmap(path);
-                    bmp.MakeTransparent(Color.Black);
+                    bmp.MakeTransparent(System.Drawing.Color.Black);
                     for (int i = 0; i < bmp.Height; i++)
                     {
                         for (int j = 0; j < bmp.Width; j++)
                         {
-                            Color pixel = bmp.GetPixel(j, i);
-                            bmp.SetPixel(j, i, Color.FromArgb(pixel.B, 0xff, 0xff, 0xff));
+                            System.Drawing.Color pixel = bmp.GetPixel(j, i);
+                            bmp.SetPixel(j, i, System.Drawing.Color.FromArgb(pixel.B, 0xff, 0xff, 0xff));
                         }
                     }
                     return new Texture(bmp);
@@ -3226,10 +3215,12 @@
             }
         }
 
-        [DllImport("Kernel32", EntryPoint="_lread")]
+        [DllImport("Kernel32", EntryPoint = "_lread")]
         private static extern unsafe int lread(IntPtr hFile, void* lpBuffer, int wBytes);
-        [DllImport("Kernel32", EntryPoint="_lwrite")]
+
+        [DllImport("Kernel32", EntryPoint = "_lwrite")]
         private static extern unsafe int lwrite(IntPtr hFile, void* lpBuffer, int wBytes);
+
         private static void MacroEditor_OnClick(Gump g)
         {
             Gumps.Destroy(g.Parent);
@@ -3242,7 +3233,7 @@
             int num3;
             m_IniPath = Path.Combine(Application.StartupPath, "Data/Config/Client.ini");
             ParseArgs(Args);
-            m_FileManager = new Client.FileManager();
+            m_FileManager = new FileManager();
             if (m_FileManager.Error)
             {
                 m_FileManager = null;
@@ -3277,9 +3268,9 @@
                 m_WalkTimeout = new ArrayList();
                 m_Journal = new ArrayList();
                 m_Doors = new ArrayList();
-                m_Pings = new Queue();
-                m_LoadQueue = new Queue();
-                m_MapLoadQueue = new Queue();
+                m_Pings = new System.Collections.Queue();
+                m_LoadQueue = new System.Collections.Queue();
+                m_MapLoadQueue = new System.Collections.Queue();
                 WantDirectory("Data/Logs/");
                 Debug.Block("Main()");
                 if (m_OverrideServHost != null)
@@ -3328,7 +3319,7 @@
                         num3 = 11;
                         goto Label_02E0;
                 }
-                MessageBox.Show(string.Format("A invalid game size of '{0}' was specified in Client.cfg. Valid sizes are: '320x240' '640x480' '800x600' '1024x768' '1280x1024' '1600x1200'", NewConfig.GameSize));
+                MessageBox.Show(string.Format("A invalid game size of '{0}' was specified in cfg. Valid sizes are: '320x240' '640x480' '800x600' '1024x768' '1280x1024' '1600x1200'", NewConfig.GameSize));
             }
             return;
         Label_02E0:;
@@ -3354,7 +3345,7 @@
             }
             else
             {
-                MessageBox.Show(string.Format("A invalid screen size of '{0}' was specified in Client.cfg. Make sure the value is formatted correctly ('<Width>x<Height>'), and that it is 320x240 or higher.", NewConfig.ScreenSize));
+                MessageBox.Show(string.Format("A invalid screen size of '{0}' was specified in cfg. Make sure the value is formatted correctly ('<Width>x<Height>'), and that it is 320x240 or higher.", NewConfig.ScreenSize));
             }
             GameX = (ScreenWidth - GameWidth) / 2;
             GameY = (ScreenHeight - GameHeight) / 2;
@@ -3436,9 +3427,9 @@
             }
             Renderer.SetTexture(null);
             Renderer.SetAlphaEnable(false);
-            m_Effects = new Client.Effects();
+            m_Effects = new Effects();
             m_Loading = false;
-            Point point = m_Display.PointToClient(Cursor.Position);
+            System.Drawing.Point point = m_Display.PointToClient(System.Windows.Forms.Cursor.Position);
             m_EventOk = true;
             MouseMove(m_Display, new MouseEventArgs(Control.MouseButtons, 0, point.X, point.Y, 0));
             Network.CheckCache();
@@ -3523,12 +3514,12 @@
                 {
                     for (int m = 0; (m_LoadQueue.Count > 0) && (m < 6); m++)
                     {
-                        ((ILoader) m_LoadQueue.Dequeue()).Load();
+                        ((ILoader)m_LoadQueue.Dequeue()).Load();
                     }
                 }
                 if (m_MapLoadQueue.Count > 0)
                 {
-                    Preload((Worker) m_MapLoadQueue.Dequeue());
+                    Preload((Worker)m_MapLoadQueue.Dequeue());
                 }
             }
             NewConfig.Save();
@@ -3794,7 +3785,7 @@
                 m_LastMouseArgs = e;
                 m_xMouse = e.X;
                 m_yMouse = e.Y;
-                if (((!m_Ingame || (e.Button != MouseButtons.Middle)) || !Macros.Start(0x11002)) && !Gumps.MouseDown(e.X, e.Y, e.Button))
+                if (((!m_Ingame || (e.Button != MouseButtons.Middle)) || !Macros.Start((Keys)0x11002)) && !Gumps.MouseDown(e.X, e.Y, e.Button))
                 {
                     if (!m_Locked && ((e.Button & MouseButtons.Right) == MouseButtons.Right))
                     {
@@ -3810,11 +3801,11 @@
                         ICell cell = Renderer.FindTileFromXY(e.X, e.Y, ref tileX, ref tileY, false);
                         if ((cell != null) && (cell.GetType() == typeof(MobileCell)))
                         {
-                            Network.Send(new PPopupRequest((MobileCell) cell));
+                            Network.Send(new PPopupRequest((MobileCell)cell));
                         }
                         else if ((cell != null) && (cell.CellType == typeof(DynamicItem)))
                         {
-                            Network.Send(new PPopupRequest(((DynamicItem) cell).m_Item));
+                            Network.Send(new PPopupRequest(((DynamicItem)cell).m_Item));
                         }
                     }
                 }
@@ -3888,7 +3879,7 @@
                             ICell cell = Renderer.FindTileFromXY(m_xMouse, m_yMouse, ref tileX, ref tileY, true);
                             if ((World.Player.Flags[MobileFlag.Warmode] && (cell != null)) && (cell.CellType == typeof(MobileCell)))
                             {
-                                m_Highlight = ((MobileCell) cell).m_Mobile;
+                                m_Highlight = ((MobileCell)cell).m_Mobile;
                             }
                             else
                             {
@@ -3896,7 +3887,7 @@
                             }
                             if (cell is DynamicItem)
                             {
-                                Item item = ((DynamicItem) cell).m_Item;
+                                Item item = ((DynamicItem)cell).m_Item;
                                 if (item.Flags[ItemFlag.CanMove] || (Map.GetWeight(item.ID) < 0xff))
                                 {
                                     if (item.PropertyList == null)
@@ -3935,7 +3926,7 @@
                             }
                             else if (cell is MobileCell)
                             {
-                                Mobile mobile = ((MobileCell) cell).m_Mobile;
+                                Mobile mobile = ((MobileCell)cell).m_Mobile;
                                 if (mobile.PropertyList == null)
                                 {
                                     mobile.QueryProperties();
@@ -3986,7 +3977,7 @@
                             ICell cell2 = Renderer.FindTileFromXY(m_xMouse, m_yMouse, ref num3, ref num4, true);
                             if (m_LastDown < 0x40000000)
                             {
-                                if (((cell2 == null) || (cell2.CellType != typeof(MobileCell))) || ((((MobileCell) cell2).m_Mobile.Serial != m_LastDown) || ((m_LastDownPoint ^ new Point(m_xMouse, m_yMouse)) >= 2)))
+                                if (((cell2 == null) || (cell2.CellType != typeof(MobileCell))) || ((((MobileCell)cell2).m_Mobile.Serial != m_LastDown) || ((m_LastDownPoint ^ new Point(m_xMouse, m_yMouse)) >= 2)))
                                 {
                                     Mobile mobile2 = World.FindMobile(m_LastDown);
                                     if (mobile2 != null)
@@ -3997,7 +3988,7 @@
                                     m_LastDown = 0;
                                 }
                             }
-                            else if (((cell2 == null) || (cell2.CellType != typeof(DynamicItem))) || ((((DynamicItem) cell2).Serial != m_LastDown) || ((m_LastDownPoint ^ new Point(m_xMouse, m_yMouse)) >= 2)))
+                            else if (((cell2 == null) || (cell2.CellType != typeof(DynamicItem))) || ((((DynamicItem)cell2).Serial != m_LastDown) || ((m_LastDownPoint ^ new Point(m_xMouse, m_yMouse)) >= 2)))
                             {
                                 Mobile player = World.Player;
                                 if ((player != null) && !player.Ghost)
@@ -4008,7 +3999,7 @@
                                         Gump gump = item2.OnBeginDrag();
                                         if (gump.GetType() == typeof(GDragAmount))
                                         {
-                                            ((GDragAmount) gump).ToDestroy = item2;
+                                            ((GDragAmount)gump).ToDestroy = item2;
                                         }
                                         else
                                         {
@@ -4029,16 +4020,16 @@
                             m_LastDownPoint = new Point(m_xMouse, m_yMouse);
                             if ((cell3 != null) && (cell3.GetType() == typeof(MobileCell)))
                             {
-                                m_LastDown = ((MobileCell) cell3).m_Mobile.Serial;
+                                m_LastDown = ((MobileCell)cell3).m_Mobile.Serial;
                             }
                             else if ((cell3 != null) && (cell3.GetType() == typeof(DynamicItem)))
                             {
-                                Item item3 = ((DynamicItem) cell3).m_Item;
+                                Item item3 = ((DynamicItem)cell3).m_Item;
                                 if (item3 != null)
                                 {
                                     if ((Map.GetWeight(item3.ID) < 0xff) || item3.Flags[ItemFlag.CanMove])
                                     {
-                                        m_LastDown = ((DynamicItem) cell3).Serial;
+                                        m_LastDown = ((DynamicItem)cell3).Serial;
                                     }
                                     else
                                     {
@@ -4103,11 +4094,11 @@
                     else if ((drag != null) && (drag.GetType() == typeof(GDraggedItem)))
                     {
                         Renderer.ResetHitTest();
-                        GDraggedItem g = (GDraggedItem) drag;
+                        GDraggedItem g = (GDraggedItem)drag;
                         g.m_IsDragging = false;
                         Gumps.Drag = null;
                         Gumps.Destroy(g);
-                        Item item = g.Item;
+                        Item item2 = g.Item;
                         short tileX = 0;
                         short tileY = 0;
                         ICell cell = Renderer.FindTileFromXY(e.X, e.Y, ref tileX, ref tileY);
@@ -4115,28 +4106,28 @@
                         {
                             if (cell.CellType == typeof(MobileCell))
                             {
-                                Network.Send(new PDropItem(item.Serial, -1, -1, 0, ((MobileCell) cell).m_Mobile.Serial));
+                                Network.Send(new PDropItem(item2.Serial, -1, -1, 0, ((MobileCell)cell).m_Mobile.Serial));
                             }
                             else if (cell.CellType == typeof(DynamicItem))
                             {
-                                Item item3 = ((DynamicItem) cell).m_Item;
+                                Item item3 = ((DynamicItem)cell).m_Item;
                                 TileFlags flags = Map.m_ItemFlags[item3.ID & 0x3fff];
                                 if (flags[TileFlag.Container])
                                 {
-                                    Network.Send(new PDropItem(item.Serial, -1, -1, 0, item3.Serial));
+                                    Network.Send(new PDropItem(item2.Serial, -1, -1, 0, item3.Serial));
                                 }
-                                else if ((flags[TileFlag.Generic] && (item.ID == item3.ID)) && (item.Hue == item3.Hue))
+                                else if ((flags[TileFlag.Generic] && (item2.ID == item3.ID)) && (item2.Hue == item3.Hue))
                                 {
-                                    Network.Send(new PDropItem(item.Serial, item3.X, item3.Y, (sbyte) item3.Z, item3.Serial));
+                                    Network.Send(new PDropItem(item2.Serial, item3.X, item3.Y, (sbyte)item3.Z, item3.Serial));
                                 }
                                 else
                                 {
-                                    Network.Send(new PDropItem(item.Serial, item3.X, item3.Y, (sbyte) item3.Z, -1));
+                                    Network.Send(new PDropItem(item2.Serial, item3.X, item3.Y, (sbyte)item3.Z, -1));
                                 }
                             }
                             else
                             {
-                                Network.Send(new PDropItem(item.Serial, tileX, tileY, (sbyte) (cell.Z + cell.Height), -1));
+                                Network.Send(new PDropItem(item2.Serial, tileX, tileY, (sbyte)(cell.Z + cell.Height), -1));
                             }
                         }
                     }
@@ -4153,19 +4144,19 @@
                         {
                             if (cell2 is MobileCell)
                             {
-                                Target(((MobileCell) cell2).m_Mobile);
+                                Target(((MobileCell)cell2).m_Mobile);
                             }
                             else if (cell2 is DynamicItem)
                             {
-                                Target(((DynamicItem) cell2).m_Item);
+                                Target(((DynamicItem)cell2).m_Item);
                             }
                             else if (cell2 is StaticItem)
                             {
-                                Target(new StaticTarget(num3, num4, ((StaticItem) cell2).m_Z, ((StaticItem) cell2).m_RealID, ((StaticItem) cell2).m_RealID, ((StaticItem) cell2).m_Hue));
+                                Target(new StaticTarget(num3, num4, ((StaticItem)cell2).m_Z, ((StaticItem)cell2).m_RealID, ((StaticItem)cell2).m_RealID, ((StaticItem)cell2).m_Hue));
                             }
                             else if (cell2 is LandTile)
                             {
-                                Target(new LandTarget(num3, num4, ((LandTile) cell2).m_Z));
+                                Target(new LandTarget(num3, num4, ((LandTile)cell2).m_Z));
                             }
                         }
                     }
@@ -4176,7 +4167,7 @@
 
         public static void MouseWheel(object sender, MouseEventArgs e)
         {
-            if ((m_EventOk && (((e.Delta <= 0) || !m_Ingame) || !Macros.Start(0x11000))) && (((e.Delta >= 0) || !m_Ingame) || !Macros.Start(0x11001)))
+            if ((m_EventOk && (((e.Delta <= 0) || !m_Ingame) || !Macros.Start((Keys)0x11000))) && (((e.Delta >= 0) || !m_Ingame) || !Macros.Start((Keys)0x11001)))
             {
                 Gumps.MouseWheel(e.X, e.Y, e.Delta);
             }
@@ -4191,7 +4182,7 @@
         {
             fixed (byte* numRef = buffer)
             {
-                return NativeRead(fs, (void*) (numRef + offset), length);
+                return NativeRead(fs, (void*)(numRef + offset), length);
             }
         }
 
@@ -4218,61 +4209,61 @@
         public static void OnDeviceReset(object sender, EventArgs e)
         {
             Renderer.m_Version++;
-            m_VertexBuffer = new VertexBuffer(typeof(CustomVertex.TransformedColoredTextured), 0x8000, m_Device, 520, 0x144, 0);
+            m_VertexBuffer = new VertexBuffer(typeof(CustomVertex.TransformedColoredTextured), 0x8000, m_Device, Usage.Dynamic | Usage.WriteOnly, VertexFormats.Texture1 | VertexFormats.Diffuse | VertexFormats.Transformed, Pool.Default);
             m_Device.SetStreamSource(0, m_VertexBuffer, 0);
-            m_Device.set_VertexFormat(0x144);
-            RenderStates states = m_Device.get_RenderState();
-            Caps caps = m_Device.get_DeviceCaps();
-            Texture.Square = caps.get_TextureCaps().get_SupportsSquareOnly();
-            Texture.Pow2 = caps.get_TextureCaps().get_SupportsPower2();
-            Texture.MaxTextureWidth = caps.get_MaxTextureWidth();
-            Texture.MaxTextureHeight = caps.get_MaxTextureHeight();
+            m_Device.VertexFormat = VertexFormats.Texture1 | VertexFormats.Diffuse | VertexFormats.Transformed;
+            RenderStateManager states = m_Device.RenderState;
+            Caps deviceCaps = m_Device.DeviceCaps;
+            Texture.Square = deviceCaps.TextureCaps.SupportsSquareOnly;
+            Texture.Pow2 = deviceCaps.TextureCaps.SupportsPower2;
+            Texture.MaxTextureWidth = deviceCaps.MaxTextureWidth;
+            Texture.MaxTextureHeight = deviceCaps.MaxTextureHeight;
             Texture.MinTextureWidth = 1;
             Texture.MinTextureHeight = 1;
-            Texture.CanSysMem = caps.get_DeviceCaps().get_SupportsTextureSystemMemory();
-            Texture.CanVidMem = caps.get_DeviceCaps().get_SupportsTextureVideoMemory();
-            Texture.MaxAspect = caps.get_MaxTextureAspectRatio();
-            Renderer.Init(caps);
-            states.set_DitherEnable(false);
-            states.set_NormalizeNormals(false);
-            states.set_RangeFogEnable(false);
-            states.set_StencilEnable(false);
-            states.set_ZBufferEnable(true);
-            states.set_ZBufferWriteEnable(true);
-            states.set_CullMode(2);
-            states.set_AntiAliasedLineEnable(false);
-            states.set_SpecularEnable(false);
-            states.set_ShadeMode(2);
-            states.set_Lighting(false);
-            states.set_VertexBlend(0);
-            states.set_SourceBlend(5);
-            states.set_DestinationBlend(6);
-            states.set_ReferenceAlpha(1);
-            states.set_AlphaFunction(7);
-            states.set_AlphaBlendEnable(false);
-            states.set_AlphaTestEnable(false);
-            TextureState state = m_Device.get_TextureState().get_TextureState(0);
-            state.set_AlphaArgument1(2);
-            state.set_AlphaArgument2(0);
-            state.set_AlphaOperation(4);
-            state.set_ColorArgument1(2);
-            state.set_ColorArgument2(0);
-            state.set_ColorOperation(4);
-            IndexBuffer buffer = new IndexBuffer(m_Device, 0x30000, 0, 0, true);
-            short[] numArray = new short[0x18000];
+            Texture.CanSysMem = deviceCaps.DeviceCaps.SupportsTextureSystemMemory;
+            Texture.CanVidMem = deviceCaps.DeviceCaps.SupportsTextureVideoMemory;
+            Texture.MaxAspect = deviceCaps.MaxTextureAspectRatio;
+            Renderer.Init(deviceCaps);
+            states.DitherEnable = (false);
+            states.NormalizeNormals = (false);
+            states.RangeFogEnable = (false);
+            states.StencilEnable = (false);
+            states.ZBufferEnable = (true);
+            states.ZBufferWriteEnable = (true);
+            states.CullMode = (Cull.Clockwise);
+            states.AntiAliasedLineEnable = (false);
+            states.SpecularEnable = (false);
+            states.ShadeMode = (ShadeMode.Gouraud);
+            states.Lighting = (false);
+            states.VertexBlend = (VertexBlend.Disable);
+            states.SourceBlend = (Blend.SourceAlpha);
+            states.DestinationBlend = (Blend.InvSourceAlpha);
+            states.ReferenceAlpha = (1);
+            states.AlphaFunction = (Compare.GreaterEqual);
+            states.AlphaBlendEnable = (false);
+            states.AlphaTestEnable = (false);
+            TextureStateManager state = m_Device.TextureState[0];
+            state.AlphaArgument1 = (TextureArgument.TextureColor);
+            state.AlphaArgument2 = (TextureArgument.Diffuse);
+            state.AlphaOperation = (TextureOperation.Modulate);
+            state.ColorArgument1 = (TextureArgument.TextureColor);
+            state.ColorArgument2 = (TextureArgument.Diffuse);
+            state.ColorOperation = (TextureOperation.Modulate);
+            IndexBuffer buffer = new IndexBuffer(m_Device, 0x30000, Usage.None, Pool.Default, true);
+            short[] data = new short[0x18000];
             int index = 0;
             for (int i = 0; i < 0x4000; i++)
             {
-                numArray[index] = (short) (i * 4);
-                numArray[index + 1] = (short) ((i * 4) + 1);
-                numArray[index + 2] = (short) ((i * 4) + 2);
-                numArray[index + 3] = (short) ((i * 4) + 2);
-                numArray[index + 4] = (short) ((i * 4) + 1);
-                numArray[index + 5] = (short) ((i * 4) + 3);
+                data[index] = (short)(i * 4);
+                data[index + 1] = (short)((i * 4) + 1);
+                data[index + 2] = (short)((i * 4) + 2);
+                data[index + 3] = (short)((i * 4) + 2);
+                data[index + 4] = (short)((i * 4) + 1);
+                data[index + 5] = (short)((i * 4) + 3);
                 index += 6;
             }
-            buffer.SetData(numArray, 0, 0);
-            m_Device.set_Indices(buffer);
+            buffer.SetData(data, 0, Microsoft.DirectX.Direct3D.LockFlags.None);
+            m_Device.Indices = buffer;
         }
 
         public static void OnDeviceResizing(object sender, CancelEventArgs e)
@@ -4298,7 +4289,7 @@
             try
             {
                 RegistryKey key = Registry.ClassesRoot.OpenSubKey(@"http\shell\open\command");
-                string str = (string) key.GetValue("");
+                string str = (string)key.GetValue("");
                 string fileName = str.Substring(str.IndexOf('"') + 1, (str.LastIndexOf('"') - str.IndexOf('"')) - 1);
                 string str3 = str.Substring(str.LastIndexOf('"') + 1);
                 key.Close();
@@ -4319,15 +4310,13 @@
 
         private static void OpenDyeWindow(OnClick OnClick, Gump g)
         {
-            GAlphaBackground background = new GAlphaBackground(0, 0, 0xb8, 110) {
-                m_NonRestrictivePicking = true,
-                m_CanDrag = false,
-                X = 0,
-                Y = g.Parent.Height - 1
-            };
-            GHuePicker toAdd = new GHuePicker(4, 4) {
-                Brightness = 1
-            };
+            GAlphaBackground background = new GAlphaBackground(0, 0, 0xb8, 110);
+            background.m_NonRestrictivePicking = true;
+            background.m_CanDrag = false;
+            background.X = 0;
+            background.Y = g.Parent.Height - 1;
+            GHuePicker toAdd = new GHuePicker(4, 4);
+            toAdd.Brightness = 1;
             toAdd.SetTag("Dialog", background);
             background.Children.Add(toAdd);
             background.Children.Add(new GSingleBorder(3, 3, 0xa2, 0x52));
@@ -4454,7 +4443,7 @@
             }
         }
 
-        public static void Ping_OnTick(Timer t)
+        public static void Ping_OnTick(Client.Timer t)
         {
             int tickCount = Environment.TickCount;
             if (Network.Send(new PPing(m_PingID)))
@@ -4469,7 +4458,7 @@
             try
             {
                 int tickCount = Environment.TickCount;
-                int num2 = (int) m_Pings.Dequeue();
+                int num2 = (int)m_Pings.Dequeue();
                 m_Ping = tickCount - num2;
             }
             catch
@@ -4492,7 +4481,7 @@
             }
         }
 
-        private static void PopupDelay_OnTick(Timer t)
+        private static void PopupDelay_OnTick(Client.Timer t)
         {
             GObjectProperties.Display(t.GetTag("object"));
             t.Stop();
@@ -4508,7 +4497,7 @@
             {
                 Mobile player = World.Player;
                 bool grayscale = (player != null) && player.Ghost;
-                IHintable hintable = grayscale ? ((IHintable) Hues.Grayscale) : ((IHintable) Hues.Default);
+                IHintable hintable = grayscale ? ((IHintable)Hues.Grayscale) : ((IHintable)Hues.Default);
                 MapBlock block = matrix.GetBlock(w.X, w.Y);
                 bool flag2 = false;
                 for (int i = 0; !flag2 && (i < m_KeepAliveBlocks.Length); i++)
@@ -4564,10 +4553,10 @@
 
         public static void Profession_OnClick(Gump Sender)
         {
-            ShowCharCreationSkills((int) Sender.GetTag("Strength"), (int) Sender.GetTag("Dexterity"), (int) Sender.GetTag("Intelligence"), (int) Sender.GetTag("vSkill1"), (int) Sender.GetTag("vSkill2"), (int) Sender.GetTag("vSkill3"), (int) Sender.GetTag("iSkill1"), (int) Sender.GetTag("iSkill2"), (int) Sender.GetTag("iSkill3"));
+            ShowCharCreationSkills((int)Sender.GetTag("Strength"), (int)Sender.GetTag("Dexterity"), (int)Sender.GetTag("Intelligence"), (int)Sender.GetTag("vSkill1"), (int)Sender.GetTag("vSkill2"), (int)Sender.GetTag("vSkill3"), (int)Sender.GetTag("iSkill1"), (int)Sender.GetTag("iSkill2"), (int)Sender.GetTag("iSkill3"));
         }
 
-        private static void QamTimer_OnTick(Timer t)
+        private static void QamTimer_OnTick(Client.Timer t)
         {
             Mobile player = World.Player;
             if (player != null)
@@ -4575,7 +4564,7 @@
                 bool gMPrivs = GMPrivs;
                 while (m_QamList.Count > 0)
                 {
-                    QamEntry entry = (QamEntry) m_QamList.Peek();
+                    QamEntry entry = (QamEntry)m_QamList.Peek();
                     if (entry.m_Item == null)
                     {
                         m_QamList.Dequeue();
@@ -4633,8 +4622,8 @@
                             {
                                 break;
                             }
-                            Network.Send(new PPickupItem(entry.m_Item, (short) entry.m_Amount));
-                            Network.Send(new PDropItem(entry.m_Item.Serial, (short) entry.m_X, (short) entry.m_Y, (sbyte) entry.m_Z, entry.m_Target));
+                            Network.Send(new PPickupItem(entry.m_Item, (short)entry.m_Amount));
+                            Network.Send(new PDropItem(entry.m_Item.Serial, (short)entry.m_X, (short)entry.m_Y, (sbyte)entry.m_Z, entry.m_Target));
                             if (!gMPrivs)
                             {
                                 break;
@@ -4655,8 +4644,10 @@
 
         [DllImport("Kernel32")]
         public static extern bool QueryPerformanceCounter(ref long Counter);
+
         [DllImport("Kernel32")]
         private static extern bool QueryPerformanceFrequency(ref long Frequency);
+
         public static void QueueAutoMove(Item item, int amount, int x, int y, int z, int target)
         {
             int num = (item.Parent == null) ? -1 : item.Parent.Serial;
@@ -4692,8 +4683,8 @@
 
         public static void QuickLogin_OnClick(Gump g)
         {
-            int tag = (int) g.GetTag("Index");
-            Entry entry = (Entry) QuickLogin.Entries[tag];
+            int tag = (int)g.GetTag("Index");
+            Entry entry = (Client.Entry)QuickLogin.Entries[tag];
             m_QuickLogin = true;
             m_QuickEntry = entry;
             Cursor.Hourglass = true;
@@ -4708,7 +4699,7 @@
             else
             {
                 Gumps.Desktop.Children.Clear();
-                xGumps.SetVariable("FailMessage", "Couldn't connect to the login server.  Either the server is down, or you've entered an invalid host / port.  Check Client.cfg.");
+                xGumps.SetVariable("FailMessage", "Couldn't connect to the login server.  Either the server is down, or you've entered an invalid host / port.  Check cfg.");
                 xGumps.Display("ConnectionFailed");
                 Cursor.Hourglass = false;
                 m_QuickLogin = false;
@@ -4747,7 +4738,7 @@
             m_DataStores.Enqueue(list);
         }
 
-        public static void RemoveTimer(Timer t)
+        public static void RemoveTimer(Client.Timer t)
         {
             m_Timers.Remove(t);
         }
@@ -4798,7 +4789,7 @@
         {
             if (Sender.HasTag("Scroller"))
             {
-                GVSlider tag = (GVSlider) Sender.GetTag("Scroller");
+                GVSlider tag = (GVSlider)Sender.GetTag("Scroller");
                 if (tag != null)
                 {
                     tag.SetValue(tag.GetValue() + tag.Increase, true);
@@ -4810,7 +4801,7 @@
         {
             if (Sender.HasTag("Scroller"))
             {
-                GVSlider tag = (GVSlider) Sender.GetTag("Scroller");
+                GVSlider tag = (GVSlider)Sender.GetTag("Scroller");
                 if (tag != null)
                 {
                     tag.SetValue(tag.GetValue() - tag.Increase, true);
@@ -4831,8 +4822,8 @@
 
         public static void SendMovementRequest(int dir, int x, int y, int z)
         {
-            int key = (m_WalkStack.Count > 0) ? ((int) m_WalkStack.Pop()) : 0;
-            Network.Send(new PMoveRequest((byte) dir, (byte) m_Sequence, key, x, y, z));
+            int key = (m_WalkStack.Count > 0) ? ((int)m_WalkStack.Pop()) : 0;
+            Network.Send(new PMoveRequest((byte)dir, (byte)m_Sequence, key, x, y, z));
             m_WalkReq++;
             m_Sequence++;
             if (m_Sequence == 0x100)
@@ -4844,10 +4835,10 @@
         public static void Server_OnClick(Gump Sender)
         {
             Cursor.Hourglass = true;
-            NewConfig.LastServerID = (int) Sender.GetTag("ServerID");
+            NewConfig.LastServerID = (int)Sender.GetTag("ServerID");
             NewConfig.Save();
             Network.Send(new PHardwareInfo());
-            Network.Send(new PServerSelection((int) Sender.GetTag("ServerID")));
+            Network.Send(new PServerSelection((int)Sender.GetTag("ServerID")));
             for (int i = 0; i < m_Servers.Length; i++)
             {
                 if (m_Servers[i].ServerID == NewConfig.LastServerID)
@@ -4917,14 +4908,12 @@
             Gumps.Desktop.Children.Add(new GBackground(0x588, ScreenWidth, ScreenHeight, false));
             Gumps.Desktop.Children.Add(new GImage(0x157c, 0, 0));
             Gumps.Desktop.Children.Add(new GImage(0x15a0, 0, 4));
-            GButton toAdd = new GButton(0x1589, 0x22b, 4, new OnClick(Engine.Quit_OnClick)) {
-                Tooltip = new Tooltip(Strings.GetString("Tooltips.Quit"))
-            };
+            GButton toAdd = new GButton(0x1589, 0x22b, 4, new OnClick(Engine.Quit_OnClick));
+            toAdd.Tooltip = new Tooltip(Strings.GetString("Tooltips.Quit"));
             Gumps.Desktop.Children.Add(toAdd);
             Gumps.Desktop.Children.Add(new GImage(0x709, 280, 0x35));
-            GTextBox box = new GTextBox(0, false, 0xf8, 0x4b, 0xd7, 0x10, "Name", GetFont(5), Hues.Load(0x76b), Hues.Load(0x835), Hues.Load(0x25)) {
-                Tooltip = new Tooltip(Strings.GetString("Tooltips.CharCreateName"))
-            };
+            GTextBox box = new GTextBox(0, false, 0xf8, 0x4b, 0xd7, 0x10, "Name", GetFont(5), Hues.Load(0x76b), Hues.Load(0x835), Hues.Load(0x25));
+            box.Tooltip = new Tooltip(Strings.GetString("Tooltips.CharCreateName"));
             Gumps.Desktop.Children.Add(new GImage(0x70a, 240, 0x49));
             Gumps.Desktop.Children.Add(new GBackground(0x70b, 0xd7, 0x10, 0xf8, 0x49, false));
             Gumps.Desktop.Children.Add(new GImage(0x70c, 0x1cf, 0x49));
@@ -4981,9 +4970,8 @@
             UnicodeFont uniFont = GetUniFont(0);
             for (int i = 0; i < 5; i++)
             {
-                GTextButton button4 = new GTextButton(strArray[i], uniFont, Hues.Bright, Hues.Load(0x26), background.OffsetX, offsetY, new OnClick(Engine.AppearanceHueProperty_OnClick)) {
-                    SpaceWidth = 6
-                };
+                GTextButton button4 = new GTextButton(strArray[i], uniFont, Hues.Bright, Hues.Load(0x26), background.OffsetX, offsetY, new OnClick(Engine.AppearanceHueProperty_OnClick));
+                button4.SpaceWidth = 6;
                 offsetY += button4.Height - 2;
                 GHuePreview preview = new GHuePreview(background.OffsetX, offsetY, 100, 0x10, numArray[i], false);
                 offsetY += 0x10;
@@ -4995,9 +4983,8 @@
                 button3.SetTag(strArray[i], preview);
                 background.Children.Add(button4);
                 background.Children.Add(preview);
-                GHotspot hotspot = new GHotspot(button4.X, button4.Y, Biggest(button4.Width, preview.Width), (preview.Y + preview.Height) - button4.Y, button4) {
-                    Tooltip = new Tooltip(strArray2[i])
-                };
+                GHotspot hotspot = new GHotspot(button4.X, button4.Y, Biggest(button4.Width, preview.Width), (preview.Y + preview.Height) - button4.Y, button4);
+                hotspot.Tooltip = new Tooltip(strArray2[i]);
                 background.Children.Add(hotspot);
                 if (i == 4)
                 {
@@ -5030,20 +5017,17 @@
             Gumps.Desktop.Children.Add(new GBackground(0x588, ScreenWidth, ScreenHeight, false));
             Gumps.Desktop.Children.Add(new GImage(0x157c, 0, 0));
             Gumps.Desktop.Children.Add(new GImage(0x15a0, 0, 4));
-            GButton toAdd = new GButton(0x1589, 0x22b, 4, new OnClick(Engine.Quit_OnClick)) {
-                Tooltip = new Tooltip(Strings.GetString("Tooltips.Quit"))
-            };
+            GButton toAdd = new GButton(0x1589, 0x22b, 4, new OnClick(Engine.Quit_OnClick));
+            toAdd.Tooltip = new Tooltip(Strings.GetString("Tooltips.Quit"));
             Gumps.Desktop.Children.Add(toAdd);
             Gumps.Desktop.Children.Add(new GBackground(0xbbc, 0x9e, 0x16f, 0x1c4, 60, true));
             GImage image = new GImage(0x1598, 0x39, 0x31);
             for (int i = 0; i < 9; i++)
             {
-                GTextButton button2;
                 GImage image2 = new GImage(0x4b9, pointArray[i].X, pointArray[i].Y);
                 image.Children.Add(image2);
-                button2 = new GTextButton(strArray[i], GetUniFont(0), Hues.Load(0x58), Hues.Load(0x35), pointArray[i].X, 0, new OnClick(Engine.City_OnClick)) {
-                    Y = (pointArray[i].Y - button2.Height) - 1
-                };
+                GTextButton button2 = new GTextButton(strArray[i], GetUniFont(0), Hues.Load(0x58), Hues.Load(0x35), pointArray[i].X, 0, new OnClick(Engine.City_OnClick));
+                button2.Y = (pointArray[i].Y - button2.Height) - 1;
                 if (i == 3)
                 {
                     button2.X = (pointArray[i].X + 14) - button2.Width;
@@ -5070,9 +5054,8 @@
                 int y = Smallest(image2.Y, button2.Y);
                 int width = Biggest(image2.X + image2.Width, button2.X + button2.Width) - x;
                 int height = Biggest(image2.Y + image2.Height, button2.Y + button2.Height) - y;
-                GHotspot hotspot = new GHotspot(x, y, width, height, button2) {
-                    Tooltip = new Tooltip("Click here to enter this city")
-                };
+                GHotspot hotspot = new GHotspot(x, y, width, height, button2);
+                hotspot.Tooltip = new Tooltip("Click here to enter this city");
                 image.Children.Add(hotspot);
             }
             Gumps.Desktop.Children.Add(image);
@@ -5097,7 +5080,6 @@
             int[] numArray4 = new int[] { 0x1b, 0x11, 40, 0x19, 0x2e, 0x2b, 7, 0x25, 0x2d, -1, -1, -1 };
             for (int i = 0; i < 4; i++)
             {
-                GLabel label;
                 GButton target = new GButton(numArray[i], numArray[i], numArray[i] + 1, 0x1ad, (num + (i * 0x4f)) + 8, new OnClick(Engine.Profession_OnClick));
                 target.SetTag("Strength", numArray2[i * 3]);
                 target.SetTag("Dexterity", numArray2[(i * 3) + 1]);
@@ -5110,29 +5092,22 @@
                 target.SetTag("iSkill3", numArray4[(i * 3) + 2]);
                 toAdd.Children.Add(new GMouseRouter(0x589, 420, num + (i * 0x4f), target));
                 toAdd.Children.Add(target);
-                label = new GLabel(strArray[i], GetFont(9), Hues.Load(0x76b), 0, 0) {
-                    X = 410 - label.Width,
-                    Y = (num + (i * 0x4f)) + ((80 - label.Height) / 2)
-                };
+                GLabel label = new GLabel(strArray[i], GetFont(9), Hues.Load(0x76b), 0, 0);
+                label.X = 410 - label.Width;
+                label.Y = (num + (i * 0x4f)) + ((80 - label.Height) / 2);
                 toAdd.Children.Add(label);
             }
             Gumps.Desktop.Children.Add(new GBackground(0x588, ScreenWidth, ScreenHeight, false));
             Gumps.Desktop.Children.Add(toAdd);
             Gumps.Desktop.Children.Add(new GImage(0x157c, 0, 0));
             Gumps.Desktop.Children.Add(new GImage(0x15a0, 0, 4));
-            GButton button2 = new GButton(0x1589, 0x22b, 4, new OnClick(Engine.Quit_OnClick)) {
-                Tooltip = new Tooltip(Strings.GetString("Tooltips.Quit"))
-            };
+            GButton button2 = new GButton(0x1589, 0x22b, 4, new OnClick(Engine.Quit_OnClick));
+            button2.Tooltip = new Tooltip(Strings.GetString("Tooltips.Quit"));
             Gumps.Desktop.Children.Add(button2);
         }
 
         public static void ShowCharCreationSkills(int Str, int Dex, int Int, int vSkill1, int vSkill2, int vSkill3, int iSkill1, int iSkill2, int iSkill3)
         {
-            GButton button2;
-            GVSlider slider;
-            GTextButton button3;
-            GTextButton button4;
-            GTextButton button5;
             Cursor.Hourglass = false;
             GBackground toAdd = new GBackground(0xa2c, 0x222, 0x160, 80, 80, true);
             toAdd.Children.Add(new GImage(0x58b, 0x42, -22));
@@ -5140,7 +5115,7 @@
             toAdd.Children.Add(new GImage(0x1580, 0x97, -30));
             toAdd.Children.Add(new GButton(0x119c, 120, 0x114, null));
             GListBox box = new GListBox(GetFont(9), Hues.Load(0x76b), Hues.Load(0x961), 0xbbc, 40, 0x39, 0xcc, 0xd6, true);
-            Client.Skills skills = Skills;
+            Skills skills = Skills;
             for (int i = 0; i < 0x100; i++)
             {
                 Skill skill = skills[i];
@@ -5159,16 +5134,14 @@
             }
             GButton button = new GButton(250, 250, 0xfb, box.X + box.Width, box.Y, new OnClick(Engine.ScrollUp_OnClick));
             toAdd.Children.Add(button);
-            button2 = new GButton(0xfc, 0xfc, 0xfd, box.X + box.Width, box.Y + box.Height, new OnClick(Engine.ScrollDown_OnClick)) {
-                Y = button2.Y - button2.Height
-            };
+            GButton button2 = new GButton(0xfc, 0xfc, 0xfd, box.X + box.Width, box.Y + box.Height, new OnClick(Engine.ScrollDown_OnClick));
+            button2.Y -= button2.Height;
             toAdd.Children.Add(button2);
             toAdd.Children.Add(new GBackground(0x100, button.Width, button2.Y - (button.Y + button.Height), button.X, button.Y + button.Height, false));
-            slider = new GVSlider(0xfe, (box.X + box.Width) + 1, button.Y + button.Height, 13, button2.Y - (button.Y + button.Height), 0.0, 0.0, (double) num2, 1.0) {
-                Y = slider.Y + slider.HalfHeight,
-                Height = slider.Height - (slider.HalfHeight * 2),
-                OnValueChange = new OnValueChange(Engine.ListView_OnValueChange)
-            };
+            GVSlider slider = new GVSlider(0xfe, (box.X + box.Width) + 1, button.Y + button.Height, 13, button2.Y - (button.Y + button.Height), 0.0, 0.0, (double)num2, 1.0);
+            slider.Y += slider.HalfHeight;
+            slider.Height -= slider.HalfHeight * 2;
+            slider.OnValueChange = new OnValueChange(Engine.ListView_OnValueChange);
             slider.SetTag("ListBox", box);
             slider.SetValue(0.0, false);
             toAdd.Children.Add(slider);
@@ -5193,9 +5166,8 @@
                 toAdd.Children.Add(new GBackground(0xd6, 0x4b, 14, 0x1b1, numArray[j], false));
                 toAdd.Children.Add(new GImage(0xd7, 0x1fc, numArray[j]));
                 GLabel label = new GLabel(numArray2[j].ToString(), GetFont(1), Hues.Load(1), 380, numArray[j] - 1);
-                GSlider slider2 = new GSlider(0xd8, 0x1a8, numArray[j], 0x5d, 14, (double) numArray2[j], numArray3[j], numArray4[j], 1.0) {
-                    OnValueChange = new OnValueChange(Engine.UpdateStaticSlider_OnValueChange)
-                };
+                GSlider slider2 = new GSlider(0xd8, 0x1a8, numArray[j], 0x5d, 14, (double)numArray2[j], numArray3[j], numArray4[j], 1.0);
+                slider2.OnValueChange = new OnValueChange(Engine.UpdateStaticSlider_OnValueChange);
                 slider2.SetTag("Static", label);
                 slider2.SetTag("Font", GetFont(1));
                 slider2.SetTag("Hue", Hues.Load(1));
@@ -5216,24 +5188,21 @@
                 sliderArray[5].SetTag(name, sliderArray[k + 3]);
             }
             OnClick onClick = new OnClick(Engine.CharSkillBox_OnClick);
-            button3 = new GTextButton((iSkill1 == -1) ? "Click Here" : Skills[iSkill1].Name, GetFont(9), Hues.Load(0x76b), Hues.Load(0x961), 0x113, 0xbf, onClick) {
-                X = 0x112,
-                Y = 0xd1 - button3.Height
-            };
+            GTextButton button3 = new GTextButton((iSkill1 == -1) ? "Click Here" : Skills[iSkill1].Name, GetFont(9), Hues.Load(0x76b), Hues.Load(0x961), 0x113, 0xbf, onClick);
+            button3.X = 0x112;
+            button3.Y = 0xd1 - button3.Height;
             button3.SetTag("List", box);
             button3.SetTag("Skill", iSkill1);
             toAdd.Children.Add(button3);
-            button4 = new GTextButton((iSkill2 == -1) ? "Click Here" : Skills[iSkill2].Name, GetFont(9), Hues.Load(0x76b), Hues.Load(0x961), 0x113, 0xbf, onClick) {
-                X = 0x112,
-                Y = 0xef - button4.Height
-            };
+            GTextButton button4 = new GTextButton((iSkill2 == -1) ? "Click Here" : Skills[iSkill2].Name, GetFont(9), Hues.Load(0x76b), Hues.Load(0x961), 0x113, 0xbf, onClick);
+            button4.X = 0x112;
+            button4.Y = 0xef - button4.Height;
             button4.SetTag("List", box);
             button4.SetTag("Skill", iSkill2);
             toAdd.Children.Add(button4);
-            button5 = new GTextButton((iSkill3 == -1) ? "Click Here" : Skills[iSkill3].Name, GetFont(9), Hues.Load(0x76b), Hues.Load(0x961), 0x113, 0xbf, onClick) {
-                X = 0x112,
-                Y = 0x10d - button5.Height
-            };
+            GTextButton button5 = new GTextButton((iSkill3 == -1) ? "Click Here" : Skills[iSkill3].Name, GetFont(9), Hues.Load(0x76b), Hues.Load(0x961), 0x113, 0xbf, onClick);
+            button5.X = 0x112;
+            button5.Y = 0x10d - button5.Height;
             button5.SetTag("List", box);
             button5.SetTag("Skill", iSkill3);
             toAdd.Children.Add(button5);
@@ -5244,9 +5213,8 @@
             Gumps.Desktop.Children.Add(new GBackground(0x588, ScreenWidth, ScreenHeight, false));
             Gumps.Desktop.Children.Add(new GImage(0x157c, 0, 0));
             Gumps.Desktop.Children.Add(new GImage(0x15a0, 0, 4));
-            GButton button6 = new GButton(0x1589, 0x22b, 4, new OnClick(Engine.Quit_OnClick)) {
-                Tooltip = new Tooltip(Strings.GetString("Tooltips.Quit"))
-            };
+            GButton button6 = new GButton(0x1589, 0x22b, 4, new OnClick(Engine.Quit_OnClick));
+            button6.Tooltip = new Tooltip(Strings.GetString("Tooltips.Quit"));
             Gumps.Desktop.Children.Add(button6);
             GButton button7 = new GButton(0x15a4, 610, 0x1bd, new OnClick(Engine.CharCreationSkillsArrow_OnClick));
             button7.SetTag("Strength", labelArray[0]);
@@ -5312,7 +5280,7 @@
 
         public static void Status_OnClick(Gump Sender)
         {
-            int tag = (int) Sender.GetTag("Serial");
+            int tag = (int)Sender.GetTag("Serial");
             Mobile mobile = World.FindMobile(tag);
             if (mobile != null)
             {
@@ -5325,8 +5293,8 @@
         {
             if ((Sender.HasTag("Dialog") && Sender.HasTag("Serial")) && Sender.HasTag("Type"))
             {
-                Gumps.Destroy((Gump) Sender.GetTag("Dialog"));
-                Network.Send(new PStringQueryCancel((int) Sender.GetTag("Serial"), (short) Sender.GetTag("Type")));
+                Gumps.Destroy((Gump)Sender.GetTag("Dialog"));
+                Network.Send(new PStringQueryCancel((int)Sender.GetTag("Serial"), (short)Sender.GetTag("Type")));
             }
         }
 
@@ -5334,8 +5302,8 @@
         {
             if ((Sender.HasTag("Dialog") && Sender.HasTag("Serial")) && (Sender.HasTag("Type") && Sender.HasTag("Text")))
             {
-                Gumps.Destroy((Gump) Sender.GetTag("Dialog"));
-                Network.Send(new PStringQueryResponse((int) Sender.GetTag("Serial"), (short) Sender.GetTag("Type"), ((GTextBox) Sender.GetTag("Text")).String));
+                Gumps.Destroy((Gump)Sender.GetTag("Dialog"));
+                Network.Send(new PStringQueryResponse((int)Sender.GetTag("Serial"), (short)Sender.GetTag("Type"), ((GTextBox)Sender.GetTag("Text")).String));
             }
         }
 
@@ -5364,23 +5332,23 @@
                 if (m_TargetHandler != targetHandler)
                 {
                     m_TargetQueue = null;
-                    if (!(o is Mobile) || !((Mobile) o).Player)
+                    if (!(o is Mobile) || !((Mobile)o).Player)
                     {
                         m_LastTarget = o;
                     }
                     if (targetHandler is ServerTargetHandler)
                     {
-                        ServerTargetHandler handler2 = (ServerTargetHandler) targetHandler;
-                        if ((((handler2.Flags & ServerTargetFlags.Harmful) != ServerTargetFlags.None) && (o is Mobile)) && !((Mobile) o).Player)
+                        ServerTargetHandler handler2 = (ServerTargetHandler)targetHandler;
+                        if ((((handler2.Flags & ServerTargetFlags.Harmful) != ServerTargetFlags.None) && (o is Mobile)) && !((Mobile)o).Player)
                         {
                             m_LastHarmTarget = o;
                         }
-                        if ((((handler2.Flags & ServerTargetFlags.Beneficial) != ServerTargetFlags.None) && (o is Mobile)) && !((Mobile) o).Player)
+                        if ((((handler2.Flags & ServerTargetFlags.Beneficial) != ServerTargetFlags.None) && (o is Mobile)) && !((Mobile)o).Player)
                         {
                             m_LastBenTarget = o;
                         }
                     }
-                    else if (((targetHandler is NullTargetHandler) && (o is Mobile)) && !((Mobile) o).Player)
+                    else if (((targetHandler is NullTargetHandler) && (o is Mobile)) && !((Mobile)o).Player)
                     {
                         m_LastHarmTarget = o;
                     }
@@ -5399,14 +5367,14 @@
                 IEnumerator enumerator = World.Mobiles.Values.GetEnumerator();
                 MapPackage cache = Map.GetCache();
                 int xyRange = 12;
-                bool flag = (m_TargetHandler is ServerTargetHandler) && (((ServerTargetHandler) m_TargetHandler).Action == TargetAction.Bola);
+                bool flag = (m_TargetHandler is ServerTargetHandler) && (((ServerTargetHandler)m_TargetHandler).Action == TargetAction.Bola);
                 if (flag)
                 {
                     xyRange = 8;
                 }
                 while (enumerator.MoveNext())
                 {
-                    Mobile current = (Mobile) enumerator.Current;
+                    Mobile current = (Mobile)enumerator.Current;
                     if (((current.Visible && !current.Player) && (!current.m_IsFriend && player.InSquareRange(current, xyRange))) && (((Array.IndexOf(members, current) == -1) && Map.LineOfSight(player, current)) && (!current.Ghost && !current.Bonded)))
                     {
                         if (current.Notoriety == Notoriety.Innocent)
@@ -5435,7 +5403,7 @@
                 if (dataStore.Count > 0)
                 {
                     dataStore.Sort(TargetSorter.Comparer);
-                    Mobile o = (Mobile) dataStore[0];
+                    Mobile o = (Mobile)dataStore[0];
                     if (m_TargetHandler != null)
                     {
                         Target(o);
@@ -5459,7 +5427,7 @@
             IEnumerator enumerator = World.Mobiles.Values.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                Mobile current = (Mobile) enumerator.Current;
+                Mobile current = (Mobile)enumerator.Current;
                 if ((current.Visible && ((current.Notoriety == Notoriety.Criminal) || (current.Notoriety == Notoriety.Attackable))) && ((!current.m_IsFriend && !current.Player) && World.InRange(current)))
                 {
                     dataStore.Add(current);
@@ -5504,7 +5472,7 @@
                 MapPackage cache = Map.GetCache();
                 while (enumerator.MoveNext())
                 {
-                    Mobile current = (Mobile) enumerator.Current;
+                    Mobile current = (Mobile)enumerator.Current;
                     if ((current.Visible && !current.Player) && (!current.m_IsFriend && player.InSquareRange(current, 12)))
                     {
                         if (current.Notoriety == Notoriety.Innocent)
@@ -5522,7 +5490,7 @@
                 if (dataStore.Count > 0)
                 {
                     dataStore.Sort(NameSorter.Comparer);
-                    Mobile o = (Mobile) dataStore[0];
+                    Mobile o = (Mobile)dataStore[0];
                     if (m_TargetHandler != null)
                     {
                         Target(o);
@@ -5551,7 +5519,7 @@
                 MapPackage cache = Map.GetCache();
                 while (enumerator.MoveNext())
                 {
-                    Mobile current = (Mobile) enumerator.Current;
+                    Mobile current = (Mobile)enumerator.Current;
                     if ((current.Visible && !current.Player) && (!current.m_IsFriend && player.InSquareRange(current, 12)))
                     {
                         if (current.Notoriety == Notoriety.Innocent)
@@ -5577,7 +5545,7 @@
                 if (dataStore.Count > 0)
                 {
                     dataStore.Sort(NameSorter.Comparer);
-                    Mobile o = (Mobile) dataStore[0];
+                    Mobile o = (Mobile)dataStore[0];
                     if (m_TargetHandler != null)
                     {
                         Target(o);
@@ -5606,7 +5574,7 @@
                 bool flag = (noto != Notoriety.Innocent) && (noto != Notoriety.Ally);
                 while (enumerator.MoveNext())
                 {
-                    Mobile current = (Mobile) enumerator.Current;
+                    Mobile current = (Mobile)enumerator.Current;
                     if (((current.Visible && (current.Notoriety == noto)) && (!flag || !current.m_IsFriend)) && (!current.Player && player.InSquareRange(current, 12)))
                     {
                         if (current.Notoriety == Notoriety.Innocent)
@@ -5624,7 +5592,7 @@
                 if (dataStore.Count > 0)
                 {
                     dataStore.Sort(TargetSorter.Comparer);
-                    Mobile o = (Mobile) dataStore[0];
+                    Mobile o = (Mobile)dataStore[0];
                     if (m_TargetHandler != null)
                     {
                         Target(o);
@@ -5663,7 +5631,7 @@
         {
             if (m_TargetHandler is ServerTargetHandler)
             {
-                ServerTargetHandler targetHandler = (ServerTargetHandler) m_TargetHandler;
+                ServerTargetHandler targetHandler = (ServerTargetHandler)m_TargetHandler;
                 if ((targetHandler.Flags & ServerTargetFlags.Harmful) != ServerTargetFlags.None)
                 {
                     if (m_LastHarmTarget != null)
@@ -5709,9 +5677,9 @@
 
         private static void TextHue_OnHueSelect(Gump g)
         {
-            World.CharData.TextHue = ((GHuePicker) g.GetTag("Hue Picker")).Hue;
+            World.CharData.TextHue = ((GHuePicker)g.GetTag("Hue Picker")).Hue;
             Renderer.SetText(m_Text);
-            ((GTextButton) g.GetTag("Button")).DefaultHue = Hues.Load(((GHuePicker) g.GetTag("Hue Picker")).Hue);
+            ((GTextButton)g.GetTag("Button")).DefaultHue = Hues.Load(((GHuePicker)g.GetTag("Hue Picker")).Hue);
             Gumps.Destroy(g.Parent);
             m_DyeWindowOpen = false;
         }
@@ -5722,7 +5690,7 @@
             int index = 0;
             while (index < count)
             {
-                Timer timer = (Timer) m_Timers[index];
+                Timer timer = (Client.Timer)m_Timers[index];
                 if (!timer.Tick())
                 {
                     m_Timers.RemoveAt(index);
@@ -5735,9 +5703,9 @@
             }
         }
 
-        private static void TimeRefresh_OnTick(Timer t)
+        private static void TimeRefresh_OnTick(Client.Timer t)
         {
-            int tag = (int) t.GetTag("Frames");
+            int tag = (int)t.GetTag("Frames");
             double num2 = tag;
             double d = 0.0;
             double num4 = 6.2831853071795862 / num2;
@@ -5751,8 +5719,8 @@
             double dTicks = Engine.dTicks;
             while (--tag >= 0)
             {
-                m_xMouse = (int) (num5 + (num7 * Math.Cos(d)));
-                m_yMouse = (int) (num6 - (num7 * Math.Sin(d)));
+                m_xMouse = (int)(num5 + (num7 * Math.Cos(d)));
+                m_yMouse = (int)(num6 - (num7 * Math.Sin(d)));
                 d += num4;
                 Renderer.Draw();
             }
@@ -5784,15 +5752,15 @@
         {
             if ((((Sender.HasTag("Static") && Sender.HasTag("Font")) && (Sender.HasTag("Hue") && Sender.HasTag("Slider1"))) && (Sender.HasTag("Slider2") && Sender.HasTag("Slider3"))) && Sender.HasTag("Max"))
             {
-                GLabel tag = (GLabel) Sender.GetTag("Static");
-                IFont font = (IFont) Sender.GetTag("Font");
-                IHue hue = (IHue) Sender.GetTag("Hue");
+                GLabel tag = (GLabel)Sender.GetTag("Static");
+                IFont font = (Client.IFont)Sender.GetTag("Font");
+                IHue hue = (IHue)Sender.GetTag("Hue");
                 GSlider[] sliderArray = new GSlider[3];
                 for (int i = 0; i < 3; i++)
                 {
-                    sliderArray[i] = (GSlider) Sender.GetTag(string.Format("Slider{0}", i + 1));
+                    sliderArray[i] = (GSlider)Sender.GetTag(string.Format("Slider{0}", i + 1));
                 }
-                double num2 = (double) Sender.GetTag("Max");
+                double num2 = (double)Sender.GetTag("Max");
                 if (((tag != null) && (font != null)) && (hue != null))
                 {
                     GSlider slider = null;
@@ -5843,8 +5811,8 @@
                         {
                             tag.Hue = hue;
                         }
-                        ((GLabel) slider2.GetTag("Static")).Text = slider2.GetValue().ToString();
-                        ((GLabel) slider.GetTag("Static")).Text = slider.GetValue().ToString();
+                        ((GLabel)slider2.GetTag("Static")).Text = slider2.GetValue().ToString();
+                        ((GLabel)slider.GetTag("Static")).Text = slider.GetValue().ToString();
                     }
                 }
             }
@@ -5854,7 +5822,7 @@
         {
             if (Sender.HasTag("URL"))
             {
-                OpenBrowser((string) Sender.GetTag("URL"));
+                OpenBrowser((string)Sender.GetTag("URL"));
             }
         }
 
@@ -5866,7 +5834,7 @@
                 Item backpack = player.Backpack;
                 if (backpack != null)
                 {
-                    Item[] itemArray = backpack.FindItems(new ItemIDValidator(new int[] { 0xf06 + type }));
+                    Item[] itemArray = backpack.FindItems(new ItemIDValidator(new int[] { 0xf06 + (int)type }));
                     int index = 0;
                     while (index < itemArray.Length)
                     {
@@ -5924,9 +5892,9 @@
 
         private static void WhisperHue_OnHueSelect(Gump g)
         {
-            World.CharData.WhisperHue = ((GHuePicker) g.GetTag("Hue Picker")).Hue;
+            World.CharData.WhisperHue = ((GHuePicker)g.GetTag("Hue Picker")).Hue;
             Renderer.SetText(m_Text);
-            ((GTextButton) g.GetTag("Button")).DefaultHue = Hues.Load(((GHuePicker) g.GetTag("Hue Picker")).Hue);
+            ((GTextButton)g.GetTag("Button")).DefaultHue = Hues.Load(((GHuePicker)g.GetTag("Hue Picker")).Hue);
             Gumps.Destroy(g.Parent);
             m_DyeWindowOpen = false;
         }
@@ -5937,7 +5905,7 @@
             object obj2 = f.WrapCache[key];
             if (obj2 != null)
             {
-                return (string) obj2;
+                return (string)obj2;
             }
             if (f.GetStringWidth(text) <= width)
             {
@@ -6018,7 +5986,7 @@
             int count = dataStore.Count;
             for (int j = 0; j < count; j++)
             {
-                builder4.Append(((StringBuilder) dataStore[j]).ToString());
+                builder4.Append(((StringBuilder)dataStore[j]).ToString());
                 if (j < (count - 1))
                 {
                     builder4.Append('\n');
@@ -6041,9 +6009,9 @@
 
         private static void YellHue_OnHueSelect(Gump g)
         {
-            World.CharData.YellHue = ((GHuePicker) g.GetTag("Hue Picker")).Hue;
+            World.CharData.YellHue = ((GHuePicker)g.GetTag("Hue Picker")).Hue;
             Renderer.SetText(m_Text);
-            ((GTextButton) g.GetTag("Button")).DefaultHue = Hues.Load(((GHuePicker) g.GetTag("Hue Picker")).Hue);
+            ((GTextButton)g.GetTag("Button")).DefaultHue = Hues.Load(((GHuePicker)g.GetTag("Hue Picker")).Hue);
             Gumps.Destroy(g.Parent);
             m_DyeWindowOpen = false;
         }
@@ -6072,13 +6040,13 @@
             }
         }
 
-        public static Client.ContainerBoundsTable ContainerBoundsTable
+        public static ContainerBoundsTable ContainerBoundsTable
         {
             get
             {
                 if (m_ContainerBoundsTable == null)
                 {
-                    m_ContainerBoundsTable = new Client.ContainerBoundsTable();
+                    m_ContainerBoundsTable = new ContainerBoundsTable();
                 }
                 return m_ContainerBoundsTable;
             }
@@ -6118,7 +6086,7 @@
                     double qPC = m_QPC;
                     qPC /= m_QPF;
                     qPC = qPC % 2147483648;
-                    m_Ticks = (int) (qPC + 0.5);
+                    m_Ticks = (int)(qPC + 0.5);
                     m_dTicks = qPC;
                     m_SetTicks = true;
                 }
@@ -6126,7 +6094,7 @@
             }
         }
 
-        public static Client.Effects Effects
+        public static Effects Effects
         {
             get
             {
@@ -6134,19 +6102,19 @@
             }
         }
 
-        public static Client.Features Features
+        public static Features Features
         {
             get
             {
                 if (m_Features == null)
                 {
-                    m_Features = new Client.Features();
+                    m_Features = new Features();
                 }
                 return m_Features;
             }
         }
 
-        public static Client.FileManager FileManager
+        public static FileManager FileManager
         {
             get
             {
@@ -6186,13 +6154,13 @@
             }
         }
 
-        public static Client.ItemArt ItemArt
+        public static ItemArt ItemArt
         {
             get
             {
                 if (m_ItemArt == null)
                 {
-                    m_ItemArt = new Client.ItemArt();
+                    m_ItemArt = new ItemArt();
                 }
                 return m_ItemArt;
             }
@@ -6206,13 +6174,13 @@
             }
         }
 
-        public static Client.LandArt LandArt
+        public static LandArt LandArt
         {
             get
             {
                 if (m_LandArt == null)
                 {
-                    m_LandArt = new Client.LandArt();
+                    m_LandArt = new LandArt();
                 }
                 return m_LandArt;
             }
@@ -6230,13 +6198,13 @@
             }
         }
 
-        public static Client.MidiTable MidiTable
+        public static MidiTable MidiTable
         {
             get
             {
                 if (m_MidiTable == null)
                 {
-                    m_MidiTable = new Client.MidiTable();
+                    m_MidiTable = new MidiTable();
                 }
                 return m_MidiTable;
             }
@@ -6262,13 +6230,13 @@
             }
         }
 
-        public static Client.Multis Multis
+        public static Multis Multis
         {
             get
             {
                 if (m_Multis == null)
                 {
-                    m_Multis = new Client.Multis();
+                    m_Multis = new Multis();
                 }
                 return m_Multis;
             }
@@ -6326,13 +6294,13 @@
             }
         }
 
-        public static Client.ServerFeatures ServerFeatures
+        public static ServerFeatures ServerFeatures
         {
             get
             {
                 if (m_ServerFeatures == null)
                 {
-                    m_ServerFeatures = new Client.ServerFeatures();
+                    m_ServerFeatures = new ServerFeatures();
                 }
                 return m_ServerFeatures;
             }
@@ -6350,28 +6318,28 @@
             }
         }
 
-        public static Client.Skills Skills
+        public static Skills Skills
         {
             get
             {
                 if (m_Skills == null)
                 {
                     Debug.TimeBlock("Initializing Skills");
-                    m_Skills = new Client.Skills();
+                    m_Skills = new Skills();
                     Debug.EndBlock();
                 }
                 return m_Skills;
             }
         }
 
-        public static Client.Sounds Sounds
+        public static Sounds Sounds
         {
             get
             {
                 if (m_Sounds == null)
                 {
                     Debug.TimeBlock("Initializing Sounds");
-                    m_Sounds = new Client.Sounds();
+                    m_Sounds = new Sounds();
                     Debug.EndBlock();
                 }
                 return m_Sounds;
@@ -6418,13 +6386,13 @@
             }
         }
 
-        public static Client.TextureArt TextureArt
+        public static TextureArt TextureArt
         {
             get
             {
                 if (m_TextureArt == null)
                 {
-                    m_TextureArt = new Client.TextureArt();
+                    m_TextureArt = new TextureArt();
                 }
                 return m_TextureArt;
             }
@@ -6440,7 +6408,7 @@
                     double qPC = m_QPC;
                     qPC /= m_QPF;
                     qPC = qPC % 2147483648;
-                    m_Ticks = (int) (qPC + 0.5);
+                    m_Ticks = (int)(qPC + 0.5);
                     m_dTicks = qPC;
                     m_SetTicks = true;
                 }
@@ -6472,13 +6440,21 @@
         private struct ConvertStruct
         {
             public char m_From;
-            public char m_To;
+            public int m_To;
             public int m_Count;
-            public ConvertStruct(char from, char to, int count)
+
+            //public ConvertStruct(char from, char to, int count)
+            //{
+            //    this.m_From = from;
+            //    this.m_To = to;
+            //    this.m_Count = count;
+            //}
+
+            public ConvertStruct(char v1, int v2, int v3)
             {
-                this.m_From = from;
-                this.m_To = to;
-                this.m_Count = count;
+                this.m_From = v1;
+                this.m_To = v2;
+                this.m_Count = v3;
             }
         }
 
@@ -6486,47 +6462,45 @@
         {
             public int Compare(object x, object y)
             {
-                DictionaryEntry entry = (DictionaryEntry) x;
-                DictionaryEntry entry2 = (DictionaryEntry) y;
-                return (((int) entry2.Key) - ((int) entry.Key));
+                DictionaryEntry entry = (DictionaryEntry)x;
+                DictionaryEntry entry2 = (DictionaryEntry)y;
+                return (((int)entry2.Key) - ((int)entry.Key));
             }
         }
 
         private class DisplayModeComparer : IComparer
         {
-            private Format m_WantFormat;
+            private Microsoft.DirectX.Direct3D.Format m_WantFormat;
             private int m_WantHeight;
             private int m_WantWidth;
 
-            public DisplayModeComparer(int w, int h, Format f)
+            public DisplayModeComparer(int w, int h, Microsoft.DirectX.Direct3D.Format f)
             {
                 this.m_WantWidth = w;
                 this.m_WantHeight = h;
                 this.m_WantFormat = f;
             }
 
-            public unsafe int Compare(object x, object y)
+            public int Compare(object x, object y)
             {
-                DisplayMode mode = *((DisplayMode*) x);
-                DisplayMode mode2 = *((DisplayMode*) y);
-                int introduced6 = mode.get_Width();
-                int num = Math.Abs((int) ((introduced6 * mode.get_Height()) - (this.m_WantWidth * this.m_WantHeight)));
-                int introduced7 = mode2.get_Width();
-                int num2 = Math.Abs((int) ((introduced7 * mode2.get_Height()) - (this.m_WantWidth * this.m_WantHeight)));
+                DisplayMode mode = (DisplayMode)x;
+                DisplayMode mode2 = (DisplayMode)y;
+                int num = Math.Abs((int)((mode.Width * mode.Height) - (this.m_WantWidth * this.m_WantHeight)));
+                int num2 = Math.Abs((int)((mode2.Width * mode2.Height) - (this.m_WantWidth * this.m_WantHeight)));
                 int num3 = num - num2;
                 if (num3 != 0)
                 {
                     return num3;
                 }
-                if (mode.get_Format() == this.m_WantFormat)
+                if (mode.Format == this.m_WantFormat)
                 {
                     num = 0;
                 }
-                else if (mode.get_Format() == 0x19)
+                else if (mode.Format == Microsoft.DirectX.Direct3D.Format.A1R5G5B5)
                 {
                     num = 1;
                 }
-                else if (mode.get_Format() == 0x17)
+                else if (mode.Format == Microsoft.DirectX.Direct3D.Format.R5G6B5)
                 {
                     num = 2;
                 }
@@ -6534,15 +6508,15 @@
                 {
                     num = 3;
                 }
-                if (mode2.get_Format() == this.m_WantFormat)
+                if (mode2.Format == this.m_WantFormat)
                 {
                     num2 = 0;
                 }
-                else if (mode2.get_Format() == 0x19)
+                else if (mode2.Format == Microsoft.DirectX.Direct3D.Format.A1R5G5B5)
                 {
                     num2 = 1;
                 }
-                else if (mode2.get_Format() == 0x17)
+                else if (mode2.Format == Microsoft.DirectX.Direct3D.Format.R5G6B5)
                 {
                     num2 = 2;
                 }
@@ -6575,4 +6549,3 @@
         }
     }
 }
-

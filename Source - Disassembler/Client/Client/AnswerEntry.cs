@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class AnswerEntry
     {
         private int m_Hue;
@@ -50,4 +48,3 @@
         }
     }
 }
-

@@ -17,7 +17,7 @@
 
         public GPropertyEntry(object obj, ObjectEditorEntry entry) : base(0, 0, 0x117, 0x16)
         {
-            IFont uniFont;
+            Client.IFont uniFont;
             this.m_Object = obj;
             this.m_Entry = entry;
             base.m_NonRestrictivePicking = true;
@@ -51,11 +51,10 @@
             this.m_Value = new GLabel(valString, uniFont, GumpHues.WindowText, 0, 0);
             if (entry.Hue != null)
             {
-                GAlphaBackground toAdd = new GAlphaBackground(4, 4, 0x16, 14) {
-                    FillColor = Engine.C16232(Hues.Load((int) val).Pixel(0xffff)),
-                    FillAlpha = 1f,
-                    ShouldHitTest = false
-                };
+                GAlphaBackground toAdd = new GAlphaBackground(4, 4, 0x16, 14);
+                toAdd.FillColor = Engine.C16232(Hues.Load((int)val).Pixel(0xffff));
+                toAdd.FillAlpha = 1f;
+                toAdd.ShouldHitTest = false;
                 this.m_ValueBack.Children.Add(toAdd);
                 this.m_Value.Text = "Hue";
                 this.m_Value.X = 30 - this.m_Value.Image.xMin;
@@ -78,11 +77,11 @@
             }
             if (val is bool)
             {
-                return (((bool) val) ? "On" : "Off");
+                return (((bool)val) ? "On" : "Off");
             }
             if (val is Item)
             {
-                return Localization.GetString(0xf9060 + (((Item) val).ID & 0x3fff));
+                return Localization.GetString(0xf9060 + (((Item)val).ID & 0x3fff));
             }
             return val.ToString();
         }
@@ -95,7 +94,7 @@
 
         protected internal override void OnMouseEnter(int X, int Y, MouseButtons mb)
         {
-            this.m_NameBack.FillColor = GumpPaint.Blend(GumpColors.Window, GumpColors.Highlight, (float) 0.9f);
+            this.m_NameBack.FillColor = GumpPaint.Blend(GumpColors.Window, GumpColors.Highlight, (float)0.9f);
             this.m_ValueBack.FillColor = this.m_NameBack.FillColor;
         }
 
@@ -109,11 +108,11 @@
         {
             if (mb == MouseButtons.Left)
             {
-                ((GEditorPanel) base.Parent.Parent).Reset();
+                ((GEditorPanel)base.Parent.Parent).Reset();
                 object obj2 = this.m_Entry.Property.GetValue(this.m_Object, null);
                 if (obj2 is bool)
                 {
-                    this.SetValue(!((bool) obj2));
+                    this.SetValue(!((bool)obj2));
                 }
                 else if ((obj2 is Item) || (this.m_Entry.Property.PropertyType == typeof(Item)))
                 {
@@ -126,7 +125,7 @@
                     {
                         if (values.GetValue(i).Equals(obj2))
                         {
-                            this.SetValue(values.GetValue((int) ((i + 1) % values.Length)));
+                            this.SetValue(values.GetValue((int)((i + 1) % values.Length)));
                             break;
                         }
                     }
@@ -173,7 +172,7 @@
 
         public void SetValue(object val)
         {
-            IFont uniFont;
+            Client.IFont uniFont;
             this.m_Entry.Property.SetValue(this.m_Object, val, null);
             if ((val is ValueType) ? val.Equals(this.m_Entry.Optionable.Default) : object.ReferenceEquals(val, this.m_Entry.Optionable.Default))
             {
@@ -189,7 +188,7 @@
             }
             else
             {
-                this.m_Hue.FillColor = Engine.C16232(Hues.Load((int) val).Pixel(0xffff));
+                this.m_Hue.FillColor = Engine.C16232(Hues.Load((int)val).Pixel(0xffff));
             }
             this.m_Value.Font = uniFont;
         }
@@ -211,4 +210,3 @@
         }
     }
 }
-

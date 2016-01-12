@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GSecureTradeCheck : GButtonNew
     {
         private bool m_Checked;
@@ -52,4 +50,3 @@
         }
     }
 }
-

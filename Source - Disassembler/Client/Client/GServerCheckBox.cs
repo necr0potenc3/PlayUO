@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GServerCheckBox : GCheckBox, IRelayedSwitch
@@ -37,4 +36,3 @@
         }
     }
 }
-

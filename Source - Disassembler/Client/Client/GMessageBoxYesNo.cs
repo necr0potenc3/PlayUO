@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GMessageBoxYesNo : GDragable
     {
         private MBYesNoCallback m_Callback;
@@ -50,4 +48,3 @@
         }
     }
 }
-

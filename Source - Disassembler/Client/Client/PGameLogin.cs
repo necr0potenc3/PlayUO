@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class PGameLogin : Packet
     {
         public PGameLogin(int AuthID, string un, string pw) : base(0x91, "Game Server Login", 0x41)
@@ -12,4 +10,3 @@
         }
     }
 }
-

@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GQuestionBackground : GBackground
     {
         private GQuestionMenuEntry[] m_Entries;
@@ -36,4 +34,3 @@
         }
     }
 }
-

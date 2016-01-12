@@ -1,7 +1,6 @@
 ﻿namespace Client.Targeting
 {
     using Client;
-    using System;
 
     public class BringToTargetHandler : ITargetHandler
     {
@@ -23,7 +22,7 @@
         {
             if (o is Item)
             {
-                Item item = (Item) o;
+                Item item = (Item)o;
                 Mobile player = World.Player;
                 if (player != null)
                 {
@@ -61,4 +60,3 @@
         }
     }
 }
-

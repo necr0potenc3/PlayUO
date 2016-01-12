@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GContainerItem : Gump, IItemGump
@@ -88,9 +87,9 @@
         {
             if ((g != null) && (g.GetType() == typeof(GDraggedItem)))
             {
-                GDraggedItem item = (GDraggedItem) g;
+                GDraggedItem item = (GDraggedItem)g;
                 Client.Item item2 = item.Item;
-                if (((GContainer) base.m_Parent).m_HitTest)
+                if (((GContainer)base.m_Parent).m_HitTest)
                 {
                     TileFlags flags = Map.m_ItemFlags[this.m_Item.ID & 0x3fff];
                     if (flags[TileFlag.Container])
@@ -100,8 +99,8 @@
                     }
                     else if ((flags[TileFlag.Generic] && (item2.ID == this.m_Item.ID)) && (item2.Hue == this.m_Item.Hue))
                     {
-                        Point point = ((GContainer) base.m_Parent).Clip(item.Image, item.Double, base.m_Parent.PointToClient(new Point(Engine.m_xMouse - item.m_OffsetX, Engine.m_yMouse - item.m_OffsetY)), item.m_OffsetX, item.m_OffsetY);
-                        Network.Send(new PDropItem(item2.Serial, (short) point.X, (short) point.Y, 0, this.m_Item.Serial));
+                        Point point = ((GContainer)base.m_Parent).Clip(item.Image, item.Double, base.m_Parent.PointToClient(new Point(Engine.m_xMouse - item.m_OffsetX, Engine.m_yMouse - item.m_OffsetY)), item.m_OffsetX, item.m_OffsetY);
+                        Network.Send(new PDropItem(item2.Serial, (short)point.X, (short)point.Y, 0, this.m_Item.Serial));
                         Gumps.Destroy(item);
                     }
                     else
@@ -127,7 +126,7 @@
                 Gump gump = this.m_Item.OnBeginDrag();
                 if (gump.GetType() == typeof(GDragAmount))
                 {
-                    ((GDragAmount) gump).ToDestroy = this;
+                    ((GDragAmount)gump).ToDestroy = this;
                 }
                 else
                 {
@@ -139,7 +138,7 @@
                     gump.Y = Engine.m_yMouse - base.m_OffsetY;
                     if (base.m_Parent is GContainer)
                     {
-                        ((GContainer) base.m_Parent).m_Hash[this.m_Item] = null;
+                        ((GContainer)base.m_Parent).m_Hash[this.m_Item] = null;
                     }
                     Gumps.Destroy(this);
                 }
@@ -161,7 +160,7 @@
             this.State = 0;
             if (base.Tooltip != null)
             {
-                ((ItemTooltip) base.Tooltip).Gump = null;
+                ((ItemTooltip)base.Tooltip).Gump = null;
             }
         }
 
@@ -253,7 +252,7 @@
             {
                 this.m_State = value;
                 int tileID = this.m_TileID;
-                int amount = (ushort) this.m_Item.Amount;
+                int amount = (ushort)this.m_Item.Amount;
                 if (this.m_Item != null)
                 {
                     this.m_Double = Map.m_ItemFlags[tileID & 0x3fff][TileFlag.Generic] && (amount > 1);
@@ -373,4 +372,3 @@
         }
     }
 }
-

@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class TileList
     {
         private int m_Count = 0;
@@ -46,4 +44,3 @@
         }
     }
 }
-

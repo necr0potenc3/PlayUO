@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public abstract class InfoProvider
     {
         private Client.Gump m_Gump;
@@ -19,7 +17,9 @@
         }
 
         public abstract Client.Gump CreateGump();
+
         public abstract InfoInput[] CreateInputs();
+
         public void Update()
         {
             if (this.m_Gump != null)
@@ -60,4 +60,3 @@
         }
     }
 }
-

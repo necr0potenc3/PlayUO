@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GDraggedItem : Gump, IItemGump
@@ -22,7 +21,7 @@
             this.m_vCache = new VertexCache();
             this.m_Item = item;
             int index = this.m_Item.ID & 0x3fff;
-            int amount = (ushort) this.m_Item.Amount;
+            int amount = (ushort)this.m_Item.Amount;
             this.m_Double = Map.m_ItemFlags[index][TileFlag.Generic] && (amount > 1);
             if ((index >= 0xeea) && (index <= 0xef2))
             {
@@ -199,4 +198,3 @@
         }
     }
 }
-

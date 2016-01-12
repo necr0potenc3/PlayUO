@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
 
     public class World
@@ -21,7 +20,7 @@
             int count = m_Messages.Count;
             for (int i = 0; i < count; i++)
             {
-                StaticMessage message = (StaticMessage) m_Messages[i];
+                StaticMessage message = (StaticMessage)m_Messages[i];
                 if (message.Serial == Serial)
                 {
                     return;
@@ -58,7 +57,7 @@
                 int index = 0;
                 while (index < count)
                 {
-                    StaticMessage message = (StaticMessage) m_Messages[index];
+                    StaticMessage message = (StaticMessage)m_Messages[index];
                     if (message.Alpha <= 0f)
                     {
                         m_Messages.RemoveAt(index);
@@ -82,7 +81,7 @@
             IEnumerator enumerator = m_Items.Values.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                Item current = (Item) enumerator.Current;
+                Item current = (Item)enumerator.Current;
                 if ((current.Visible && current.InWorld) && (!current.IsMulti && InRange(current)))
                 {
                     for (int i = 0; i < check.Length; i++)
@@ -102,7 +101,7 @@
             IEnumerator enumerator = m_Items.Values.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                Item current = (Item) enumerator.Current;
+                Item current = (Item)enumerator.Current;
                 if (((current.Visible && current.InWorld) && (!current.IsMulti && InRange(current))) && check.IsValid(current))
                 {
                     return current;
@@ -113,7 +112,7 @@
 
         public static Item FindItem(int serial)
         {
-            return (Item) m_Items[serial];
+            return (Item)m_Items[serial];
         }
 
         public static Item[] FindItems(IItemValidator check)
@@ -122,20 +121,20 @@
             IEnumerator enumerator = m_Items.Values.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                Item current = (Item) enumerator.Current;
+                Item current = (Item)enumerator.Current;
                 if (((current.Visible && current.InWorld) && (!current.IsMulti && InRange(current))) && check.IsValid(current))
                 {
                     dataStore.Add(current);
                 }
             }
-            Item[] itemArray = (Item[]) dataStore.ToArray(typeof(Item));
+            Item[] itemArray = (Item[])dataStore.ToArray(typeof(Item));
             Engine.ReleaseDataStore(dataStore);
             return itemArray;
         }
 
         public static Mobile FindMobile(int serial)
         {
-            return (Mobile) m_Mobiles[serial];
+            return (Mobile)m_Mobiles[serial];
         }
 
         public static int GetAmount(params Item[] items)
@@ -143,7 +142,7 @@
             int num = 0;
             for (int i = 0; i < items.Length; i++)
             {
-                num += (ushort) items[i].Amount;
+                num += (ushort)items[i].Amount;
             }
             return num;
         }
@@ -168,7 +167,7 @@
             int count = m_Messages.Count;
             for (int i = 0; i < count; i++)
             {
-                ((StaticMessage) m_Messages[i]).Offset(X, Y);
+                ((StaticMessage)m_Messages[i]).Offset(X, Y);
             }
         }
 
@@ -259,7 +258,7 @@
                 IEnumerator enumerator = m_Mobiles.Values.GetEnumerator();
                 while (enumerator.MoveNext())
                 {
-                    Mobile current = (Mobile) enumerator.Current;
+                    Mobile current = (Mobile)enumerator.Current;
                     if ((current.Visible && !current.Player) && !InUpdateRange(current))
                     {
                         Remove(current);
@@ -268,7 +267,7 @@
                 enumerator = m_Items.Values.GetEnumerator();
                 while (enumerator.MoveNext())
                 {
-                    Item p = (Item) enumerator.Current;
+                    Item p = (Item)enumerator.Current;
                     if ((p.Visible && p.InWorld) && (!p.IsMulti && !InUpdateRange(p)))
                     {
                         Remove(p);
@@ -279,7 +278,7 @@
 
         public static Item WantItem(int serial)
         {
-            Item item = (Item) m_Items[serial];
+            Item item = (Item)m_Items[serial];
             if (item == null)
             {
                 item = new Item(serial);
@@ -290,7 +289,7 @@
 
         public static Item WantItem(int serial, ref bool wasFound)
         {
-            Item item = (Item) m_Items[serial];
+            Item item = (Item)m_Items[serial];
             wasFound = item != null;
             if (item == null)
             {
@@ -302,7 +301,7 @@
 
         public static Mobile WantMobile(int serial)
         {
-            Mobile mobile = (Mobile) m_Mobiles[serial];
+            Mobile mobile = (Mobile)m_Mobiles[serial];
             if (mobile == null)
             {
                 mobile = new Mobile(serial);
@@ -313,7 +312,7 @@
 
         public static Mobile WantMobile(int serial, ref bool wasFound)
         {
-            Mobile mobile = (Mobile) m_Mobiles[serial];
+            Mobile mobile = (Mobile)m_Mobiles[serial];
             wasFound = mobile != null;
             if (mobile == null)
             {
@@ -439,4 +438,3 @@
         }
     }
 }
-

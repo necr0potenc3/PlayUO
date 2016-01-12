@@ -35,9 +35,8 @@
             }
             if (y > 230)
             {
-                GVSlider slider = new GVSlider(0x828, 0xed, 0x51, 0x22, 0x5c, 0.0, 0.0, (double) (y - 230), 1.0) {
-                    OnValueChange = new OnValueChange(this.Slider_OnValueChange)
-                };
+                GVSlider slider = new GVSlider(0x828, 0xed, 0x51, 0x22, 0x5c, 0.0, 0.0, (double)(y - 230), 1.0);
+                slider.OnValueChange = new OnValueChange(this.Slider_OnValueChange);
                 base.m_Children.Add(slider);
                 base.m_Children.Add(new GHotspot(0xed, 0x42, 0x22, 0x7a, slider));
             }
@@ -90,7 +89,7 @@
                 {
                     if (gump is GBuyGump_InventoryItem)
                     {
-                        ((GBuyGump_InventoryItem) gump).Clipper = clipper;
+                        ((GBuyGump_InventoryItem)gump).Clipper = clipper;
                     }
                 }
             }
@@ -100,13 +99,13 @@
         private void Slider_OnValueChange(double v, double o, Gump slider)
         {
             Gump[] gumpArray = base.m_Children.ToArray();
-            int num = -((int) v);
+            int num = -((int)v);
             for (int i = 0; i < gumpArray.Length; i++)
             {
                 Gump gump = gumpArray[i];
                 if (gump is GBuyGump_InventoryItem)
                 {
-                    ((GBuyGump_InventoryItem) gump).Offset = num;
+                    ((GBuyGump_InventoryItem)gump).Offset = num;
                 }
             }
         }
@@ -140,4 +139,3 @@
         }
     }
 }
-

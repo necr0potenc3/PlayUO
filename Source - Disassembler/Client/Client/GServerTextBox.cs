@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GServerTextBox : GTextBox
     {
         private int m_RelayID;
@@ -21,4 +19,3 @@
         }
     }
 }
-

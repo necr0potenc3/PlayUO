@@ -1,7 +1,6 @@
 ﻿namespace Client
 {
     using Microsoft.Win32;
-    using System;
 
     public class VolumeControl
     {
@@ -21,7 +20,7 @@
                         {
                             if (key != null)
                             {
-                                m_Music = (int) key.GetValue("Music Volume", 100);
+                                m_Music = (int)key.GetValue("Music Volume", 100);
                             }
                         }
                     }
@@ -66,7 +65,7 @@
                         {
                             if (key != null)
                             {
-                                m_Sound = (int) key.GetValue("Sound Volume", 100);
+                                m_Sound = (int)key.GetValue("Sound Volume", 100);
                             }
                         }
                     }
@@ -99,4 +98,3 @@
         }
     }
 }
-

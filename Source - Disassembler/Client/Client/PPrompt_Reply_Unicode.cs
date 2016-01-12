@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class PPrompt_Reply_Unicode : Packet
     {
         public PPrompt_Reply_Unicode(int serial, int prompt, string message) : base(0xc2, "Unicode Prompt Reply")
@@ -14,4 +12,3 @@
         }
     }
 }
-

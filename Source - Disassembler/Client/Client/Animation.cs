@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class Animation
     {
         private int m_Action;
@@ -117,4 +115,3 @@
         }
     }
 }
-

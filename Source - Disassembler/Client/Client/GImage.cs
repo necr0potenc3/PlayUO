@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GImage : Gump, ITranslucent, IClipable
     {
         protected bool m_bAlpha;
@@ -199,4 +197,3 @@
         }
     }
 }
-

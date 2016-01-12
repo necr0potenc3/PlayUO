@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GTextBox : Gump
@@ -8,7 +7,7 @@
         private GBackground m_Back;
         private IClickable m_EnterButton;
         private bool m_Focus;
-        private IFont m_Font;
+        private Client.IFont m_Font;
         private int m_Height;
         private IHue m_HFocus;
         private IHue m_HNormal;
@@ -22,11 +21,11 @@
         private bool m_Transparent;
         private int m_Width;
 
-        public GTextBox(int GumpID, bool HasBorder, int X, int Y, int Width, int Height, string StartText, IFont f, IHue HNormal, IHue HOver, IHue HFocus) : this(GumpID, HasBorder, X, Y, Width, Height, StartText, f, HNormal, HOver, HFocus, '\0')
+        public GTextBox(int GumpID, bool HasBorder, int X, int Y, int Width, int Height, string StartText, Client.IFont f, IHue HNormal, IHue HOver, IHue HFocus) : this(GumpID, HasBorder, X, Y, Width, Height, StartText, f, HNormal, HOver, HFocus, '\0')
         {
         }
 
-        public GTextBox(int GumpID, bool HasBorder, int X, int Y, int Width, int Height, string StartText, IFont f, IHue HNormal, IHue HOver, IHue HFocus, char PassChar) : base(X, Y)
+        public GTextBox(int GumpID, bool HasBorder, int X, int Y, int Width, int Height, string StartText, Client.IFont f, IHue HNormal, IHue HOver, IHue HFocus, char PassChar) : base(X, Y)
         {
             this.m_String = "";
             this.m_MaxChars = -1;
@@ -299,4 +298,3 @@
         }
     }
 }
-

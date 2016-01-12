@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.IO;
 
     public class TextureVB
@@ -10,4 +9,3 @@
         public MemoryStream m_Stream = new MemoryStream();
     }
 }
-

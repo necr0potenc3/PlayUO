@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Text;
 
     public class UOAMPacketReader
@@ -38,7 +37,7 @@
             {
                 return 0;
             }
-            return (short) (this.m_Buffer[this.m_Index++] | (this.m_Buffer[this.m_Index++] << 8));
+            return (short)(this.m_Buffer[this.m_Index++] | (this.m_Buffer[this.m_Index++] << 8));
         }
 
         public int ReadInt32()
@@ -56,7 +55,7 @@
             {
                 return 0;
             }
-            return (sbyte) this.m_Buffer[this.m_Index++];
+            return (sbyte)this.m_Buffer[this.m_Index++];
         }
 
         public string ReadString(int length)
@@ -65,7 +64,7 @@
             StringBuilder builder = new StringBuilder();
             for (int i = 0; (i < length) && ((num = this.m_Buffer[this.m_Index + i]) != 0); i++)
             {
-                builder.Append((char) num);
+                builder.Append((char)num);
             }
             this.m_Index += length;
             return builder.ToString();
@@ -77,7 +76,7 @@
             {
                 return 0;
             }
-            return (ushort) (this.m_Buffer[this.m_Index++] | (this.m_Buffer[this.m_Index++] << 8));
+            return (ushort)(this.m_Buffer[this.m_Index++] | (this.m_Buffer[this.m_Index++] << 8));
         }
 
         public uint ReadUInt32()
@@ -86,8 +85,7 @@
             {
                 return 0;
             }
-            return (uint) (((this.m_Buffer[this.m_Index++] | (this.m_Buffer[this.m_Index++] << 8)) | (this.m_Buffer[this.m_Index++] << 0x10)) | (this.m_Buffer[this.m_Index++] << 0x18));
+            return (uint)(((this.m_Buffer[this.m_Index++] | (this.m_Buffer[this.m_Index++] << 8)) | (this.m_Buffer[this.m_Index++] << 0x10)) | (this.m_Buffer[this.m_Index++] << 0x18));
         }
     }
 }
-

@@ -28,9 +28,8 @@
 
         public void AddItem(string Text, Tooltip t)
         {
-            GListItem toAdd = new GListItem(Text, this.m_Count++, this) {
-                Tooltip = t
-            };
+            GListItem toAdd = new GListItem(Text, this.m_Count++, this);
+            toAdd.Tooltip = t;
             base.m_Children.Add(toAdd);
         }
 
@@ -112,7 +111,7 @@
                         Gump gump = gumpArray[i];
                         if (gump.GetType() == tGListItem)
                         {
-                            ((GListItem) base.m_Children[i]).Layout();
+                            ((GListItem)base.m_Children[i]).Layout();
                         }
                     }
                 }
@@ -120,4 +119,3 @@
         }
     }
 }
-

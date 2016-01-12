@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class Skill
     {
         public bool Action;
@@ -29,4 +27,3 @@
         }
     }
 }
-

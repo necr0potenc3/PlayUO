@@ -34,7 +34,7 @@
             }
             background.Height = ((offsetY - 4) - background.OffsetY) + (background.Height - background.UseHeight);
             this.Height = (((((this.Height - base.UseHeight) + 4) + toAdd.Height) + 4) + background.Height) + 4;
-            int num5 = (int) (Engine.ScreenHeight * 0.75);
+            int num5 = (int)(Engine.ScreenHeight * 0.75);
             if (this.Height > num5)
             {
                 this.Height = num5;
@@ -55,7 +55,7 @@
                 {
                     background.Children.Add(new GImage(0x100, offsetX, j));
                 }
-                this.m_Slider = new GVSlider(0xfe, offsetX + 1, (offsetY + 1) + 12, 13, (background.UseHeight - 2) - 0x18, 0.0, 0.0, (double) (num6 - background.UseHeight), 1.0);
+                this.m_Slider = new GVSlider(0xfe, offsetX + 1, (offsetY + 1) + 12, 13, (background.UseHeight - 2) - 0x18, 0.0, 0.0, (double)(num6 - background.UseHeight), 1.0);
                 this.m_Slider.OnValueChange = new OnValueChange(this.OnScroll);
                 this.m_Slider.ScrollOffset = 20.0;
                 background.Children.Add(this.m_Slider);
@@ -122,7 +122,7 @@
 
         private void OnScroll(double vNew, double vOld, Gump g)
         {
-            int num = (int) vNew;
+            int num = (int)vNew;
             for (int i = 0; i < this.m_Entries.Length; i++)
             {
                 this.m_Entries[i].Y = this.m_Entries[i].yBase - num;
@@ -146,4 +146,3 @@
         }
     }
 }
-

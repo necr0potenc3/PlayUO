@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
 
     public class EquipSorter : IComparer
@@ -36,8 +35,8 @@
 
         public int Compare(object x, object y)
         {
-            int num = this.m_Table[(int) ((EquipEntry) x).m_Layer];
-            int num2 = this.m_Table[(int) ((EquipEntry) y).m_Layer];
+            int num = this.m_Table[(int)((EquipEntry)x).m_Layer];
+            int num2 = this.m_Table[(int)((EquipEntry)y).m_Layer];
             if (num < num2)
             {
                 return -1;
@@ -51,8 +50,7 @@
 
         public bool IsValidLayer(Layer layer)
         {
-            return (this.m_Table[(int) layer] != -1);
+            return (this.m_Table[(int)layer] != -1);
         }
     }
 }
-

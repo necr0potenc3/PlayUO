@@ -1,7 +1,6 @@
 ﻿namespace Client
 {
     using Microsoft.DirectX.AudioVideoPlayback;
-    using System;
     using System.IO;
 
     public class Music
@@ -35,7 +34,7 @@
                     {
                         m_Audio.Open(path);
                     }
-                    m_Audio.set_Volume(-10000 + (ScaledVolume * 100));
+                    m_Audio.Volume = -10000 + (ScaledVolume * 100);
                     m_Audio.Play();
                 }
             }
@@ -62,4 +61,3 @@
         }
     }
 }
-

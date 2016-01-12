@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class FontInfo
     {
         private int m_Color;
@@ -40,4 +38,3 @@
         }
     }
 }
-

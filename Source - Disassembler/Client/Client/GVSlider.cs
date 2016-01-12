@@ -65,10 +65,10 @@
             {
                 return this.m_End;
             }
-            double num = ((double) Position) / ((double) this.m_Height);
+            double num = ((double)Position) / ((double)this.m_Height);
             double num2 = ((this.m_End - this.m_Start) + 1.0) / this.m_Increase;
             double num3 = (num * num2) + 0.5;
-            int num4 = (int) num3;
+            int num4 = (int)num3;
             double end = num4 * this.m_Increase;
             end += this.m_Start;
             if (end > this.m_End)
@@ -147,7 +147,7 @@
             {
                 num3 = 1.0;
             }
-            this.m_Position = (int) ((num3 * this.m_Height) + 0.5);
+            this.m_Position = (int)((num3 * this.m_Height) + 0.5);
             if ((Value == this.m_End) && (Value != this.m_Start))
             {
                 this.m_Position = this.m_Height - 1;
@@ -299,4 +299,3 @@
         }
     }
 }
-

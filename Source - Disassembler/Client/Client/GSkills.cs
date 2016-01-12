@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GSkills : GAlphaBackground, IResizable, IRestorableGump
@@ -208,4 +207,3 @@
         }
     }
 }
-

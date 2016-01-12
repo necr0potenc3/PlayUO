@@ -39,7 +39,7 @@
             Hide();
             if (o is Item)
             {
-                Item item = (Item) o;
+                Item item = (Item)o;
                 ObjectPropertyList propertyList = item.PropertyList;
                 if (propertyList != null)
                 {
@@ -48,7 +48,7 @@
             }
             else if (o is Mobile)
             {
-                Mobile mobile = (Mobile) o;
+                Mobile mobile = (Mobile)o;
                 ObjectPropertyList propList = mobile.PropertyList;
                 if (propList != null)
                 {
@@ -66,7 +66,7 @@
         {
             if (this.m_Object is Mobile)
             {
-                return Hues.GetNotoriety(((Mobile) this.m_Object).Notoriety);
+                return Hues.GetNotoriety(((Mobile)this.m_Object).Notoriety);
             }
             return Hues.Load(0x34);
         }
@@ -89,7 +89,7 @@
         {
             if (this.m_Object is Item)
             {
-                Item item = (Item) this.m_Object;
+                Item item = (Item)this.m_Object;
                 if (item.PropertyList == null)
                 {
                     item.QueryProperties();
@@ -156,7 +156,7 @@
             if (elapsed < this.m_WidthDuration)
             {
                 num = elapsed / this.m_WidthDuration;
-                this.Width = 2 + ((int) (num * (this.m_TotalWidth - 2)));
+                this.Width = 2 + ((int)(num * (this.m_TotalWidth - 2)));
                 this.Height = this.m_CompactHeight;
             }
             else
@@ -175,7 +175,7 @@
                 else
                 {
                     this.Width = this.m_TotalWidth;
-                    this.Height = this.m_CompactHeight + ((int) (num * (this.m_TotalHeight - this.m_CompactHeight)));
+                    this.Height = this.m_CompactHeight + ((int)(num * (this.m_TotalHeight - this.m_CompactHeight)));
                 }
             }
             Engine.Redraw();
@@ -274,14 +274,14 @@
             {
                 ArrayList list = new ArrayList(properties);
                 list.Insert(index, new ObjectProperty(0xfea1b, string.Format("total resist {0}%", num3)));
-                properties = (ObjectProperty[]) list.ToArray(typeof(ObjectProperty));
+                properties = (ObjectProperty[])list.ToArray(typeof(ObjectProperty));
                 info = ResistInfo.Find(properties[0].Text, ResistInfo.m_Armor);
                 info2 = ResistInfo.Find(properties[0].Text, ResistInfo.m_Materials);
             }
             int num14 = -1;
             if (this.m_Object is Mobile)
             {
-                Mobile mobile = (Mobile) this.m_Object;
+                Mobile mobile = (Mobile)this.m_Object;
                 ArrayList equip = mobile.Equip;
                 int num15 = 0;
                 int num16 = 0;
@@ -292,7 +292,7 @@
                 int num21 = 0;
                 for (int k = 0; k < equip.Count; k++)
                 {
-                    EquipEntry entry = (EquipEntry) equip[k];
+                    EquipEntry entry = (EquipEntry)equip[k];
                     if (entry.m_Item != null)
                     {
                         Item item = entry.m_Item;
@@ -391,17 +391,17 @@
                     list4.Add(new ObjectProperty(0x102e5d, num17.ToString()));
                     list4.Add(new ObjectProperty(0x102e61, num18.ToString()));
                     list4.Add(new ObjectProperty(0x102e5e, num19.ToString()));
-                    properties = (ObjectProperty[]) list4.ToArray(typeof(ObjectProperty));
+                    properties = (ObjectProperty[])list4.ToArray(typeof(ObjectProperty));
                 }
             }
-            if (((this.m_Object is Item) && (((Item) this.m_Object).Container is GContainer)) && ((GContainer) ((Item) this.m_Object).Container).m_TradeContainer)
+            if (((this.m_Object is Item) && (((Item)this.m_Object).Container is GContainer)) && ((GContainer)((Item)this.m_Object).Container).m_TradeContainer)
             {
                 ArrayList list5 = new ArrayList(properties);
                 if (list5.Count > 0)
                 {
                     list5[0] = new ObjectProperty(0xfea1b, "Their Offer");
                 }
-                Item item2 = (Item) this.m_Object;
+                Item item2 = (Item)this.m_Object;
                 Item[] itemArray = item2.FindItems(new ItemIDValidator(new int[] { 0xeed, 0xeec, 0xeee }));
                 int num25 = 0;
                 for (int m = 0; m < itemArray.Length; m++)
@@ -440,7 +440,7 @@
                     }
                 }
                 list5.Add(new ObjectProperty(0xfea1b, string.Format("Total Gold: {0:N0}", num25)));
-                properties = (ObjectProperty[]) list5.ToArray(typeof(ObjectProperty));
+                properties = (ObjectProperty[])list5.ToArray(typeof(ObjectProperty));
             }
             for (int j = 0; j < properties.Length; j++)
             {
@@ -549,7 +549,7 @@
                     Mobile mobile3 = World.Player;
                     if (mobile3 != null)
                     {
-                        double num35 = Math.Floor((double) (40000.0 / ((double) ((mobile3.StamCur + 100) * num10)))) / 2.0;
+                        double num35 = Math.Floor((double)(40000.0 / ((double)((mobile3.StamCur + 100) * num10)))) / 2.0;
                         toAdd.Text = toAdd.Text + string.Format(" ({0:F1}s)", num35);
                     }
                 }
@@ -629,4 +629,3 @@
         }
     }
 }
-

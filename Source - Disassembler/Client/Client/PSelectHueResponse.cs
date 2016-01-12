@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class PSelectHueResponse : Packet
     {
         public PSelectHueResponse(int Serial, short Relay, short Hue) : base(0x95, "Select Hue Response", 9)
@@ -12,4 +10,3 @@
         }
     }
 }
-

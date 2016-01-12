@@ -9,4 +9,3 @@
         IHue Hue { get; }
     }
 }
-

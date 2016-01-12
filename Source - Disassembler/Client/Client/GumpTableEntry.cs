@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GumpTableEntry
     {
         public int m_NewHue;
@@ -16,4 +14,3 @@
         }
     }
 }
-

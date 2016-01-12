@@ -1,7 +1,6 @@
 ﻿namespace Client
 {
     using System;
-    using System.Drawing;
 
     public class Point : IPoint2D
     {
@@ -14,7 +13,7 @@
             this.m_Y = Y;
         }
 
-        public Point(Point p, int xOffset, int yOffset)
+        public Point(Client.Point p, int xOffset, int yOffset)
         {
             this.m_X = p.m_X + xOffset;
             this.m_Y = p.m_Y + yOffset;
@@ -22,11 +21,11 @@
 
         public override bool Equals(object o)
         {
-            if ((o == null) || (o.GetType() != typeof(Point)))
+            if ((o == null) || (o.GetType() != typeof(Client.Point)))
             {
                 return false;
             }
-            Point point = (Point) o;
+            Client.Point point = (Client.Point)o;
             return ((this.m_X == point.m_X) && (this.m_Y == point.m_Y));
         }
 
@@ -35,46 +34,46 @@
             return base.GetHashCode();
         }
 
-        public static Point operator +(Point l, Point r)
+        public static Client.Point operator +(Client.Point l, Client.Point r)
         {
-            return new Point(l.X + r.X, l.Y + r.Y);
+            return new Client.Point(l.X + r.X, l.Y + r.Y);
         }
 
-        public static Point operator /(Point l, int r)
+        public static Client.Point operator /(Client.Point l, int r)
         {
-            return new Point(l.X / r, l.Y / r);
+            return new Client.Point(l.X / r, l.Y / r);
         }
 
-        public static bool operator ==(Point p1, Point p2)
+        public static bool operator ==(Client.Point p1, Client.Point p2)
         {
             return ((p1.m_X == p2.m_X) && (p1.m_Y == p2.m_Y));
         }
 
-        public static int operator ^(Point p1, Point p2)
+        public static int operator ^(Client.Point p1, Client.Point p2)
         {
-            int num = Math.Abs((int) (p2.X - p1.X));
-            int num2 = Math.Abs((int) (p2.Y - p1.Y));
-            return (int) Math.Sqrt((double) ((num * num) + (num2 * num2)));
+            int num = Math.Abs((int)(p2.X - p1.X));
+            int num2 = Math.Abs((int)(p2.Y - p1.Y));
+            return (int)Math.Sqrt((double)((num * num) + (num2 * num2)));
         }
 
-        public static implicit operator Point(Point p)
+        public static implicit operator System.Drawing.Point(Client.Point p)
         {
-            return new Point(p.m_X, p.m_Y);
+            return new System.Drawing.Point(p.m_X, p.m_Y);
         }
 
-        public static implicit operator Point(Point p)
+        public static implicit operator Client.Point(System.Drawing.Point p)
         {
-            return new Point(p.X, p.Y);
+            return new Client.Point(p.X, p.Y);
         }
 
-        public static bool operator !=(Point p1, Point p2)
+        public static bool operator !=(Client.Point p1, Client.Point p2)
         {
             return ((p1.m_X != p2.m_X) || (p1.m_Y != p2.m_Y));
         }
 
-        public static Point operator -(Point l, Point r)
+        public static Client.Point operator -(Client.Point l, Client.Point r)
         {
-            return new Point(l.X - r.X, l.Y - r.Y);
+            return new Client.Point(l.X - r.X, l.Y - r.Y);
         }
 
         public int X
@@ -102,4 +101,3 @@
         }
     }
 }
-

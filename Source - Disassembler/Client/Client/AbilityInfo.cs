@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
 
     public class AbilityInfo
@@ -96,7 +95,7 @@
                         int num6 = 0;
                         num6++;
                     }
-                    ArrayList list = (ArrayList) m_Table[this.m_Weapons[num4]];
+                    ArrayList list = (ArrayList)m_Table[this.m_Weapons[num4]];
                     if (list == null)
                     {
                         m_Table[this.m_Weapons[num4]] = list = new ArrayList();
@@ -124,20 +123,20 @@
                 if (item != null)
                 {
                     int num = item.ID & 0x3fff;
-                    list = (ArrayList) m_Table[num];
+                    list = (ArrayList)m_Table[num];
                     if ((list != null) && (list.Count > 0))
                     {
-                        return (AbilityInfo) list[primary ? 0 : (list.Count - 1)];
+                        return (AbilityInfo)list[primary ? 0 : (list.Count - 1)];
                     }
                 }
                 item = m.FindEquip(Layer.OneHanded);
                 if (item != null)
                 {
                     int num2 = item.ID & 0x3fff;
-                    list = (ArrayList) m_Table[num2];
+                    list = (ArrayList)m_Table[num2];
                     if ((list != null) && (list.Count > 0))
                     {
-                        return (AbilityInfo) list[primary ? 0 : (list.Count - 1)];
+                        return (AbilityInfo)list[primary ? 0 : (list.Count - 1)];
                     }
                 }
             }
@@ -239,4 +238,3 @@
         }
     }
 }
-

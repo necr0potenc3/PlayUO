@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Collections;
 
     public class GCategoryPanel : GAlphaBackground
@@ -24,7 +23,7 @@
             int num = 0x15;
             for (int i = 0; i < entries.Count; i++)
             {
-                this.m_Entries[i] = new GPropertyEntry(obj, (ObjectEditorEntry) entries[i]);
+                this.m_Entries[i] = new GPropertyEntry(obj, (ObjectEditorEntry)entries[i]);
                 this.m_Entries[i].Y = num;
                 num += 0x15;
                 base.m_Children.Add(this.m_Entries[i]);
@@ -89,4 +88,3 @@
         }
     }
 }
-

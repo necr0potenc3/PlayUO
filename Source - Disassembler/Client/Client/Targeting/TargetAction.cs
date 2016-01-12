@@ -1,7 +1,5 @@
 ﻿namespace Client.Targeting
 {
-    using System;
-
     public enum TargetAction
     {
         Agility = 8,
@@ -59,4 +57,3 @@
         Weaken = 7
     }
 }
-

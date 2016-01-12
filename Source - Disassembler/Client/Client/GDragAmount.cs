@@ -14,27 +14,24 @@
 
         public GDragAmount(Client.Item item) : base(0x85c, 0, 0)
         {
-            GTextBox box;
             this.m_First = true;
             this.m_Item = item;
-            int amount = (ushort) this.m_Item.Amount;
+            int amount = (ushort)this.m_Item.Amount;
             this.m_Amount = amount;
             this.m_Okay = new GButtonNew(0x81a, 0x81c, 0x81b, 0x66, 0x25);
             this.m_Okay.CanEnter = true;
             this.m_Okay.Clicked += new EventHandler(this.Okay_Clicked);
             base.m_Children.Add(this.m_Okay);
-            GSlider toAdd = new GSlider(0x845, 0x23, 0x10, 0x5f, 15, (double) amount, 0.0, (double) amount, 1.0) {
-                OnValueChange = new OnValueChange(this.Slider_OnValueChange)
-            };
+            GSlider toAdd = new GSlider(0x845, 0x23, 0x10, 0x5f, 15, (double)amount, 0.0, (double)amount, 1.0);
+            toAdd.OnValueChange = new OnValueChange(this.Slider_OnValueChange);
             base.m_Children.Add(toAdd);
             this.m_Slider = toAdd;
             GHotspot hotspot = new GHotspot(0x1c, 0x10, 0x6d, 15, toAdd);
             base.m_Children.Add(hotspot);
-            box = new GTextBox(0, false, 0x1a, 0x2b, 0x42, 15, amount.ToString(), Engine.GetFont(1), Hues.Load(0x455), Hues.Load(0x455), Hues.Load(0x455)) {
-                OnTextChange = (OnTextChange) Delegate.Combine(box.OnTextChange, new OnTextChange(this.TextBox_OnTextChange)),
-                OnBeforeTextChange = (OnBeforeTextChange) Delegate.Combine(box.OnBeforeTextChange, new OnBeforeTextChange(this.TextBox_OnBeforeTextChange)),
-                EnterButton = this.m_Okay
-            };
+            GTextBox box = new GTextBox(0, false, 0x1a, 0x2b, 0x42, 15, amount.ToString(), Engine.GetFont(1), Hues.Load(0x455), Hues.Load(0x455), Hues.Load(0x455));
+            box.OnTextChange = (OnTextChange)Delegate.Combine(box.OnTextChange, new OnTextChange(this.TextBox_OnTextChange));
+            box.OnBeforeTextChange = (OnBeforeTextChange)Delegate.Combine(box.OnBeforeTextChange, new OnBeforeTextChange(this.TextBox_OnBeforeTextChange));
+            box.EnterButton = this.m_Okay;
             base.m_Children.Add(box);
             this.m_TextBox = box;
             box.Focus();
@@ -64,20 +61,20 @@
                         amount = this.m_Amount;
                     }
                     base.m_IsDragging = false;
-                    Network.Send(new PPickupItem(this.m_Item, (short) ((ushort) amount)));
-                    this.m_Item.Amount = (short) ((ushort) amount);
+                    Network.Send(new PPickupItem(this.m_Item, (short)((ushort)amount)));
+                    this.m_Item.Amount = (short)((ushort)amount);
                     Gumps.Desktop.Children.Add(new GDraggedItem(this.m_Item));
                     if (this.m_ToDestroy is Gump)
                     {
-                        if (((Gump) this.m_ToDestroy).Parent is GContainer)
+                        if (((Gump)this.m_ToDestroy).Parent is GContainer)
                         {
-                            ((GContainer) ((Gump) this.m_ToDestroy).Parent).m_Hash[this.m_Item] = null;
+                            ((GContainer)((Gump)this.m_ToDestroy).Parent).m_Hash[this.m_Item] = null;
                         }
-                        Gumps.Destroy((Gump) this.m_ToDestroy);
+                        Gumps.Destroy((Gump)this.m_ToDestroy);
                     }
                     else if (this.m_ToDestroy is Client.Item)
                     {
-                        Client.Item toDestroy = (Client.Item) this.m_ToDestroy;
+                        Client.Item toDestroy = (Client.Item)this.m_ToDestroy;
                         toDestroy.RestoreInfo = new RestoreInfo(toDestroy);
                         World.Remove(toDestroy);
                     }
@@ -91,7 +88,7 @@
 
         private void Slider_OnValueChange(double v, double old, Gump g)
         {
-            this.m_TextBox.String = ((int) v).ToString();
+            this.m_TextBox.String = ((int)v).ToString();
         }
 
         private void TextBox_OnBeforeTextChange(Gump g)
@@ -99,7 +96,7 @@
             if (this.m_First)
             {
                 this.m_First = false;
-                ((GTextBox) g).String = "";
+                ((GTextBox)g).String = "";
             }
         }
 
@@ -114,11 +111,11 @@
                 }
                 else if (num > this.m_Amount)
                 {
-                    this.m_Slider.SetValue((double) this.m_Amount, true);
+                    this.m_Slider.SetValue((double)this.m_Amount, true);
                 }
                 else
                 {
-                    this.m_Slider.SetValue((double) num, false);
+                    this.m_Slider.SetValue((double)num, false);
                 }
             }
             catch
@@ -147,4 +144,3 @@
         }
     }
 }
-

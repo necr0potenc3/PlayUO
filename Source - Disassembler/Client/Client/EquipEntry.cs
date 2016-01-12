@@ -1,7 +1,6 @@
 ﻿namespace Client
 {
     using Microsoft.DirectX.Direct3D;
-    using System;
 
     public class EquipEntry : IEntity
     {
@@ -17,7 +16,7 @@
             this.m_Layer = layer;
         }
 
-        public unsafe void Draw(Texture t, int x, int y)
+        public unsafe void Draw(Client.Texture t, int x, int y)
         {
             fixed (CustomVertex.TransformedColoredTextured* texturedRef = m_vPool)
             {
@@ -33,7 +32,7 @@
             }
         }
 
-        public unsafe void DrawGame(Texture t, int x, int y)
+        public unsafe void DrawGame(Client.Texture t, int x, int y)
         {
             fixed (CustomVertex.TransformedColoredTextured* texturedRef = m_vPool)
             {
@@ -58,4 +57,3 @@
         }
     }
 }
-

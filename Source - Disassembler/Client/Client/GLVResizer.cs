@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Windows.Forms;
 
     public class GLVResizer : Gump
@@ -35,7 +34,7 @@
         {
             if (Gumps.Capture == this)
             {
-                Point point = ((Gump) this.m_Target).PointToScreen(new Point(this.m_Target.Width, 0));
+                Point point = ((Gump)this.m_Target).PointToScreen(new Point(this.m_Target.Width, 0));
                 Point point2 = base.PointToScreen(new Point(X, Y));
                 int num = point.X - (point2.X - this.m_xOffset);
                 bool flag = false;
@@ -51,7 +50,7 @@
                 if (!flag)
                 {
                     this.m_Target.Width = num;
-                    ((Gump) this.m_Target).X = point2.X - this.m_xOffset;
+                    ((Gump)this.m_Target).X = point2.X - this.m_xOffset;
                     flag2 = true;
                 }
                 int minHeight = ((point2.Y - point.Y) + 6) - this.m_yOffset;
@@ -93,4 +92,3 @@
         }
     }
 }
-

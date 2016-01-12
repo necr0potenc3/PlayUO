@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class SwingInfoProvider : InfoProvider
     {
         public SwingInfoProvider() : base("Swing Speeds")
@@ -19,19 +17,19 @@
             Table2DInfoNode[] nodes = new Table2DInfoNode[objArray.Length];
             for (int i = 0; i < objArray.Length; i++)
             {
-                object[,] objArray2 = (object[,]) objArray[i];
+                object[,] objArray2 = (object[,])objArray[i];
                 string[] cols = new string[] { "0.5", "1.0", "1.5", "2.0", "2.5", "3.0", "3.5", "4.0" };
                 string[] rows = new string[objArray2.GetLength(0)];
                 int[] speeds = new int[rows.Length];
                 for (int j = 0; j < rows.Length; j++)
                 {
-                    string str = (string) objArray2[j, 0];
-                    int num3 = (int) objArray2[j, 1];
+                    string str = (string)objArray2[j, 0];
+                    int num3 = (int)objArray2[j, 1];
                     int num4 = str.IndexOf('@');
                     rows[j] = str.Substring(++num4);
                     speeds[j] = num3;
                 }
-                string name = (string) objArray2[0, 0];
+                string name = (string)objArray2[0, 0];
                 int index = name.IndexOf('@');
                 name = name.Substring(0, index);
                 nodes[i] = new SwingSpeedInfoNode(name, cols, rows, speeds);
@@ -54,9 +52,8 @@
                 int num = 0;
                 for (int i = 0; i < active.Descriptors.Length; i++)
                 {
-                    TableGump gump = new TableGump(active.Descriptors[i]) {
-                        Y = num
-                    };
+                    TableGump gump = new TableGump(active.Descriptors[i]);
+                    gump.Y = num;
                     num += gump.Height + 10;
                     g.Children.Add(gump);
                 }
@@ -64,4 +61,3 @@
         }
     }
 }
-

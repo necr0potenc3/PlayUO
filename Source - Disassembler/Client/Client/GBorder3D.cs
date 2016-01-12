@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GBorder3D : GAlphaBackground
     {
         protected bool m_Inset;
@@ -51,4 +49,3 @@
         }
     }
 }
-

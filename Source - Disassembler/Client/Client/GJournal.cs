@@ -26,7 +26,7 @@
             base.m_Children.Add(new GLTResizer(this));
             base.m_Children.Add(new GHTResizer(this));
             base.m_Children.Add(new GLVResizer(this));
-            this.m_Scroller = new GAlphaVSlider(0, 10, 0x10, 0xa9, (double) num, 0.0, (double) num, 1.0);
+            this.m_Scroller = new GAlphaVSlider(0, 10, 0x10, 0xa9, (double)num, 0.0, (double)num, 1.0);
             this.m_Hotspot = new GHotspot(0, 4, 0x10, 180, this.m_Scroller);
             this.m_Hotspot.NormalHit = false;
             base.m_Children.Add(this.m_Scroller);
@@ -41,7 +41,7 @@
             int x = X + 2;
             int num2 = base.m_Height - 2;
             int count = Engine.m_Journal.Count;
-            int num4 = (int) this.m_Scroller.GetValue();
+            int num4 = (int)this.m_Scroller.GetValue();
             if (num4 >= count)
             {
                 num4 = count - 1;
@@ -49,28 +49,28 @@
             UnicodeFont uniFont = Engine.GetUniFont(3);
             for (int i = num4; (i >= 0) && (i < count); i--)
             {
-                Texture image;
-                JournalEntry entry = (JournalEntry) Engine.m_Journal[i];
+                Texture texture;
+                JournalEntry entry = (JournalEntry)Engine.m_Journal[i];
                 if (entry.Width != this.m_CropWidth)
                 {
                     string str = Engine.WrapText(entry.Text, this.m_CropWidth, uniFont);
-                    image = uniFont.GetString(str, entry.Hue);
+                    texture = uniFont.GetString(str, entry.Hue);
                     entry.Width = this.m_CropWidth;
-                    entry.Image = image;
+                    entry.Image = texture;
                 }
                 else
                 {
-                    image = entry.Image;
+                    texture = entry.Image;
                 }
-                if ((image != null) && !image.IsEmpty())
+                if ((texture != null) && !texture.IsEmpty())
                 {
-                    num2 -= image.Height;
+                    num2 -= texture.Height;
                     if (num2 < 3)
                     {
-                        image.DrawClipped(x, Y + num2, Clipper.TemporaryInstance(X, Y + 1, this.Width, this.Height));
+                        texture.DrawClipped(x, Y + num2, Clipper.TemporaryInstance(X, Y + 1, this.Width, this.Height));
                         break;
                     }
-                    m_vCache.Draw(image, x, Y + num2);
+                    m_vCache.Draw(texture, x, Y + num2);
                     num2 -= 4;
                 }
             }
@@ -189,4 +189,3 @@
         }
     }
 }
-

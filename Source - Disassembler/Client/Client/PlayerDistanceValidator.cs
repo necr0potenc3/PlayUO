@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class PlayerDistanceValidator : IItemValidator
     {
         private IItemValidator m_Parent;
@@ -23,4 +21,3 @@
         }
     }
 }
-

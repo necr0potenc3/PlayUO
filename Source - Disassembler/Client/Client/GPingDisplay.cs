@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GPingDisplay : GLabel
     {
         private IHue[] m_Hues;
@@ -54,4 +52,3 @@
         }
     }
 }
-

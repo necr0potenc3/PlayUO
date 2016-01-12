@@ -32,17 +32,17 @@
                 input = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.None);
                 reader = new BinaryReader(input);
             }
-            input.Seek((long) (12 + (fid * 8)), SeekOrigin.Begin);
+            input.Seek((long)(12 + (fid * 8)), SeekOrigin.Begin);
             int num = reader.ReadInt32();
             int bytes = reader.ReadInt32();
-            input.Seek((long) num, SeekOrigin.Begin);
+            input.Seek((long)num, SeekOrigin.Begin);
             if ((m_Buffer == null) || (bytes > m_Buffer.Length))
             {
                 m_Buffer = new byte[bytes];
             }
             fixed (byte* numRef = m_Buffer)
             {
-                Engine.NativeRead(input, (void*) numRef, bytes);
+                Engine.NativeRead(input, (void*)numRef, bytes);
                 byte* numPtr = numRef;
                 for (int i = 0; i < 0xe0; i++)
                 {
@@ -70,16 +70,16 @@
                     }
                     this.m_Images[i] = image;
                 }
-                int num9 = *((int*) numPtr);
+                int num9 = *((int*)numPtr);
                 numPtr += 4;
-                short* numPtr4 = (short*) numPtr;
+                short* numPtr4 = (short*)numPtr;
                 this.m_Palette = new short[num9];
                 for (int j = 0; j < num9; j++)
                 {
                     numPtr4++;
                     this.m_Palette[j] = numPtr4[0];
                 }
-                numPtr = (byte*) numPtr4;
+                numPtr = (byte*)numPtr4;
             }
             reader.Close();
         }
@@ -135,10 +135,10 @@
             {
                 fixed (short* numRef2 = this.m_Palette)
                 {
-                    hue.CopyPixels((void*) (numRef2 + 1), (void*) (numRef + 1), this.m_Palette.Length - 1);
+                    hue.CopyPixels((void*)(numRef2 + 1), (void*)(numRef + 1), this.m_Palette.Length - 1);
                 }
                 LockData data = texture.Lock(LockFlags.WriteOnly);
-                short* pvSrc = (short*) data.pvSrc;
+                short* pvSrc = (short*)data.pvSrc;
                 short* numPtr2 = pvSrc;
                 int num6 = data.Pitch >> 1;
                 int num7 = num6 * yHeight;
@@ -258,13 +258,13 @@
             {
                 writer.Flush();
                 long length = output.Length;
-                output.Seek((long) (12 + (i * 8)), SeekOrigin.Begin);
-                writer.Write((int) length);
+                output.Seek((long)(12 + (i * 8)), SeekOrigin.Begin);
+                writer.Write((int)length);
                 output.Seek(length, SeekOrigin.Begin);
                 reader.ReadByte();
                 int num3 = 0;
                 ArrayList list = new ArrayList();
-                list.Add((short) 0);
+                list.Add((short)0);
                 for (int j = 0; j < 0xe0; j++)
                 {
                     int num5 = reader.ReadByte();
@@ -283,7 +283,7 @@
                             }
                             for (int num12 = 0; num12 < list.Count; num12++)
                             {
-                                if (((short) list[num12]) == ((short) num10))
+                                if (((short)list[num12]) == ((short)num10))
                                 {
                                     count = num12;
                                     break;
@@ -292,14 +292,14 @@
                             if (count == -1)
                             {
                                 count = list.Count;
-                                list.Add((short) num10);
+                                list.Add((short)num10);
                             }
-                            buffer[num9, m] = (byte) count;
+                            buffer[num9, m] = (byte)count;
                         }
                     }
-                    writer.Write((byte) num5);
-                    writer.Write((byte) num6);
-                    writer.Write((byte) num7);
+                    writer.Write((byte)num5);
+                    writer.Write((byte)num6);
+                    writer.Write((byte)num7);
                     num3 += 3;
                     for (int n = 0; n < num6; n++)
                     {
@@ -314,11 +314,11 @@
                 num3 += 4;
                 for (int k = 0; k < list.Count; k++)
                 {
-                    writer.Write((short) list[k]);
+                    writer.Write((short)list[k]);
                 }
                 num3 += list.Count * 2;
                 length = output.Length;
-                output.Seek((long) ((12 + (i * 8)) + 4), SeekOrigin.Begin);
+                output.Seek((long)((12 + (i * 8)) + 4), SeekOrigin.Begin);
                 writer.Write(num3);
                 output.Seek(length, SeekOrigin.Begin);
             }
@@ -348,4 +348,3 @@
         }
     }
 }
-

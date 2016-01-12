@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-    using System.Reflection;
     using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Sequential)]
@@ -12,13 +10,13 @@
         public byte frameCount;
         public byte frameInterval;
         public byte frameStartInterval;
-        public sbyte this[int index]
+
+        public unsafe sbyte this[int index]
         {
             get
             {
-                return this.pvFrames[index & 0x3f];
+                return pvFrames[index & 0x3f];
             }
         }
     }
 }
-

@@ -15,14 +15,14 @@
         {
             if (m_Active && Engine.m_Ingame)
             {
-                TimeSpan span = (TimeSpan) (DateTime.Now - m_Start);
+                TimeSpan span = (TimeSpan)(DateTime.Now - m_Start);
                 if (span >= TimeSpan.FromSeconds(20.0))
                 {
                     m_Active = false;
                 }
                 else
                 {
-                    this.Text = string.Format("Bandage: {0} seconds elapsed", (int) span.TotalSeconds);
+                    this.Text = string.Format("Bandage: {0} seconds elapsed", (int)span.TotalSeconds);
                     base.Render(X, Y);
                     Stats.Add(this);
                 }
@@ -52,4 +52,3 @@
         }
     }
 }
-

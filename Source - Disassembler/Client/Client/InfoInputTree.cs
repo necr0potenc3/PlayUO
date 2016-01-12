@@ -1,6 +1,5 @@
 ﻿namespace Client
 {
-    using System;
     using System.Drawing;
 
     public class InfoInputTree : InfoInput
@@ -19,9 +18,8 @@
         public override Gump CreateGump()
         {
             GMainMenu menu = new GMainMenu(0, 0);
-            GMenuItem child = new GMenuItem(base.Name) {
-                DropDown = true
-            };
+            GMenuItem child = new GMenuItem(base.Name);
+            child.DropDown = true;
             for (int i = 0; i < this.m_Nodes.Length; i++)
             {
                 child.Add(this.m_Nodes[i].Menu);
@@ -34,9 +32,9 @@
         private GMenuItem FormatMenu(GMenuItem mi)
         {
             mi.FillAlpha = 1f;
-            mi.DefaultColor = GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float) 0.5f);
-            mi.OverColor = GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float) 0.5f);
-            mi.ExpandedColor = GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float) 0.5f);
+            mi.DefaultColor = GumpPaint.Blend(Color.WhiteSmoke, SystemColors.Control, (float)0.5f);
+            mi.OverColor = GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float)0.5f);
+            mi.ExpandedColor = GumpPaint.Blend(Color.SteelBlue, SystemColors.Control, (float)0.5f);
             mi.SetHue(Hues.Load(1));
             return mi;
         }
@@ -48,15 +46,15 @@
             {
                 if (mi.Children[i] is GMenuItem)
                 {
-                    this.RecurseFormatMenu((GMenuItem) mi.Children[i]);
+                    this.RecurseFormatMenu((GMenuItem)mi.Children[i]);
                 }
             }
         }
 
         public override void UpdateGump(Gump g)
         {
-            GMainMenu menu = (GMainMenu) g;
-            GMenuItem item = (GMenuItem) menu.Children[0];
+            GMainMenu menu = (GMainMenu)g;
+            GMenuItem item = (GMenuItem)menu.Children[0];
             InfoNode active = base.Active as InfoNode;
             if (active == null)
             {
@@ -77,4 +75,3 @@
         }
     }
 }
-

@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GMainMenu : Gump
     {
         private bool m_LeftToRight;
@@ -97,4 +95,3 @@
         }
     }
 }
-

@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class PDropItem : Packet
     {
         public PDropItem(int Serial, short X, short Y, sbyte Z, int DestSerial) : base(8, "Drop Item", 14)
@@ -14,4 +12,3 @@
         }
     }
 }
-

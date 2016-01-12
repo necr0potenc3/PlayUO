@@ -1,7 +1,5 @@
 ﻿namespace Client
 {
-    using System;
-
     public class GShardMenu : GMenuItem
     {
         private ShardProfile m_Shard;
@@ -24,4 +22,3 @@
         }
     }
 }
-
